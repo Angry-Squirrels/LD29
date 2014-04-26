@@ -26,6 +26,7 @@ class Staff extends BaseWeapon
 		bulletWidth = 50;
 		
 		this.bulletFactory = new FlxWeapon("staff", skin);
+		this.bulletFactory.bulletDamage = 1;
 		this.bulletFactory.setBulletLifeSpan(0.1);
 		this.bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, 0);
 		this.bulletFactory.makePixelBullet(2, bulletWidth, 150, FlxColor.YELLOW);

@@ -1,6 +1,8 @@
 package;
 
+import flixel.group.FlxTypedGroup.FlxTypedGroup;
 import flixel.util.FlxSave;
+import ennemies.BaseEnnemy;
 
 /**
  * Handy, pre-built Registry class that can be used to store 
@@ -41,4 +43,7 @@ class Reg
 	/** Spawn position **/
 	static public var spawnX : Int = 50;
 	static public var spawnY : Int = 50;
+	
+	/** Ennemy group **/
+	static public var ennemyGroup:FlxTypedGroup<BaseEnnemy> = new FlxTypedGroup<BaseEnnemy>();
 }

@@ -1,5 +1,6 @@
 package;
 
+import ennemies.BaseEnnemy;
 import flash.Lib;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -37,6 +38,11 @@ class PlayState extends FlxState
 		this.hero = new Hero(Reg.spawnX, Reg.spawnY);
 		FlxG.worldBounds.set(0, 0, level.fullWidth, level.fullHeight);
 		add(this.hero);
+		
+		var ennemy:BaseEnnemy = new BaseEnnemy();
+		ennemy.x = 200;
+		ennemy.y = 3036;
+		add(ennemy);
 		
 		FlxG.camera.follow(this.hero.hitbox);
 	}

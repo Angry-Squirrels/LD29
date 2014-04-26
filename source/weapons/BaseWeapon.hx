@@ -1,7 +1,9 @@
 package weapons;
 import flixel.addons.weapon.FlxWeapon;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
+import flixel.FlxG;
 
 /**
  * ...
@@ -19,6 +21,24 @@ class BaseWeapon extends FlxGroup
 		super();
 		
 		//this.loadGraphic(spritePath);
+	}
+	
+	public override function update()
+	{
+		FlxG.overlap(this.bulletFactory.group, Reg.ennemyGroup, applyDamage);
+		
+		
+		
+		super.update();
+	}
+	
+	private function applyDamage(_obj1:FlxObject, _obj2:FlxObject)
+	{
+		// destroy bullet
+		_obj1.kill();
+		
+		// apply damage to the ennemy
+		_obj2.hurt(this.bulletFactory.bulletDamage);
 	}
 	
 	public function fire():Void
@@ -47,11 +67,18 @@ class BaseWeapon extends FlxGroup
 	
 	public function moveWeapon(_x:Int, _y:Int)
 	{
+		if (this.bulletFactory.currentBullet != null)
+		{
+			this.bulletFactory.currentBullet.x += _x - skin.x;
+			this.bulletFactory.currentBullet.y += _y - skin.y;
+		}
+		
 		skin.x = _x;
 		skin.y = _y;
 		
 		bulletFactory.bounds.x = _x - 128;
 		bulletFactory.bounds.y = _y - 128;
+		
 	}
 	
 }
