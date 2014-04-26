@@ -57,7 +57,7 @@ class Level extends TiledMap
 			}
 			
 			if (tileSet == null)
-				throw "blarba gharg";
+				throw "Tileset not found";
 				
 			var imagePath = new Path(tileSet.imageSource);
 			var processedPath = PATH_LEVEL_TILESHEETS + imagePath.file  + "." + imagePath.ext;
@@ -101,9 +101,7 @@ class Level extends TiledMap
 		switch (o.type.toLowerCase())
 		{
 			case "door":
-				x -= 5;
 				var door = new Door(o.xmlData, x,y);
-				door.makeGraphic(32, 32, 0xffffff00);
 				state.add(door);
 				doors.add(door);
 		}
