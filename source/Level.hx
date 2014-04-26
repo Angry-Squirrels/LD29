@@ -12,6 +12,7 @@ import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
 import player.Hero;
+import universe.Space;
 import utils.Collider;
 
 /**
@@ -28,14 +29,21 @@ class Level extends TiledMap
 	public var doors: FlxGroup;
 	
 	var collisionableTileLayers:FlxTilemap;
-	var state : PlayState;
+	var _space:Space;
 	
-	public function new(path:String, state : PlayState) 
+	var _number:UInt = 0;
+	static private var NB_LEVEL:UInt = 0;
+	
+	public function new(path:String, space:Space) 
 	{
+		trace("new Level(" + path, space);
 		super(path);
-	
 		
-		this.state = state;
+		NB_LEVEL++;
+		_number = NB_LEVEL;
+		
+	
+		_space = space;
 		
 		FlxG.log.notice("Loading map");
 		
@@ -116,15 +124,16 @@ class Level extends TiledMap
 		return null;
 	}
 	
-	public function loadObjects() {
+	
+	public function loadObjects(state:PlayState) {
 		for (group in objectGroups) {
 			for (o in group.objects) {
-				loadObject(o, group);
+				loadObject(o, group, state);
 			}
 		}
 	}
 	
-	function loadObject(o:TiledObject, g:TiledObjectGroup) {
+	function loadObject(o:TiledObject, g:TiledObjectGroup, state:PlayState) {
 		var x = o.x;
 		var y = o.y;
 		
@@ -146,6 +155,18 @@ class Level extends TiledMap
 			return FlxG.overlap(collisionableTileLayers, obj, notififyCallback, processCallback != null ? processCallback : FlxObject.separate);
 		}
 		return false;
+	}
+	
+	function get_number():UInt 
+	{
+		return _number;
+	}
+	
+	public var number(get_number, null):UInt;
+	
+	public function toString():String
+	{
+		return "[Level " + _number + "]";
 	}
 	
 }

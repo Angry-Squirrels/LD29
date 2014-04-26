@@ -16,7 +16,7 @@ class LevelTree extends FlxGroup
 	var _currentLevel:Level;
 	
 	public var spaces:Array<Space>;
-	var levels:Array<Level>;
+	public var levels:Array<Level>;
 	var playState:PlayState;
 	
 	public function new(Length:UInt, _playState:PlayState) 
@@ -36,7 +36,7 @@ class LevelTree extends FlxGroup
 		
 		generateLevels();
 		
-		_currentLevel = addLevel(levels[0]);
+		_currentLevel = levels[0];
 	}
 	
 	function generateSpaces(Length:UInt)
@@ -173,17 +173,18 @@ class LevelTree extends FlxGroup
 	{
 		for (space in spaces)
 		{
-			levels.push(createLevel());
-			trace(space.mask);
+			var level:Level = createLevel(space);
+			levels.push(level);
 		}
 	}
 	
 	
 	function createLevel(space:Space):Level
 	{
-		var level = new Level("assets/data/levels/map.tmx", _playState, space);
-		add(level.backgroundTiles);
-		add(level.foregroundTiles);
+		trace("createLevel(" + space);
+		var tmx = FlxRandom.chanceRoll()?"assets/data/levels/templateDoors.tmx":"assets/data/levels/FirstRoom.tmx";
+		trace(tmx);
+		var level = new Level(tmx, space);
 		return level;
 	}
 	

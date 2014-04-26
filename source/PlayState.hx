@@ -14,7 +14,6 @@ import player.Hero;
 class PlayState extends FlxState
 {
 	var level:Level;
-	var levelTree : LevelTree;
 	var hero:Hero;
 	var map:FlxSprite;
 	
@@ -23,17 +22,16 @@ class PlayState extends FlxState
 	 */
 	override public function create():Void
 	{
+		trace("create(");
 		super.create();
 		
-		
-		level = new Level("assets/data/levels/map.tmx", this);
+		if(Reg.levelTree ==null)	Reg.levelTree = new LevelTree(10, this);
+		//add(Reg.levelTree);
+		level = Reg.levelTree.currentLevel;
+		trace(level);
 		add(level.backgroundTiles);
 		add(level.foregroundTiles);
-		
-		levelTree = new LevelTree(10, this);
-		add(levelTree);
-		
-		level.loadObjects();
+		level.loadObjects(this);
 		
 		spawnHero();
 		
@@ -67,8 +65,7 @@ class PlayState extends FlxState
 			this.hero.canJumpThrough = false;
 		}
 		
-		this.level.collideWithLevel(this.hero.hitbox);
-		this.levelTree.currentLevel.collideWithLevel(this.hero.hitbox);
+		level.collideWithLevel(this.hero.hitbox);
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 	}	
