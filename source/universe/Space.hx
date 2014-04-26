@@ -37,6 +37,7 @@ class Space
 
 	public function getNeighborAt(direction:String):Space
 	{
+		trace("getNeighborAt(" + direction);
 		switch(direction)
 		{
 			case Direction.TOP:
@@ -55,6 +56,7 @@ class Space
 					if (neighbor.alt == alt && neighbor.long == long - 1)	return neighbor;
 				}
 			case Direction.RIGHT:
+				trace(neighbors);
 				for (neighbor in neighbors)
 				{
 					if (neighbor.alt == alt && neighbor.long == long + 1)	return neighbor;

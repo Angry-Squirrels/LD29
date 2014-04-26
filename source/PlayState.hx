@@ -70,10 +70,17 @@ class PlayState extends FlxState
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 	}	
 	
+	var doorTouched:Bool = false;
 	function touchDoor(door: Door, player:FlxSprite) 
 	{
-		door.enter(this.hero);
-		FlxG.resetState();
+		if (!doorTouched)
+		{
+			trace("touchDoor");
+			door.enter(this.hero);
+			//remove(door);
+			FlxG.resetState();
+			doorTouched = true;
+		}
 	}
 	
 	function spawnHero():Void 
