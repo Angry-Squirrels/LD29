@@ -3,10 +3,6 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.text.FlxText;
-import flixel.ui.FlxButton;
-import flixel.util.FlxMath;
-import flixel.util.FlxColor;
 import player.Hero;
 
 /**
@@ -15,7 +11,7 @@ import player.Hero;
 class PlayState extends FlxState
 {
 	
-	var level : Level;
+	var levelTree : LevelTree;
 	var hero:Hero;
 	var map:FlxSprite;
 	
@@ -26,9 +22,13 @@ class PlayState extends FlxState
 	{
 		super.create();
 		
+		/*
 		level = new Level("assets/data/levels/map.tmx");
 		add(level.backgroundTiles);
 		add(level.foregroundTiles);
+		*/
+		levelTree = new LevelTree(10);
+		add(levelTree);
 		
 		this.hero = new Hero(50, 50);
 		add(this.hero);
@@ -52,6 +52,6 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
-		this.level.collideWithLevel(this.hero.hitbox);
+		this.levelTree.currentLevel.collideWithLevel(this.hero.hitbox);
 	}	
 }

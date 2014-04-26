@@ -25,6 +25,7 @@ class Level extends TiledMap
 	public function new(path:String) 
 	{
 		super(path);
+	
 		
 		FlxG.log.notice("Loading map");
 		
@@ -32,9 +33,9 @@ class Level extends TiledMap
 		backgroundTiles = new FlxGroup();
 		
 		FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
+		//return;
 		
 		FlxG.log.add(properties.get('name'));
-		
 		for (tileLayer in layers) { // for each layer
 			
 			// Get propertie of the layer 
