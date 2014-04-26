@@ -56,12 +56,20 @@ class LevelTree extends FlxGroup
 		for (i in 0...Length-1)
 		{
 			var direction:Int;
-			do
+			//for the room, we go to the right
+			if (i == 0)
 			{
-				direction = FlxRandom.intRanged(-1, 1);
-				
+				direction = 1;
 			}
-			while (direction * currentDirection == -1);
+			else
+			{
+				do
+				{
+					direction = FlxRandom.intRanged(-1, 1);
+					
+				}
+				while (direction * currentDirection == -1);
+			}
 			//trace("direction: " + direction);
 			
 			currentDirection = direction;

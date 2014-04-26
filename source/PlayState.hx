@@ -25,7 +25,7 @@ class PlayState extends FlxState
 		trace("create(");
 		super.create();
 		
-		if(Reg.levelTree ==null)	Reg.levelTree = new LevelTree(10, this);
+		if(Reg.levelTree == null)	Reg.levelTree = new LevelTree(10, this);
 		//add(Reg.levelTree);
 		level = Reg.levelTree.currentLevel;
 		trace(level);
