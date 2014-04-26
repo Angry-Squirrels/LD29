@@ -3,6 +3,7 @@ package ;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectGroup;
+import flixel.addons.editors.tiled.TiledTerrain;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -67,7 +68,15 @@ class Level extends TiledMap
 			tilemap.heightInTiles = height;
 			tilemap.loadMap(tileLayer.tileArray, processedPath, tileSet.tileWidth, tileSet.tileHeight, 0, 1 , 1, 1);
 			
-			tilemap.setTileProperties(8, FlxObject.UP, throughCallBack, Collider);
+			if( tileSet.terraintypes != null) {
+				var terrains = tileSet.terraintypes.map;
+				
+				if (terrains["crossable"] != null)
+				{
+					for (tile in terrains["crossable"])
+						tilemap.setTileProperties(tile+1, FlxObject.UP, throughCallBack, Collider);
+				}
+			}
 			
 			if (tileLayer.properties.contains("nocollide"))
 			{

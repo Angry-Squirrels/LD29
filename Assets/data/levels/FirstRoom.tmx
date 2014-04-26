@@ -4,6 +4,8 @@
   <image source="../../images/tilesets/tiles_test.png" width="256" height="256"/>
   <terraintypes>
    <terrain name="crossable" tile="7"/>
+   <terrain name="crossable" tile="10"/>
+   <terrain name="crossable" tile="8"/>
   </terraintypes>
  </tileset>
  <layer name="Background" width="50" height="50">
@@ -20,7 +22,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt18EOhCAMRdHWlf//xYZFYyVFIVHoqz0Jm1l5gU50I6ItyEKXHb4wxegossMX5A6mczbQOtj4DbHDkh3zsFotCB09smM9fd+QOzS0jtaso3W0IHTc/d8KhI4eaB05H77J+aB3iOxYq5531I4aUkeE748I31FR3kuQO3q+ybUVHbtalpHnF17PY5SHDqbxe1Tz0PGG2R1v7L0lz+PZF/vekudxNXPvLXkez9DmY/WdKkY7PDyz5Q/z4XXvLX84DyTSUb+/oa3ScAAuPwGc
+   eJztl8sOxCAIRaGrmf//4cYFKWOwatJRLuUkbOrGw6ORg4iOIIFOeviCKYZHIT18gezBdM0Gmgcb3xA9LNJjHayiBYLHCOmxH91vyB4aNI/WrKN5tEDwuPvfCggeI6B55Hz4RuqD7iGkx17qeUf1qEHyiLB/RNijorxLkD1GdnLNDo+Piq9xPnN/wWs9ZvHgwTTfRzUePJ5gtccTubfIevT5R95bZD1+WZl7i6xHH7T52N1ThVkPD3e2eMN8eM29xRvqgYR41O83tCgOJ6hzAaU=
   </data>
  </layer>
  <objectgroup name="doors" width="50" height="50">
