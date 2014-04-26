@@ -10,6 +10,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
+import player.Hero;
 
 /**
  * ...
@@ -41,8 +42,6 @@ class Level extends TiledMap
 		
 		FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
 		
-		FlxG.log.add(properties.get('name'));
-		
 		for (tileLayer in layers) { // for each layer
 			
 			// Get propertie of the layer 
@@ -57,7 +56,7 @@ class Level extends TiledMap
 			}
 			
 			if (tileSet == null)
-				throw "blarba gharg";
+				throw "Tileset not found";
 				
 			var imagePath = new Path(tileSet.imageSource);
 			var processedPath = PATH_LEVEL_TILESHEETS + imagePath.file  + "." + imagePath.ext;
@@ -66,6 +65,8 @@ class Level extends TiledMap
 			tilemap.widthInTiles = width;
 			tilemap.heightInTiles = height;
 			tilemap.loadMap(tileLayer.tileArray, processedPath, tileSet.tileWidth, tileSet.tileHeight, 0, 1 , 1, 1);
+			
+			tilemap.setTileProperties(8, FlxObject.UP, throughCallBack);
 			
 			if (tileLayer.properties.contains("nocollide"))
 			{
@@ -81,6 +82,11 @@ class Level extends TiledMap
 			}
 		}
 		
+	}
+	
+	function throughCallBack(tile:FlxObject, hero:FlxObject) 
+	{
+		trace("test");
 	}
 	
 	public function loadObjects() {
@@ -101,9 +107,7 @@ class Level extends TiledMap
 		switch (o.type.toLowerCase())
 		{
 			case "door":
-				x -= 5;
 				var door = new Door(o.xmlData, x,y);
-				door.makeGraphic(32, 32, 0xffffff00);
 				state.add(door);
 				doors.add(door);
 		}

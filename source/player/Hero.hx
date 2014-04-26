@@ -16,9 +16,9 @@ import weapons.Staff;
  */
 class Hero extends FlxGroup
 {
-	public static inline var RUN_SPEED:Int = 90;
-	public static inline var GRAVITY:Int = 620;
-	public static inline var JUMP_SPEED:Int = 250;
+	public static inline var RUN_SPEED:Int = 500;
+	public static inline var GRAVITY:Int = 980;
+	public static inline var JUMP_SPEED:Int = 650;
 	
 	private var head:FlxSprite;
 	private var body:FlxSprite;
@@ -32,6 +32,7 @@ class Hero extends FlxGroup
 	private var rightKeys:Array<String>;
 	
 	private var currentWeapon:BaseWeapon;
+	public var onJumpThrough : Bool;
 	
 	public function new(_x:Int, _y:Int) 
 	{
@@ -39,8 +40,10 @@ class Hero extends FlxGroup
 		
 		// create hitbox
 		hitbox = new Collider(_x, _y, this);
-		hitbox.makeGraphic(17, 33, FlxColor.GREEN);
+		hitbox.makeGraphic(64, 128, FlxColor.GREEN);
 		add(hitbox);
+		
+		this.onJumpThrough = false;
 		
 		// create composed FlxSprite Hero
 		head = new FlxSprite();

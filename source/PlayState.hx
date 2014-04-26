@@ -2,6 +2,7 @@ package;
 
 import flash.Lib;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
@@ -33,7 +34,7 @@ class PlayState extends FlxState
 		
 		level.loadObjects();
 		
-		this.hero = new Hero(50, 50);
+		this.hero = new Hero(Reg.spawnX, Reg.spawnY);
 		FlxG.worldBounds.set(0, 0, level.fullWidth, level.fullHeight);
 		add(this.hero);
 		
@@ -57,12 +58,22 @@ class PlayState extends FlxState
 		super.update();
 		this.level.collideWithLevel(this.hero.hitbox);
 		
+		if (FlxG.keys.pressed.DOWN && this.hero.onJumpThrough) {
+			this.hero.hitbox.allowCollisions = FlxObject.UP | FlxObject.LEFT | FlxObject.RIGHT;
+		}else {
+			this.hero.hitbox.allowCollisions = FlxObject.ANY;
+		}
+		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 	}	
 	
 	function touchDoor(door: Door, player:FlxSprite) 
 	{
-		Reg.currentMap = door.dest;
+		//Reg.currentMap = door.dest;
+		
+		//Reg.spawnX = door.destX * 32;
+		//Reg.spawnY = door.destY * 32;
+		door.enter(this.hero);
 		FlxG.resetState();
 	}
 }

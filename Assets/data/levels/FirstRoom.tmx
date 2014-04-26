@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64">
+  <image source="../../images/tilesets/tiles_test.png" width="256" height="256"/>
+  <terraintypes>
+   <terrain name="crossable" tile="7"/>
+  </terraintypes>
+ </tileset>
+ <layer name="Background" width="50" height="50">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztw8EJAAAMA6H7Zf+NO0dBwVVTVVVVVVVVVVXV5w8i8ERd
+  </data>
+ </layer>
+ <layer name="Level" width="50" height="50">
+  <properties>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt18EOhCAMRdHWlf//xYZFYyVFIVHoqz0Jm1l5gU50I6ItyEKXHb4wxegossMX5A6mczbQOtj4DbHDkh3zsFotCB09smM9fd+QOzS0jtaso3W0IHTc/d8KhI4eaB05H77J+aB3iOxYq5531I4aUkeE748I31FR3kuQO3q+ybUVHbtalpHnF17PY5SHDqbxe1Tz0PGG2R1v7L0lz+PZF/vekudxNXPvLXkez9DmY/WdKkY7PDyz5Q/z4XXvLX84DyTSUb+/oa3ScAAuPwGc
+  </data>
+ </layer>
+ <objectgroup name="doors" width="50" height="50">
+  <object name="door" type="door" gid="3" x="3136" y="256">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
