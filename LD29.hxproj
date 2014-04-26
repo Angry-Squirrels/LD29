@@ -6,7 +6,7 @@
     <movie input="" />
     <movie path="Project.xml" />
     <movie fps="60" />
-    <movie width="640" />
+    <movie width="800" />
     <movie height="480" />
     <movie version="3" />
     <movie minorVersion="0" />
@@ -24,7 +24,7 @@
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
-    <option enabledebug="True" />
+    <option enabledebug="False" />
     <option additional="--no-output&#xA;-swf-version 11.8&#xA;#--remap nme:flash" />
   </build>
   <!-- haxelib libraries -->

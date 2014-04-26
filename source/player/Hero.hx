@@ -6,6 +6,9 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
+import utils.Collider;
+import weapons.BaseWeapon;
+import weapons.Staff;
 
 /**
  * ...
@@ -20,7 +23,7 @@ class Hero extends FlxGroup
 	private var head:FlxSprite;
 	private var body:FlxSprite;
 	private var legs:FlxSprite;
-	public var hitbox:FlxSprite;
+	public var hitbox:Collider;
 	
 	private var jumpTime:Float = -1;
 	private var timesJumped:Int = 0;
@@ -28,12 +31,14 @@ class Hero extends FlxGroup
 	private var leftKeys:Array<String>;
 	private var rightKeys:Array<String>;
 	
+	private var currentWeapon:BaseWeapon;
+	
 	public function new(_x:Int, _y:Int) 
 	{
 		super();
 		
 		// create hitbox
-		hitbox = new FlxSprite(_x, _y);
+		hitbox = new Collider(_x, _y, this);
 		hitbox.makeGraphic(17, 33, FlxColor.GREEN);
 		add(hitbox);
 		
@@ -47,7 +52,6 @@ class Hero extends FlxGroup
 		add(head);
 		add(body);
 		add(legs);
-		placeMembers();
 		
 		// set parameters
 		hitbox.drag.set(RUN_SPEED * 8, RUN_SPEED * 8);
@@ -58,6 +62,12 @@ class Hero extends FlxGroup
 		jumpKeys = ["SPACE", "Z", "UP"];
 		leftKeys = ["LEFT", "Q"];
 		rightKeys = ["RIGHT", "D"];
+		
+		// create weapon
+		this.currentWeapon = new Staff(this);
+		this.add(currentWeapon);
+		
+		placeMembers();
 	}
 	
 	public override function update():Void
@@ -66,16 +76,12 @@ class Hero extends FlxGroup
 		
 		if (FlxG.keys.anyPressed(leftKeys))
 		{
-			head.flipX = true;
-			body.flipX = true;
-			legs.flipX = true;
+			flipHero(true);
 			hitbox.acceleration.x = -hitbox.drag.x;
 		}
 		else if (FlxG.keys.anyPressed(rightKeys))
 		{
-			head.flipX = false;
-			body.flipX = false;
-			legs.flipX = false;
+			flipHero(false);
 			hitbox.acceleration.x = hitbox.drag.x;
 		}
 		
@@ -85,6 +91,12 @@ class Hero extends FlxGroup
 		if (hitbox.x <= 0)
 		{
 			hitbox.x = 0;
+		}
+		
+		// check attack
+		if (FlxG.mouse.justPressed)
+		{
+			currentWeapon.fire();
 		}
 		
 		placeMembers();
@@ -104,7 +116,7 @@ class Hero extends FlxGroup
 	
 	private function jump():Void
 	{
-		if (FlxG.keys.anyPressed(jumpKeys) && hitbox.isTouching(FlxObject.FLOOR))
+		if (FlxG.keys.anyJustPressed(jumpKeys) && hitbox.isTouching(FlxObject.FLOOR))
 		{
 			if (hitbox.velocity.y == 0)
 			{
@@ -121,5 +133,16 @@ class Hero extends FlxGroup
 		body.y = hitbox.y + 1 + head.height;
 		legs.x = hitbox.x + 1 + (body.width - legs.width) / 2;
 		legs.y = hitbox.y + 1 + head.height + body.height;
+		
+		currentWeapon.skin.x = body.x + body.width;
+		currentWeapon.skin.y = body.y - currentWeapon.skin.height + 5;
+	}
+	
+	private function flipHero(_facingLeft:Bool):Void
+	{
+		head.flipX = _facingLeft;
+		body.flipX = _facingLeft;
+		legs.flipX = _facingLeft;
+		currentWeapon.flipWeapon(_facingLeft);
 	}
 }
