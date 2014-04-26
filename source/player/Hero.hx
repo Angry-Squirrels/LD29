@@ -49,9 +49,9 @@ class Hero extends FlxGroup
 		head = new FlxSprite();
 		body = new FlxSprite();
 		legs = new FlxSprite();
-		head.makeGraphic(7, 7, FlxColor.WHITE);
-		body.makeGraphic(15, 15, FlxColor.RED);
-		legs.makeGraphic(5, 10, FlxColor.BLUE);
+		head.makeGraphic(25, 25, FlxColor.WHITE);
+		body.makeGraphic(62, 60, FlxColor.RED);
+		legs.makeGraphic(20, 43, FlxColor.BLUE);
 		add(head);
 		add(body);
 		add(legs);
@@ -137,8 +137,7 @@ class Hero extends FlxGroup
 		legs.x = hitbox.x + 1 + (body.width - legs.width) / 2;
 		legs.y = hitbox.y + 1 + head.height + body.height;
 		
-		currentWeapon.skin.x = body.x + body.width;
-		currentWeapon.skin.y = body.y - currentWeapon.skin.height + 5;
+		currentWeapon.moveWeapon(Std.int(body.x + body.width), Std.int(body.y - currentWeapon.skin.height + 5));
 	}
 	
 	private function flipHero(_facingLeft:Bool):Void
