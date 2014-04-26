@@ -33,7 +33,7 @@ class Hero extends FlxGroup
 	private var rightKeys:Array<String>;
 	
 	private var currentWeapon:BaseWeapon;
-	public var onJumpThrough : Bool;
+	public var canJumpThrough : Bool;
 	
 	public function new(_x:Int, _y:Int) 
 	{
@@ -44,7 +44,7 @@ class Hero extends FlxGroup
 		hitbox.makeGraphic(64, 128, FlxColor.GREEN);
 		add(hitbox);
 		
-		this.onJumpThrough = false;
+		this.canJumpThrough = false;
 		
 		// create composed FlxSprite Hero
 		head = new FlxSprite();

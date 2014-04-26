@@ -3,6 +3,7 @@ package ;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectGroup;
+import flixel.addons.editors.tiled.TiledTerrain;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -11,6 +12,7 @@ import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
 import player.Hero;
+import utils.Collider;
 
 /**
  * ...
@@ -66,7 +68,15 @@ class Level extends TiledMap
 			tilemap.heightInTiles = height;
 			tilemap.loadMap(tileLayer.tileArray, processedPath, tileSet.tileWidth, tileSet.tileHeight, 0, 1 , 1, 1);
 			
-			tilemap.setTileProperties(8, FlxObject.UP, throughCallBack);
+			if( tileSet.terraintypes != null) {
+				var terrains = tileSet.terraintypes.map;
+				
+				if (terrains["crossable"] != null)
+				{
+					for (tile in terrains["crossable"])
+						tilemap.setTileProperties(tile+1, FlxObject.UP, throughCallBack, Collider);
+				}
+			}
 			
 			if (tileLayer.properties.contains("nocollide"))
 			{
@@ -86,7 +96,13 @@ class Level extends TiledMap
 	
 	function throughCallBack(tile:FlxObject, hero:FlxObject) 
 	{
-		trace("test");
+		var collider : Collider = cast hero;
+		var player : Hero = cast collider.parent;
+		
+		if (player.canJumpThrough)
+			tile.allowCollisions = 0;
+		else
+			tile.allowCollisions = FlxObject.UP;
 	}
 	
 	public function loadObjects() {
