@@ -1,6 +1,8 @@
 package ;
 
 import flixel.addons.editors.tiled.TiledMap;
+import flixel.addons.editors.tiled.TiledObject;
+import flixel.addons.editors.tiled.TiledObjectGroup;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -21,10 +23,13 @@ class Level extends TiledMap
 	public var backgroundTiles: FlxGroup;
 	
 	var collisionableTileLayers: Array<FlxTilemap>;
+	var state : PlayState;
 	
-	public function new(path:String) 
+	public function new(path:String, state : PlayState) 
 	{
 		super(path);
+		
+		this.state = state;
 		
 		FlxG.log.notice("Loading map");
 		
@@ -72,6 +77,18 @@ class Level extends TiledMap
 				collisionableTileLayers.push(tilemap);
 			}
 		}
+		
+	}
+	
+	public function loadObjects() {
+		for (group in objectGroups) {
+			for (o in group.objects) {
+				loadObject(o, group);
+			}
+		}
+	}
+	
+	function loadObject(o:TiledObject, g:TiledObjectGroup) {
 		
 	}
 	

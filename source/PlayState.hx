@@ -27,7 +27,7 @@ class PlayState extends FlxState
 	{
 		super.create();
 		
-		level = new Level("assets/data/levels/map.tmx");
+		level = new Level("assets/data/levels/map.tmx", this);
 		add(level.backgroundTiles);
 		add(level.foregroundTiles);
 		
@@ -52,19 +52,7 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
-		
-		this.hero.acceleration.x = 0;
-		
-		if (FlxG.keys.pressed.RIGHT)
-			this.hero.velocity.x += 100;
-		if (FlxG.keys.pressed.LEFT)
-			this.hero.velocity.x -= 100;
-		
-		if (FlxG.keys.pressed.UP)
-			this.hero.velocity.y = -1000;
-		
 		super.update();
-		
 		this.level.collideWithLevel(this.hero.hitbox);
 	}	
 }
