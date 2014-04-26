@@ -27,7 +27,7 @@ class Level extends TiledMap
 	public var backgroundTiles: FlxGroup;
 	public var doors: FlxGroup;
 	
-	var collisionableTileLayers: Array<FlxTilemap>;
+	var collisionableTileLayers:FlxTilemap;
 	var state : PlayState;
 	
 	public function new(path:String, state : PlayState) 
@@ -84,11 +84,11 @@ class Level extends TiledMap
 			}
 			else
 			{
-				if (collisionableTileLayers == null)
-					collisionableTileLayers = new Array<FlxTilemap>();
+				//if (collisionableTileLayers == null)
+				//	collisionableTileLayers = new Array<FlxTilemap>();
 
 				foregroundTiles.add(tilemap);
-				collisionableTileLayers.push(tilemap);
+				collisionableTileLayers = tilemap;
 			}
 		}
 		
@@ -132,9 +132,7 @@ class Level extends TiledMap
 	public function collideWithLevel(obj:FlxObject, ?notififyCallback:FlxObject->FlxObject->Void, ?processCallback:FlxObject->FlxObject->Bool):Bool {
 		
 		if (collideWithLevel != null) {
-			for (map in collisionableTileLayers) {
-				return FlxG.overlap(map, obj, notififyCallback, processCallback != null ? processCallback : FlxObject.separate);
-			}
+			return FlxG.overlap(collisionableTileLayers, obj, notififyCallback, processCallback != null ? processCallback : FlxObject.separate);
 		}
 		return false;
 	}
