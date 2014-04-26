@@ -17,35 +17,41 @@ class TreeState extends FlxState
 {
 	var line:LineStyle = { thickness:1, color:0xff0000, pixelHinting:true, scaleMode:LineScaleMode.NORMAL, capsStyle:CapsStyle.NONE, jointStyle:JointStyle.MITER, miterLimit:1 };
 	var fill:FillStyle = { hasFill:true, color:0xff0000, alpha:1 };
+	var tree:LevelTree;
 		
-	
+	static inline var BOX_SIZE:Int = 25;
 	
 	override public function create() 
 	{
 		super.create();
+		tree = createTree();
 		
 	}
 	
 	function createTree()
 	{
-		var tree = new LevelTree(100);
+		trace("createTree");
 		
-		for (i in 0...tree.spaces.length)
+		var _tree = new LevelTree(10);
+		
+		for (i in 0..._tree.spaces.length)
 		{
 			//trace("i:" + i);
-			var space:Space = tree.spaces[i];
+			var space:Space = _tree.spaces[i];
 			add(createBox(space.alt, space.long));
 		}
+		
+		return _tree;
 	}
 	
 	function createBox(altitude:UInt, longitude:Int):FlxSprite
 	{
 		var sprite = new FlxSprite();
-		sprite.x = FlxG.stage.stageWidth / 2 + longitude * 10;
+		sprite.x = FlxG.stage.stageWidth / 2 + longitude * BOX_SIZE;
 		//trace("x=" + sprite.x);
-		sprite.y = FlxG.stage.stageHeight - 50 - altitude * 10;
+		sprite.y = FlxG.stage.stageHeight - 50 - altitude * BOX_SIZE;
 		
-		sprite.makeGraphic(10, 10);
+		sprite.makeGraphic(BOX_SIZE, BOX_SIZE);
 		sprite.alpha = 0.5;
 		return sprite;
 		//return new FlxShapeBox(X, Y, 10, 10, line, fill);
@@ -57,8 +63,11 @@ class TreeState extends FlxState
 		super.update();
 		if (FlxG.mouse.justReleased)
 		{
+			//remove(tree);
 			clear();
-			createTree();
+			tree = createTree();
+			//trace(tree.spaces[5].neighbors);
+			//trace(FlxG.mouse.
 		}
 	}
 	

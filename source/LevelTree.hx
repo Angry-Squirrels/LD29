@@ -1,4 +1,5 @@
 package ;
+import flash.Lib;
 import flixel.group.FlxGroup;
 import flixel.group.FlxTypedGroup.FlxTypedGroup;
 import universe.Space;
@@ -25,11 +26,22 @@ class LevelTree extends FlxGroup
 	{
 		super();
 		
+		trace("LevelTree("+Length);
+		
 		_currentLevel = addLevel();
 		
 		spaces = new Array<Space>();
 		levels = new Array<Level>();
 		
+		//var t0:UInt = Lib.getTimer();
+		generateSpaces(Length);
+		//trace(Lib.getTimer() - t0);
+		introduceNewNeighbors();
+	}
+	
+	function generateSpaces(Length:UInt)
+	{
+		//trace("genereateSpaces(" + Length);
 		
 		var currentSpace:Space = null;
 		var currentAlt:UInt = 0;
@@ -40,7 +52,7 @@ class LevelTree extends FlxGroup
 		currentSpace = firstSpace;
 		spaces.push(firstSpace);
 		
-		trace("---");
+		//trace("---");
 		for (i in 0...Length-1)
 		{
 			var direction:Int;
@@ -50,7 +62,7 @@ class LevelTree extends FlxGroup
 				
 			}
 			while (direction * currentDirection == -1);
-			trace("direction: " + direction);
+			//trace("direction: " + direction);
 			
 			currentDirection = direction;
 			
@@ -66,24 +78,62 @@ class LevelTree extends FlxGroup
 					currentLong ++;
 				//break;
 			}
-				
-			
-			
 			
 			var space = new Space(currentAlt, currentLong);
 			if (currentSpace != null)
 			{
 				space.neighbors.push(currentSpace);
 				currentSpace.neighbors.push(space);
+				currentSpace = space;
 			}
 			//var space = new Space(i, 0);
 			spaces.push(space);
 		}
-		
-		
+		//trace(spaces);
 	}
 	
-	private function addSpace()
+	//	Since we've generated the spaces linearly,
+	//	the spaces only know 2 neighbors max.
+	//	Let's introcuce them to their new neighbors they meet along the path.
+	function introduceNewNeighbors()
+	{
+		trace("introduceNewNeighbors(");
+		for (i in 0...spaces.length)
+		{
+			if (i < spaces.length - 3)
+			{
+				var space = spaces[i];
+				var eventualNeighbor = spaces[i + 3];
+				
+				var eventualNeighborIsSameAlt = (eventualNeighbor.alt == space.alt);
+				var eventualNeighborIsJustAbove = (eventualNeighbor.alt == space.alt + 1);
+				
+				var eventualNeighborIsSameLong = (eventualNeighbor.long == space.long);
+				var eventualNeighborIsJustLeft = (eventualNeighbor.long == space.long - 1);
+				var eventualNeighborIsJustRight = (eventualNeighbor.long == space.long + 1);
+				var eventualNeighborIsJustBeside = eventualNeighborIsJustLeft || eventualNeighborIsJustRight;
+				
+				if (eventualNeighborIsSameAlt && eventualNeighborIsJustBeside || eventualNeighborIsSameLong && eventualNeighborIsJustAbove)
+				{
+					space.neighbors.push(eventualNeighbor);
+					eventualNeighbor.neighbors.push(space);
+				}
+			}
+		}
+		
+		for (space in spaces)
+		{
+			trace("neighbors for "+space+"->"+space.neighbors);
+		}
+		
+		//trace(
+	}
+	
+	
+	
+	
+	
+	function generateLevels()
 	{
 		
 	}
