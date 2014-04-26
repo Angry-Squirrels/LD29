@@ -174,6 +174,7 @@ class LevelTree extends FlxGroup
 		for (space in spaces)
 		{
 			var level:Level = createLevel(space);
+			space.level = level;
 			levels.push(level);
 		}
 	}

@@ -21,6 +21,8 @@ class Space
 	public var rightMask:UInt;
 	var _mask:String;
 	
+	public var level:Level;
+	
 	static inline var BOX_SIZE:Int = 25;
 	
 	public var neighbors:Array<Space>;
