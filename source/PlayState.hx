@@ -6,10 +6,6 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.text.FlxText;
-import flixel.ui.FlxButton;
-import flixel.util.FlxMath;
-import flixel.util.FlxColor;
 import player.Hero;
 
 /**
@@ -18,7 +14,7 @@ import player.Hero;
 class PlayState extends FlxState
 {
 	
-	var level : Level;
+	var levelTree : LevelTree;
 	var hero:Hero;
 	var map:FlxSprite;
 	
@@ -29,9 +25,13 @@ class PlayState extends FlxState
 	{
 		super.create();
 		
-		level = new Level("assets/data/levels/" + Reg.currentMap +".tmx", this);
+		/*
+		level = new Level("assets/data/levels/map.tmx");
 		add(level.backgroundTiles);
 		add(level.foregroundTiles);
+		*/
+		levelTree = new LevelTree(10);
+		add(levelTree);
 		
 		level.loadObjects();
 		
@@ -68,6 +68,7 @@ class PlayState extends FlxState
 		}
 		
 		this.level.collideWithLevel(this.hero.hitbox);
+		this.levelTree.currentLevel.collideWithLevel(this.hero.hitbox);
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 	}	

@@ -33,6 +33,7 @@ class Level extends TiledMap
 	public function new(path:String, state : PlayState) 
 	{
 		super(path);
+	
 		
 		this.state = state;
 		
@@ -43,6 +44,7 @@ class Level extends TiledMap
 		doors = new FlxGroup();
 		
 		FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
+		//return;
 		
 		for (tileLayer in layers) { // for each layer
 			
