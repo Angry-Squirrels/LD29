@@ -35,10 +35,10 @@ class Level extends TiledMap
 		
 		FlxG.log.add(properties.get('name'));
 		
-		for (tileLayer in layers) {
+		for (tileLayer in layers) { // for each layer
 			
-			// Get propertie of the layer
-			var tileSheetName : String = tileLayer.properties.get('tileset');
+			// Get propertie of the layer 
+			var tileSheetName : String = tileLayer.properties.get('tileset'); // get the name of the tileset used
 			
 			var tileSet: TiledTileSet = null;
 			for (fs in tilesets)  {

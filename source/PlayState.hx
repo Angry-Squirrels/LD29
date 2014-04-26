@@ -26,17 +26,14 @@ class PlayState extends FlxState
 	{
 		super.create();
 		
-		hero = new Hero();
-		add(hero);
+		level = new Level("assets/data/levels/map.tmx");
+		add(level.backgroundTiles);
+		add(level.foregroundTiles);
 		
-		map = new FlxSprite(0, 100);
-		map.makeGraphic(500, 10, FlxColor.BEIGE);
-		map.immovable = true;
-		add(map);
+		this.hero = new Hero(50, 50);
+		add(this.hero);
 		
-		FlxG.camera.setBounds(0, 0, 640, 480);
-		FlxG.worldBounds.set(0, 0, 640, 480);
-		FlxG.camera.follow(hero.hitbox, 1);
+		FlxG.camera.follow(this.hero.hitbox);
 	}
 	
 	/**
@@ -55,6 +52,6 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
-		FlxG.collide(hero, map);
+		this.level.collideWithLevel(this.hero.hitbox);
 	}	
 }

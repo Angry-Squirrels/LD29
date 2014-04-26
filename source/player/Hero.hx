@@ -28,12 +28,12 @@ class Hero extends FlxGroup
 	private var leftKeys:Array<String>;
 	private var rightKeys:Array<String>;
 	
-	public function new() 
+	public function new(_x:Int, _y:Int) 
 	{
 		super();
 		
 		// create hitbox
-		hitbox = new FlxSprite();
+		hitbox = new FlxSprite(_x, _y);
 		hitbox.makeGraphic(17, 33, FlxColor.GREEN);
 		add(hitbox);
 		

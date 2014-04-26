@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="15" height="30" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles_test" tilewidth="32" tileheight="32">
+  <image source="../../images/tilesets/tiles_test.png" width="96" height="64"/>
+ </tileset>
+ <layer name="Background" width="15" height="30">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles_test"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzFo3gUj+JRPIpHKAYAOO4Bww==
+  </data>
+ </layer>
+ <layer name="Level" width="15" height="30">
+  <properties>
+   <property name="tileset" value="tiles_test"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYmBgYKIAkwNG9SLEKdFLKB6o4WZy9FPLXlLNGWzxS4y5lOSnweRfYs2jl5vR1ZJrJ7JZhPIiMe4gx15yzKSmvaSGO7mA2uUGKRgAAN0A2w==
+  </data>
+ </layer>
+</map>
