@@ -6,6 +6,8 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
+import flixel.util.FlxColor;
+import player.Hero;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -14,6 +16,8 @@ class PlayState extends FlxState
 {
 	
 	var level : Level;
+	var hero:Hero;
+	var map:FlxSprite;
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -21,6 +25,18 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
+		
+		hero = new Hero();
+		add(hero);
+		
+		map = new FlxSprite(0, 100);
+		map.makeGraphic(500, 10, FlxColor.BEIGE);
+		map.immovable = true;
+		add(map);
+		
+		FlxG.camera.setBounds(0, 0, 640, 480);
+		FlxG.worldBounds.set(0, 0, 640, 480);
+		FlxG.camera.follow(hero.hitbox, 1);
 	}
 	
 	/**
@@ -38,5 +54,7 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
+		
+		FlxG.collide(hero, map);
 	}	
 }
