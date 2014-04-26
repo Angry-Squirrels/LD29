@@ -15,12 +15,26 @@ class PlayState extends FlxState
 	
 	var level : Level;
 	
+	var hero : FlxSprite;
+	
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
 	override public function create():Void
 	{
 		super.create();
+		
+		level = new Level("assets/data/levels/map.tmx");
+		add(level.backgroundTiles);
+		add(level.foregroundTiles);
+		
+		this.hero = new FlxSprite(50, 50);
+		this.hero.makeGraphic(20, 20, 0xffffffff);
+		this.hero.maxVelocity.x = 160;
+		this.hero.maxVelocity.y = 400;
+		this.hero.acceleration.y = 400;
+		FlxG.camera.follow(this.hero);
+		add(this.hero);
 	}
 	
 	/**
@@ -38,5 +52,7 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
+		
+		this.level.collideWithLevel(this.hero);
 	}	
 }
