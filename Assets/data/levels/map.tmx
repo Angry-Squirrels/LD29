@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="15" height="10" tilewidth="70" tileheight="70">
+ <properties>
+  <property name="name" value="la carte de la mort"/>
+ </properties>
+ <tileset firstgid="1" name="drt" tilewidth="70" tileheight="70">
+  <image source="sheet.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="15" height="10">
+  <properties>
+   <property name="tileset" value="drt"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJwTY2BgkAViMRw0PqAKxCo4sA4BvWJ49A5me3Xw0KMAAQDGDgZ5
+  </data>
+ </layer>
+</map>
