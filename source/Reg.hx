@@ -34,4 +34,6 @@ class Reg
 	 * Especially useful for setting up multiple save slots.
 	 */
 	static public var saves:Array<FlxSave> = [];
+	
+	static public var currentMap : String = "map";
 }

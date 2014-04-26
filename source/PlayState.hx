@@ -27,9 +27,11 @@ class PlayState extends FlxState
 	{
 		super.create();
 		
-		level = new Level("assets/data/levels/map.tmx", this);
+		level = new Level("assets/data/levels/" + Reg.currentMap +".tmx", this);
 		add(level.backgroundTiles);
 		add(level.foregroundTiles);
+		
+		level.loadObjects();
 		
 		this.hero = new Hero(50, 50);
 		FlxG.worldBounds.set(0, 0, level.fullWidth, level.fullHeight);
@@ -54,5 +56,13 @@ class PlayState extends FlxState
 	{
 		super.update();
 		this.level.collideWithLevel(this.hero.hitbox);
+		
+		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 	}	
+	
+	function touchDoor(door: Door, player:FlxSprite) 
+	{
+		Reg.currentMap = door.dest;
+		FlxG.resetState();
+	}
 }

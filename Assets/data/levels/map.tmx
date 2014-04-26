@@ -6,7 +6,7 @@
  <tileset firstgid="1" name="tiles_test" tilewidth="32" tileheight="32">
   <image source="../../images/tilesets/tiles_test.png" width="96" height="64"/>
  </tileset>
- <layer name="Background" width="30" height="15" visible="0">
+ <layer name="Background" width="30" height="15">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles_test"/>
@@ -23,8 +23,8 @@
    eJxjYmBgYBogTG8wnO3FZgep9lLLncM5nPHZjU2MHDcRo2+o5SNquJee/mVCY1MzXxCKV2rbSw6glr3E1gMDVQfBMADhhgDj
   </data>
  </layer>
- <objectgroup name="doors" width="30" height="15" visible="0">
-  <object name="doorA" type="door" gid="3" x="928" y="416">
+ <objectgroup name="doors" width="30" height="15">
+  <object name="doorA" type="door" gid="3" x="314" y="387">
    <properties>
     <property name="directionX" value="1"/>
     <property name="directionY" value="0"/>

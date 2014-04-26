@@ -6,6 +6,7 @@ import flixel.addons.editors.tiled.TiledObjectGroup;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
@@ -21,6 +22,7 @@ class Level extends TiledMap
 	
 	public var foregroundTiles: FlxGroup;
 	public var backgroundTiles: FlxGroup;
+	public var doors: FlxGroup;
 	
 	var collisionableTileLayers: Array<FlxTilemap>;
 	var state : PlayState;
@@ -35,6 +37,7 @@ class Level extends TiledMap
 		
 		foregroundTiles = new FlxGroup();
 		backgroundTiles = new FlxGroup();
+		doors = new FlxGroup();
 		
 		FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
 		
@@ -89,7 +92,21 @@ class Level extends TiledMap
 	}
 	
 	function loadObject(o:TiledObject, g:TiledObjectGroup) {
+		var x = o.x;
+		var y = o.y;
 		
+		if (o.gid != -1)
+			y -= g.map.getGidOwner(o.gid).tileHeight;
+			
+		switch (o.type.toLowerCase())
+		{
+			case "door":
+				x -= 5;
+				var door = new Door(o.xmlData, x,y);
+				door.makeGraphic(32, 32, 0xffffff00);
+				state.add(door);
+				doors.add(door);
+		}
 	}
 	
 	public function collideWithLevel(obj:FlxObject, ?notififyCallback:FlxObject->FlxObject->Void, ?processCallback:FlxObject->FlxObject->Bool):Bool {
