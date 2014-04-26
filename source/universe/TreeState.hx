@@ -38,7 +38,8 @@ class TreeState extends FlxState
 		{
 			//trace("i:" + i);
 			var space:Space = _tree.spaces[i];
-			add(createBox(space.alt, space.long));
+			//add(createBox(space.alt, space.long));
+			add(space.getBox());
 		}
 		
 		return _tree;

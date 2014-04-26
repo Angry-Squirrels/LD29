@@ -1,4 +1,5 @@
 package ;
+import universe.Direction;
 import flash.Lib;
 import flixel.group.FlxGroup;
 import flixel.group.FlxTypedGroup.FlxTypedGroup;
@@ -33,10 +34,11 @@ class LevelTree extends FlxGroup
 		spaces = new Array<Space>();
 		levels = new Array<Level>();
 		
-		//var t0:UInt = Lib.getTimer();
 		generateSpaces(Length);
-		//trace(Lib.getTimer() - t0);
+		
 		introduceNewNeighbors();
+		
+		generateLevels();
 	}
 	
 	function generateSpaces(Length:UInt)
@@ -136,6 +138,61 @@ class LevelTree extends FlxGroup
 	function generateLevels()
 	{
 		
+		for (space in spaces)
+		{
+			var mask:String = "";
+			trace(space);
+			
+			var topNeighbor:Space = space.getNeighborAt(Direction.TOP);
+			var bottomNeighbor:Space = space.getNeighborAt(Direction.BOTTOM);
+			var leftNeighbor:Space = space.getNeighborAt(Direction.LEFT);
+			var rightNeighbor:Space = space.getNeighborAt(Direction.RIGHT);
+			
+			if (topNeighbor != null)
+			{
+				space.topMask = topNeighbor.bottomMask = FlxRandom.intRanged(1, 3);
+			}
+			else
+			{
+				//space.topMask = 0;
+			}
+			
+			if (bottomNeighbor != null)
+			{
+				space.bottomMask = bottomNeighbor.topMask = FlxRandom.intRanged(1, 3);
+			}
+			else
+			{
+				//space.bottomMask = 0;
+			}
+			
+			if (leftNeighbor != null)
+			{
+				space.leftMask = leftNeighbor.rightMask = FlxRandom.intRanged(1, 3);
+			}
+			else
+			{
+				//space.leftMask = 0;
+			}
+			
+			if (rightNeighbor != null)
+			{
+				space.rightMask = rightNeighbor.leftMask = FlxRandom.intRanged(1, 3);
+			}
+			else
+			{
+				//space.rightMask = 0;
+			}
+			
+			
+			
+			//var level = new Level();
+		}
+		
+		for (space in spaces)
+		{
+			trace(space.mask);
+		}
 	}
 	
 	private function addLevel():Level
