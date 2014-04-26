@@ -56,13 +56,14 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
-		this.level.collideWithLevel(this.hero.hitbox);
 		
-		if (FlxG.keys.pressed.DOWN && this.hero.onJumpThrough) {
-			this.hero.hitbox.allowCollisions = FlxObject.UP | FlxObject.LEFT | FlxObject.RIGHT;
+		if (FlxG.keys.pressed.DOWN) {
+			this.hero.canJumpThrough = true;
 		}else {
-			this.hero.hitbox.allowCollisions = FlxObject.ANY;
+			this.hero.canJumpThrough = false;
 		}
+		
+		this.level.collideWithLevel(this.hero.hitbox);
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 	}	
