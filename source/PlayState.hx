@@ -1,5 +1,6 @@
 package;
 
+import flash.Lib;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -31,6 +32,7 @@ class PlayState extends FlxState
 		add(level.foregroundTiles);
 		
 		this.hero = new Hero(50, 50);
+		FlxG.worldBounds.set(0, 0, level.fullWidth, level.fullHeight);
 		add(this.hero);
 		
 		FlxG.camera.follow(this.hero.hitbox);
@@ -50,6 +52,17 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
+		
+		this.hero.acceleration.x = 0;
+		
+		if (FlxG.keys.pressed.RIGHT)
+			this.hero.velocity.x += 100;
+		if (FlxG.keys.pressed.LEFT)
+			this.hero.velocity.x -= 100;
+		
+		if (FlxG.keys.pressed.UP)
+			this.hero.velocity.y = -1000;
+		
 		super.update();
 		
 		this.level.collideWithLevel(this.hero.hitbox);
