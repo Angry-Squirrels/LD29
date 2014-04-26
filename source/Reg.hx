@@ -36,7 +36,7 @@ class Reg
 	static public var saves:Array<FlxSave> = [];
 	
 	/** Map to load **/
-	static public var currentMap : String = "templateDoors.tmx";
+	static public var currentMap : String = "FirstRoom";
 	
 	/** Spawn position **/
 	static public var spawnX : Int = 50;

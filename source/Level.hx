@@ -10,6 +10,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
+import player.Hero;
 
 /**
  * ...
@@ -41,8 +42,6 @@ class Level extends TiledMap
 		
 		FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
 		
-		FlxG.log.add(properties.get('name'));
-		
 		for (tileLayer in layers) { // for each layer
 			
 			// Get propertie of the layer 
@@ -67,6 +66,8 @@ class Level extends TiledMap
 			tilemap.heightInTiles = height;
 			tilemap.loadMap(tileLayer.tileArray, processedPath, tileSet.tileWidth, tileSet.tileHeight, 0, 1 , 1, 1);
 			
+			tilemap.setTileProperties(8, FlxObject.UP, throughCallBack);
+			
 			if (tileLayer.properties.contains("nocollide"))
 			{
 				backgroundTiles.add(tilemap);
@@ -81,6 +82,11 @@ class Level extends TiledMap
 			}
 		}
 		
+	}
+	
+	function throughCallBack(tile:FlxObject, hero:FlxObject) 
+	{
+		trace("test");
 	}
 	
 	public function loadObjects() {
