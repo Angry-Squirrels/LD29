@@ -32,7 +32,7 @@ class TreeState extends FlxState
 	{
 		trace("createTree");
 		
-		var _tree = new LevelTree(10);
+		var _tree = new LevelTree(10, new PlayState());
 		
 		for (i in 0..._tree.spaces.length)
 		{

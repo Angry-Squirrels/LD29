@@ -17,19 +17,13 @@ class LevelTree extends FlxGroup
 	
 	public var spaces:Array<Space>;
 	var levels:Array<Level>;
+	var playState:PlayState;
 	
-	static inline var FIRST_DOOR:UInt = 1;
-	static inline var MIDDLE_DOOR:UInt = 2;
-	static inline var LAST_DOOR:UInt = 4;
-	
-	
-	public function new(Length:UInt) 
+	public function new(Length:UInt, _playState:PlayState) 
 	{
 		super();
 		
 		trace("LevelTree("+Length);
-		
-		_currentLevel = addLevel();
 		
 		spaces = new Array<Space>();
 		levels = new Array<Level>();
@@ -38,7 +32,11 @@ class LevelTree extends FlxGroup
 		
 		introduceNewNeighbors();
 		
+		generateMasks();
+		
 		generateLevels();
+		
+		_currentLevel = addLevel(levels[0]);
 	}
 	
 	function generateSpaces(Length:UInt)
@@ -135,7 +133,7 @@ class LevelTree extends FlxGroup
 	
 	
 	
-	function generateLevels()
+	function generateMasks()
 	{
 		
 		for (space in spaces)
@@ -152,56 +150,43 @@ class LevelTree extends FlxGroup
 			{
 				space.topMask = topNeighbor.bottomMask = FlxRandom.intRanged(1, 3);
 			}
-			else
-			{
-				//space.topMask = 0;
-			}
 			
 			if (bottomNeighbor != null)
 			{
 				space.bottomMask = bottomNeighbor.topMask = FlxRandom.intRanged(1, 3);
-			}
-			else
-			{
-				//space.bottomMask = 0;
 			}
 			
 			if (leftNeighbor != null)
 			{
 				space.leftMask = leftNeighbor.rightMask = FlxRandom.intRanged(1, 3);
 			}
-			else
-			{
-				//space.leftMask = 0;
-			}
 			
 			if (rightNeighbor != null)
 			{
 				space.rightMask = rightNeighbor.leftMask = FlxRandom.intRanged(1, 3);
 			}
-			else
-			{
-				//space.rightMask = 0;
-			}
-			
-			
-			
-			//var level = new Level();
 		}
 		
+	}
+	
+	function generateLevels()
+	{
 		for (space in spaces)
 		{
+			levels.push(createLevel());
 			trace(space.mask);
 		}
 	}
 	
-	private function addLevel():Level
+	
+	function createLevel(space:Space):Level
 	{
-		var level = new Level("assets/data/levels/map.tmx");
+		var level = new Level("assets/data/levels/map.tmx", _playState, space);
 		add(level.backgroundTiles);
 		add(level.foregroundTiles);
 		return level;
 	}
+	
 	
 	function get_currentLevel():Level 
 	{

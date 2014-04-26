@@ -13,7 +13,7 @@ import player.Hero;
  */
 class PlayState extends FlxState
 {
-	
+	var level:Level;
 	var levelTree : LevelTree;
 	var hero:Hero;
 	var map:FlxSprite;
@@ -25,12 +25,12 @@ class PlayState extends FlxState
 	{
 		super.create();
 		
-		/*
-		level = new Level("assets/data/levels/map.tmx");
+		
+		level = new Level("assets/data/levels/map.tmx", this);
 		add(level.backgroundTiles);
 		add(level.foregroundTiles);
-		*/
-		levelTree = new LevelTree(10);
+		
+		levelTree = new LevelTree(10, this);
 		add(levelTree);
 		
 		level.loadObjects();
