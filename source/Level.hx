@@ -41,7 +41,7 @@ class Level extends TiledMap
 		
 		NB_LEVEL++;
 		_number = NB_LEVEL;
-		
+		trace(this);
 	
 		_space = space;
 		
