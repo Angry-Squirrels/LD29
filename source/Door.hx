@@ -38,6 +38,11 @@ class Door extends FlxSprite
 	}
 	
 	public function enter(hero : Hero) {
+		Reg.levelTree.currentLevel = Reg.levelTree
+		.currentLevel
+		.space
+		.getNeighborAt(this.direction)
+		.level;
 		Reg.exitDirection = this.direction;
 	}
 	

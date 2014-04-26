@@ -164,6 +164,13 @@ class Level extends TiledMap
 	
 	public var number(get_number, null):UInt;
 	
+	function get_space():Space 
+	{
+		return _space;
+	}
+	
+	public var space(get_space, null):Space;
+	
 	public function toString():String
 	{
 		return "[Level " + _number + "]";

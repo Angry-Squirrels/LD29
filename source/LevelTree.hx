@@ -13,7 +13,7 @@ import flixel.util.FlxRandom;
 class LevelTree extends FlxGroup
 {
 
-	var _currentLevel:Level;
+	public var currentLevel:Level;
 	
 	public var spaces:Array<Space>;
 	public var levels:Array<Level>;
@@ -36,7 +36,7 @@ class LevelTree extends FlxGroup
 		
 		generateLevels();
 		
-		_currentLevel = levels[0];
+		currentLevel = levels[0];
 	}
 	
 	function generateSpaces(Length:UInt)
@@ -148,22 +148,26 @@ class LevelTree extends FlxGroup
 			
 			if (topNeighbor != null)
 			{
-				space.topMask = topNeighbor.bottomMask = FlxRandom.intRanged(1, 3);
+				//space.topMask = topNeighbor.bottomMask = FlxRandom.intRanged(1, 3);
+				space.topMask = topNeighbor.bottomMask = 1;
 			}
 			
 			if (bottomNeighbor != null)
 			{
-				space.bottomMask = bottomNeighbor.topMask = FlxRandom.intRanged(1, 3);
+				//space.bottomMask = bottomNeighbor.topMask = FlxRandom.intRanged(1, 3);
+				space.bottomMask = bottomNeighbor.topMask = 1;
 			}
 			
 			if (leftNeighbor != null)
 			{
-				space.leftMask = leftNeighbor.rightMask = FlxRandom.intRanged(1, 3);
+				//space.leftMask = leftNeighbor.rightMask = FlxRandom.intRanged(1, 3);
+				space.leftMask = leftNeighbor.rightMask = 1;
 			}
 			
 			if (rightNeighbor != null)
 			{
-				space.rightMask = rightNeighbor.leftMask = FlxRandom.intRanged(1, 3);
+				//space.rightMask = rightNeighbor.leftMask = FlxRandom.intRanged(1, 3);
+				space.rightMask = rightNeighbor.leftMask = 1;
 			}
 		}
 		
@@ -190,11 +194,6 @@ class LevelTree extends FlxGroup
 	}
 	
 	
-	function get_currentLevel():Level 
-	{
-		return _currentLevel;
-	}
 	
-	public var currentLevel(get_currentLevel, null):Level;
 	
 }
