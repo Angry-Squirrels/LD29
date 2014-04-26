@@ -104,7 +104,7 @@ class Hero extends FlxGroup
 	
 	private function jump():Void
 	{
-		if (FlxG.keys.anyPressed(jumpKeys))
+		if (FlxG.keys.anyPressed(jumpKeys) && hitbox.isTouching(FlxObject.FLOOR))
 		{
 			if (hitbox.velocity.y == 0)
 			{
