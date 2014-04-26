@@ -23,31 +23,22 @@ class Door extends FlxSprite
 		
 		switch(direction) {
 			case 'up' :
-				makeGraphic(64*4, 64, 0xffffff00);
+				makeGraphic(64 * 4, 64, 0xffffff00);
+				this.y -= 60;
 			case 'right' :
 				makeGraphic(64, 64 * 4, 0xffffff00);
+				this.x += 60;
 			case 'down' :
-				makeGraphic(64*4, 64, 0xffffff00);
+				makeGraphic(64 * 4, 64, 0xffffff00);
+				this.y += 60;
 			case 'left' :
-				makeGraphic(64, 64*4, 0xffffff00);
+				makeGraphic(64, 64 * 4, 0xffffff00);
+				this.x -= 60;
 		}
 	}
 	
 	public function enter(hero : Hero) {
-		switch(direction) {
-			case 'up' :
-				Reg.spawnX = cast hero.hitbox.x;
-				Reg.spawnY = 48 * 64;
-			case 'right' :
-				Reg.spawnX = 64;
-				Reg.spawnY = cast hero.hitbox.y;
-			case 'down' :
-				Reg.spawnX = cast hero.hitbox.x;
-				Reg.spawnY = 64;
-			case 'left' :
-				Reg.spawnX = 48*64;
-				Reg.spawnY = cast hero.hitbox.y;
-		}
+		Reg.exitDirection = this.direction;
 	}
 	
 }

@@ -1,44 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="64" tileheight="64">
+<map version="1.0" orientation="orthogonal" width="75" height="30" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64">
   <image source="../../images/tilesets/tiles_test.png" width="256" height="256"/>
+  <terraintypes>
+   <terrain name="crossable" tile="7"/>
+  </terraintypes>
  </tileset>
- <layer name="Background" width="50" height="50">
+ <layer name="Background" width="75" height="30">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztw8EJAAAMA6H7Zf+NO0dBwVVTVVVVVVVVVVXV5w8i8ERd
+   eJztw8EJAAAMA6H7Zf+Nu0dRcNVUVVVVVVVVVfX5A1USPYc=
   </data>
  </layer>
- <layer name="Level" width="50" height="50">
+ <layer name="Level" width="75" height="30">
   <properties>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt2jEKACAMxdDi/Q/tLoqDKPGTB24iZGgnW1W1yRnN7uzO6zd+ZweLHSwJDdJNCTOStK/s4LCDxQ4WO1jsYEnqkLSWMCNJ+8oODjtY7GCxg8UOFjtY7GBJaJBuSpiRpH1F+QN2+kYH5WoBKQ==
+   eJzt2iEOwCAABEGC6v9fXI/ptgnUzCRnIVmBYo4x5qatdt1zcjzTqtOq06rTqtOq06rTqtOq06rT6h2tOq06rTqtGm97p1WnVadVp1WnVadVp1OnVadVp1Xnbe+06v7+R3Fq17Kv59yTtgGd
   </data>
  </layer>
- <objectgroup name="doors" width="50" height="50">
-  <object name="door" type="door" gid="3" x="0" y="2816">
-   <properties>
-    <property name="direction" value="left"/>
-   </properties>
-  </object>
+ <objectgroup name="doors" width="75" height="30">
   <object name="door" type="door" gid="3" x="0" y="1536">
    <properties>
     <property name="direction" value="left"/>
-   </properties>
-  </object>
-  <object name="door" type="door" gid="3" x="0" y="448">
-   <properties>
-    <property name="direction" value="left"/>
-   </properties>
-  </object>
-  <object name="door" type="door" gid="3" x="384" y="64">
-   <properties>
-    <property name="direction" value="up"/>
    </properties>
   </object>
   <object name="door" type="door" gid="3" x="1472" y="64">
@@ -46,39 +34,25 @@
     <property name="direction" value="up"/>
    </properties>
   </object>
-  <object name="door" type="door" gid="3" x="2560" y="64">
-   <properties>
-    <property name="direction" value="up"/>
-   </properties>
-  </object>
-  <object name="door" type="door" gid="3" x="384" y="3200">
-   <properties>
-    <property name="direction" value="down"/>
-   </properties>
-  </object>
-  <object name="door" type="door" gid="3" x="1472" y="3200">
-   <properties>
-    <property name="direction" value="down"/>
-   </properties>
-  </object>
-  <object name="door" type="door" gid="3" x="2560" y="3200">
-   <properties>
-    <property name="direction" value="down"/>
-   </properties>
-  </object>
-  <object name="door" type="door" gid="3" x="3136" y="2816">
+  <object name="door" type="door" gid="3" x="4736" y="768">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="door" type="door" gid="3" x="3136" y="1536">
+  <object gid="3" x="4736" y="768"/>
+  <object gid="3" x="4736" y="768"/>
+  <object name="door" type="door" gid="3" x="4736" y="768">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="door" type="door" gid="3" x="3136" y="448">
+  <object gid="3" x="3648" y="1920"/>
+  <object gid="3" x="3648" y="1920"/>
+  <object gid="3" x="3648" y="1920"/>
+  <object gid="3" x="3648" y="1920"/>
+  <object name="door" type="door" gid="3" x="3648" y="1920">
    <properties>
-    <property name="direction" value="right"/>
+    <property name="direction" value="down"/>
    </properties>
   </object>
  </objectgroup>

@@ -35,9 +35,7 @@ class PlayState extends FlxState
 		
 		level.loadObjects();
 		
-		this.hero = new Hero(Reg.spawnX, Reg.spawnY);
-		FlxG.worldBounds.set(0, 0, level.fullWidth, level.fullHeight);
-		add(this.hero);
+		spawnHero();
 		
 		var ennemy:BaseEnnemy = new BaseEnnemy();
 		ennemy.x = 200;
@@ -76,11 +74,39 @@ class PlayState extends FlxState
 	
 	function touchDoor(door: Door, player:FlxSprite) 
 	{
-		//Reg.currentMap = door.dest;
-		
-		//Reg.spawnX = door.destX * 32;
-		//Reg.spawnY = door.destY * 32;
 		door.enter(this.hero);
 		FlxG.resetState();
+	}
+	
+	function spawnHero():Void 
+	{
+		
+		var door : Door = null;
+		var spawnX : Int = 100;
+		var spawnY : Int = 100;
+		
+		switch(Reg.exitDirection) {
+			case 'left' :
+				door = level.getDoor('right');
+				spawnX = cast door.x - 64;
+				spawnY = cast door.y ;
+			case 'right' :
+				door = level.getDoor('left');
+				spawnX = cast door.x + 64;
+				spawnY = cast door.y;
+			case 'down' : 
+				door = level.getDoor('up');
+				spawnX = cast door.x ;
+				spawnY = cast door.y  + 64;
+			case 'up' :
+				door = level.getDoor('down');
+				spawnX = cast door.x;
+				spawnY = cast door.y - 64; 
+		}
+		
+		
+		this.hero = new Hero(spawnX, spawnY);
+		FlxG.worldBounds.set(0, 0, level.fullWidth, level.fullHeight);
+		add(this.hero);
 	}
 }

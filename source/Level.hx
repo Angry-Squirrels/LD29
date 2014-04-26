@@ -105,6 +105,15 @@ class Level extends TiledMap
 			tile.allowCollisions = FlxObject.UP;
 	}
 	
+	public function getDoor(direction: String) : Door {
+		for (a in doors) {
+			var door : Door = cast a;
+			if (door.direction == direction)
+				return door;
+		}
+		return null;
+	}
+	
 	public function loadObjects() {
 		for (group in objectGroups) {
 			for (o in group.objects) {

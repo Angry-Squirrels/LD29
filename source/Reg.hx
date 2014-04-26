@@ -38,11 +38,10 @@ class Reg
 	static public var saves:Array<FlxSave> = [];
 	
 	/** Map to load **/
-	static public var currentMap : String = "FirstRoom";
+	static public var currentMap : String = "templateDoors";
 	
 	/** Spawn position **/
-	static public var spawnX : Int = 50;
-	static public var spawnY : Int = 50;
+	static public var exitDirection : String = "left";
 	
 	/** Ennemy group **/
 	static public var ennemyGroup:FlxTypedGroup<BaseEnnemy> = new FlxTypedGroup<BaseEnnemy>();
