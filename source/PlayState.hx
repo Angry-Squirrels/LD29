@@ -64,7 +64,10 @@ class PlayState extends FlxState
 		ennemy.y = 500;
 		add(ennemy);
 		
+		FlxG.worldBounds.set(0, 0, level.fullWidth, level.fullHeight);
 		FlxG.camera.follow(this.hero.hitbox);
+		//FlxG.camera.bounds = FlxG.worldBounds;
+		FlxG.camera.setBounds(FlxG.worldBounds.x, FlxG.worldBounds.y, FlxG.worldBounds.width, FlxG.worldBounds.height);
 		FlxG.camera.fade(0xff000000, 0.1, true);
 	}
 	
@@ -152,7 +155,7 @@ function fadeComplete() {
 		
 		
 		this.hero = new Hero(spawnX, spawnY);
-		FlxG.worldBounds.set(-120, -120, level.fullWidth+240, level.fullHeight+240);
+		
 		hero.hitbox.velocity.x = Reg.vitX;
 		hero.hitbox.velocity.y = Reg.vitY;
 		add(this.hero);
