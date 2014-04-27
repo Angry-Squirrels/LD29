@@ -152,8 +152,6 @@ class Hero extends FlxGroup
 					currentState = Hero.IDLE;
 				}
 			case Hero.JUMP:
-				playAnimation("jump");
-				
 				if (hitbox.velocity.y > 0)
 				{
 					currentState = Hero.FALL;
@@ -167,6 +165,10 @@ class Hero extends FlxGroup
 					playAnimation("land", 30);
 				}
 			case Hero.LAND:
+				if (hitbox.velocity.x != 0)
+				{
+					currentState = Hero.RUN;
+				}
 				if (head.animation.finished)
 				{
 					currentState = Hero.IDLE;
@@ -200,6 +202,8 @@ class Hero extends FlxGroup
 		{
 			if (hitbox.velocity.y == 0)
 			{
+				currentState = Hero.JUMP;
+				playAnimation("jump", 20);
 				hitbox.velocity.y = -hitbox.maxVelocity.y;
 			}
 		}
@@ -209,8 +213,10 @@ class Hero extends FlxGroup
 	{
 		if (head.animation.curAnim == null || head.animation.curAnim.name != _anim)
 		{
-			head.animation.play(_anim, true, _speed);
-			body.animation.play(_anim, true, _speed);
+			head.animation.play(_anim);
+			body.animation.play(_anim);
+			head.animation.curAnim.frameRate = _speed;
+			body.animation.curAnim.frameRate = _speed;
 		}
 	}
 	
