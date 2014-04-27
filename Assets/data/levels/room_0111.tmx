@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="64" tileheight="64">
- <tileset firstgid="1" source="tiles.tsx"/>
+ <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64">
+  <image source="../../images/tilesets/cave1.png" width="512" height="1024"/>
+  <terraintypes>
+   <terrain name="crossable" tile="13"/>
+   <terrain name="crossable" tile="14"/>
+   <terrain name="crossable" tile="15"/>
+  </terraintypes>
+ </tileset>
  <layer name="Background" width="20" height="15">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYBzFo3gUj+JBgNkIyAMAxuYBMg==
+   eJxjZGBgYBzFo3gUj+IhgAHGRgEt
   </data>
  </layer>
  <layer name="bg2" width="20" height="15">
@@ -16,7 +23,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKA/EBoAO0fBKBhoMJruKQcAZ7AAJQ==
+   eJxjYKAtEKKx+lEwCoYKGE3blAMAs1gANw==
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
