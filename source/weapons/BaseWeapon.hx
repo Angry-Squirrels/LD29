@@ -58,7 +58,7 @@ class BaseWeapon extends FlxGroup
 			if (_facingLeft)
 			{
 				bulletFactory.setBulletDirection(FlxWeapon.BULLET_LEFT, 0);
-				bulletFactory.setBulletOffset(- (parent.width + bulletWidth), 0);
+				bulletFactory.setBulletOffset(-(parent.width + bulletWidth), 0);
 			}
 			else
 			{
@@ -79,8 +79,8 @@ class BaseWeapon extends FlxGroup
 		skin.x = _x;
 		skin.y = _y;
 		
-		bulletFactory.bounds.x = _x - 128;
-		bulletFactory.bounds.y = _y - 128;
+		bulletFactory.bounds.x = _x - parent.width;
+		bulletFactory.bounds.y = _y - parent.width;
 		
 	}
 	

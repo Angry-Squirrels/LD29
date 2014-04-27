@@ -2,17 +2,17 @@
 <!-- Created with TexturePacker http://texturepacker.com-->
 <!-- $TexturePacker:SmartUpdate:9865b315df28827d292379aa3babd37f$ -->
 <TextureAtlas imagePath="hero_body.png">
-    <SubTexture name="LD29_hero_body_fallR0001" x="0" y="0" width="128" height="128"/>
-    <SubTexture name="LD29_hero_body_fallR0002" x="128" y="0" width="128" height="128"/>
-    <SubTexture name="LD29_hero_body_fallR0003" x="256" y="0" width="128" height="128"/>
-    <SubTexture name="LD29_hero_body_fallR0004" x="384" y="0" width="128" height="128"/>
-    <SubTexture name="LD29_hero_body_fallR0005" x="512" y="0" width="128" height="128"/>
-    <SubTexture name="LD29_hero_body_fallR0006" x="640" y="0" width="128" height="128"/>
-    <SubTexture name="LD29_hero_body_fallR0007" x="768" y="0" width="128" height="128"/>
-    <SubTexture name="LD29_hero_body_fallR0008" x="896" y="0" width="128" height="128"/>
-    <SubTexture name="LD29_hero_body_fallR0009" x="1024" y="0" width="128" height="128"/>
-    <SubTexture name="LD29_hero_body_fallR0010" x="1152" y="0" width="128" height="128"/>
-    <SubTexture name="LD29_hero_body_fallR0011" x="1280" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_airR0001" x="0" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_fallR0001" x="128" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_fallR0002" x="256" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_fallR0003" x="384" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_fallR0004" x="512" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_fallR0005" x="640" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_fallR0006" x="768" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_fallR0007" x="896" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_fallR0008" x="1024" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_fallR0009" x="1152" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_hero_body_fallR0010" x="1280" y="0" width="128" height="128"/>
     <SubTexture name="LD29_hero_body_jumpR0001" x="1280" y="0" width="128" height="128"/>
     <SubTexture name="LD29_hero_body_jumpR0002" x="1408" y="0" width="128" height="128"/>
     <SubTexture name="LD29_hero_body_jumpR0003" x="1536" y="0" width="128" height="128"/>
