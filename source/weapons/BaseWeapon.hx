@@ -4,6 +4,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.FlxG;
+import flixel.util.loaders.SparrowData;
 
 /**
  * ...
@@ -11,11 +12,15 @@ import flixel.FlxG;
  */
 class BaseWeapon extends FlxGroup
 {
-	private static var spritePath:String = "";
+	private var spritePath:String;
+	private var spriteXML:String;
 	private var bulletFactory:FlxWeapon;
 	private var bulletWidth:Int;
 	public var skin:FlxSprite;
 	private var parent:FlxSprite;
+	public var firing:Bool = false;
+	public var currentAnim:String;
+	public var currentAnimFrameRate:Int;
 	
 	public function new(_parent:FlxSprite) 
 	{
@@ -23,14 +28,22 @@ class BaseWeapon extends FlxGroup
 		
 		this.parent = _parent;
 		
-		//this.loadGraphic(spritePath);
+		// load animation
+		var animation = new SparrowData(spriteXML, spritePath);
+		skin = new FlxSprite();
+		skin.loadGraphicFromTexture(animation);
+		skin.animation.addByPrefix("idle", "LD29_hero_arm_1_waitR", 75);
+		skin.animation.addByPrefix("run", "LD29_hero_arm_1_runR", 12);
+		skin.animation.addByPrefix("jump", "LD29_hero_arm_1_jumpR", 6, false);
+		skin.animation.addByPrefix("fall", "LD29_hero_arm_1_airR", 1);
+		skin.animation.addByPrefix("land", "LD29_hero_arm_1_fallR", 10, false);
+		skin.animation.addByPrefix("fire", "LD29_hero_arm_fire", 6, false);
+		add(skin);
 	}
 	
 	public override function update()
 	{
 		FlxG.overlap(this.bulletFactory.group, Reg.ennemyGroup, applyDamage);
-		
-		
 		
 		super.update();
 	}
@@ -46,7 +59,25 @@ class BaseWeapon extends FlxGroup
 	
 	public function fire():Void
 	{
+		firing = true;
+		skin.animation.play("fire");
+		skin.animation.curAnim.frameRate = 30;
+		skin.animation.callback = checkEndOfFire;
 		this.bulletFactory.fire();
+	}
+	
+	private function checkEndOfFire(_name:String, _frameNumber:Int, _frameIndex:Int):Void
+	{
+		if (_frameNumber == 5)
+		{
+			firing = false;
+			
+			trace (currentAnim);
+			skin.animation.play(currentAnim);
+			skin.animation.curAnim.frameRate = currentAnimFrameRate;
+			skin.animation.curAnim.curIndex = parent.animation.frameIndex;
+			skin.animation.callback = null;
+		}
 	}
 	
 	public function flipWeapon(_facingLeft:Bool):Void
@@ -58,17 +89,17 @@ class BaseWeapon extends FlxGroup
 			if (_facingLeft)
 			{
 				bulletFactory.setBulletDirection(FlxWeapon.BULLET_LEFT, 0);
-				bulletFactory.setBulletOffset(-(parent.width + bulletWidth), 0);
+				bulletFactory.setBulletOffset(-bulletWidth, 0);
 			}
 			else
 			{
 				bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, 0);
-				bulletFactory.setBulletOffset(0, 0);
+				bulletFactory.setBulletOffset(parent.width, 0);
 			}
 		}
 	}
 	
-	public function moveWeapon(_x:Int, _y:Int)
+	public function moveWeapon(_x:Float, _y:Float)
 	{
 		if (this.bulletFactory.currentBullet != null)
 		{

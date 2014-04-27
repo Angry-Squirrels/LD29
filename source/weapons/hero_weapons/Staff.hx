@@ -14,15 +14,16 @@ import weapons.BaseWeapon;
  */
 class Staff extends BaseWeapon
 {
-	private static var spritePath:String = "";
+	private var hero:Hero;
 	
 	public function new(_parent:Hero) 
 	{
-		super(_parent.hitbox);
+		spritePath = "assets/Weapons/hero_arm.png";
+		spriteXML = "assets/Weapons/hero_arm.xml";
 		
-		skin = new FlxSprite(0, 0);
-		skin.makeGraphic(10, 50, FlxColor.BLACK);
-		add(skin);
+		super(_parent.body);
+		
+		hero = _parent;
 		
 		bulletWidth = 50;
 		
@@ -32,6 +33,25 @@ class Staff extends BaseWeapon
 		this.bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, 0);
 		this.bulletFactory.makePixelBullet(2, bulletWidth, 150, FlxColor.YELLOW);
 		add(this.bulletFactory.group);
+	}
+	
+	public override function flipWeapon(_facingLeft:Bool):Void
+	{
+		skin.flipX = _facingLeft;
+		
+		if (bulletFactory != null)
+		{
+			if (_facingLeft)
+			{
+				bulletFactory.setBulletDirection(FlxWeapon.BULLET_LEFT, 0);
+				bulletFactory.setBulletOffset(-bulletWidth + (hero.body.width - hero.hitbox.width) / 2, 0);
+			}
+			else
+			{
+				bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, 0);
+				bulletFactory.setBulletOffset(hero.hitbox.width + (hero.body.width - hero.hitbox.width) / 2, 0);
+			}
+		}
 	}
 	
 	public override function kill()

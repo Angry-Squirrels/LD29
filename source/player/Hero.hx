@@ -29,8 +29,7 @@ class Hero extends FlxGroup
 	private var currentState:Int;
 	
 	private var head:FlxSprite;
-	private var body:FlxSprite;
-	private var legs:FlxSprite;
+	public var body:FlxSprite;
 	public var hitbox:Collider;
 	
 	private var jumpTime:Float = -1;
@@ -137,7 +136,7 @@ class Hero extends FlxGroup
 					currentState = Hero.RUN;
 				}
 			case Hero.RUN:
-				playAnimation("run", 30);
+				playAnimation("run", 20);
 				
 				if (hitbox.velocity.y < 0)
 				{
@@ -217,6 +216,17 @@ class Hero extends FlxGroup
 			body.animation.play(_anim);
 			head.animation.curAnim.frameRate = _speed;
 			body.animation.curAnim.frameRate = _speed;
+			currentWeapon.currentAnim = _anim;
+			currentWeapon.currentAnimFrameRate = _speed;
+		}
+		if (!currentWeapon.firing)
+		{
+			if (currentWeapon.skin.animation.curAnim == null || currentWeapon.skin.animation.curAnim.name != _anim)
+			{
+				currentWeapon.skin.animation.play(_anim);
+				currentWeapon.skin.animation.curAnim.curFrame = head.animation.curAnim.curFrame;
+				currentWeapon.skin.animation.curAnim.frameRate = _speed;
+			}
 		}
 	}
 	
@@ -225,7 +235,7 @@ class Hero extends FlxGroup
 		head.x = body.x = hitbox.x + (hitbox.width - 128) / 2;
 		head.y = body.y = hitbox.y - 10;
 		
-		currentWeapon.moveWeapon(Std.int(body.x + body.width), Std.int(body.y - currentWeapon.skin.height + 5));
+		currentWeapon.moveWeapon(head.x, head.y);
 	}
 	
 	private function flipHero(_facingLeft:Bool):Void
