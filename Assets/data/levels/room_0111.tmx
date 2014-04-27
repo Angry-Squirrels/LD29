@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="64" tileheight="64">
- <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64">
-  <image source="../../images/tilesets/cave1.png" width="256" height="256"/>
-  <terraintypes>
-   <terrain name="crossable" tile="7"/>
-  </terraintypes>
- </tileset>
+ <tileset firstgid="1" source="tiles.tsx"/>
  <layer name="Background" width="20" height="15">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZ2BgYB/Fo3gUj+IhgAFQFQg1
+   eJxjZGBgYBzFo3gUj+IhgAHGRgEt
+  </data>
+ </layer>
+ <layer name="bg2" width="20" height="15">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYKA/EBoAO0fBKBhoMJruKQcAZ7AAJQ==
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -20,23 +24,23 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYKIyphYYNW/UvIE2bxRQBkBhyIgHc6BhfGpBZgEALasAfw==
+   eJzjYWBgYKES5gViZgbqAdZR80bNI9E8Diqax0lFs0YqYCKA+dAwIfUArrYBCw==
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
-  <object name="door" type="door" gid="3" x="1216" y="704">
+  <object name="door" type="door" gid="19" x="0" y="704">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="door" type="door" gid="19" x="1216" y="704">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="door" type="door" gid="3" x="512" y="960">
+  <object name="door" type="door" gid="19" x="512" y="960">
    <properties>
     <property name="direction" value="down"/>
-   </properties>
-  </object>
-  <object name="door" type="door" gid="3" x="0" y="704">
-   <properties>
-    <property name="direction" value="left"/>
    </properties>
   </object>
  </objectgroup>
