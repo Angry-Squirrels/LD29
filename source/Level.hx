@@ -54,7 +54,7 @@ class Level extends TiledMap
 		backgroundTiles.ID = 2345;
 		doors = new FlxGroup();
 		
-		FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
+		//FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
 		//return;
 		
 	}
