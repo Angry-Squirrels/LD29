@@ -6,6 +6,7 @@ import flixel.FlxSprite;
 import ennemies.BaseEnnemy;
 import flixel.tile.FlxTilemap;
 import player.Hero;
+import universe.LevelTree;
 
 /**
  * Handy, pre-built Registry class that can be used to store 

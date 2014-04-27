@@ -1,16 +1,13 @@
 package;
-import flixel.FlxBasic;
-import ennemies.BaseEnnemy;
 import ennemies.FlyingEnnemy;
-import flash.Lib;
+import flash.errors.Error;
 import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import haxe.Timer;
 import player.Hero;
-import flash.errors.Error;
+import universe.LevelTree;
 import states.DieState;
 import universe.LevelDef;
 
