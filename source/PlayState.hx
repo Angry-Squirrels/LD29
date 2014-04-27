@@ -150,7 +150,7 @@ function fadeComplete() {
 		
 		
 		this.hero = new Hero(spawnX, spawnY);
-		FlxG.worldBounds.set(0, 0, level.fullWidth, level.fullHeight);
+		FlxG.worldBounds.set(-120, -120, level.fullWidth+240, level.fullHeight+240);
 		hero.hitbox.velocity.x = Reg.vitX;
 		hero.hitbox.velocity.y = Reg.vitY;
 		add(this.hero);

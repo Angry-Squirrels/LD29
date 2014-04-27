@@ -24,7 +24,7 @@ class Door extends FlxSprite
 		switch(direction) {
 			case 'up' :
 				makeGraphic(64 * 4, 64, 0xff000000);
-				this.y -= 60;
+				this.y -= 180;
 			case 'right' :
 				makeGraphic(64, 64 * 4, 0xff000000);
 				this.x += 60;

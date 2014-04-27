@@ -36,12 +36,12 @@ class TreeState extends FlxState
 		
 		var _tree = new LevelTree(10, new PlayState());
 		
-		for (i in 0..._tree.spaces.length)
+		for (i in 0..._tree.defs.length)
 		{
 			//if(verbose) trace("i:" + i);
-			var space:LevelDef = _tree.spaces[i];
+			var def:LevelDef = _tree.defs[i];
 			//add(createBox(space.alt, space.long));
-			add(space.getBox());
+			add(def.getBox());
 		}
 		
 		return _tree;

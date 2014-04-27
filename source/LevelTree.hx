@@ -15,7 +15,7 @@ class LevelTree extends FlxGroup
 	public static var verbose:Bool;
 	public var currentLevel:Level;
 	
-	public var spaces:Array<LevelDef>;
+	public var defs:Array<LevelDef>;
 	public var levels:Array<Level>;
 	var playState:PlayState;
 	
@@ -25,7 +25,7 @@ class LevelTree extends FlxGroup
 		
 		if(verbose) trace("LevelTree("+Length);
 		
-		spaces = new Array<LevelDef>();
+		defs = new Array<LevelDef>();
 		levels = new Array<Level>();
 		
 		generateSpaces(Length);
@@ -36,7 +36,7 @@ class LevelTree extends FlxGroup
 		
 		//generateLevels();
 		
-		currentLevel = createLevel(spaces[0]);
+		currentLevel = createLevel(defs[0]);
 	}
 	
 	function generateSpaces(Length:UInt)
@@ -50,7 +50,7 @@ class LevelTree extends FlxGroup
 		
 		var firstSpace = new LevelDef(0, 0);
 		currentSpace = firstSpace;
-		spaces.push(firstSpace);
+		defs.push(firstSpace);
 		
 		//if(verbose) trace("---");
 		for (i in 0...Length-1)
@@ -95,7 +95,7 @@ class LevelTree extends FlxGroup
 				currentSpace = space;
 			}
 			//var space = new Space(i, 0);
-			spaces.push(space);
+			defs.push(space);
 		}
 		//if(verbose) trace(spaces);
 	}
@@ -106,12 +106,12 @@ class LevelTree extends FlxGroup
 	function introduceNewNeighbors()
 	{
 		if(verbose) trace("introduceNewNeighbors(");
-		for (i in 0...spaces.length)
+		for (i in 0...defs.length)
 		{
-			if (i < spaces.length - 3)
+			if (i < defs.length - 3)
 			{
-				var space = spaces[i];
-				var eventualNeighbor = spaces[i + 3];
+				var space = defs[i];
+				var eventualNeighbor = defs[i + 3];
 				
 				var eventualNeighborIsSameAlt = (eventualNeighbor.alt == space.alt);
 				var eventualNeighborIsJustAbove = (eventualNeighbor.alt == space.alt + 1);
@@ -129,7 +129,7 @@ class LevelTree extends FlxGroup
 			}
 		}
 		
-		for (space in spaces)
+		for (space in defs)
 		{
 			if(verbose) trace("neighbors for "+space+"->"+space.neighbors);
 		}
@@ -144,7 +144,7 @@ class LevelTree extends FlxGroup
 	function generateMasks()
 	{
 		
-		for (space in spaces)
+		for (space in defs)
 		{
 			var mask:String = "";
 			if(verbose) trace(space);
