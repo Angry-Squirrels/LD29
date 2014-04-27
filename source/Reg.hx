@@ -12,6 +12,8 @@ import flixel.tile.FlxTilemap;
  */
 class Reg
 {
+	static public var levelTree:LevelTree;
+	
 	/**
 	 * Generic levels Array that can be used for cross-state stuff.
 	 * Example usage: Storing the levels of a platformer.
@@ -39,11 +41,18 @@ class Reg
 	static public var saves:Array<FlxSave> = [];
 	
 	/** Map to load **/
-	static public var currentMap : String = "FirstRoom";
+	static public var currentMap : String = "templateDoors";
 	
 	/** Spawn position **/
-	static public var spawnX : Int = 50;
-	static public var spawnY : Int = 50;
+	static public var exitDirection : String = "right";
+	
+	/** Spawn velocity so that we keep it when entering a new room**/
+	static public var vitX : Float = 0;
+	static public var vitY : Float = 0;
+	
+	/** door offset **/
+	static public var spawnOffsetX : Int = 0;
+	static public var spawnOffsetY : Int = 0;
 	
 	/** Gravity **/
 	static public var GRAVITY:Int = 980;
