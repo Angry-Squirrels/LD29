@@ -194,13 +194,13 @@ class LevelTree extends FlxGroup
 	*/
 	
 	
-	public function createLevel(space:LevelDef):Level
+	public function createLevel(def:LevelDef):Level
 	{
-		if(verbose) trace("createLevel(" + space);
+		if(verbose) trace("createLevel(" + def);
 		//var tmx = FlxRandom.chanceRoll()?"assets/data/levels/templateDoors.tmx":"assets/data/levels/FirstRoom.tmx";
-		var tmx = "assets/data/levels/room_" + space.mask + ".tmx";
+		var tmx = "assets/data/levels/room_" + def.mask + ".tmx";
 		if(verbose) trace(tmx);
-		var level = new Level(tmx, space);
+		var level = new Level(tmx, def);
 		return level;
 	}
 	

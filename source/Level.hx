@@ -1,17 +1,15 @@
 package ;
-
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectGroup;
-import flixel.addons.editors.tiled.TiledTerrain;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxObject;
-import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
 import player.Hero;
+import universe.Direction;
 import universe.LevelDef;
 import utils.Collider;
 
@@ -34,16 +32,17 @@ class Level extends TiledMap
 	var _number:UInt = 0;
 	static private var NB_LEVEL:UInt = 0;
 	
-	public function new(path:String, space:LevelDef) 
+	public function new(path:String, def:LevelDef) 
 	{
-		if(verbose) trace("new Level(" + path, space);
+		if (verbose) trace("new Level(" + path, def);
+		if(verbose)	trace(def.getNeighborAt(Direction.TOP));
 		super(path);
 		
 		NB_LEVEL++;
 		_number = NB_LEVEL;
 		if(verbose) trace(this);
 	
-		_definition = space;
+		_definition = def;
 		
 		FlxG.log.notice("Loading map");
 		

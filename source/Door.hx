@@ -39,7 +39,7 @@ class Door extends FlxSprite
 	
 	public function enter(hero : Hero)
 	{
-		if(verbose) trace(this.direction);
+		if(verbose) trace("direction: "+this.direction);
 		Reg.levelTree.currentLevel = Reg.levelTree.createLevel(
 		Reg.levelTree.currentLevel
 		.definition
