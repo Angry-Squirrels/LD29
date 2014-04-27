@@ -11,6 +11,6 @@ class Direction
 	inline static public var LEFT:String = 'left';
 	inline static public var RIGHT:String = 'right';
 	
-	
+	static public var ALL:Array<String> = [Direction.TOP, Direction.BOTTOM, Direction.LEFT, Direction.RIGHT];
 	
 }

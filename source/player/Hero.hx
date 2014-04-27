@@ -8,6 +8,7 @@ import flixel.group.FlxGroup;
 import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
 import flixel.util.loaders.SparrowData;
+import states.DieState;
 import utils.Collider;
 import weapons.BaseWeapon;
 import weapons.hero_weapons.BaseHeroWeapon;
@@ -20,13 +21,14 @@ import weapons.hero_weapons.Staff;
 class Hero extends FlxGroup
 {
 	public static inline var RUN_SPEED:Int = 500;
-	public static inline var JUMP_SPEED:Int = 650;
+	public static inline var JUMP_SPEED:Int = 620;
 	
 	public static inline var IDLE:Int = 0;
 	public static inline var RUN:Int = 1;
 	public static inline var JUMP:Int = 2;
 	public static inline var FALL:Int = 3;
 	public static inline var LAND:Int = 4;
+	
 	private var currentState:Int;
 	
 	private var head:FlxSprite;
@@ -105,14 +107,23 @@ class Hero extends FlxGroup
 		
 		if (FlxG.keys.anyPressed(leftKeys))
 		{
-			flipHero(true);
 			hitbox.acceleration.x = -hitbox.drag.x;
 		}
 		else if (FlxG.keys.anyPressed(rightKeys))
 		{
-			flipHero(false);
 			hitbox.acceleration.x = hitbox.drag.x;
 		}
+		
+		if (FlxG.keys.pressed.DOWN) {
+			canJumpThrough = true;
+		}else {
+			canJumpThrough = false;
+		}
+		
+		if (hitbox.acceleration.x < 0)
+			flipHero(true)
+		else if(hitbox.acceleration.x>0)
+			flipHero(false);
 		
 		jump();
 		
@@ -192,6 +203,10 @@ class Hero extends FlxGroup
 	public function hurt(_damage:Float):Void
 	{
 		hitbox.hurt(_damage);
+		
+		FlxG.camera.flash(0xffbb0000, 0.1);
+		FlxG.camera.shake(0.05,0.1);
+		
 		if (!hitbox.alive)
 		{
 			kill();
@@ -205,7 +220,14 @@ class Hero extends FlxGroup
 			return;
 		}
 		
+		FlxG.camera.fade(0xff000000, 1, false, gotoGameOver);
+		
 		super.kill();
+	}
+	
+	function gotoGameOver() 
+	{
+		FlxG.switchState(new DieState());
 	}
 	
 	private function jump():Void

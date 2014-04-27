@@ -6,6 +6,7 @@ import flixel.FlxSprite;
 import ennemies.BaseEnnemy;
 import flixel.tile.FlxTilemap;
 import player.Hero;
+import universe.LevelTree;
 
 /**
  * Handy, pre-built Registry class that can be used to store 
@@ -15,6 +16,8 @@ import player.Hero;
 class Reg
 {
 	static public var levelTree:LevelTree;
+	
+	static public var playState:PlayState;
 	
 	/**
 	 * Generic levels Array that can be used for cross-state stuff.
@@ -67,4 +70,13 @@ class Reg
 	
 	/** hero stats **/
 	public static var heroStats: HeroStats = new HeroStats();
+	
+	// intro
+	public static var introTexts : Array<String> = [
+		"I've been choosen by the council!",
+		"I must find out what's up there...",
+		"And see if our world will ever",
+		"be able to bear life again!"
+	];
+	
 }

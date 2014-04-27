@@ -5,6 +5,7 @@ import flixel.addons.editors.tiled.TiledObjectGroup;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
@@ -19,7 +20,7 @@ import utils.Collider;
  */
 class Level extends TiledMap
 {
-	public static var verbose:Bool;
+	public static var verbose:Bool = true;
 	private inline static var PATH_LEVEL_TILESHEETS = "assets/images/tilesets/";
 	
 	public var foregroundTiles: FlxGroup;
@@ -36,8 +37,7 @@ class Level extends TiledMap
 	
 	public function new(path:String, def:LevelDef) 
 	{
-		if (verbose) trace("new Level(" + path, def);
-		if(verbose)	trace(def.getNeighborAt(Direction.TOP));
+		if (verbose) trace("new Level(" + path, def, def.mask);
 		super(path);
 		
 		NB_LEVEL++;
@@ -110,6 +110,10 @@ class Level extends TiledMap
 			}
 		}
 		
+	}
+	
+	public function setCurrentState(state:PlayState) {
+		this.state = state;
 	}
 	
 	function throughCallBack(tile:FlxObject, hero:FlxObject) 

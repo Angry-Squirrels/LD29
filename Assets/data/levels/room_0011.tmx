@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64">
-  <image source="../../images/tilesets/tiles_test.png" width="256" height="256"/>
+  <image source="../../images/tilesets/cave1.png" width="512" height="1024"/>
   <terraintypes>
-   <terrain name="crossable" tile="7"/>
+   <terrain name="crossable" tile="13"/>
+   <terrain name="crossable" tile="14"/>
+   <terrain name="crossable" tile="15"/>
   </terraintypes>
  </tileset>
  <layer name="Background" width="20" height="15">
@@ -12,7 +14,16 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZ2BgYB/Fo3gUj+IhgAFQFQg1
+   eJxjZGBgYBzFoxgN4wID7a5RPLIxALbyASc=
+  </data>
+ </layer>
+ <layer name="Background2" width="20" height="15">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYKAdEKJQfhSMAlyAXmlnNI0OLgAA3dAASQ==
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -20,16 +31,16 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYKIyphYYNW/UvIE2bxRQBkBhyEglDDILACkTAGM=
+   eJzjYWBgYKES5gViZgbqAdZR84gCbEDMhAVzkWEeG1QfLkCqeZwM5KUXASDmA2J+EuwChR8Hie7DBzipaBYpAOZ3Uv0/GAG2dEkJBgD61QGM
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
-  <object name="door" type="door" gid="3" x="1216" y="704">
+  <object name="door" type="door" gid="19" x="1216" y="704">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="door" type="door" gid="3" x="0" y="704">
+  <object name="door" type="door" gid="19" x="0" y="704">
    <properties>
     <property name="direction" value="left"/>
    </properties>
