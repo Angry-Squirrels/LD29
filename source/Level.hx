@@ -5,6 +5,7 @@ import flixel.addons.editors.tiled.TiledObjectGroup;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
@@ -110,6 +111,10 @@ class Level extends TiledMap
 			}
 		}
 		
+	}
+	
+	public function setCurrentState(state:PlayState) {
+		this.state = state;
 	}
 	
 	function throughCallBack(tile:FlxObject, hero:FlxObject) 

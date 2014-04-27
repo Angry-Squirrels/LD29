@@ -8,6 +8,7 @@ import flixel.group.FlxGroup;
 import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
 import flixel.util.loaders.SparrowData;
+import states.DieState;
 import utils.Collider;
 import weapons.BaseWeapon;
 import weapons.hero_weapons.BaseHeroWeapon;
@@ -201,6 +202,10 @@ class Hero extends FlxGroup
 	public function hurt(_damage:Float):Void
 	{
 		hitbox.hurt(_damage);
+		
+		FlxG.camera.flash(0xffbb0000, 0.1);
+		FlxG.camera.shake(0.05,0.1);
+		
 		if (!hitbox.alive)
 		{
 			kill();
@@ -214,7 +219,14 @@ class Hero extends FlxGroup
 			return;
 		}
 		
+		FlxG.camera.fade(0xff000000, 1, false, gotoGameOver);
+		
 		super.kill();
+	}
+	
+	function gotoGameOver() 
+	{
+		FlxG.switchState(new DieState());
 	}
 	
 	private function jump():Void

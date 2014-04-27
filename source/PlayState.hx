@@ -11,6 +11,7 @@ import flixel.text.FlxText;
 import haxe.Timer;
 import player.Hero;
 import flash.errors.Error;
+import states.DieState;
 import universe.LevelDef;
 
 /**
@@ -26,6 +27,10 @@ class PlayState extends FlxState
 	
 	var introText : FlxText;
 	
+	public function new() {
+		super();
+	}
+	
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
@@ -34,9 +39,12 @@ class PlayState extends FlxState
 		if(verbose) trace("create(");
 		super.create();
 		
+		Reg.playState = this;
+		
 		if(Reg.levelTree == null)	Reg.levelTree = new LevelTree(10, this);
 		
 		level = Reg.levelTree.currentLevel;
+		level.setCurrentState(this);
 		if(verbose) trace(level);
 		level.draw();
 		Reg.currentTileMap = level.collisionableTileLayers;
@@ -69,7 +77,7 @@ class PlayState extends FlxState
 		launchSpecialEvent();
 		
 		var ennemy:FlyingEnnemy = new FlyingEnnemy(hero);
-		ennemy.place(500, 3000);
+		ennemy.place(100, 100);
 		add(ennemy);
 		
 		FlxG.camera.follow(this.hero.hitbox);
@@ -132,6 +140,9 @@ class PlayState extends FlxState
 			introText.x = hero.hitbox.x + 50;
 			introText.y = hero.hitbox.y  - 25;
 		}
+		
+		if (FlxG.keys.pressed.K)
+			FlxG.switchState(new DieState());
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 	}	

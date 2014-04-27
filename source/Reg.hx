@@ -16,6 +16,8 @@ class Reg
 {
 	static public var levelTree:LevelTree;
 	
+	static public var playState:PlayState;
+	
 	/**
 	 * Generic levels Array that can be used for cross-state stuff.
 	 * Example usage: Storing the levels of a platformer.
@@ -72,7 +74,7 @@ class Reg
 	public static var introTexts : Array<String> = [
 		"I've been choosen by the council!",
 		"I must find out what's up there...",
-		"and find out if our world will ever",
+		"And see if our world will ever",
 		"be able to bear life again!"
 	];
 	
