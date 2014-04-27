@@ -82,7 +82,8 @@ class PlayState extends FlxState
 		
 		if (alt == 0 && long == 0) {
 			if (!curDef.explored) {
-				trace("blablabalbal");
+				FlxG.camera.fade(0xff000000, 1, true);
+				FlxG.camera.shake(0.01, 3);
 			}
 		}
 	}
@@ -138,8 +139,8 @@ class PlayState extends FlxState
 	function spawnHero():Void 
 	{
 		var door : Door = null;
-		var spawnX : Int = 100;
-		var spawnY : Int = 100;
+		var spawnX : Int = 64;
+		var spawnY : Int = 47 * 64 + 10;
 		
 		switch(Reg.exitDirection) {
 			case 'left' :
