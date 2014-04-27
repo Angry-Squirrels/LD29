@@ -3,7 +3,9 @@
  <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64">
   <image source="../../images/tilesets/cave1.png" width="512" height="1024"/>
   <terraintypes>
-   <terrain name="crossable" tile="7"/>
+   <terrain name="crossable" tile="13"/>
+   <terrain name="crossable" tile="14"/>
+   <terrain name="crossable" tile="15"/>
   </terraintypes>
  </tileset>
  <layer name="Background" width="20" height="15">
