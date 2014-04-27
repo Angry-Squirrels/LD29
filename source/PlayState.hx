@@ -146,8 +146,7 @@ class PlayState extends FlxState
 	
 	function touchDoor(door: Door, player:FlxSprite) 
 	{
-		if (!door.entered)
-		{
+		if (!door.entered){
 			if(verbose) trace("touchDoor");
 			level.explore();
 			Reg.vitX = hero.hitbox.velocity.x;

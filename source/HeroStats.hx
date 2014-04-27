@@ -21,6 +21,7 @@ class HeroStats
 	
 	public var roomExplored : UInt = 0;
 	public var enemyKilled : UInt = 0;
+	public var experience : Int = 0;
 	
 	public function new() 
 	{
