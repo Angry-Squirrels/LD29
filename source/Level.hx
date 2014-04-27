@@ -184,6 +184,14 @@ class Level extends TiledMap
 		return "[Level " + _number + "]";
 	}
 	
+	public function explore() 
+	{
+		if (this._definition.explored == false) {
+			Reg.heroStats.roomExplored++;
+			this._definition.explored = true;
+		}
+	}
+	
 	
 	
 }

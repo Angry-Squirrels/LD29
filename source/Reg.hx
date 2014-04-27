@@ -4,6 +4,7 @@ import flixel.group.FlxTypedGroup.FlxTypedGroup;
 import flixel.util.FlxSave;
 import ennemies.BaseEnnemy;
 import flixel.tile.FlxTilemap;
+import player.Hero;
 
 /**
  * Handy, pre-built Registry class that can be used to store 
@@ -40,9 +41,6 @@ class Reg
 	 */
 	static public var saves:Array<FlxSave> = [];
 	
-	/** Map to load **/
-	static public var currentMap : String = "templateDoors";
-	
 	/** Spawn position **/
 	static public var exitDirection : String = "right";
 	
@@ -62,4 +60,7 @@ class Reg
 	
 	/** Map used for pathfinding **/
 	static public var currentTileMap:FlxTilemap;
+	
+	/** hero stats **/
+	public static var heroStats: HeroStats = new HeroStats();
 }
