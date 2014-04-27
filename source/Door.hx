@@ -10,8 +10,9 @@ import player.Hero;
  */
 class Door extends FlxSprite
 {
-	
+	public static var verbose:Bool;
 	public var direction : String;
+	public var entered : Bool;
 
 	public function new(data:Fast, x : Int, y:Int) 
 	{
@@ -20,6 +21,7 @@ class Door extends FlxSprite
 		var elem = data.node.properties.elements;
 		var node = elem.next();
 		direction = node.att.value;
+		entered = false;
 		
 		switch(direction) {
 			case 'up' :
@@ -37,7 +39,15 @@ class Door extends FlxSprite
 		}
 	}
 	
-	public function enter(hero : Hero) {
+	public function enter(hero : Hero)
+	{
+		if (verbose) trace("direction: " + this.direction);
+		entered = true;
+		Reg.levelTree.currentLevel = Reg.levelTree.createLevel(
+		Reg.levelTree.currentLevel
+		.definition
+		.getNeighborAt(this.direction)
+		);
 		Reg.spawnOffsetX = cast (this.x - hero.hitbox.x);
 		Reg.spawnOffsetY = cast (this.y - hero.hitbox.y);
 		Reg.exitDirection = this.direction;

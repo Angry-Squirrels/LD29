@@ -7,9 +7,11 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
+import flixel.util.loaders.SparrowData;
 import utils.Collider;
 import weapons.BaseWeapon;
-import weapons.Staff;
+import weapons.hero_weapons.BaseHeroWeapon;
+import weapons.hero_weapons.Staff;
 
 /**
  * ...
@@ -18,12 +20,17 @@ import weapons.Staff;
 class Hero extends FlxGroup
 {
 	public static inline var RUN_SPEED:Int = 500;
-	public static inline var GRAVITY:Int = 980;
 	public static inline var JUMP_SPEED:Int = 650;
 	
+	public static inline var IDLE:Int = 0;
+	public static inline var RUN:Int = 1;
+	public static inline var JUMP:Int = 2;
+	public static inline var FALL:Int = 3;
+	public static inline var LAND:Int = 4;
+	private var currentState:Int;
+	
 	private var head:FlxSprite;
-	private var body:FlxSprite;
-	private var legs:FlxSprite;
+	public var body:FlxSprite;
 	public var hitbox:Collider;
 	
 	private var jumpTime:Float = -1;
@@ -32,7 +39,7 @@ class Hero extends FlxGroup
 	private var leftKeys:Array<String>;
 	private var rightKeys:Array<String>;
 	
-	private var currentWeapon:BaseWeapon;
+	private var currentWeapon:BaseHeroWeapon;
 	public var canJumpThrough : Bool;
 	
 	public function new(_x:Int, _y:Int) 
@@ -41,7 +48,7 @@ class Hero extends FlxGroup
 		
 		// create hitbox
 		hitbox = new Collider(_x, _y, this);
-		hitbox.makeGraphic(64, 128, FlxColor.GREEN);
+		hitbox.makeGraphic(80, 118, 0);
 		add(hitbox);
 		
 		this.canJumpThrough = false;
@@ -49,18 +56,33 @@ class Hero extends FlxGroup
 		// create composed FlxSprite Hero
 		head = new FlxSprite();
 		body = new FlxSprite();
-		legs = new FlxSprite();
-		head.makeGraphic(25, 25, FlxColor.WHITE);
-		body.makeGraphic(62, 60, FlxColor.RED);
-		legs.makeGraphic(20, 43, FlxColor.BLUE);
-		add(head);
+		
+		// load animation
+		var headAnimation = new SparrowData("assets/Hero/hero_head.xml", "assets/Hero/hero_head.png");
+		head.loadGraphicFromTexture(headAnimation);
+		head.animation.addByPrefix("idle", "LD29_hero_head_waitR", 75);
+		head.animation.addByPrefix("run", "LD29_hero_head_runR", 12);
+		head.animation.addByPrefix("jump", "LD29_hero_head_jumpR", 6, false);
+		head.animation.addByPrefix("fall", "LD29_hero_head_airR", 1);
+		head.animation.addByPrefix("land", "LD29_hero_head_fallR", 10, false);
+		
+		var bodyAnimation = new SparrowData("assets/Hero/hero_body.xml", "assets/Hero/hero_body.png");
+		body.loadGraphicFromTexture(bodyAnimation);
+		body.animation.addByPrefix("idle", "LD29_hero_body_waitR", 75);
+		body.animation.addByPrefix("run", "LD29_hero_body_runR", 12);
+		body.animation.addByPrefix("jump", "LD29_hero_body_jumpR", 6, false);
+		body.animation.addByPrefix("fall", "LD29_hero_body_airR", 1);
+		body.animation.addByPrefix("land", "LD29_hero_body_fallR", 10, false);
+		
 		add(body);
-		add(legs);
+		add(head);
+		
+		currentState = Hero.IDLE;
 		
 		// set parameters
-		hitbox.drag.set(RUN_SPEED * 8, RUN_SPEED * 8);
+		hitbox.drag.set(RUN_SPEED * 8, JUMP_SPEED * 8);
 		hitbox.maxVelocity.set(RUN_SPEED, JUMP_SPEED);
-		hitbox.acceleration.set(0, GRAVITY);
+		hitbox.acceleration.set(0, Reg.GRAVITY);
 		
 		// set keys
 		jumpKeys = ["SPACE", "Z", "UP"];
@@ -97,8 +119,64 @@ class Hero extends FlxGroup
 			hitbox.x = 0;
 		}
 		
+		switch (currentState)
+		{
+			case Hero.IDLE:
+				playAnimation("idle");
+				
+				if (hitbox.velocity.y < 0)
+				{
+					currentState = Hero.JUMP;
+				}
+				else if (hitbox.velocity.y > 0)
+				{
+					currentState = Hero.FALL;
+				}
+				else if (hitbox.velocity.x != 0)
+				{
+					currentState = Hero.RUN;
+				}
+			case Hero.RUN:
+				playAnimation("run", 20);
+				
+				if (hitbox.velocity.y < 0)
+				{
+					currentState = Hero.JUMP;
+				}
+				else if (hitbox.velocity.y > 0)
+				{
+					currentState = Hero.FALL;
+				}
+				else if (hitbox.velocity.x == 0)
+				{
+					currentState = Hero.IDLE;
+				}
+			case Hero.JUMP:
+				if (hitbox.velocity.y > 0)
+				{
+					currentState = Hero.FALL;
+				}
+			case Hero.FALL:
+				playAnimation("fall");
+				
+				if (hitbox.velocity.y == 0)
+				{
+					currentState = Hero.LAND;
+					playAnimation("land", 30);
+				}
+			case Hero.LAND:
+				if (hitbox.velocity.x != 0)
+				{
+					currentState = Hero.RUN;
+				}
+				if (head.animation.finished)
+				{
+					currentState = Hero.IDLE;
+				}
+		}
+		
 		// check attack
-		if (FlxG.mouse.justPressed)
+		if (FlxG.mouse.justPressed && currentState != Hero.LAND)
 		{
 			currentWeapon.fire();
 		}
@@ -124,28 +202,47 @@ class Hero extends FlxGroup
 		{
 			if (hitbox.velocity.y == 0)
 			{
+				currentState = Hero.JUMP;
+				playAnimation("jump", 20);
 				hitbox.velocity.y = -hitbox.maxVelocity.y;
+			}
+		}
+	}
+	
+	private function playAnimation(_anim:String, _speed:Int = 12):Void
+	{
+		if (head.animation.curAnim == null || head.animation.curAnim.name != _anim)
+		{
+			head.animation.play(_anim);
+			body.animation.play(_anim);
+			head.animation.curAnim.frameRate = _speed;
+			body.animation.curAnim.frameRate = _speed;
+			currentWeapon.currentAnim = _anim;
+			currentWeapon.currentAnimFrameRate = _speed;
+		}
+		if (!currentWeapon.firing)
+		{
+			if (currentWeapon.skin.animation.curAnim == null || currentWeapon.skin.animation.curAnim.name != _anim)
+			{
+				currentWeapon.skin.animation.play(_anim);
+				currentWeapon.skin.animation.curAnim.curFrame = head.animation.curAnim.curFrame;
+				currentWeapon.skin.animation.curAnim.frameRate = _speed;
 			}
 		}
 	}
 	
 	private function placeMembers():Void
 	{
-		head.x = hitbox.x + 1 + (body.width - head.width) / 2;
-		head.y = hitbox.y + 1;
-		body.x = hitbox.x + 1;
-		body.y = hitbox.y + 1 + head.height;
-		legs.x = hitbox.x + 1 + (body.width - legs.width) / 2;
-		legs.y = hitbox.y + 1 + head.height + body.height;
+		head.x = body.x = hitbox.x + (hitbox.width - 128) / 2;
+		head.y = body.y = hitbox.y - 10;
 		
-		currentWeapon.moveWeapon(Std.int(body.x + body.width), Std.int(body.y - currentWeapon.skin.height + 5));
+		currentWeapon.moveWeapon(head.x, head.y);
 	}
 	
 	private function flipHero(_facingLeft:Bool):Void
 	{
 		head.flipX = _facingLeft;
 		body.flipX = _facingLeft;
-		legs.flipX = _facingLeft;
 		currentWeapon.flipWeapon(_facingLeft);
 	}
 }

@@ -12,7 +12,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZ2BgYMeDGQjIj+JRPIpHMb0wADAlCC4=
+   eJxjZ2BgYB/Fo3gUj+IhgAFQFQg1
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -20,7 +20,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYMKD0QE+tbj0IAMONIwPEGMeKWAgzBv1L2XmkQJoYR4hQKp/qQkGwjxy4peRShhkFgCDcgED
+   eJxjYmBgYMKDOdAwPrUwTC0wHMxDDz9KzSMFDAf3Uds8Uv1LTTAQ5g20f0GYkUoYZBYAq3IBAw==
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">

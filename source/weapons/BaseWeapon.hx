@@ -4,6 +4,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.FlxG;
+import flixel.util.loaders.SparrowData;
 
 /**
  * ...
@@ -11,23 +12,20 @@ import flixel.FlxG;
  */
 class BaseWeapon extends FlxGroup
 {
-	private static var spritePath:String = "";
 	private var bulletFactory:FlxWeapon;
 	private var bulletWidth:Int;
-	public var skin:FlxSprite;
+	private var parent:FlxSprite;
 	
-	public function new() 
+	public function new(_parent:FlxSprite) 
 	{
 		super();
 		
-		//this.loadGraphic(spritePath);
+		this.parent = _parent;
 	}
 	
 	public override function update()
 	{
 		FlxG.overlap(this.bulletFactory.group, Reg.ennemyGroup, applyDamage);
-		
-		
 		
 		super.update();
 	}
@@ -48,37 +46,30 @@ class BaseWeapon extends FlxGroup
 	
 	public function flipWeapon(_facingLeft:Bool):Void
 	{
-		skin.flipX = _facingLeft;
-		
 		if (bulletFactory != null)
 		{
 			if (_facingLeft)
 			{
 				bulletFactory.setBulletDirection(FlxWeapon.BULLET_LEFT, 0);
-				bulletFactory.setBulletOffset(- (64 + bulletWidth), 0);
+				bulletFactory.setBulletOffset(-bulletWidth, 0);
 			}
 			else
 			{
 				bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, 0);
-				bulletFactory.setBulletOffset(0, 0);
+				bulletFactory.setBulletOffset(parent.width, 0);
 			}
 		}
 	}
 	
-	public function moveWeapon(_x:Int, _y:Int)
+	public function moveWeapon(_x:Float, _y:Float)
 	{
 		if (this.bulletFactory.currentBullet != null)
 		{
-			this.bulletFactory.currentBullet.x += _x - skin.x;
-			this.bulletFactory.currentBullet.y += _y - skin.y;
+			this.bulletFactory.currentBullet.x += _x;
+			this.bulletFactory.currentBullet.y += _y;
 		}
 		
-		skin.x = _x;
-		skin.y = _y;
-		
-		bulletFactory.bounds.x = _x - 128;
-		bulletFactory.bounds.y = _y - 128;
-		
+		bulletFactory.bounds.x = _x - parent.width;
+		bulletFactory.bounds.y = _y - parent.width;
 	}
-	
 }
