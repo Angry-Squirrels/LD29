@@ -20,6 +20,7 @@ class HeroStats
 	public var statPoinrLeft : UInt = 10;
 	
 	public var roomExplored : UInt = 0;
+	public var enemyKilled : UInt = 0;
 	
 	public function new() 
 	{

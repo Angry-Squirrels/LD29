@@ -21,13 +21,14 @@ import weapons.hero_weapons.Staff;
 class Hero extends FlxGroup
 {
 	public static inline var RUN_SPEED:Int = 500;
-	public static inline var JUMP_SPEED:Int = 650;
+	public static inline var JUMP_SPEED:Int = 620;
 	
 	public static inline var IDLE:Int = 0;
 	public static inline var RUN:Int = 1;
 	public static inline var JUMP:Int = 2;
 	public static inline var FALL:Int = 3;
 	public static inline var LAND:Int = 4;
+	
 	private var currentState:Int;
 	
 	private var head:FlxSprite;
