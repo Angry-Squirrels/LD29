@@ -9,7 +9,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
 import utils.Collider;
 import weapons.BaseWeapon;
-import weapons.Staff;
+import weapons.hero_weapons.Staff;
 
 /**
  * ...
@@ -18,7 +18,6 @@ import weapons.Staff;
 class Hero extends FlxGroup
 {
 	public static inline var RUN_SPEED:Int = 500;
-	public static inline var GRAVITY:Int = 980;
 	public static inline var JUMP_SPEED:Int = 650;
 	
 	private var head:FlxSprite;
@@ -58,9 +57,9 @@ class Hero extends FlxGroup
 		add(legs);
 		
 		// set parameters
-		hitbox.drag.set(RUN_SPEED * 8, RUN_SPEED * 8);
+		hitbox.drag.set(RUN_SPEED * 8, JUMP_SPEED * 8);
 		hitbox.maxVelocity.set(RUN_SPEED, JUMP_SPEED);
-		hitbox.acceleration.set(0, GRAVITY);
+		hitbox.acceleration.set(0, Reg.GRAVITY);
 		
 		// set keys
 		jumpKeys = ["SPACE", "Z", "UP"];

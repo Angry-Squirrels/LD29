@@ -15,10 +15,13 @@ class BaseWeapon extends FlxGroup
 	private var bulletFactory:FlxWeapon;
 	private var bulletWidth:Int;
 	public var skin:FlxSprite;
+	private var parent:FlxSprite;
 	
-	public function new() 
+	public function new(_parent:FlxSprite) 
 	{
 		super();
+		
+		this.parent = _parent;
 		
 		//this.loadGraphic(spritePath);
 	}
@@ -55,7 +58,7 @@ class BaseWeapon extends FlxGroup
 			if (_facingLeft)
 			{
 				bulletFactory.setBulletDirection(FlxWeapon.BULLET_LEFT, 0);
-				bulletFactory.setBulletOffset(- (64 + bulletWidth), 0);
+				bulletFactory.setBulletOffset(- (parent.width + bulletWidth), 0);
 			}
 			else
 			{
