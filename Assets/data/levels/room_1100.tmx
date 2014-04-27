@@ -20,13 +20,13 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYMKD0QE+tbj0kAtGzRs1b9S8oW8eIx7MgYbxqQWZBQAYewCH
+   eJxjYmBgYMKD0QE+tbj0IAMONIwPEGMeKWAgzBv1L2XmkQJG/Ut788jxLyMejG4ePrUgswCQygEn
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
   <object name="door" type="door" gid="3" x="512" y="64">
    <properties>
-    <property name="direction" value="down"/>
+    <property name="direction" value="up"/>
    </properties>
   </object>
   <object name="door" type="door" gid="3" x="512" y="960">

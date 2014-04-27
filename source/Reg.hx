@@ -41,7 +41,15 @@ class Reg
 	static public var currentMap : String = "templateDoors";
 	
 	/** Spawn position **/
-	static public var exitDirection : String = "left";
+	static public var exitDirection : String = "right";
+	
+	/** Spawn velocity so that we keep it when entering a new room**/
+	static public var vitX : Float = 0;
+	static public var vitY : Float = 0;
+	
+	/** door offset **/
+	static public var spawnOffsetX : Int = 0;
+	static public var spawnOffsetY : Int = 0;
 	
 	/** Ennemy group **/
 	static public var ennemyGroup:FlxTypedGroup<BaseEnnemy> = new FlxTypedGroup<BaseEnnemy>();

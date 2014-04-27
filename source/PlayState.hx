@@ -43,6 +43,7 @@ class PlayState extends FlxState
 		add(ennemy);
 		
 		FlxG.camera.follow(this.hero.hitbox);
+		FlxG.camera.fade(0xff000000, 0.1, true);
 	}
 	
 	/**
@@ -75,12 +76,26 @@ class PlayState extends FlxState
 	function touchDoor(door: Door, player:FlxSprite) 
 	{
 		door.enter(this.hero);
+		Reg.vitX = hero.hitbox.velocity.x;
+		Reg.vitY = hero.hitbox.velocity.y;
+		
+		FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
+		
+		var doorCode : Dynamic = Math.random() * 14 + 1;
+		var str = doorCode.toString(2);
+		while (str.length < 4)
+			str = "0" + str;
+		trace(str);
+		
+		Reg.currentMap = "room_" + str;
+	}
+	
+	function fadeComplete() {
 		FlxG.resetState();
 	}
 	
 	function spawnHero():Void 
 	{
-		
 		var door : Door = null;
 		var spawnX : Int = 100;
 		var spawnY : Int = 100;
@@ -88,25 +103,35 @@ class PlayState extends FlxState
 		switch(Reg.exitDirection) {
 			case 'left' :
 				door = level.getDoor('right');
-				spawnX = cast door.x - 64;
-				spawnY = cast door.y ;
+				if (door != null) {
+					spawnX = cast door.x - 64;
+					spawnY = cast door.y - Reg.spawnOffsetY;
+				}
 			case 'right' :
 				door = level.getDoor('left');
-				spawnX = cast door.x + 64;
-				spawnY = cast door.y;
+				if (door != null) {
+					spawnX = cast door.x + 64;
+					spawnY = cast door.y - Reg.spawnOffsetY;
+				}
 			case 'down' : 
 				door = level.getDoor('up');
-				spawnX = cast door.x ;
-				spawnY = cast door.y  + 64;
+				if (door != null) {
+					spawnX = cast door.x  - Reg.spawnOffsetX;
+					spawnY = cast door.y  + 64 ;
+				}
 			case 'up' :
 				door = level.getDoor('down');
-				spawnX = cast door.x;
-				spawnY = cast door.y - 64; 
+				if (door != null){
+					spawnX = cast door.x - Reg.spawnOffsetX;
+					spawnY = cast door.y - 64 ; 
+				}
 		}
 		
 		
 		this.hero = new Hero(spawnX, spawnY);
 		FlxG.worldBounds.set(0, 0, level.fullWidth, level.fullHeight);
+		hero.hitbox.velocity.x = Reg.vitX;
+		hero.hitbox.velocity.y = Reg.vitY;
 		add(this.hero);
 	}
 }

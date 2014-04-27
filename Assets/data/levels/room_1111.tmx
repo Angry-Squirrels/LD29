@@ -12,7 +12,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZ2BgYMeDGQjIj+JRPIpHMb0wADAlCC4=
+   eJxjZ2BgYB/Fo3gUj+IhgAFQFQg1
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -20,7 +20,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYMKD0QE+tbj0IAMONIwPEGMeKWAgzBv1L2XmkQJoYR4hQKp/qQkGwjxy4peRShhkFgCDcgED
+   eJxjYmBgYMKD0QE+tbj0IAMONIwPEGMeKWAgzBv1L2XmkQJoYR4hQIp/hwMg1b+gMGTEg9HNw6cWZBYAgaoBFw==
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
@@ -32,6 +32,16 @@
   <object name="door" type="door" gid="3" x="0" y="704">
    <properties>
     <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="door" type="door" gid="3" x="1216" y="704">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="door" type="door" gid="3" x="512" y="960">
+   <properties>
+    <property name="direction" value="down"/>
    </properties>
   </object>
  </objectgroup>
