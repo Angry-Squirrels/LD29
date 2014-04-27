@@ -1,4 +1,4 @@
-package weapons;
+package weapons.hero_weapons;
 
 import flixel.addons.weapon.FlxWeapon;
 import flixel.addons.weapon.FlxBullet;
@@ -6,6 +6,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxTypedGroup.FlxTypedGroup;
 import flixel.util.FlxColor;
 import player.Hero;
+import weapons.BaseWeapon;
 
 /**
  * ...
@@ -17,7 +18,7 @@ class Staff extends BaseWeapon
 	
 	public function new(_parent:Hero) 
 	{
-		super();
+		super(_parent.hitbox);
 		
 		skin = new FlxSprite(0, 0);
 		skin.makeGraphic(10, 50, FlxColor.BLACK);

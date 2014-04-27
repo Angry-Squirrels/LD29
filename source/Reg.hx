@@ -3,6 +3,7 @@ package;
 import flixel.group.FlxTypedGroup.FlxTypedGroup;
 import flixel.util.FlxSave;
 import ennemies.BaseEnnemy;
+import flixel.tile.FlxTilemap;
 
 /**
  * Handy, pre-built Registry class that can be used to store 
@@ -53,6 +54,12 @@ class Reg
 	static public var spawnOffsetX : Int = 0;
 	static public var spawnOffsetY : Int = 0;
 	
+	/** Gravity **/
+	static public var GRAVITY:Int = 980;
+	
 	/** Ennemy group **/
 	static public var ennemyGroup:FlxTypedGroup<BaseEnnemy> = new FlxTypedGroup<BaseEnnemy>();
+	
+	/** Map used for pathfinding **/
+	static public var currentTileMap:FlxTilemap;
 }

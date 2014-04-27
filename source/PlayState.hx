@@ -1,6 +1,7 @@
 package;
 import flixel.FlxBasic;
 import ennemies.BaseEnnemy;
+import ennemies.FlyingEnnemy;
 import flash.Lib;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -30,6 +31,9 @@ class PlayState extends FlxState
 		if(Reg.levelTree == null)	Reg.levelTree = new LevelTree(10, this);
 		//add(Reg.levelTree);
 		
+		level.loadObjects();
+		Reg.currentTileMap = level.collisionableTileLayers;
+		
 		level = Reg.levelTree.currentLevel;
 		if(verbose) trace(level);
 		level.draw();
@@ -57,7 +61,7 @@ class PlayState extends FlxState
 		
 		spawnHero();
 		
-		var ennemy:BaseEnnemy = new BaseEnnemy();
+		var ennemy:FlyingEnnemy = new FlyingEnnemy(hero);
 		ennemy.x = 200;
 		ennemy.y = 3036;
 		add(ennemy);

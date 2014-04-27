@@ -26,7 +26,9 @@ class Level extends TiledMap
 	public var backgroundTiles: FlxGroup;
 	public var doors: FlxGroup;
 	
-	var collisionableTileLayers:FlxTilemap;
+	public var collisionableTileLayers:FlxTilemap;
+	var state : PlayState;
+	
 	var _definition:LevelDef;
 	
 	var _number:UInt = 0;
