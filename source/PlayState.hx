@@ -60,10 +60,10 @@ class PlayState extends FlxState
 		
 		spawnHero();
 		
-		/*var ennemy:FlyingEnnemy = new FlyingEnnemy(hero);
+		var ennemy:FlyingEnnemy = new FlyingEnnemy(hero);
 		ennemy.x = 200;
 		ennemy.y = 500;
-		add(ennemy);*/
+		add(ennemy);
 		
 		FlxG.camera.follow(this.hero.hitbox);
 		//FlxG.camera.bounds = FlxG.worldBounds;

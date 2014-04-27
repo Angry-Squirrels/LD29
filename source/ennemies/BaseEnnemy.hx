@@ -55,8 +55,18 @@ class BaseEnnemy extends FlxSprite
 	private function findAPath():Array<FlxPoint>
 	{
 		var heroPoint = hero.hitbox.getMidpoint();
-		heroPoint.y -= 32;
-		return Reg.currentTileMap.findPath(this.getMidpoint(), heroPoint);
+		if (flipX)
+		{
+			heroPoint.x += minDistance;
+		}
+		else
+		{
+			heroPoint.x -= minDistance;
+		}
+		
+		var _path = Reg.currentTileMap.findPath(this.getMidpoint(), heroPoint, false);
+		
+		return (_path == null ? _path : _path.length >= 2 ? [_path[0], _path[1]] : _path);
 	}
 	
 	private function detectHero():Bool

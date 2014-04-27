@@ -2,6 +2,7 @@ package ennemies;
 import player.Hero;
 import flixel.util.FlxColor;
 import utils.EnnemyPath;
+import flixel.util.FlxPoint;
 
 /**
  * ...
@@ -32,7 +33,7 @@ class FlyingEnnemy extends BaseEnnemy
 					pathToHero = findAPath();
 					if (pathToHero != null)
 					{
-						path.start(this, [pathToHero[0], pathToHero[1]], move_speed);
+						path.start(this, pathToHero, move_speed);
 					}
 				}
 			
@@ -44,7 +45,7 @@ class FlyingEnnemy extends BaseEnnemy
 						pathToHero = findAPath();
 						if (pathToHero != null)
 						{
-							path.start(this, [pathToHero[0], pathToHero[1]], move_speed);
+							path.start(this, pathToHero, move_speed);
 						}
 					}
 				}
@@ -69,7 +70,7 @@ class FlyingEnnemy extends BaseEnnemy
 					pathToHero = findAPath();
 					if (pathToHero != null)
 					{
-						path.start(this, [pathToHero[0], pathToHero[1]], move_speed);
+						path.start(this, pathToHero, move_speed);
 					}
 				}
 		}
