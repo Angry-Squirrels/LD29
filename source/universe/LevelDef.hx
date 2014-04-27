@@ -1,6 +1,7 @@
 package universe;
 import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.FlxG;
+import flixel.group.FlxGroup;
 
 
 import flixel.FlxSprite;
@@ -29,12 +30,13 @@ class LevelDef
 	public var leftMask:UInt;
 	public var rightMask:UInt;
 	var _mask:String;
-	
 	public var level:Level;
 	public var branchLevel:UInt;
 	
-	public var debugColor:UInt = 0x80ff0000;
+	public var difficulty:UInt;
+	public var enemies:FlxGroup;
 	
+	public var debugColor:UInt = 0x80ff0000;
 	static inline var BOX_SIZE:Int = 25;
 	
 	public var neighbors:Array<LevelDef>;

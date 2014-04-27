@@ -1,4 +1,5 @@
 package;
+import ennemies.EnemySpawner;
 import ennemies.FlyingEnnemy;
 import flash.errors.Error;
 import flixel.FlxG;
@@ -18,7 +19,7 @@ import utils.MusicManager;
 class PlayState extends FlxState
 {
 	public static var verbose:Bool;
-	var level:Level;
+	public var level:Level;
 	var hero:Hero;
 	var map:FlxSprite;
 	var runningIntro : Bool;
@@ -35,34 +36,28 @@ class PlayState extends FlxState
 		
 		Reg.playState = this;
 		
+		
+		
 		if(Reg.levelTree == null)	Reg.levelTree = new LevelTree(10, this);
 		
 		level = Reg.levelTree.currentLevel;
 		level.setCurrentState(this);
-		if(verbose) trace(level);
 		level.draw();
+		
+
 		Reg.currentTileMap = level.collisionableTileLayers;
 		
 		FlxG.worldBounds.set(0, 0, level.fullWidth, level.fullHeight);
 		
-		try
+		
+		for (member in level.backgroundTiles.members)
 		{
-			if(verbose) trace("backgroundTiles:" + level.backgroundTiles);
-			
-			if(verbose) trace(level.backgroundTiles.members);
-			for (member in level.backgroundTiles.members)
-			{
-				if(verbose) trace(member);
-			}
-			if(verbose) trace(level.definition.mask);
-			
-			add(level.backgroundTiles);
-			add(level.foregroundTiles);
+			if(verbose) trace(member);
 		}
-		catch (e:Error)
-		{
-			if(verbose) trace(e);
-		}
+		if(verbose) trace(level.definition.mask);
+		
+		add(level.backgroundTiles);
+		add(level.foregroundTiles);
 		
 		level.loadObjects(this);
 		
@@ -70,9 +65,16 @@ class PlayState extends FlxState
 		
 		launchSpecialEvent();
 		
+		if (!level.definition.explored)
+		{
+			level.definition.difficulty = Reg.heroStats.roomExplored;
+			new EnemySpawner(this).generateEnemies();
+		}
+		/*
 		var ennemy:FlyingEnnemy = new FlyingEnnemy(hero);
 		ennemy.place(100, 100);
 		add(ennemy);
+		*/
 		
 		FlxG.camera.follow(this.hero.hitbox);
 		FlxG.camera.setBounds(FlxG.worldBounds.x, FlxG.worldBounds.y, FlxG.worldBounds.width, FlxG.worldBounds.height);

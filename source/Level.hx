@@ -158,6 +158,10 @@ class Level extends TiledMap
 				var door = new Door(o.xmlData, x,y);
 				state.add(door);
 				doors.add(door);
+				trace("generating door");
+			
+			case "flyingSpawner":
+				level.
 		}
 	}
 	
