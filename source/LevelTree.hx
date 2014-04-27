@@ -3,7 +3,7 @@ import universe.Direction;
 import flash.Lib;
 import flixel.group.FlxGroup;
 import flixel.group.FlxTypedGroup.FlxTypedGroup;
-import universe.Space;
+import universe.LevelDef;
 import flixel.util.FlxRandom;
 
 /**
@@ -12,10 +12,10 @@ import flixel.util.FlxRandom;
  */
 class LevelTree extends FlxGroup
 {
-
+	public static var verbose:Bool;
 	public var currentLevel:Level;
 	
-	public var spaces:Array<Space>;
+	public var spaces:Array<LevelDef>;
 	public var levels:Array<Level>;
 	var playState:PlayState;
 	
@@ -23,9 +23,9 @@ class LevelTree extends FlxGroup
 	{
 		super();
 		
-		trace("LevelTree("+Length);
+		if(verbose) trace("LevelTree("+Length);
 		
-		spaces = new Array<Space>();
+		spaces = new Array<LevelDef>();
 		levels = new Array<Level>();
 		
 		generateSpaces(Length);
@@ -34,25 +34,25 @@ class LevelTree extends FlxGroup
 		
 		generateMasks();
 		
-		generateLevels();
+		//generateLevels();
 		
-		currentLevel = levels[0];
+		currentLevel = createLevel(spaces[0]);
 	}
 	
 	function generateSpaces(Length:UInt)
 	{
-		//trace("genereateSpaces(" + Length);
+		//if(verbose) trace("genereateSpaces(" + Length);
 		
-		var currentSpace:Space = null;
+		var currentSpace:LevelDef = null;
 		var currentAlt:UInt = 0;
 		var currentLong:Int = 0;
 		var currentDirection:Int = 0;
 		
-		var firstSpace = new Space(0, 0);
+		var firstSpace = new LevelDef(0, 0);
 		currentSpace = firstSpace;
 		spaces.push(firstSpace);
 		
-		//trace("---");
+		//if(verbose) trace("---");
 		for (i in 0...Length-1)
 		{
 			var direction:Int;
@@ -70,7 +70,7 @@ class LevelTree extends FlxGroup
 				}
 				while (direction * currentDirection == -1);
 			}
-			//trace("direction: " + direction);
+			//if(verbose) trace("direction: " + direction);
 			
 			currentDirection = direction;
 			
@@ -87,7 +87,7 @@ class LevelTree extends FlxGroup
 				//break;
 			}
 			
-			var space = new Space(currentAlt, currentLong);
+			var space = new LevelDef(currentAlt, currentLong);
 			if (currentSpace != null)
 			{
 				space.neighbors.push(currentSpace);
@@ -97,7 +97,7 @@ class LevelTree extends FlxGroup
 			//var space = new Space(i, 0);
 			spaces.push(space);
 		}
-		//trace(spaces);
+		//if(verbose) trace(spaces);
 	}
 	
 	//	Since we've generated the spaces linearly,
@@ -105,7 +105,7 @@ class LevelTree extends FlxGroup
 	//	Let's introcuce them to their new neighbors they meet along the path.
 	function introduceNewNeighbors()
 	{
-		trace("introduceNewNeighbors(");
+		if(verbose) trace("introduceNewNeighbors(");
 		for (i in 0...spaces.length)
 		{
 			if (i < spaces.length - 3)
@@ -131,10 +131,10 @@ class LevelTree extends FlxGroup
 		
 		for (space in spaces)
 		{
-			trace("neighbors for "+space+"->"+space.neighbors);
+			if(verbose) trace("neighbors for "+space+"->"+space.neighbors);
 		}
 		
-		//trace(
+		//if(verbose) trace(
 	}
 	
 	
@@ -147,12 +147,12 @@ class LevelTree extends FlxGroup
 		for (space in spaces)
 		{
 			var mask:String = "";
-			trace(space);
+			if(verbose) trace(space);
 			
-			var topNeighbor:Space = space.getNeighborAt(Direction.TOP);
-			var bottomNeighbor:Space = space.getNeighborAt(Direction.BOTTOM);
-			var leftNeighbor:Space = space.getNeighborAt(Direction.LEFT);
-			var rightNeighbor:Space = space.getNeighborAt(Direction.RIGHT);
+			var topNeighbor:LevelDef = space.getNeighborAt(Direction.TOP);
+			var bottomNeighbor:LevelDef = space.getNeighborAt(Direction.BOTTOM);
+			var leftNeighbor:LevelDef = space.getNeighborAt(Direction.LEFT);
+			var rightNeighbor:LevelDef = space.getNeighborAt(Direction.RIGHT);
 			
 			if (topNeighbor != null)
 			{
@@ -181,6 +181,7 @@ class LevelTree extends FlxGroup
 		
 	}
 	
+	/*
 	function generateLevels()
 	{
 		for (space in spaces)
@@ -190,14 +191,15 @@ class LevelTree extends FlxGroup
 			levels.push(level);
 		}
 	}
+	*/
 	
 	
-	function createLevel(space:Space):Level
+	public function createLevel(space:LevelDef):Level
 	{
-		trace("createLevel(" + space);
+		if(verbose) trace("createLevel(" + space);
 		//var tmx = FlxRandom.chanceRoll()?"assets/data/levels/templateDoors.tmx":"assets/data/levels/FirstRoom.tmx";
 		var tmx = "assets/data/levels/room_" + space.mask + ".tmx";
-		trace(tmx);
+		if(verbose) trace(tmx);
 		var level = new Level(tmx, space);
 		return level;
 	}

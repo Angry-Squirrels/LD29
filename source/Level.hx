@@ -12,7 +12,7 @@ import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
 import player.Hero;
-import universe.Space;
+import universe.LevelDef;
 import utils.Collider;
 
 /**
@@ -21,7 +21,7 @@ import utils.Collider;
  */
 class Level extends TiledMap
 {
-	
+	public static var verbose:Bool;
 	private inline static var PATH_LEVEL_TILESHEETS = "assets/images/tilesets/";
 	
 	public var foregroundTiles: FlxGroup;
@@ -29,30 +29,37 @@ class Level extends TiledMap
 	public var doors: FlxGroup;
 	
 	var collisionableTileLayers:FlxTilemap;
-	var _space:Space;
+	var _definition:LevelDef;
 	
 	var _number:UInt = 0;
 	static private var NB_LEVEL:UInt = 0;
 	
-	public function new(path:String, space:Space) 
+	public function new(path:String, space:LevelDef) 
 	{
-		trace("new Level(" + path, space);
+		if(verbose) trace("new Level(" + path, space);
 		super(path);
 		
 		NB_LEVEL++;
 		_number = NB_LEVEL;
-		trace(this);
+		if(verbose) trace(this);
 	
-		_space = space;
+		_definition = space;
 		
 		FlxG.log.notice("Loading map");
 		
 		foregroundTiles = new FlxGroup();
+		foregroundTiles.ID = 1234;
 		backgroundTiles = new FlxGroup();
+		backgroundTiles.ID = 2345;
 		doors = new FlxGroup();
 		
 		FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
 		//return;
+		
+	}
+	
+	public function draw()
+	{
 		
 		for (tileLayer in layers) { // for each layer
 			
@@ -164,16 +171,18 @@ class Level extends TiledMap
 	
 	public var number(get_number, null):UInt;
 	
-	function get_space():Space 
+	function get_definition():LevelDef 
 	{
-		return _space;
+		return _definition;
 	}
 	
-	public var space(get_space, null):Space;
+	public var definition(get_definition, null):LevelDef;
 	
 	public function toString():String
 	{
 		return "[Level " + _number + "]";
 	}
+	
+	
 	
 }

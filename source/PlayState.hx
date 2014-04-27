@@ -1,5 +1,5 @@
 package;
-
+import flixel.FlxBasic;
 import ennemies.BaseEnnemy;
 import flash.Lib;
 import flixel.FlxG;
@@ -7,12 +7,14 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import player.Hero;
+import flash.errors.Error;
 
 /**
  * A FlxState which can be used for the actual gameplay.
  */
 class PlayState extends FlxState
 {
+	public static var verbose:Bool;
 	var level:Level;
 	var hero:Hero;
 	var map:FlxSprite;
@@ -22,15 +24,35 @@ class PlayState extends FlxState
 	 */
 	override public function create():Void
 	{
-		trace("create(");
+		if(verbose) trace("create(");
 		super.create();
 		
 		if(Reg.levelTree == null)	Reg.levelTree = new LevelTree(10, this);
 		//add(Reg.levelTree);
+		
 		level = Reg.levelTree.currentLevel;
-		trace(level);
-		add(level.backgroundTiles);
-		add(level.foregroundTiles);
+		if(verbose) trace(level);
+		level.draw();
+		
+		try
+		{
+			if(verbose) trace("backgroundTiles:" + level.backgroundTiles);
+			
+			if(verbose) trace(level.backgroundTiles.members);
+			for (member in level.backgroundTiles.members)
+			{
+				if(verbose) trace(member);
+			}
+			if(verbose) trace(level.definition.mask);
+			
+			add(level.backgroundTiles);
+			add(level.foregroundTiles);
+		}
+		catch (e:Error)
+		{
+			if(verbose) trace(e);
+		}
+		
 		level.loadObjects(this);
 		
 		spawnHero();
@@ -49,6 +71,9 @@ class PlayState extends FlxState
 	 */
 	override public function destroy():Void
 	{
+		if(verbose) trace("destroy(");
+		remove(level.backgroundTiles);
+		remove(level.foregroundTiles);
 		super.destroy();
 	}
 
@@ -75,7 +100,7 @@ class PlayState extends FlxState
 	{
 		if (!doorTouched)
 		{
-			trace("touchDoor");
+			if(verbose) trace("touchDoor");
 			door.enter(this.hero);
 			//remove(door);
 			FlxG.resetState();

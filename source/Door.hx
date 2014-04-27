@@ -10,7 +10,7 @@ import player.Hero;
  */
 class Door extends FlxSprite
 {
-	
+	public static var verbose:Bool;
 	public var direction : String;
 
 	public function new(data:Fast, x : Int, y:Int) 
@@ -39,12 +39,12 @@ class Door extends FlxSprite
 	
 	public function enter(hero : Hero)
 	{
-		trace(this.direction);
-		Reg.levelTree.currentLevel = Reg.levelTree
-		.currentLevel
-		.space
+		if(verbose) trace(this.direction);
+		Reg.levelTree.currentLevel = Reg.levelTree.createLevel(
+		Reg.levelTree.currentLevel
+		.definition
 		.getNeighborAt(this.direction)
-		.level;
+		);
 		Reg.exitDirection = this.direction;
 	}
 	

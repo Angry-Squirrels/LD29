@@ -10,8 +10,9 @@ import flixel.text.FlxTextField;
  * ...
  * @author damrem
  */
-class Space
+class LevelDef
 {
+	public static var verbose:Bool;
 	public var alt:UInt;
 	public var long:Int;
 	//public var mask:String;
@@ -25,19 +26,19 @@ class Space
 	
 	static inline var BOX_SIZE:Int = 25;
 	
-	public var neighbors:Array<Space>;
+	public var neighbors:Array<LevelDef>;
 	
 	public function new(?Alt:UInt, ?Long:Int) 
 	{
-		//trace(this, Alt, Long, Mask);
+		//if(verbose) trace(this, Alt, Long, Mask);
 		alt = Alt;
 		long = Long;
-		neighbors = new Array<Space>();
+		neighbors = new Array<LevelDef>();
 	}
 
-	public function getNeighborAt(direction:String):Space
+	public function getNeighborAt(direction:String):LevelDef
 	{
-		trace("getNeighborAt(" + direction);
+		if(verbose) trace("getNeighborAt(" + direction);
 		switch(direction)
 		{
 			case Direction.TOP:
@@ -56,7 +57,7 @@ class Space
 					if (neighbor.alt == alt && neighbor.long == long - 1)	return neighbor;
 				}
 			case Direction.RIGHT:
-				trace(neighbors);
+				if(verbose) trace(neighbors);
 				for (neighbor in neighbors)
 				{
 					if (neighbor.alt == alt && neighbor.long == long + 1)	return neighbor;
@@ -84,7 +85,7 @@ class Space
 		var X = FlxG.stage.stageWidth / 2 + long * BOX_SIZE;
 		var Y = FlxG.stage.stageHeight - 50 - alt * BOX_SIZE;
 		var group:FlxSpriteGroup = new FlxSpriteGroup(X, Y);
-		//trace("x=" + sprite.x);
+		//if(verbose) trace("x=" + sprite.x);
 		
 		group.makeGraphic(BOX_SIZE, BOX_SIZE);
 		

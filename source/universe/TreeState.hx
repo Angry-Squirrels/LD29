@@ -15,6 +15,8 @@ import flash.display.JointStyle;
  */
 class TreeState extends FlxState
 {
+	public static var verbose:Bool;
+	
 	var line:LineStyle = { thickness:1, color:0xff0000, pixelHinting:true, scaleMode:LineScaleMode.NORMAL, capsStyle:CapsStyle.NONE, jointStyle:JointStyle.MITER, miterLimit:1 };
 	var fill:FillStyle = { hasFill:true, color:0xff0000, alpha:1 };
 	var tree:LevelTree;
@@ -30,14 +32,14 @@ class TreeState extends FlxState
 	
 	function createTree()
 	{
-		trace("createTree");
+		if(verbose) trace("createTree");
 		
 		var _tree = new LevelTree(10, new PlayState());
 		
 		for (i in 0..._tree.spaces.length)
 		{
-			//trace("i:" + i);
-			var space:Space = _tree.spaces[i];
+			//if(verbose) trace("i:" + i);
+			var space:LevelDef = _tree.spaces[i];
 			//add(createBox(space.alt, space.long));
 			add(space.getBox());
 		}
@@ -49,7 +51,7 @@ class TreeState extends FlxState
 	{
 		var sprite = new FlxSprite();
 		sprite.x = FlxG.stage.stageWidth / 2 + longitude * BOX_SIZE;
-		//trace("x=" + sprite.x);
+		//if(verbose) trace("x=" + sprite.x);
 		sprite.y = FlxG.stage.stageHeight - 50 - altitude * BOX_SIZE;
 		
 		sprite.makeGraphic(BOX_SIZE, BOX_SIZE);
@@ -67,8 +69,8 @@ class TreeState extends FlxState
 			//remove(tree);
 			clear();
 			tree = createTree();
-			//trace(tree.spaces[5].neighbors);
-			//trace(FlxG.mouse.
+			//if(verbose) trace(tree.spaces[5].neighbors);
+			//if(verbose) trace(FlxG.mouse.
 		}
 	}
 	
