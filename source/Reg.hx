@@ -67,4 +67,13 @@ class Reg
 	
 	/** hero stats **/
 	public static var heroStats: HeroStats = new HeroStats();
+	
+	// intro
+	public static var introTexts : Array<String> = [
+		"I've been choosen by the council!",
+		"I must find out what's up there...",
+		"and find out if our world will ever",
+		"be able to bear life again!"
+	];
+	
 }

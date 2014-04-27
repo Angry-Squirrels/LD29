@@ -105,14 +105,23 @@ class Hero extends FlxGroup
 		
 		if (FlxG.keys.anyPressed(leftKeys))
 		{
-			flipHero(true);
 			hitbox.acceleration.x = -hitbox.drag.x;
 		}
 		else if (FlxG.keys.anyPressed(rightKeys))
 		{
-			flipHero(false);
 			hitbox.acceleration.x = hitbox.drag.x;
 		}
+		
+		if (FlxG.keys.pressed.DOWN) {
+			canJumpThrough = true;
+		}else {
+			canJumpThrough = false;
+		}
+		
+		if (hitbox.acceleration.x < 0)
+			flipHero(true)
+		else if(hitbox.acceleration.x>0)
+			flipHero(false);
 		
 		jump();
 		

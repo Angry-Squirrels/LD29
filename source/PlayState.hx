@@ -7,6 +7,8 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.text.FlxText;
+import haxe.Timer;
 import player.Hero;
 import flash.errors.Error;
 import universe.LevelDef;
@@ -20,6 +22,9 @@ class PlayState extends FlxState
 	var level:Level;
 	var hero:Hero;
 	var map:FlxSprite;
+	var runningIntro : Bool;
+	
+	var introText : FlxText;
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -73,6 +78,7 @@ class PlayState extends FlxState
 		FlxG.camera.fade(0xff000000, 0.1, true);
 	}
 	
+	var introTextIndex:Int = 0;
 	function launchSpecialEvent() 
 	{
 		var curDef : LevelDef = Reg.levelTree.currentLevel.definition;
@@ -82,9 +88,21 @@ class PlayState extends FlxState
 		
 		if (alt == 0 && long == 0) {
 			if (!curDef.explored) {
+				runningIntro = true;
 				FlxG.camera.fade(0xff000000, 1, true);
-				FlxG.camera.shake(0.01, 3);
+				introText = new FlxText(10, 10, 0, Reg.introTexts[introTextIndex], 16);
+				add(introText);
+				Timer.delay(changeIntroText, 3000);
 			}
+		}
+	}
+	
+	function changeIntroText() 
+	{
+		if (introTextIndex < Reg.introTexts.length-1) {
+			introTextIndex++;
+			Timer.delay(changeIntroText, 2000);
+			introText.text = Reg.introTexts[introTextIndex];
 		}
 	}
 	
@@ -107,13 +125,13 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
-		if (FlxG.keys.pressed.DOWN) {
-			this.hero.canJumpThrough = true;
-		}else {
-			this.hero.canJumpThrough = false;
-		}
-		
 		level.collideWithLevel(this.hero.hitbox);
+		
+		if (runningIntro) {
+			hero.hitbox.velocity.x = 700;
+			introText.x = hero.hitbox.x + 50;
+			introText.y = hero.hitbox.y  - 25;
+		}
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 	}	
@@ -139,8 +157,8 @@ class PlayState extends FlxState
 	function spawnHero():Void 
 	{
 		var door : Door = null;
-		var spawnX : Int = 64;
-		var spawnY : Int = 47 * 64 + 10;
+		var spawnX : Int = 0;
+		var spawnY : Int = 17 * 64 + 10;
 		
 		switch(Reg.exitDirection) {
 			case 'left' :
