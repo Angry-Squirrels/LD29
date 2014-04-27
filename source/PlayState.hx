@@ -1,24 +1,21 @@
 package;
-
+import flixel.FlxBasic;
 import ennemies.BaseEnnemy;
 import flash.Lib;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.text.FlxText;
-import flixel.ui.FlxButton;
-import flixel.util.FlxMath;
-import flixel.util.FlxColor;
 import player.Hero;
+import flash.errors.Error;
 
 /**
  * A FlxState which can be used for the actual gameplay.
  */
 class PlayState extends FlxState
 {
-	
-	var level : Level;
+	public static var verbose:Bool;
+	var level:Level;
 	var hero:Hero;
 	var map:FlxSprite;
 	
@@ -27,13 +24,36 @@ class PlayState extends FlxState
 	 */
 	override public function create():Void
 	{
+		if(verbose) trace("create(");
 		super.create();
 		
-		level = new Level("assets/data/levels/" + Reg.currentMap +".tmx", this);
-		add(level.backgroundTiles);
-		add(level.foregroundTiles);
+		if(Reg.levelTree == null)	Reg.levelTree = new LevelTree(10, this);
+		//add(Reg.levelTree);
 		
-		level.loadObjects();
+		level = Reg.levelTree.currentLevel;
+		if(verbose) trace(level);
+		level.draw();
+		
+		try
+		{
+			if(verbose) trace("backgroundTiles:" + level.backgroundTiles);
+			
+			if(verbose) trace(level.backgroundTiles.members);
+			for (member in level.backgroundTiles.members)
+			{
+				if(verbose) trace(member);
+			}
+			if(verbose) trace(level.definition.mask);
+			
+			add(level.backgroundTiles);
+			add(level.foregroundTiles);
+		}
+		catch (e:Error)
+		{
+			if(verbose) trace(e);
+		}
+		
+		level.loadObjects(this);
 		
 		spawnHero();
 		
@@ -52,6 +72,9 @@ class PlayState extends FlxState
 	 */
 	override public function destroy():Void
 	{
+		if(verbose) trace("destroy(");
+		remove(level.backgroundTiles);
+		remove(level.foregroundTiles);
 		super.destroy();
 	}
 
@@ -68,28 +91,27 @@ class PlayState extends FlxState
 			this.hero.canJumpThrough = false;
 		}
 		
-		this.level.collideWithLevel(this.hero.hitbox);
+		level.collideWithLevel(this.hero.hitbox);
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 	}	
 	
+	var doorTouched:Bool = false;
 	function touchDoor(door: Door, player:FlxSprite) 
 	{
-		door.enter(this.hero);
-		Reg.vitX = hero.hitbox.velocity.x;
-		Reg.vitY = hero.hitbox.velocity.y;
+		if (!doorTouched)
+		{
+			if(verbose) trace("touchDoor");
+			Reg.vitX = hero.hitbox.velocity.x;
+			Reg.vitY = hero.hitbox.velocity.y;
+			door.enter(this.hero);
+			//remove(door);
+			FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
+			doorTouched = true;
+		}
 		
-		FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
-		
-		var doorCode : Dynamic = Math.random() * 14 + 1;
-		var str = doorCode.toString(2);
-		while (str.length < 4)
-			str = "0" + str;
-		
-		Reg.currentMap = "room_" + str;
-	}
-	
-	function fadeComplete() {
+}
+function fadeComplete() {
 		FlxG.resetState();
 	}
 	

@@ -25,7 +25,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--no-output&#xA;-swf-version 11.8&#xA;#--remap nme:flash" />
+    <option additional="--no-output&#xA;-swf-version 11.8&#xA;#--remap nme:flash;-v" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

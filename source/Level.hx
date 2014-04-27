@@ -12,6 +12,7 @@ import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
 import player.Hero;
+import universe.LevelDef;
 import utils.Collider;
 
 /**
@@ -20,7 +21,7 @@ import utils.Collider;
  */
 class Level extends TiledMap
 {
-	
+	public static var verbose:Bool;
 	private inline static var PATH_LEVEL_TILESHEETS = "assets/images/tilesets/";
 	
 	public var foregroundTiles: FlxGroup;
@@ -28,21 +29,37 @@ class Level extends TiledMap
 	public var doors: FlxGroup;
 	
 	var collisionableTileLayers:FlxTilemap;
-	var state : PlayState;
+	var _definition:LevelDef;
 	
-	public function new(path:String, state : PlayState) 
+	var _number:UInt = 0;
+	static private var NB_LEVEL:UInt = 0;
+	
+	public function new(path:String, space:LevelDef) 
 	{
+		if(verbose) trace("new Level(" + path, space);
 		super(path);
 		
-		this.state = state;
+		NB_LEVEL++;
+		_number = NB_LEVEL;
+		if(verbose) trace(this);
+	
+		_definition = space;
 		
 		FlxG.log.notice("Loading map");
 		
 		foregroundTiles = new FlxGroup();
+		foregroundTiles.ID = 1234;
 		backgroundTiles = new FlxGroup();
+		backgroundTiles.ID = 2345;
 		doors = new FlxGroup();
 		
 		FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
+		//return;
+		
+	}
+	
+	public function draw()
+	{
 		
 		for (tileLayer in layers) { // for each layer
 			
@@ -114,15 +131,16 @@ class Level extends TiledMap
 		return null;
 	}
 	
-	public function loadObjects() {
+	
+	public function loadObjects(state:PlayState) {
 		for (group in objectGroups) {
 			for (o in group.objects) {
-				loadObject(o, group);
+				loadObject(o, group, state);
 			}
 		}
 	}
 	
-	function loadObject(o:TiledObject, g:TiledObjectGroup) {
+	function loadObject(o:TiledObject, g:TiledObjectGroup, state:PlayState) {
 		var x = o.x;
 		var y = o.y;
 		
@@ -145,5 +163,26 @@ class Level extends TiledMap
 		}
 		return false;
 	}
+	
+	function get_number():UInt 
+	{
+		return _number;
+	}
+	
+	public var number(get_number, null):UInt;
+	
+	function get_definition():LevelDef 
+	{
+		return _definition;
+	}
+	
+	public var definition(get_definition, null):LevelDef;
+	
+	public function toString():String
+	{
+		return "[Level " + _number + "]";
+	}
+	
+	
 	
 }

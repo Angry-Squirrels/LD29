@@ -11,6 +11,8 @@ import ennemies.BaseEnnemy;
  */
 class Reg
 {
+	static public var levelTree:LevelTree;
+	
 	/**
 	 * Generic levels Array that can be used for cross-state stuff.
 	 * Example usage: Storing the levels of a platformer.
