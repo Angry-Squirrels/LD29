@@ -1,7 +1,11 @@
 package weapons.hero_weapons;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.util.loaders.SparrowData;
+import flixel.FlxG;
 import weapons.BaseWeapon;
+import ennemies.BaseEnnemy;
+import utils.Collider;
 
 /**
  * ...
@@ -11,7 +15,6 @@ class BaseHeroWeapon extends BaseWeapon
 {
 	private var spritePath:String;
 	private var spriteXML:String;
-	public var skin:FlxSprite;
 	public var firing:Bool = false;
 	public var currentAnim:String;
 	public var currentAnimFrameRate:Int;
@@ -31,6 +34,26 @@ class BaseHeroWeapon extends BaseWeapon
 		skin.animation.addByPrefix("land", "LD29_hero_arm_1_fallR", 10, false);
 		skin.animation.addByPrefix("fire", "LD29_hero_arm_fire", 6, false);
 		add(skin);
+	}
+	
+	public override function update()
+	{
+		FlxG.overlap(this.bulletFactory.group, Reg.ennemyGroup, applyDamage);
+		
+		super.update();
+	}
+	
+	private override function applyDamage(_obj1:FlxObject, _obj2:FlxObject)
+	{
+		super.applyDamage(_obj1, _obj2);
+		
+		// apply damage to the ennemy
+		if (Type.getClassName(Type.getClass(_obj2)) == "utils.Collider")
+		{
+			var collider = cast(_obj2, Collider);
+			var ennemy = cast(collider.parent, BaseEnnemy);
+			ennemy.hurt(this.bulletFactory.bulletDamage);
+		}
 	}
 	
 	public override function fire():Void
@@ -57,25 +80,18 @@ class BaseHeroWeapon extends BaseWeapon
 		}
 	}
 	
-	public override function flipWeapon(_facingLeft:Bool):Void
-	{
-		skin.flipX = _facingLeft;
-		
-		super.flipWeapon(_facingLeft);
-	}
-	
 	public override function moveWeapon(_x:Float, _y:Float)
 	{
-		if (this.bulletFactory.currentBullet != null)
-		{
-			this.bulletFactory.currentBullet.x += _x - skin.x;
-			this.bulletFactory.currentBullet.y += _y - skin.y;
-		}
-		
-		bulletFactory.bounds.x = _x - parent.width;
-		bulletFactory.bounds.y = _y - parent.width;
-		
 		skin.x = _x;
 		skin.y = _y;
+		
+		if (this.bulletFactory.currentBullet != null)
+		{
+			this.bulletFactory.currentBullet.x = skin.flipX ? skin.x - bulletWidth + 32 : skin.x + parent.width - 32;
+			this.bulletFactory.currentBullet.y = skin.y;
+		}
+		
+		bulletFactory.bounds.x = _x - bulletWidth - 5;
+		bulletFactory.bounds.y = _y - bulletWidth - 5;
 	}
 }

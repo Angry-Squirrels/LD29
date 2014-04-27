@@ -1,8 +1,11 @@
 package ennemies;
+import flixel.FlxSprite;
 import player.Hero;
 import flixel.util.FlxColor;
+import utils.Collider;
 import utils.EnnemyPath;
 import flixel.util.FlxPoint;
+import weapons.ennemy_weapons.BaseEnnemyWeapon;
 
 /**
  * ...
@@ -12,14 +15,19 @@ class FlyingEnnemy extends BaseEnnemy
 {
 	public function new(_hero:Hero) 
 	{
+		body = new Collider(0, 0, this);
+		body.makeGraphic(70, 50, FlxColor.MAUVE);
+		
 		super(_hero);
 		
-		makeGraphic(70, 50, FlxColor.MAUVE);
-		health = 2;
+		body.health = 2;
 		distanceToDetect = 500;
-		minDistance = Std.int(this.width * 2);
+		minDistance = Std.int(body.width * 2);
 		move_speed = 200;
 		patrol_speed = 200;
+		
+		weapon = new BaseEnnemyWeapon(body, minDistance);
+		add(weapon);
 	}
 	
 	public override function update()
@@ -33,7 +41,7 @@ class FlyingEnnemy extends BaseEnnemy
 					pathToHero = findAPath();
 					if (pathToHero != null)
 					{
-						path.start(this, pathToHero, move_speed);
+						path.start(body, pathToHero, move_speed);
 					}
 				}
 			
@@ -45,13 +53,14 @@ class FlyingEnnemy extends BaseEnnemy
 						pathToHero = findAPath();
 						if (pathToHero != null)
 						{
-							path.start(this, pathToHero, move_speed);
+							path.start(body, pathToHero, move_speed);
 						}
 					}
 				}
 				else if (canAttack())
 				{
 					path.cancel();
+					weapon.blockWeaponFor(1);
 					currentState = BaseEnnemy.ACTION_ATTACK;
 				}
 				else
@@ -62,7 +71,7 @@ class FlyingEnnemy extends BaseEnnemy
 			case BaseEnnemy.ACTION_ATTACK:
 				if (canAttack())
 				{
-					
+					weapon.fire();
 				}
 				else
 				{
@@ -70,7 +79,7 @@ class FlyingEnnemy extends BaseEnnemy
 					pathToHero = findAPath();
 					if (pathToHero != null)
 					{
-						path.start(this, pathToHero, move_speed);
+						path.start(body, pathToHero, move_speed);
 					}
 				}
 		}

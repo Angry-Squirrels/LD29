@@ -2,6 +2,7 @@ package;
 
 import flixel.group.FlxTypedGroup.FlxTypedGroup;
 import flixel.util.FlxSave;
+import flixel.FlxSprite;
 import ennemies.BaseEnnemy;
 import flixel.tile.FlxTilemap;
 import player.Hero;
@@ -57,6 +58,9 @@ class Reg
 	
 	/** Ennemy group **/
 	static public var ennemyGroup:FlxTypedGroup<BaseEnnemy> = new FlxTypedGroup<BaseEnnemy>();
+	
+	/** Hero for collision **/
+	static public var hero:Hero;
 	
 	/** Map used for pathfinding **/
 	static public var currentTileMap:FlxTilemap;

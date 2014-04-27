@@ -14,18 +14,25 @@ class BaseWeapon extends FlxGroup
 {
 	private var bulletFactory:FlxWeapon;
 	private var bulletWidth:Int;
+	
+	private var fireRate:Float; // time between 2 shots in seconds
+	private var elapsedTime:Float;
+	
 	private var parent:FlxSprite;
+	public var skin:FlxSprite;
 	
 	public function new(_parent:FlxSprite) 
 	{
 		super();
 		
 		this.parent = _parent;
+		
+		elapsedTime = 0;
 	}
 	
-	public override function update()
+	public override function update():Void
 	{
-		FlxG.overlap(this.bulletFactory.group, Reg.ennemyGroup, applyDamage);
+		elapsedTime += FlxG.elapsed;
 		
 		super.update();
 	}
@@ -34,18 +41,21 @@ class BaseWeapon extends FlxGroup
 	{
 		// destroy bullet
 		_obj1.kill();
-		
-		// apply damage to the ennemy
-		_obj2.hurt(this.bulletFactory.bulletDamage);
 	}
 	
 	public function fire():Void
 	{
-		this.bulletFactory.fire();
+		if (elapsedTime > fireRate)
+		{
+			elapsedTime = 0;
+			this.bulletFactory.fire();
+		}
 	}
 	
 	public function flipWeapon(_facingLeft:Bool):Void
 	{
+		skin.flipX = _facingLeft;
+		
 		if (bulletFactory != null)
 		{
 			if (_facingLeft)
@@ -63,13 +73,28 @@ class BaseWeapon extends FlxGroup
 	
 	public function moveWeapon(_x:Float, _y:Float)
 	{
+		skin.x = _x;
+		skin.y = _y;
+		
 		if (this.bulletFactory.currentBullet != null)
 		{
-			this.bulletFactory.currentBullet.x += _x;
-			this.bulletFactory.currentBullet.y += _y;
+			this.bulletFactory.currentBullet.x = skin.flipX ? skin.x - bulletWidth : skin.x + parent.width;
+			this.bulletFactory.currentBullet.y = skin.y;
 		}
 		
-		bulletFactory.bounds.x = _x - parent.width;
-		bulletFactory.bounds.y = _y - parent.width;
+		bulletFactory.bounds.x = _x - bulletWidth - 5;
+		bulletFactory.bounds.y = _y - bulletWidth - 5;
+	}
+	
+	public override function kill()
+	{
+		if (!alive)
+		{
+			return;
+		}
+		
+		bulletFactory = null;
+		
+		super.kill();
 	}
 }

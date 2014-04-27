@@ -26,6 +26,7 @@ class Staff extends BaseHeroWeapon
 		hero = _parent;
 		
 		bulletWidth = 50;
+		fireRate = 0.25;
 		
 		this.bulletFactory = new FlxWeapon("staff", skin);
 		this.bulletFactory.bulletDamage = 1;

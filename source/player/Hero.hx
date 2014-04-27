@@ -48,7 +48,7 @@ class Hero extends FlxGroup
 		
 		// create hitbox
 		hitbox = new Collider(_x, _y, this);
-		hitbox.makeGraphic(80, 118, 0);
+		hitbox.makeGraphic(80, 118, FlxColor.GREEN);
 		add(hitbox);
 		
 		this.canJumpThrough = false;
@@ -92,8 +92,11 @@ class Hero extends FlxGroup
 		// create weapon
 		this.currentWeapon = new Staff(this);
 		this.add(currentWeapon);
+		currentWeapon.flipWeapon(hitbox.flipX);
 		
 		placeMembers();
+		
+		Reg.hero = this;
 	}
 	
 	public override function update():Void
@@ -184,6 +187,15 @@ class Hero extends FlxGroup
 		placeMembers();
 		
 		super.update();
+	}
+	
+	public function hurt(_damage:Float):Void
+	{
+		hitbox.hurt(_damage);
+		if (!hitbox.alive)
+		{
+			kill();
+		}
 	}
 	
 	public override function kill():Void

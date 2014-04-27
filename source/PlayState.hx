@@ -64,8 +64,7 @@ class PlayState extends FlxState
 		launchSpecialEvent();
 		
 		var ennemy:FlyingEnnemy = new FlyingEnnemy(hero);
-		ennemy.x = 200;
-		ennemy.y = 500;
+		ennemy.place(500, 3000);
 		add(ennemy);
 		
 		FlxG.camera.follow(this.hero.hitbox);
