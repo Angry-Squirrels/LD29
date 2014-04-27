@@ -49,9 +49,10 @@ class Hero extends FlxGroup
 		head = new FlxSprite();
 		body = new FlxSprite();
 		legs = new FlxSprite();
-		head.makeGraphic(25, 25, FlxColor.WHITE);
+		
+		/*head.makeGraphic(25, 25, FlxColor.WHITE);
 		body.makeGraphic(62, 60, FlxColor.RED);
-		legs.makeGraphic(20, 43, FlxColor.BLUE);
+		legs.makeGraphic(20, 43, FlxColor.BLUE);*/
 		add(head);
 		add(body);
 		add(legs);
