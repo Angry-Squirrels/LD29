@@ -15,14 +15,13 @@ class LevelDef
 	public static var verbose:Bool;
 	public var alt:UInt;
 	public var long:Int;
+	public var explored : Bool;
 	//public var mask:String;
 	public var topMask:UInt;
 	public var bottomMask:UInt;
 	public var leftMask:UInt;
 	public var rightMask:UInt;
 	var _mask:String;
-	
-	public var level:Level;
 	
 	static inline var BOX_SIZE:Int = 25;
 	

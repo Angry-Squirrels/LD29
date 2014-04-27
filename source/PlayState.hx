@@ -9,6 +9,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import player.Hero;
 import flash.errors.Error;
+import universe.LevelDef;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -60,6 +61,8 @@ class PlayState extends FlxState
 		
 		spawnHero();
 		
+		launchSpecialEvent();
+		
 		/*var ennemy:FlyingEnnemy = new FlyingEnnemy(hero);
 		ennemy.x = 200;
 		ennemy.y = 500;
@@ -69,6 +72,20 @@ class PlayState extends FlxState
 		//FlxG.camera.bounds = FlxG.worldBounds;
 		FlxG.camera.setBounds(FlxG.worldBounds.x, FlxG.worldBounds.y, FlxG.worldBounds.width, FlxG.worldBounds.height);
 		FlxG.camera.fade(0xff000000, 0.1, true);
+	}
+	
+	function launchSpecialEvent() 
+	{
+		var curDef : LevelDef = Reg.levelTree.currentLevel.definition;
+		
+		var alt = curDef.alt;
+		var long = curDef.long;
+		
+		if (alt == 0 && long == 0) {
+			if (!curDef.explored) {
+				trace("blablabalbal");
+			}
+		}
 	}
 	
 	/**
@@ -106,14 +123,16 @@ class PlayState extends FlxState
 		if (!door.entered)
 		{
 			if(verbose) trace("touchDoor");
+			level.explore();
 			Reg.vitX = hero.hitbox.velocity.x;
 			Reg.vitY = hero.hitbox.velocity.y;
 			door.enter(this.hero);
 			FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
 		}
 		
-}
-function fadeComplete() {
+	}
+
+	function fadeComplete() {
 		FlxG.resetState();
 	}
 	
