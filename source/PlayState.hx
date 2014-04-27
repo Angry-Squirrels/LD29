@@ -31,12 +31,10 @@ class PlayState extends FlxState
 		if(Reg.levelTree == null)	Reg.levelTree = new LevelTree(10, this);
 		//add(Reg.levelTree);
 		
-		level.loadObjects();
-		Reg.currentTileMap = level.collisionableTileLayers;
-		
 		level = Reg.levelTree.currentLevel;
 		if(verbose) trace(level);
 		level.draw();
+		Reg.currentTileMap = level.collisionableTileLayers;
 		
 		try
 		{
@@ -63,7 +61,7 @@ class PlayState extends FlxState
 		
 		var ennemy:FlyingEnnemy = new FlyingEnnemy(hero);
 		ennemy.x = 200;
-		ennemy.y = 3036;
+		ennemy.y = 500;
 		add(ennemy);
 		
 		FlxG.camera.follow(this.hero.hitbox);
