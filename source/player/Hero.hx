@@ -99,6 +99,8 @@ class Hero extends FlxGroup
 		placeMembers();
 		
 		Reg.hero = this;
+		
+		hitbox.health = Reg.heroStats.health;
 	}
 	
 	public override function update():Void
@@ -205,7 +207,9 @@ class Hero extends FlxGroup
 		hitbox.hurt(_damage);
 		
 		FlxG.camera.flash(0xffbb0000, 0.1);
-		FlxG.camera.shake(0.05,0.1);
+		FlxG.camera.shake(0.05, 0.1);
+		
+		Reg.heroStats.health = cast hitbox.health;
 		
 		if (!hitbox.alive)
 		{

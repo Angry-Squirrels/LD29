@@ -24,10 +24,6 @@ class PlayState extends FlxState
 	
 	var introText : FlxText;
 	
-	public function new() {
-		super();
-	}
-	
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
@@ -78,7 +74,6 @@ class PlayState extends FlxState
 		add(ennemy);
 		
 		FlxG.camera.follow(this.hero.hitbox);
-		//FlxG.camera.bounds = FlxG.worldBounds;
 		FlxG.camera.setBounds(FlxG.worldBounds.x, FlxG.worldBounds.y, FlxG.worldBounds.width, FlxG.worldBounds.height);
 		FlxG.camera.fade(0xff000000, 0.1, true);
 	}
@@ -97,16 +92,17 @@ class PlayState extends FlxState
 				FlxG.camera.fade(0xff000000, 1, true);
 				introText = new FlxText(10, 10, 0, Reg.introTexts[introTextIndex], 16);
 				add(introText);
-				Timer.delay(changeIntroText, 3000);
+				introTimer = Timer.delay(changeIntroText, 3000);
 			}
 		}
 	}
 	
+	var introTimer : Timer;
 	function changeIntroText() 
 	{
-		if (introTextIndex < Reg.introTexts.length-1) {
+		if (introTextIndex < Reg.introTexts.length-1 && introText != null) {
 			introTextIndex++;
-			Timer.delay(changeIntroText, 2000);
+			introTimer = Timer.delay(changeIntroText, 2000);
 			introText.text = Reg.introTexts[introTextIndex];
 		}
 	}
@@ -117,7 +113,10 @@ class PlayState extends FlxState
 	 */
 	override public function destroy():Void
 	{
-		if(verbose) trace("destroy(");
+		if (verbose) trace("destroy(");
+		trace(introTimer);
+		if (introTimer != null)
+			introTimer.stop();
 		remove(level.backgroundTiles);
 		remove(level.foregroundTiles);
 		super.destroy();
@@ -136,6 +135,10 @@ class PlayState extends FlxState
 			hero.hitbox.velocity.x = 700;
 			introText.x = hero.hitbox.x + 50;
 			introText.y = hero.hitbox.y  - 25;
+			
+			if (FlxG.keys.pressed.X)
+				touchDoor(cast level.doors.getFirstExisting(), hero.hitbox);
+			
 		}
 		
 		if (FlxG.keys.pressed.K)
@@ -154,7 +157,6 @@ class PlayState extends FlxState
 			door.enter(this.hero);
 			FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
 		}
-		
 	}
 
 	function fadeComplete() {

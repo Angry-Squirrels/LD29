@@ -23,6 +23,8 @@ class HeroStats
 	public var enemyKilled : UInt = 0;
 	public var experience : Int = 0;
 	
+	public var health : Int = 0;
+	
 	public function new() 
 	{
 		
