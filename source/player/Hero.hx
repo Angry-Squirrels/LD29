@@ -10,6 +10,7 @@ import flixel.util.FlxPoint;
 import flixel.util.loaders.SparrowData;
 import utils.Collider;
 import weapons.BaseWeapon;
+import weapons.hero_weapons.BaseHeroWeapon;
 import weapons.hero_weapons.Staff;
 
 /**
@@ -38,7 +39,7 @@ class Hero extends FlxGroup
 	private var leftKeys:Array<String>;
 	private var rightKeys:Array<String>;
 	
-	private var currentWeapon:BaseWeapon;
+	private var currentWeapon:BaseHeroWeapon;
 	public var canJumpThrough : Bool;
 	
 	public function new(_x:Int, _y:Int) 

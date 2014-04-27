@@ -12,7 +12,7 @@ import weapons.BaseWeapon;
  * ...
  * @author Ynk33
  */
-class Staff extends BaseWeapon
+class Staff extends BaseHeroWeapon
 {
 	private var hero:Hero;
 	

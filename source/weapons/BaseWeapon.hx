@@ -12,33 +12,15 @@ import flixel.util.loaders.SparrowData;
  */
 class BaseWeapon extends FlxGroup
 {
-	private var spritePath:String;
-	private var spriteXML:String;
 	private var bulletFactory:FlxWeapon;
 	private var bulletWidth:Int;
-	public var skin:FlxSprite;
 	private var parent:FlxSprite;
-	public var firing:Bool = false;
-	public var currentAnim:String;
-	public var currentAnimFrameRate:Int;
 	
 	public function new(_parent:FlxSprite) 
 	{
 		super();
 		
 		this.parent = _parent;
-		
-		// load animation
-		var animation = new SparrowData(spriteXML, spritePath);
-		skin = new FlxSprite();
-		skin.loadGraphicFromTexture(animation);
-		skin.animation.addByPrefix("idle", "LD29_hero_arm_1_waitR", 75);
-		skin.animation.addByPrefix("run", "LD29_hero_arm_1_runR", 12);
-		skin.animation.addByPrefix("jump", "LD29_hero_arm_1_jumpR", 6, false);
-		skin.animation.addByPrefix("fall", "LD29_hero_arm_1_airR", 1);
-		skin.animation.addByPrefix("land", "LD29_hero_arm_1_fallR", 10, false);
-		skin.animation.addByPrefix("fire", "LD29_hero_arm_fire", 6, false);
-		add(skin);
 	}
 	
 	public override function update()
@@ -59,31 +41,11 @@ class BaseWeapon extends FlxGroup
 	
 	public function fire():Void
 	{
-		firing = true;
-		skin.animation.play("fire");
-		skin.animation.curAnim.frameRate = 30;
-		skin.animation.callback = checkEndOfFire;
 		this.bulletFactory.fire();
-	}
-	
-	private function checkEndOfFire(_name:String, _frameNumber:Int, _frameIndex:Int):Void
-	{
-		if (_frameNumber == 5)
-		{
-			firing = false;
-			
-			trace (currentAnim);
-			skin.animation.play(currentAnim);
-			skin.animation.curAnim.frameRate = currentAnimFrameRate;
-			skin.animation.curAnim.curIndex = parent.animation.frameIndex;
-			skin.animation.callback = null;
-		}
 	}
 	
 	public function flipWeapon(_facingLeft:Bool):Void
 	{
-		skin.flipX = _facingLeft;
-		
 		if (bulletFactory != null)
 		{
 			if (_facingLeft)
@@ -103,16 +65,11 @@ class BaseWeapon extends FlxGroup
 	{
 		if (this.bulletFactory.currentBullet != null)
 		{
-			this.bulletFactory.currentBullet.x += _x - skin.x;
-			this.bulletFactory.currentBullet.y += _y - skin.y;
+			this.bulletFactory.currentBullet.x += _x;
+			this.bulletFactory.currentBullet.y += _y;
 		}
-		
-		skin.x = _x;
-		skin.y = _y;
 		
 		bulletFactory.bounds.x = _x - parent.width;
 		bulletFactory.bounds.y = _y - parent.width;
-		
 	}
-	
 }
