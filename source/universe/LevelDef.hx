@@ -98,8 +98,8 @@ class LevelDef
 	
 	function set_explored(value:Bool):Bool 
 	{
-		this.miniDoors.visible = value;
-		this.miniRooms.visible = value;
+		//this.miniDoors.visible = value;
+		//this.miniRooms.visible = value;
 		return _explored = value;
 	}
 	
@@ -145,44 +145,30 @@ class LevelDef
 		
 		return group;
 	}
-	
+	/*
 	var miniRooms:FlxSpriteGroup;
 	var miniDoors:FlxSpriteGroup;
+	*/
+	
+	
 	public function getMiniRooms():FlxSpriteGroup
 	{
+		
+		
 		var X = FlxG.stage.stageWidth / 2 + long * MINIBOX_SIZE;
 		var Y = FlxG.stage.stageHeight - 50 - alt * MINIBOX_SIZE;
+		var group:FlxSpriteGroup = new FlxSpriteGroup(X, Y);
+		group.scrollFactor.set(0, 0);
 		
-		if (miniRooms == null)
-		{
 		
-			var box:FlxSprite = new FlxSprite(1, 1);
-			box.angle = FlxRandom.intRanged( -5, 5);
-			box.makeGraphic(MINIBOX_SIZE-2, MINIBOX_SIZE-2, 0xffff0000);
-			miniRooms = new FlxSpriteGroup(X, Y);
-			miniRooms.add(box);
-		}
-		
-		return miniRooms;
-	}
-	
-	
-	public function getMiniDoors():FlxSpriteGroup
-	{
-		var X = FlxG.stage.stageWidth / 2 + long * MINIBOX_SIZE;
-		var Y = FlxG.stage.stageHeight - 50 - alt * MINIBOX_SIZE;
-		
-		if (miniDoors == null)
-		{
-			miniDoors = new FlxSpriteGroup(X, Y);
-			miniDoors.scrollFactor.set(0, 0);
+			
 			
 			if (topMask >= 1)
 			{
 				var top:FlxSprite = new FlxSprite(10, -5);
 				top.angle = FlxRandom.intRanged( -5, 5);
 				top.makeGraphic(5, 10, 0xffffffff);
-				miniDoors.add(top);
+				group.add(top);
 			}
 			
 			if (bottomMask >= 1)
@@ -190,7 +176,7 @@ class LevelDef
 				var bottom:FlxSprite = new FlxSprite(10, 20);
 				bottom.angle = FlxRandom.intRanged( -5, 5);
 				bottom.makeGraphic(5, 10, 0xffffffff);
-				miniDoors.add(bottom);
+				group.add(bottom);
 			}
 			
 			if (leftMask >= 1)
@@ -198,7 +184,7 @@ class LevelDef
 				var left:FlxSprite = new FlxSprite( -5, 10);
 				left.angle = FlxRandom.intRanged( -5, 5);
 				left.makeGraphic(10, 5, 0xffffffff);
-				miniDoors.add(left);
+				group.add(left);
 			}
 			
 			if (rightMask >= 1)
@@ -206,10 +192,20 @@ class LevelDef
 				var right:FlxSprite = new FlxSprite(20, 10);
 				right.angle = FlxRandom.intRanged( -5, 5);
 				right.makeGraphic(10, 5, 0xffffffff);
-				miniDoors.add(right);
+				group.add(right);
 			}
-		}
-		return miniDoors;
+		
+			
+		
+			var box:FlxSprite = new FlxSprite(1, 1);
+			box.angle = FlxRandom.intRanged( -5, 5);
+			box.makeGraphic(MINIBOX_SIZE-2, MINIBOX_SIZE-2, 0xffff0000);
+			
+			group.add(box);
+		
+		
+		
+		return group;
 	}
 	
 }

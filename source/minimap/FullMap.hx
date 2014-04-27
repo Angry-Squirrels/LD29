@@ -25,7 +25,7 @@ class FullMap extends FlxSpriteGroup
 		super();
 		
 		var defs = Reg.levelTree.defs;
-		
+		/*
 		for (def in defs)
 		{
 			if (def != null)
@@ -37,11 +37,12 @@ class FullMap extends FlxSpriteGroup
 				);
 			}
 		}
-		
+		*/
 		for (def in defs)
 		{
-			def.getMiniRooms().visible = false;
-			add(def.getMiniRooms());
+			var miniRooms = def.getMiniRooms();
+			//miniRooms.visible = false;
+			add(miniRooms);
 		}
 	}
 	
