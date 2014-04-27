@@ -85,7 +85,6 @@ class PlayState extends FlxState
 		var str = doorCode.toString(2);
 		while (str.length < 4)
 			str = "0" + str;
-		trace(str);
 		
 		Reg.currentMap = "room_" + str;
 	}
