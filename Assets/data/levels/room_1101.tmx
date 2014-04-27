@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64">
-  <image source="../../images/tilesets/cave1.png" width="256" height="256"/>
+  <image source="../../images/tilesets/cave1.png" width="512" height="1024"/>
   <terraintypes>
-   <terrain name="crossable" tile="7"/>
+   <terrain name="crossable" tile="13"/>
+   <terrain name="crossable" tile="14"/>
+   <terrain name="crossable" tile="15"/>
   </terraintypes>
  </tileset>
  <layer name="Background" width="20" height="15">
@@ -12,7 +14,16 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZ2BgYB/Fo3gUj+IhgAFQFQg1
+   eJxjZGBgYBzFo3gUj+IhgAHGRgEt
+  </data>
+ </layer>
+ <layer name="bg2" width="20" height="15">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYKAtEKJQfhSMglEwCmAAAJ2wACU=
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -20,23 +31,23 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYMKD0QE+tbj0kAtGzRs1bziZBzNzpJnHiAdzoGF8akFmAQASGwB/
+   eJzjYWBgYMGBORgwASce9bxAzIxFD7mAlQjzBICYD4r5qWAeKWAgzBv1L2XmkQI4qWweAxHmkeJfYswjFVDbPG4gZsKB2RkQfoVhNjzqQRgA5wgCCQ==
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
-  <object name="door" type="door" gid="3" x="512" y="64">
+  <object name="door" type="door" gid="19" x="512" y="64">
    <properties>
     <property name="direction" value="up"/>
    </properties>
   </object>
-  <object name="door" type="door" gid="3" x="512" y="960">
-   <properties>
-    <property name="direction" value="down"/>
-   </properties>
-  </object>
-  <object name="door" type="door" gid="3" x="1216" y="704">
+  <object name="door" type="door" gid="19" x="1216" y="704">
    <properties>
     <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="door" type="door" gid="19" x="512" y="960">
+   <properties>
+    <property name="direction" value="down"/>
    </properties>
   </object>
  </objectgroup>

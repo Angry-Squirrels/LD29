@@ -31,7 +31,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzjYWBgYKES5gViZgbqAdZR80bNI9E8DiqbR00wEs1jIoD50DA+tVxADAC4dgEj
+   eJzjYWBgYKES5gViZgbqAdZR80bNI9E8DiqbR00wEs1jwoPZgZgPDbPhUc8FxAC5+gEs
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
