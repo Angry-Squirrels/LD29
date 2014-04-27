@@ -1,4 +1,4 @@
-package universe;
+package minimap;
 import flash.display.CapsStyle;
 import flash.display.JointStyle;
 import flash.display.LineScaleMode;
@@ -9,6 +9,8 @@ import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxSpriteUtil.FillStyle;
 import flixel.util.FlxSpriteUtil.LineStyle;
+import universe.LevelTree;
+import universe.LevelDef;
 
 /**
  * ...
@@ -27,8 +29,8 @@ class TreeState extends FlxState
 	override public function create() 
 	{
 		super.create();
-		tree = createTree();
-		
+		//tree = createTree();
+		add(new FullMap());
 	}
 	
 	var treeContainer:FlxSpriteGroup;
@@ -66,7 +68,7 @@ class TreeState extends FlxState
 			//if(verbose) trace("i:" + i);
 			var def:LevelDef = _tree.defs[i];
 			//add(createBox(space.alt, space.long));
-			treeContainer.add(def.getBox());
+			treeContainer.add(def.getMiniRooms());
 		}
 		
 		return _tree;

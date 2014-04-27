@@ -4,7 +4,7 @@ import flash.Lib;
 import flixel.FlxGame;
 import flixel.FlxState;
 import states.UpgradeState;
-import universe.TreeState;
+import minimap.TreeState;
 
 class GameClass extends FlxGame
 {

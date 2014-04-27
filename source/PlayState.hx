@@ -6,6 +6,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import haxe.Timer;
+import minimap.FullMap;
 import player.Hero;
 import universe.LevelTree;
 import states.DieState;
@@ -19,10 +20,11 @@ class PlayState extends FlxState
 	public static var verbose:Bool;
 	var level:Level;
 	var hero:Hero;
-	var map:FlxSprite;
 	var runningIntro : Bool;
 	
 	var introText : FlxText;
+	
+	var miniMap:FullMap;
 	
 	public function new() {
 		super();
@@ -81,6 +83,12 @@ class PlayState extends FlxState
 		//FlxG.camera.bounds = FlxG.worldBounds;
 		FlxG.camera.setBounds(FlxG.worldBounds.x, FlxG.worldBounds.y, FlxG.worldBounds.width, FlxG.worldBounds.height);
 		FlxG.camera.fade(0xff000000, 0.1, true);
+		
+		
+		miniMap = new FullMap();
+		miniMap.scrollFactor.set(0, 0);
+		trace(miniMap);
+		add(miniMap);
 	}
 	
 	var introTextIndex:Int = 0;

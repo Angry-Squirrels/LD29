@@ -5,15 +5,12 @@ import flixel.addons.editors.tiled.TiledObjectGroup;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxObject;
-import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import haxe.io.Path;
 import player.Hero;
-import universe.Direction;
 import universe.LevelDef;
 import utils.Collider;
-
 /**
  * ...
  * @author TBaudon

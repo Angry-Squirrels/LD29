@@ -1,17 +1,16 @@
 package universe;
-import flixel.addons.display.shapes.FlxShapeBox;
+import flash.display.CapsStyle;
+import flash.display.JointStyle;
+import flash.display.LineScaleMode;
 import flixel.FlxG;
-
-
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxTextField;
-import flixel.util.FlxSpriteUtil.LineStyle;
+import flixel.util.FlxRandom;
 import flixel.util.FlxSpriteUtil.FillStyle;
+import flixel.util.FlxSpriteUtil.LineStyle;
 
-import flash.display.LineScaleMode;
-import flash.display.CapsStyle;
-import flash.display.JointStyle;
+
 
 /**
  * ...
@@ -22,7 +21,7 @@ class LevelDef
 	public static var verbose:Bool;
 	public var alt:Int;
 	public var long:Int;
-	public var explored : Bool;
+	private var _explored : Bool;
 	//public var mask:String;
 	public var topMask:UInt;
 	public var bottomMask:UInt;
@@ -35,7 +34,9 @@ class LevelDef
 	
 	public var debugColor:UInt = 0x80ff0000;
 	
-	static inline var BOX_SIZE:Int = 25;
+	static inline var DEBUGBOX_SIZE:Int = 25;
+	static public inline var MINIBOX_SIZE:UInt = 25;
+	
 	
 	public var neighbors:Array<LevelDef>;
 	
@@ -90,23 +91,37 @@ class LevelDef
 	
 	public var mask(get_mask, null):String;
 	
+	function get_explored():Bool 
+	{
+		return _explored;
+	}
+	
+	function set_explored(value:Bool):Bool 
+	{
+		this.miniDoors.visible = value;
+		this.miniRooms.visible = value;
+		return _explored = value;
+	}
+	
+	public var explored(get_explored, set_explored):Bool;
+	
 	var line:LineStyle = { thickness:1, color:0xff0000, pixelHinting:true, scaleMode:LineScaleMode.NORMAL, capsStyle:CapsStyle.NONE, jointStyle:JointStyle.MITER, miterLimit:1 };
 	var fill:FillStyle = { hasFill:true, color:0xff0000, alpha:1 };
 	
 	var COLORS:Array<UInt> = [0x80ff0000, 0x8000ff00, 0x800000ff];
 	
-	public function getBox():FlxSpriteGroup
+	public function getDebugBox():FlxSpriteGroup
 	{
 		
 		
-		var X = FlxG.stage.stageWidth / 2 + long * BOX_SIZE;
-		var Y = FlxG.stage.stageHeight - 50 - alt * BOX_SIZE;
+		var X = FlxG.stage.stageWidth / 2 + long * DEBUGBOX_SIZE;
+		var Y = FlxG.stage.stageHeight - 50 - alt * DEBUGBOX_SIZE;
 		var group:FlxSpriteGroup = new FlxSpriteGroup(X, Y);
 		//if(verbose) trace("x=" + sprite.x);
 		
 		var box:FlxSprite = new FlxSprite(1, 1);
 		//box.angle = branchLevel * 30;
-		box.makeGraphic(BOX_SIZE-2, BOX_SIZE-2, debugColor);
+		box.makeGraphic(DEBUGBOX_SIZE-2, DEBUGBOX_SIZE-2, debugColor);
 		
 		//var box:FlxShapeBox = new FlxShapeBox(0, 0, BOX_SIZE, BOX_SIZE, line, fill);
 		group.add(box);
@@ -129,6 +144,72 @@ class LevelDef
 		
 		
 		return group;
+	}
+	
+	var miniRooms:FlxSpriteGroup;
+	var miniDoors:FlxSpriteGroup;
+	public function getMiniRooms():FlxSpriteGroup
+	{
+		var X = FlxG.stage.stageWidth / 2 + long * MINIBOX_SIZE;
+		var Y = FlxG.stage.stageHeight - 50 - alt * MINIBOX_SIZE;
+		
+		if (miniRooms == null)
+		{
+		
+			var box:FlxSprite = new FlxSprite(1, 1);
+			box.angle = FlxRandom.intRanged( -5, 5);
+			box.makeGraphic(MINIBOX_SIZE-2, MINIBOX_SIZE-2, 0xffff0000);
+			miniRooms = new FlxSpriteGroup(X, Y);
+			miniRooms.add(box);
+		}
+		
+		return miniRooms;
+	}
+	
+	
+	public function getMiniDoors():FlxSpriteGroup
+	{
+		var X = FlxG.stage.stageWidth / 2 + long * MINIBOX_SIZE;
+		var Y = FlxG.stage.stageHeight - 50 - alt * MINIBOX_SIZE;
+		
+		if (miniDoors == null)
+		{
+			miniDoors = new FlxSpriteGroup(X, Y);
+			miniDoors.scrollFactor.set(0, 0);
+			
+			if (topMask >= 1)
+			{
+				var top:FlxSprite = new FlxSprite(10, -5);
+				top.angle = FlxRandom.intRanged( -5, 5);
+				top.makeGraphic(5, 10, 0xffffffff);
+				miniDoors.add(top);
+			}
+			
+			if (bottomMask >= 1)
+			{
+				var bottom:FlxSprite = new FlxSprite(10, 20);
+				bottom.angle = FlxRandom.intRanged( -5, 5);
+				bottom.makeGraphic(5, 10, 0xffffffff);
+				miniDoors.add(bottom);
+			}
+			
+			if (leftMask >= 1)
+			{
+				var left:FlxSprite = new FlxSprite( -5, 10);
+				left.angle = FlxRandom.intRanged( -5, 5);
+				left.makeGraphic(10, 5, 0xffffffff);
+				miniDoors.add(left);
+			}
+			
+			if (rightMask >= 1)
+			{
+				var right:FlxSprite = new FlxSprite(20, 10);
+				right.angle = FlxRandom.intRanged( -5, 5);
+				right.makeGraphic(10, 5, 0xffffffff);
+				miniDoors.add(right);
+			}
+		}
+		return miniDoors;
 	}
 	
 }
