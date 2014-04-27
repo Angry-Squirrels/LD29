@@ -12,6 +12,7 @@ class Door extends FlxSprite
 {
 	public static var verbose:Bool;
 	public var direction : String;
+	public var entered : Bool;
 
 	public function new(data:Fast, x : Int, y:Int) 
 	{
@@ -20,11 +21,12 @@ class Door extends FlxSprite
 		var elem = data.node.properties.elements;
 		var node = elem.next();
 		direction = node.att.value;
+		entered = false;
 		
 		switch(direction) {
 			case 'up' :
 				makeGraphic(64 * 4, 64, 0xff000000);
-				this.y -= 180;
+				this.y -= 60;
 			case 'right' :
 				makeGraphic(64, 64 * 4, 0xff000000);
 				this.x += 60;
@@ -39,7 +41,8 @@ class Door extends FlxSprite
 	
 	public function enter(hero : Hero)
 	{
-		if(verbose) trace("direction: "+this.direction);
+		if (verbose) trace("direction: " + this.direction);
+		entered = true;
 		Reg.levelTree.currentLevel = Reg.levelTree.createLevel(
 		Reg.levelTree.currentLevel
 		.definition
@@ -48,6 +51,7 @@ class Door extends FlxSprite
 		Reg.spawnOffsetX = cast (this.x - hero.hitbox.x);
 		Reg.spawnOffsetY = cast (this.y - hero.hitbox.y);
 		Reg.exitDirection = this.direction;
+		trace(Reg.exitDirection);
 	}
 	
 }
