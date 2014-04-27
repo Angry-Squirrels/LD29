@@ -17,6 +17,15 @@
    eJztwzEJAAAMA7DWv+mqGOxIIAkAAAAA8EVVVY8PBv8CHQ==
   </data>
  </layer>
+ <layer name="bg2" width="90" height="20">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0LENAEAIAkBncP9hbX6Bjx3eJXQ0UAUAAAAAcFu//PSTbPek/QGQbgBjRgBb
+  </data>
+ </layer>
  <layer name="Level" width="90" height="20">
   <properties>
    <property name="tileset" value="tiles"/>
@@ -26,7 +35,7 @@
   </data>
  </layer>
  <objectgroup name="doors" width="90" height="20">
-  <object name="door" type="door" gid="3" x="5696" y="1024">
+  <object name="door" type="door" gid="19" x="5696" y="1024">
    <properties>
     <property name="direction" value="right"/>
    </properties>
