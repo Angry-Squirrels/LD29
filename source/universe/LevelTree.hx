@@ -369,7 +369,12 @@ class LevelTree extends FlxGroup
 	{
 		if(verbose) trace("createLevel(" + def);
 		//var tmx = FlxRandom.chanceRoll()?"assets/data/levels/templateDoors.tmx":"assets/data/levels/FirstRoom.tmx";
-		var tmx = "assets/data/levels/room_" + def.mask + ".tmx";
+		var tmx= "assets/data/levels/room_" + def.mask + ".tmx";
+		if (def.alt == 0 && def.long == 0)
+		{
+			tmx = "assets/data/levels/FirstRoom.tmx";
+		}
+		 
 		//if(verbose) trace(tmx);
 		var level = new Level(tmx, def);
 		return level;
