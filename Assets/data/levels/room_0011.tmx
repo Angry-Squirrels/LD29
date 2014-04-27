@@ -23,7 +23,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAdEKJQfhSMgoEGo2l0cAEAumAANw==
+   eJxjYKAdEKJQfhSMAlyAXmlnNI0OLgAA3dAASQ==
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
