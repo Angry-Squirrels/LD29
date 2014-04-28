@@ -34,13 +34,18 @@ class WalkingEnemy extends BaseEnnemy
 		add(tfDiff);
 		*/
 		
+		var factor = 10;
+		
 		damage = 1 + Math.floor(_difficulty / 2);
+		damage *= 10;
+		
 		fireRate = 1 + _difficulty / 10;
 		body.health = 2 + _difficulty / 2;
-		distanceToDetect = 500 + (_difficulty - 1) * 10;
+		body.health *= 10;
+		distanceToDetect = 250 + (_difficulty - 1) * 10;
 		minDistance = Std.int(body.width);
-		move_speed = 200 + _difficulty * 5;
-		patrol_speed = 200 + _difficulty * 5;
+		move_speed = 100 + _difficulty * 5;
+		patrol_speed = 150 + _difficulty * 5;
 		award = _difficulty;
 		
 		body.drag.set(move_speed * 8, move_speed * 8);

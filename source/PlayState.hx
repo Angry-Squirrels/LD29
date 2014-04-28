@@ -78,7 +78,7 @@ class PlayState extends FlxState
 		initGame();
 
 		spawnHero();
-		enemySpawner.generateEnemies();
+		enemySpawner.generateEnemies(level.definition.difficulty);
 		
 		FlxG.camera.follow(this.hero.hitbox);
 		FlxG.camera.setBounds(FlxG.worldBounds.x, FlxG.worldBounds.y, FlxG.worldBounds.width, FlxG.worldBounds.height);

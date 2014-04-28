@@ -21,7 +21,7 @@ import flixel.FlxG;
  */
 class BaseEnnemy extends FlxGroup
 {
-	public static var verbose:Bool=true;
+	public static var verbose:Bool=false;
 	
 	private inline static var ACTION_PATROL:Int = 0;
 	private inline static var ACTION_RUSH:Int = 1;
