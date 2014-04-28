@@ -6,6 +6,8 @@
    <terrain name="crossable" tile="13"/>
    <terrain name="crossable" tile="14"/>
    <terrain name="crossable" tile="15"/>
+   <terrain name="hurt" tile="16"/>
+   <terrain name="hurt" tile="19"/>
   </terraintypes>
  </tileset>
  <layer name="Background" width="20" height="15">
@@ -14,7 +16,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYBzFo3gUj+IhgAHGRgEt
+   eJxjZGBgYCQRM5ChZySZRwwYSPPoHX70wJSEA6n6iAEDHR7DFQMAaM4BCg==
   </data>
  </layer>
  <layer name="bg2" width="20" height="15">
@@ -23,7 +25,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAtEKJQfhSMglEwCmAAAJ2wACU=
+   eJxjYKA+EMLBJqR2FAxeIDrQDoCCweKOoQLIzV+khDM94wQAb1MAnQ==
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -31,7 +33,12 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzjYWBgYMGBORgwASce9bxAzIxFD7mAlQjzBICYD4r5qWAeKWAgzBv1L2XmkQI4qWweAxHmkeJfYswjFVDbPG4gZsKB2RkQfoVhNjzqQRgA5wgCCQ==
+   eJy1Ue0KgCAQOyr7MCt/9P7PmoEHck3rygZD2N0N2RwRdRmOdIWJrwP7S2ALbkpgv/Nuj0xnX/zQTOp9YFOgVfoZsIcg7zzwY+2NH/9F6hPl+37SvbYPBM7cRr/tg5fMSNsvc0hu0oxq9Yt0T7o+UE41+vjTb6Zy5qvgXV8HH+ICig==
+  </data>
+ </layer>
+ <layer name="front" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAFYkAszkA8IKReDojlSTCPVPWjYHgDRSBWoqJ5mkCsRUXzRgEE0CueANnMAgE=
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
@@ -52,35 +59,26 @@
   </object>
  </objectgroup>
  <objectgroup name="spawners" width="20" height="15">
-  <object name="spawner" type="spawner" gid="35" x="1109" y="166">
-   <properties>
-    <property name="enemy" value="f"/>
-   </properties>
-  </object>
-  <object name="spawner" type="spawner" gid="35" x="597" y="293">
+  <object name="spawner" type="spawner" gid="35" x="640" y="576">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="634" y="468">
+  <object name="spawner" type="spawner" gid="35" x="128" y="896">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="619" y="646">
+  <object name="spawner" type="spawner" gid="35" x="448" y="192">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="121" y="848">
+  <object name="spawner" type="spawner" gid="35" x="1088" y="896">
    <properties>
     <property name="enemy" value="w"/>
-   </properties>
-  </object>
-  <object name="spawner" type="spawner" gid="35" x="137" y="252">
-   <properties>
-    <property name="enemy" value="f"/>
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="crystals" width="20" height="15"/>
 </map>
