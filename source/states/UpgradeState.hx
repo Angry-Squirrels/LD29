@@ -35,7 +35,7 @@ class UpgradeState extends FlxState
 		var instructions : FlxText = new FlxText(marginX + 5, marginY, 0, "Upgrade your hero!", 32);
 		add(instructions);
 		
-		pointleft = new FlxText(marginX, marginY + 90, 0, "Point left : " + heroStats.statPoinrLeft, 12);
+		pointleft = new FlxText(marginX, marginY + 90, 0, "Coins left : " + heroStats.statPoinrLeft, 12);
 		add(pointleft);
 		
 		life = new FlxText(marginX, marginY + 120, 0, "Life points : " + heroStats.baseLifePoint, 12);
@@ -47,47 +47,41 @@ class UpgradeState extends FlxState
 		def = new FlxText(marginX, marginY + 180, 0, "Defense points : " + heroStats.baseDefensePoint, 12);
 		add(def);
 		
-		removeLifeBTN = new FlxButton(marginX + 250, life.y, "-", remoLife);
-		add(removeLifeBTN);
-		addLifeBTN = new FlxButton(marginX + 350, life.y, "+", addLife);
+		addLifeBTN = new FlxButton(marginX + 350, life.y, "Buy", buyLife);
 		add(addLifeBTN);
 		
-		removeAtkBTN = new FlxButton(marginX + 250, atk.y, "-", remoAtk);
-		add(removeAtkBTN);
-		addAtkBTN = new FlxButton(marginX  + 350, atk.y, "+", addAtk);
+		addAtkBTN = new FlxButton(marginX  + 350, atk.y, "Buy", buyAtk);
 		add(addAtkBTN);
-		
-		removeDefBTN = new FlxButton(marginX  + 250, def.y, "-", remoDef);
-		add(removeDefBTN);
-		addDefBTN = new FlxButton(marginX  + 350, def.y, "+", addDef);
+
+		addDefBTN = new FlxButton(marginX  + 350, def.y, "Buy", buyDef);
 		add(addDefBTN);
 		
 		start = new FlxButton(addDefBTN.x , addDefBTN.y + 30, "Start", begin);
 		add(start);
 		start.active = false;
+		
+		updateText();
 	}
 	
 	function begin() 
 	{
 		FlxG.camera.fade(0xff000000, 1, false, onFadeEnd);
 		start.active = false;
-		removeLifeBTN.active = false;
 		addLifeBTN.active = false;
-		removeAtkBTN.active = false;
 		addAtkBTN.active = false;
-		removeDefBTN.active = false;
 		addDefBTN.active = false;
 	}
 	
 	function onFadeEnd() {
+		Reg.resetGame();
 		FlxG.switchState(new PlayState());
 	}
 	
 	function updateText() {
-		pointleft.text = "Point left : " + heroStats.statPoinrLeft;
-		life.text = "Life points : " + heroStats.baseLifePoint;
-		atk.text = "Damage points : " + heroStats.baseDamegePoint;
-		def.text = "Defense points : " + heroStats.baseDefensePoint;
+		pointleft.text = "Coins left : " + heroStats.coinCollected;
+		life.text = "Life level : " + heroStats.baseLifePoint;
+		atk.text = "Damage level : " + heroStats.baseDamegePoint;
+		def.text = "Defense level : " + heroStats.baseDefensePoint;
 		
 		if (heroStats.statPoinrLeft == 0)
 			start.active = true;
@@ -95,68 +89,41 @@ class UpgradeState extends FlxState
 			start.active = false;
 	}
 	
-	function remoLife() 
-	{
-		if (heroStats.baseLifePoint > 1)
-		{
-			heroStats.baseLifePoint--;
-			heroStats.statPoinrLeft++;
-		}
-		
-		updateText();
+	function canAfford(ammount: Int) : Bool {
+		return Reg.heroStats.coinCollected - ammount >= 0;
 	}
 	
-	function addLife() 
+	function buyLife() 
 	{
-		if (heroStats.statPoinrLeft > 0)
+		var cost = Reg.heroStats.baseLifePoint * 10; 
+		if (canAfford(cost))
 		{
 			heroStats.baseLifePoint++;
-			heroStats.statPoinrLeft--;
+			heroStats.coinCollected-=cost;
 		}
 		
 		updateText();
 	}
 	
-	function remoAtk() 
+	function buyAtk() 
 	{
-		if (heroStats.baseDamegePoint > 1)
-		{
-			heroStats.baseDamegePoint--;
-			heroStats.statPoinrLeft++;
-		}
-		
-		updateText();
-	}
-	
-	function addAtk() 
-	{
-		if (heroStats.statPoinrLeft > 0)
+		var cost = Reg.heroStats.baseDamegePoint * 10; 
+		if (canAfford(cost))
 		{
 			heroStats.baseDamegePoint++;
-			heroStats.statPoinrLeft--;
+			heroStats.coinCollected-=cost;
 		}
 		
 		updateText();
 	}
 	
-	
-	function remoDef() 
+	function buyDef() 
 	{
-		if (heroStats.baseDefensePoint> 1)
-		{
-			heroStats.baseDefensePoint--;
-			heroStats.statPoinrLeft++;
-		}
-		
-		updateText();
-	}
-	
-	function addDef() 
-	{
-		if (heroStats.statPoinrLeft > 0)
+		var cost = Reg.heroStats.baseDefensePoint * 10; 
+		if (canAfford(cost))
 		{
 			heroStats.baseDefensePoint++;
-			heroStats.statPoinrLeft--;
+			heroStats.coinCollected-=cost;
 		}
 		
 		updateText();

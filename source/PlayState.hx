@@ -2,6 +2,7 @@ package;
 import ennemies.EnemySpawner;
 import ennemies.FlyingEnnemy;
 import flash.errors.Error;
+import flash.Lib;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -70,8 +71,7 @@ class PlayState extends FlxState
 		spawnHero();
 		
 		enemySpawner.generateEnemies();
-		
-		launchSpecialEvent();
+		initGame();
 		
 		
 		/*
@@ -88,7 +88,7 @@ class PlayState extends FlxState
 	}
 	
 	var introTextIndex:Int = 0;
-	function launchSpecialEvent() 
+	function initGame() 
 	{
 		var curDef : LevelDef = Reg.levelTree.currentLevel.definition;
 		
@@ -102,6 +102,7 @@ class PlayState extends FlxState
 				introText = new FlxText(10, 10, 0, Reg.introTexts[introTextIndex], 16);
 				add(introText);
 				introTimer = Timer.delay(changeIntroText, 3000);
+				Reg.heroStats.health = Reg.heroStats.baseLifePoint * 5;
 			}
 		}
 	}

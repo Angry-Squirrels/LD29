@@ -38,7 +38,7 @@ class BaseEnnemy extends FlxGroup
 	private var weapon:BaseEnnemyWeapon;
 	
 	private var damage:Float;
-	private var xpAward : UInt;
+	private var award : UInt;
 	
 	public function new(_hero:Hero)
 	{
@@ -159,7 +159,6 @@ class BaseEnnemy extends FlxGroup
 		weapon.kill();
 		body.kill();
 		
-		Reg.heroStats.experience += xpAward;
 		Reg.heroStats.enemyKilled ++;
 		
 		super.kill();

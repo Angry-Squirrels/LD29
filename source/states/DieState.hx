@@ -22,9 +22,9 @@ class DieState extends FlxState
 		dead.color = 0xffff0000;
 		add(dead);
 		
-		Timer.delay(showRooms, 3000);
+		Timer.delay(showCoins, 3000);
 	}
-	
+	/*
 	function showRooms() 
 	{
 		//FlxG.switchState(new PlayState());
@@ -39,7 +39,7 @@ class DieState extends FlxState
 		var killText = new FlxText(150, 200, 0, "Enemy killed : " + Reg.heroStats.enemyKilled, 18);
 		killText.x = (800 - killText.width) / 2;
 		add(killText);
-		Timer.delay(showXp, 1000);
+		Timer.delay(showCoins, 1000);
 	}
 	
 	function showXp() 
@@ -47,18 +47,16 @@ class DieState extends FlxState
 		var xpText = new FlxText(150, 230, 0, "xp : " + Reg.heroStats.experience, 18);
 		xpText.x = (800 - xpText.width) / 2;
 		add(xpText);
-		Timer.delay(showScore, 1000);
-	}
+		Timer.delay(showCoins, 1000);
+	}*/
 	
-	function showScore() 
+	function showCoins() 
 	{
-		var final : Int = Std.int(	(Reg.heroStats.enemyKilled * 50 + 
-							Reg.heroStats.roomExplored * 10 +
-							Reg.heroStats.experience) / 100); 
+		var final : Int = Reg.heroStats.coinCollected; 
 		
 		Reg.heroStats.statPoinrLeft = final;
 							
-		var total = new FlxText(150, 260, 0, "Point earned : " + Reg.heroStats.statPoinrLeft, 18);
+		var total = new FlxText(150, 220, 0, "Coins collected : " + Reg.heroStats.statPoinrLeft, 18);
 		total.x = (800 - total.width) / 2;
 		add(total);
 		Timer.delay(showBtn, 1000);
