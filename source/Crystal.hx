@@ -28,8 +28,6 @@ class Crystal extends FlxSprite
 		
 		this.velocity.x = FlxRandom.intRanged( -400, 400);
 		this.velocity.y = FlxRandom.intRanged( -400, -100);
-		
-		Reg.playState.add(this);
 	}
 	
 	override public function update() {
