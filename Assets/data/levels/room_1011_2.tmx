@@ -37,6 +37,10 @@
   </data>
  </layer>
  <layer name="front" width="20" height="15">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYEAAMSAWZyAd4NInB8TyZJhHrr5RMApGAfWAIhArUVGdJhBrUagOAP1tAgE=
   </data>
