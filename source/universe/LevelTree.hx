@@ -399,6 +399,10 @@ class LevelTree extends FlxGroup
 		{
 			tmx = "assets/data/levels/FirstRoom.tmx";
 		}
+		else if (def == lastDef)
+		{
+			tmx = "assets/data/levels/FinalRoom.tmx";
+		}
 		/*
 		if (def.order == 1)
 		{
