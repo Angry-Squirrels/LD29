@@ -77,7 +77,7 @@ class UpgradeState extends FlxState
 	}
 	
 	function updateText() {
-		pointleft.text = "Coins left : " + heroStats.coinCollected;
+		pointleft.text = "Crystals left : " + heroStats.coinCollected;
 		life.text = "Life level : " + heroStats.baseLifePoint;
 		atk.text = "Damage level : " + heroStats.baseDamegePoint;
 		def.text = "Defense level : " + heroStats.baseDefensePoint;

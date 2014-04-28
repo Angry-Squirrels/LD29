@@ -32,6 +32,8 @@ class FlyingEnnemy extends BaseEnnemy
 		
 		super(_hero, _difficulty);
 		
+		name = "Wasp";
+		
 		var factor = 10;
 		
 		damage = 1 + Math.floor(_difficulty / 2);
@@ -41,6 +43,8 @@ class FlyingEnnemy extends BaseEnnemy
 		
 		body.health = 2 + _difficulty / 2;
 		body.health *= factor;
+		
+		maxHealth = cast body.health;
 		
 		distanceToDetect = 500 + (_difficulty - 1) * 10;
 		

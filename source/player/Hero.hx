@@ -254,7 +254,7 @@ class Hero extends FlxGroup
 	
 	public function hurt(_damage:Float):Void
 	{
-		var damageReduction = (25 * Reg.heroStats.baseDefensePoint) * 0.01;
+		var damageReduction = (0.25 * Reg.heroStats.baseDefensePoint) * 0.01;
 		_damage = Math.round(_damage - _damage * damageReduction);
 		hitbox.health -= _damage;
 		

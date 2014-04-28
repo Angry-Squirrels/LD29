@@ -311,4 +311,54 @@ class PlayState extends FlxState
 	function damageShown(target : FlxTween ) {
 		damagestxts.shift().destroy();
 	}
+	
+	var hittedEnemy : BaseEnnemy;
+	var enemyNameTxt : FlxText;
+	var enemyBarBg : FlxSprite;
+	var enemyBar : FlxSprite;
+	public function showEnnemyBar(enemy : BaseEnnemy) {
+		if (enemyNameTxt == null) {
+			
+			var barrX = 430;
+			var barrY = 427;
+			
+			enemyNameTxt = new FlxText(barrX, barrY, 0, "", 12);
+			add(enemyNameTxt);
+			enemyNameTxt.scrollFactor.x = 0;
+			enemyNameTxt.scrollFactor.y = 0;
+			
+			enemyBarBg = new FlxSprite(barrX, barrY + 20);
+			enemyBarBg.scrollFactor.x = 0;
+			enemyBarBg.scrollFactor.y = 0;
+			enemyBarBg.makeGraphic(250, 12, 0xff222222);
+			add(enemyBarBg);
+			
+			enemyBar = new FlxSprite(barrX + 2, enemyBarBg.y + 2);
+			enemyBar.makeGraphic(246, 8, 0xff66cc00);
+			enemyBar.origin.x = 0;
+			enemyBar.origin.y = 0;
+			enemyBar.scrollFactor.x = 0;
+			enemyBar.scrollFactor.y = 0;
+			add(enemyBar);
+		}
+		
+		if (hittedEnemy != null)
+			hideEnnemyBar();
+			
+		enemyNameTxt.visible = true;
+		enemyBarBg.visible = true;
+		enemyBar.visible = true;
+		hittedEnemy = enemy;
+		enemyBar.scale.x = enemy.body.health / enemy.maxHealth;
+		if (enemyBar.scale.x < 0)
+			enemyBar.scale.x = 0;
+		enemyNameTxt.text = enemy.name + " lvl " + enemy.difficulty;
+	}
+	
+	public function hideEnnemyBar() {
+		enemyNameTxt.visible = false;
+		enemyBarBg.visible = false;
+		enemyBar.visible = false;
+		hittedEnemy = null;
+	}
 }
