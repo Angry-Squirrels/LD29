@@ -67,6 +67,7 @@ class BaseEnnemy extends FlxGroup
 		difficulty = _difficulty;
 		
 		touchedTime = 0;
+		award = 5;
 		
 		path = new FlxPath();
 		
@@ -268,6 +269,8 @@ class BaseEnnemy extends FlxGroup
 		if(verbose) trace("really kill");
 		
 		body.kill();
+		
+		for (i in 0 ... award) new Crystal(cast body.x, cast body.y - 10);
 		
 		Reg.heroStats.enemyKilled ++;
 		

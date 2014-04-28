@@ -76,8 +76,6 @@ class PlayState extends FlxState
 		
 		spawnHero();
 		
-		add(new Crystal(cast hero.hitbox.x, cast hero.hitbox.y));
-		
 		enemySpawner.generateEnemies();
 		initGame();
 		
