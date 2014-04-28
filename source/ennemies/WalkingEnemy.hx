@@ -7,7 +7,8 @@ import utils.EnnemyPath;
 import flixel.util.FlxPoint;
 import weapons.ennemy_weapons.BaseEnnemyWeapon;
 import flixel.text.FlxTextField;
-
+import flixel.util.loaders.SparrowData;
+import flixel.FlxG;
 /**
  * ...
  * @author Ynk33
@@ -17,8 +18,13 @@ class WalkingEnemy extends BaseEnnemy
 	public function new(_hero:Hero, _difficulty:UInt=1) 
 	{
 		body = new Collider(0, 0, this);
-		body.makeGraphic(70, 50, FlxColor.FOREST_GREEN);
 		
+		var tilesetIndex = Math.ceil(_difficulty / 2);
+		var animation = new SparrowData("assets/Monsters/beetle.xml", "assets/Monsters/beetle"+tilesetIndex+".png");
+		body.loadGraphicFromTexture(animation);
+		body.animation.addByPrefix("move", "LD29_beetle_move", 9);
+		body.animation.addByPrefix("attack", "LD29_beetle_attack", 17, false);
+		body.animation.callback = callbackAnimation;
 		
 		super(_hero, _difficulty);
 		/*
@@ -93,6 +99,22 @@ class WalkingEnemy extends BaseEnnemy
 		}
 		
 		super.update();
+	}
+	
+	
+	private function callbackAnimation(_anim:String, _frameNumber:Int, _frameIndex:Int):Void
+	{
+		if (_anim == "attack")
+		{
+			if (_frameNumber == 6)
+			{
+				FlxG.sound.play("assets/sounds/ennemy_swoosh.mp3");
+			}
+			if (_frameNumber == 9)
+			{
+				weapon.fire();
+			}
+		}
 	}
 	
 	private function followPath():Void
