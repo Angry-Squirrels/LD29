@@ -31,7 +31,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy1kkEKgDAQA0OtiIov0P+/0+5B6KHFSdFAbsuQzW6WlBs+9K3Wn5hu1gXMzAZvB0x3d8p0dp/gHOVGxiTWZ4h2SnYPOZ3SrCN3Si9s55dq9e713Mf9e9Krm7WX8Sy+Bnh1ny1vxTc91AHz
+   eJxjYWBgYMGCeRmoCzhpZCYt3MpKZfNI8TsTFLMTYSYpfmcmUh2x5nIzEOdOGCA2TLmJNJOUMCXWraSmUZi5+MwmNy3hii9Y/JCa7okJV1LdisuN0kAsQ4Z5yOGJDXMBMQDQBQHT
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
@@ -67,10 +67,6 @@
     <property name="enemy" value="w"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="crystals" width="20" height="15">
-  <object gid="43" x="1088" y="832"/>
-  <object gid="43" x="1088" y="832"/>
   <object name="spawner" type="spawner" gid="35" x="960" y="896">
    <properties>
     <property name="enemy" value="w"/>
@@ -96,5 +92,8 @@
     <property name="enemy" value="w"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup name="crystals" width="20" height="15">
+  <object name="crystal" type="crystal" gid="43" x="1088" y="832"/>
  </objectgroup>
 </map>
