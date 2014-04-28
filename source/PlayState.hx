@@ -10,6 +10,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxStringUtil;
 import flixel.util.loaders.SparrowData;
 import haxe.Timer;
 import player.Halo;
@@ -150,6 +151,7 @@ class PlayState extends FlxState
 	
 	var introTextIndex:Int = 0;
 	var canSkip : Bool;
+	var introDoor : IntroDoor;
 	function initGame() 
 	{
 		var curDef : LevelDef = Reg.levelTree.currentLevel.definition;
@@ -158,16 +160,21 @@ class PlayState extends FlxState
 		var long = curDef.long;
 		
 		if (alt == 0 && long == 0) {
+			
+			introDoor = new IntroDoor( -10, 64 * 15);
+			introDoor.immovable = true;
+			add(introDoor);
+			introText = new FlxText(introDoor.x + 100, introDoor.y + 100, 250, "", 16);
+			add(introText);
+			
 			if (!curDef.explored) {
 				runningIntro = true;
 				FlxG.camera.fade(0xff000000, 1, true, onEndIntroFadeIn);
-				introText = new FlxText(10, 10, 0, Reg.introTexts[introTextIndex], 16);
-				add(introText);
-				introTimer = Timer.delay(changeIntroText, 3000);
+				//introTimer = Timer.delay(changeIntroText, 3000);
 				
 				// init hero
 				
-				hero.hitbox.x = 0;
+				hero.hitbox.x = 140;
 				hero.hitbox.y = 17 * 64 + 10;
 				
 				Reg.heroStats.initHealth();
@@ -175,9 +182,13 @@ class PlayState extends FlxState
 		}
 	}
 	
+	public function speakDoor(text : String) {
+		introText.text = text;
+	}
+	
 	function onEndIntroFadeIn() 
 	{
-		canSkip = true;
+		introDoor.close();
 	}
 	
 	var introTimer : Timer;
@@ -203,6 +214,10 @@ class PlayState extends FlxState
 		remove(level.foregroundTiles);
 		super.destroy();
 	}
+	
+	function introDoorCollide(obj : Dynamic, obja:Dynamic) {
+		//introDoor.open();
+	}
 
 	/**
 	 * Function that is called once every frame.
@@ -213,18 +228,8 @@ class PlayState extends FlxState
 		
 		level.collideWithLevel(this.hero.hitbox);
 		
-		if (runningIntro) {
-			hero.hitbox.velocity.x = 700;
-			introText.x = hero.hitbox.x + 50;
-			introText.y = hero.hitbox.y  - 25;
-			
-			if (canSkip && FlxG.keys.pressed.X)
-				touchDoor(cast level.doors.getFirstExisting(), hero.hitbox);
-			
-		}
-		
-		if (FlxG.keys.pressed.K)
-			FlxG.switchState(new DieState());
+		if(introDoor != null)
+			FlxG.collide(introDoor, hero.hitbox, introDoorCollide);
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 		FlxG.collide(enemies, enemies);
