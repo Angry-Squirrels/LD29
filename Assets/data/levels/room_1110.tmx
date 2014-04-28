@@ -51,4 +51,36 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="spawners" width="20" height="15">
+  <object name="spawner" type="spawner" gid="35" x="1043" y="272">
+   <properties>
+    <property name="enemy" value="f"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="609" y="493">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="124" y="142">
+   <properties>
+    <property name="enemy" value="f"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="639" y="285">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="654" y="639">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="1133" y="836">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

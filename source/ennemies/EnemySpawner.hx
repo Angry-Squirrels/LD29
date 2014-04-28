@@ -22,7 +22,7 @@ class EnemySpawner
 	{
 		if (verbose) trace("generateEnemies");
 		
-		for (i in 0..._playState.level.definition.difficulty * 5)
+		for (i in 0..._playState.level.definition.difficulty)
 		{
 			
 			var spawningPoint = cast(_playState.level.spawningPoints.getRandom(), SpawningPoint);
