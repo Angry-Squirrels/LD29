@@ -109,6 +109,10 @@
   </object>
  </objectgroup>
  <layer name="Calque 4" width="20" height="16">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYMAEYkAsjkQTA/CplQNieSSaGECK2lEwCkbB8AKKQKyERFMKNIFYC4mGAQAM4gJr
   </data>

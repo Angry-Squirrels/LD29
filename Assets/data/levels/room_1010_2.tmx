@@ -70,7 +70,11 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="Calque 4" width="13" height="15">
+ <layer name="fg" width="13" height="15">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYGBgEANicQbSgBwQy5OoZxSMAloARSBWIlGPJhBroYkBAE9TAQE=
   </data>

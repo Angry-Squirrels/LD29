@@ -74,6 +74,12 @@ class Level extends TiledMap
 			
 			var tileSet: TiledTileSet = null;
 			for (fs in tilesets)  {
+				if (verbose)
+				{
+					trace(fs);
+					trace(fs.name);
+					trace(tileSheetName);
+				}
 				if (fs.name == tileSheetName) {
 					tileSet = fs;
 					break;
