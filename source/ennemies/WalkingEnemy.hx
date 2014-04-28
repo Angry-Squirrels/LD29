@@ -1,4 +1,5 @@
 package ennemies;
+import flixel.FlxG;
 import flixel.FlxSprite;
 import player.Hero;
 import flixel.util.FlxColor;
@@ -18,13 +19,13 @@ class WalkingEnemy extends BaseEnnemy
 	{
 		body = new Collider(0, 0, this);
 		var tilesetIndex = Math.ceil(_difficulty / 2);
-		var animation = new SparrowData("assets/Monsters/wasp.xml", "assets/Monsters/wasp"+tilesetIndex+".png");
+		var animation = new SparrowData("assets/Monsters/beetle.xml", "assets/Monsters/beetle"+tilesetIndex+".png");
 		body.loadGraphicFromTexture(animation);
-		body.animation.addByPrefix("move", "LD29_wasp_move", 9);
-		body.animation.addByPrefix("attack", "LD29_wasp_attack", 17, false);
-		body.width = 90;
-		body.height = 70;
-		body.centerOffsets();
+		body.animation.add("idle", [10], 30);
+		body.animation.addByPrefix("move", "LD29_beetle_move", 10);
+		body.animation.addByPrefix("attack", "LD29_beetle_attack", 7, false);
+		body.animation.callback = callbackAnimation;
+		
 		
 		super(_hero, _difficulty);
 		/*
@@ -63,12 +64,14 @@ class WalkingEnemy extends BaseEnnemy
 			switch(currentState)
 			{
 				case BaseEnnemy.ACTION_PATROL:
+					//playAnimation("idle");
 					if (detectHero())
 					{
 						currentState = BaseEnnemy.ACTION_RUSH;
 					}
 				
 				case BaseEnnemy.ACTION_RUSH:
+					//playAnimation("move");
 					if (followHero())
 					{
 						followPath();
@@ -88,17 +91,50 @@ class WalkingEnemy extends BaseEnnemy
 					{
 						if (canAttack())
 						{
-							weapon.fire();
+							//weapon.fire();
+							playAnimation("attack", 30);
+						}
+						else
+						{
+							//playAnimation("idle");
 						}
 					}
 					else
 					{
+						//playAnimation("move");
 						currentState = BaseEnnemy.ACTION_RUSH;
 					}
+			}
+			
+			if (!canAttack())
+			{
+				if (body.velocity.x != 0)
+				{
+					playAnimation('move');
+				}
+				else
+				{
+					playAnimation('idle');
+				}
 			}
 		}
 		
 		super.update();
+	}
+	
+	private function callbackAnimation(_anim:String, _frameNumber:Int, _frameIndex:Int):Void
+	{
+		if (_anim == "attack")
+		{
+			if (_frameNumber == 6)
+			{
+				FlxG.sound.play("assets/sounds/ennemy_swoosh.mp3");
+			}
+			if (_frameNumber == 9)
+			{
+				weapon.fire();
+			}
+		}
 	}
 	
 	private function followPath():Void

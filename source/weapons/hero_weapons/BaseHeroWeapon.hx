@@ -89,8 +89,11 @@ class BaseHeroWeapon extends BaseWeapon
 			if (skin.animation.curAnim != null || skin.animation.curAnim.name != currentAnim)
 			{
 				skin.animation.play(currentAnim);
-				skin.animation.curAnim.frameRate = currentAnimFrameRate;
-				skin.animation.curAnim.curIndex = parent.animation.frameIndex;
+				if (skin.animation.curAnim != null)
+				{
+					skin.animation.curAnim.frameRate = currentAnimFrameRate;
+					skin.animation.curAnim.curIndex = parent.animation.frameIndex;
+				}
 			}
 			
 			skin.animation.callback = null;
