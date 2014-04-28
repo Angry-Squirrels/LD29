@@ -8,7 +8,6 @@ import flixel.util.FlxPoint;
 import weapons.ennemy_weapons.BaseEnnemyWeapon;
 import flixel.text.FlxTextField;
 import flixel.util.loaders.SparrowData;
-import flixel.FlxG;
 /**
  * ...
  * @author Ynk33
@@ -18,13 +17,14 @@ class WalkingEnemy extends BaseEnnemy
 	public function new(_hero:Hero, _difficulty:UInt=1) 
 	{
 		body = new Collider(0, 0, this);
-		
 		var tilesetIndex = Math.ceil(_difficulty / 2);
-		var animation = new SparrowData("assets/Monsters/beetle.xml", "assets/Monsters/beetle"+tilesetIndex+".png");
+		var animation = new SparrowData("assets/Monsters/wasp.xml", "assets/Monsters/wasp"+tilesetIndex+".png");
 		body.loadGraphicFromTexture(animation);
-		body.animation.addByPrefix("move", "LD29_beetle_move", 9);
-		body.animation.addByPrefix("attack", "LD29_beetle_attack", 17, false);
-		body.animation.callback = callbackAnimation;
+		body.animation.addByPrefix("move", "LD29_wasp_move", 9);
+		body.animation.addByPrefix("attack", "LD29_wasp_attack", 17, false);
+		body.width = 90;
+		body.height = 70;
+		body.centerOffsets();
 		
 		super(_hero, _difficulty);
 		/*
@@ -37,7 +37,7 @@ class WalkingEnemy extends BaseEnnemy
 		fireRate = 1 + _difficulty / 10;
 		body.health = 2 + _difficulty / 2;
 		distanceToDetect = 500 + (_difficulty - 1) * 10;
-		minDistance = Std.int(body.width) + 20;
+		minDistance = Std.int(body.width);
 		move_speed = 200 + _difficulty * 5;
 		patrol_speed = 200 + _difficulty * 5;
 		award = _difficulty;
@@ -99,22 +99,6 @@ class WalkingEnemy extends BaseEnnemy
 		}
 		
 		super.update();
-	}
-	
-	
-	private function callbackAnimation(_anim:String, _frameNumber:Int, _frameIndex:Int):Void
-	{
-		if (_anim == "attack")
-		{
-			if (_frameNumber == 6)
-			{
-				FlxG.sound.play("assets/sounds/ennemy_swoosh.mp3");
-			}
-			if (_frameNumber == 9)
-			{
-				weapon.fire();
-			}
-		}
 	}
 	
 	private function followPath():Void
