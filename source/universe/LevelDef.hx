@@ -1,6 +1,7 @@
 package universe;
 import flixel.addons.display.shapes.FlxShapeBox;
 import flixel.FlxG;
+import flixel.group.FlxGroup;
 
 
 import flixel.FlxSprite;
@@ -22,6 +23,8 @@ class LevelDef
 	public static var verbose:Bool;
 	public var alt:Int;
 	public var long:Int;
+	var _order:UInt;
+	static var COUNT:UInt = 0;
 	public var explored : Bool;
 	//public var mask:String;
 	public var topMask:UInt;
@@ -29,18 +32,22 @@ class LevelDef
 	public var leftMask:UInt;
 	public var rightMask:UInt;
 	var _mask:String;
-	
 	public var level:Level;
 	public var branchLevel:UInt;
 	
-	public var debugColor:UInt = 0x80ff0000;
+	public var difficulty:UInt;
+	public var enemies:FlxGroup;
 	
+	public var debugColor:UInt = 0x80ff0000;
 	static inline var BOX_SIZE:Int = 25;
 	
 	public var neighbors:Array<LevelDef>;
 	
 	public function new(?Alt:UInt, ?Long:Int, BranchLevel:UInt=0) 
 	{
+		_order = COUNT;
+		COUNT++;
+		
 		branchLevel = BranchLevel;
 		//if(verbose) trace(this, Alt, Long, Mask);
 		alt = Alt;
@@ -80,7 +87,7 @@ class LevelDef
 	
 	public function toString():String
 	{
-		return "[Space("+alt+", "+long+"; "+branchLevel+")]";
+		return "[LevelDef("+alt+", "+long+"; "+order+")]";
 	}
 	
 	function get_mask():String 
@@ -89,6 +96,13 @@ class LevelDef
 	}
 	
 	public var mask(get_mask, null):String;
+	
+	function get_order():UInt 
+	{
+		return _order;
+	}
+	
+	public var order(get_order, null):UInt;
 	
 	var line:LineStyle = { thickness:1, color:0xff0000, pixelHinting:true, scaleMode:LineScaleMode.NORMAL, capsStyle:CapsStyle.NONE, jointStyle:JointStyle.MITER, miterLimit:1 };
 	var fill:FillStyle = { hasFill:true, color:0xff0000, alpha:1 };

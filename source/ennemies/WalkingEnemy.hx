@@ -1,27 +1,22 @@
 package ennemies;
 import flixel.FlxSprite;
-import flixel.system.FlxSound;
 import player.Hero;
 import flixel.util.FlxColor;
 import utils.Collider;
 import utils.EnnemyPath;
 import flixel.util.FlxPoint;
 import weapons.ennemy_weapons.BaseEnnemyWeapon;
-import flixel.FlxG;
-import flixel.system.FlxAssets;
 
 /**
  * ...
  * @author Ynk33
  */
-class FlyingEnnemy extends BaseEnnemy
+class WalkingEnemy extends BaseEnnemy
 {
-	private var mainSound:FlxSound;
-	
 	public function new(_hero:Hero) 
 	{
 		body = new Collider(0, 0, this);
-		body.makeGraphic(70, 50, FlxColor.MAUVE);
+		body.makeGraphic(70, 50, FlxColor.FOREST_GREEN);
 		
 		super(_hero);
 		
@@ -31,14 +26,8 @@ class FlyingEnnemy extends BaseEnnemy
 		move_speed = 200;
 		patrol_speed = 200;
 		
-		xpAward = 10;
-		
 		weapon = new BaseEnnemyWeapon(body, minDistance);
 		add(weapon);
-		
-		mainSound = new FlxSound();
-		mainSound.loadEmbedded(FlxAssets.getSound("assets/sounds/ennemy_buzz"), true);
-		mainSound.volume = 0.3;
 	}
 	
 	public override function update()
@@ -46,10 +35,8 @@ class FlyingEnnemy extends BaseEnnemy
 		switch(currentState)
 		{
 			case BaseEnnemy.ACTION_PATROL:
-				mainSound.stop();
 				if (detectHero())
 				{
-					mainSound.play();
 					currentState = BaseEnnemy.ACTION_RUSH;
 					pathToHero = findAPath();
 					if (pathToHero != null)
@@ -98,13 +85,6 @@ class FlyingEnnemy extends BaseEnnemy
 		}
 		
 		super.update();
-	}
-	
-	public override function kill():Void
-	{
-		mainSound.stop();
-		
-		super.kill();
 	}
 	
 }

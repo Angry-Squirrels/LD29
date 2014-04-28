@@ -25,10 +25,10 @@ class Staff extends BaseHeroWeapon
 		
 		hero = _parent;
 		
-		bulletWidth = 50;
+		bulletWidth = 40;
 		fireRate = 0.25;
 		
-		this.bulletFactory = new FlxWeapon("staff", skin);
+		this.bulletFactory = new FlxWeapon("staff");
 		this.bulletFactory.bulletDamage = 1;
 		this.bulletFactory.setBulletLifeSpan(0.1);
 		this.bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, 0);
@@ -45,12 +45,12 @@ class Staff extends BaseHeroWeapon
 			if (_facingLeft)
 			{
 				bulletFactory.setBulletDirection(FlxWeapon.BULLET_LEFT, 0);
-				bulletFactory.setBulletOffset(-bulletWidth + (hero.body.width - hero.hitbox.width) / 2, 0);
+				bulletFactory.setBulletOffset(0, 0);
 			}
 			else
 			{
 				bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, 0);
-				bulletFactory.setBulletOffset(hero.hitbox.width + (hero.body.width - hero.hitbox.width) / 2, 0);
+				bulletFactory.setBulletOffset(0, 0);
 			}
 		}
 	}

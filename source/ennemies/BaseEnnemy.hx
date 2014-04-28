@@ -9,6 +9,7 @@ import utils.Collider;
 import utils.EnnemyPath;
 import weapons.BaseWeapon;
 import weapons.ennemy_weapons.BaseEnnemyWeapon;
+import flixel.FlxG;
 
 /**
  * ...
@@ -71,6 +72,7 @@ class BaseEnnemy extends FlxGroup
 		body.hurt(_damage);
 		if (!body.alive)
 		{
+			FlxG.sound.play("assets/sounds/ennemy_death.mp3", 3);
 			kill();
 		}
 	}

@@ -46,4 +46,31 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="Calque d'objets 2" width="20" height="15">
+  <object name="spawner" type="spawner" gid="35" x="448" y="176">
+   <properties>
+    <property name="enemy" value="f"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="355" y="312">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="491" y="462">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="1038" y="257">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="696" y="643">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
