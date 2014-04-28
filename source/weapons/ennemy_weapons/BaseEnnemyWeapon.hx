@@ -22,7 +22,7 @@ class BaseEnnemyWeapon extends BaseWeapon
 		fireRate = 0;
 		
 		skin = new FlxSprite();
-		skin.makeGraphic(10, 10, FlxColor.BLACK);
+		skin.makeGraphic(10, 10, FlxColor.TRANSPARENT);
 		add(skin);
 		
 		

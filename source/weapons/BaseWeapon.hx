@@ -82,8 +82,9 @@ class BaseWeapon extends FlxGroup
 			this.bulletFactory.currentBullet.y = skin.y;
 		}
 		
-		bulletFactory.bounds.x = _x - bulletWidth - 5;
-		bulletFactory.bounds.y = _y - bulletWidth - 5;
+		/*bulletFactory.bounds.x = FlxG.camera.x;
+		bulletFactory.bounds.y = FlxG.camera.y;*/
+		bulletFactory.bounds = FlxG.camera.bounds;
 	}
 	
 	public override function kill()

@@ -136,6 +136,7 @@ class BaseEnnemy extends FlxGroup
 			splat.play();
 		}
 		
+		touchedTime = 0;
 		var deltaX = body.getMidpoint().x - hero.hitbox.getGraphicMidpoint().x;
 		var deltaY = body.getMidpoint().y - hero.hitbox.getGraphicMidpoint().y;
 		

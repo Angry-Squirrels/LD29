@@ -65,28 +65,13 @@ class BaseHeroWeapon extends BaseWeapon
 		super.applyDamage(_obj1, _obj2);
 	}
 	
-	public override function fire():Void
-	{
-		firing = true;
-		skin.animation.play("fire");
-		skin.animation.curAnim.frameRate = 30;
-		skin.animation.callback = checkEndOfFire;
-		
-		if (elapsedTime > fireRate)
-		{
-			FlxG.sound.play("assets/sounds/hero_swoosh.mp3", 0.6);
-		}
-		
-		super.fire();
-	}
-	
 	private function checkEndOfFire(_name:String, _frameNumber:Int, _frameIndex:Int):Void
 	{
 		if (_frameNumber == 5)
 		{
 			firing = false;
 			
-			if (skin.animation.curAnim != null || skin.animation.curAnim.name != currentAnim)
+			if (skin.animation.curAnim == null || skin.animation.curAnim.name != currentAnim)
 			{
 				skin.animation.play(currentAnim);
 				skin.animation.curAnim.frameRate = currentAnimFrameRate;
@@ -99,16 +84,15 @@ class BaseHeroWeapon extends BaseWeapon
 	
 	public override function moveWeapon(_x:Float, _y:Float)
 	{
+		if (this.bulletFactory.currentBullet != null)
+		{
+			this.bulletFactory.currentBullet.x += _x - skin.x;
+			this.bulletFactory.currentBullet.y += _y - skin.y;
+		}
+		
 		skin.x = _x;
 		skin.y = _y;
 		
-		if (this.bulletFactory.currentBullet != null)
-		{
-			this.bulletFactory.currentBullet.x = skin.flipX ? skin.x - bulletWidth + 32 : skin.x + parent.width - 32;
-			this.bulletFactory.currentBullet.y = skin.y;
-		}
-		
-		bulletFactory.bounds.x = _x - bulletWidth - 5;
-		bulletFactory.bounds.y = _y - bulletWidth - 5;
+		bulletFactory.bounds = FlxG.camera.bounds;
 	}
 }
