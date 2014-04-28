@@ -5,6 +5,7 @@ import flixel.addons.weapon.FlxBullet;
 import flixel.FlxSprite;
 import flixel.group.FlxTypedGroup.FlxTypedGroup;
 import flixel.util.FlxColor;
+import flixel.util.loaders.SparrowData;
 import player.Hero;
 import weapons.BaseWeapon;
 import flixel.FlxG;
@@ -82,24 +83,24 @@ class Staff extends BaseHeroWeapon
 	
 	private override function checkEndOfFire(_anim:String, _frameNumber:Int, _frameIndex:Int):Void
 	{
-		if (this.bulletFactory.currentBullet != null)
-		{
 			if (_anim == "fire")
 			{
 				if (_frameNumber == 4)
 				{
 					super.fire();
-					this.bulletFactory.currentBullet.flipX = skin.flipX;
-					this.bulletFactory.currentBullet.alpha = 1;
-					if (firedBullets.indexOf(this.bulletFactory.currentBullet) == -1)
+					if (this.bulletFactory.currentBullet != null)
 					{
-						firedBullets.push(this.bulletFactory.currentBullet);
+						this.bulletFactory.currentBullet.flipX = skin.flipX;
+						this.bulletFactory.currentBullet.alpha = 1;
+						if (firedBullets.indexOf(this.bulletFactory.currentBullet) == -1)
+						{
+							firedBullets.push(this.bulletFactory.currentBullet);
+						}
 					}
 				}
 			}
 			
 			super.checkEndOfFire(_anim, _frameNumber, _frameIndex);
-		}
 	}
 	
 	public override function flipWeapon(_facingLeft:Bool):Void

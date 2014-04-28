@@ -48,6 +48,7 @@ class Hero extends FlxGroup
 	public var canJumpThrough : Bool;
 	
 	private var touchedTime:Float;
+	public var isDead:Bool;
 	
 	public function new(_x:Int, _y:Int) 
 	{
@@ -82,7 +83,7 @@ class Hero extends FlxGroup
 		body.animation.addByPrefix("fall", "LD29_hero_body_airR", 1);
 		body.animation.addByPrefix("land", "LD29_hero_body_fallR", 10, false);
 		body.animation.addByPrefix("death", "LD29_hero_body_deathR", 17, false);
-		body.animation.callback = soundifyAnimation;
+		body.animation.callback = callbackAnimation;
 		
 		add(body);
 		add(head);
@@ -111,106 +112,115 @@ class Hero extends FlxGroup
 		Reg.hero = this;
 		
 		hitbox.health = Reg.heroStats.health;
+		isDead = false;
 	}
 	
 	public override function update():Void
 	{
-		touchedTime += FlxG.elapsed;
-		
-		hitbox.acceleration.y = Reg.GRAVITY;
-		if (!isHurt())
+		if (!isDead)
 		{
-			hitbox.acceleration.x = 0;
+			touchedTime += FlxG.elapsed;
 			
-			if (FlxG.keys.anyPressed(leftKeys))
+			hitbox.acceleration.y = Reg.GRAVITY;
+			if (!isHurt())
 			{
-				hitbox.acceleration.x = -hitbox.drag.x;
+				hitbox.acceleration.x = 0;
+				
+				if (FlxG.keys.anyPressed(leftKeys))
+				{
+					hitbox.acceleration.x = -hitbox.drag.x;
+				}
+				else if (FlxG.keys.anyPressed(rightKeys))
+				{
+					hitbox.acceleration.x = hitbox.drag.x;
+				}
+				
+				if (FlxG.keys.pressed.DOWN) {
+					canJumpThrough = true;
+				}else {
+					canJumpThrough = false;
+				}
+				
+				if (hitbox.acceleration.x < 0)
+					flipHero(true)
+				else if(hitbox.acceleration.x>0)
+					flipHero(false);
+				
+				jump();
+				
+				// limit to the map
+				if (hitbox.x <= 0)
+				{
+					hitbox.x = 0;
+				}
+				
+				switch (currentState)
+				{
+					case Hero.IDLE:
+						playAnimation("idle");
+						
+						if (hitbox.velocity.y < 0)
+						{
+							currentState = Hero.JUMP;
+						}
+						else if (hitbox.velocity.y > 0)
+						{
+							currentState = Hero.FALL;
+						}
+						else if (hitbox.velocity.x != 0)
+						{
+							currentState = Hero.RUN;
+						}
+					case Hero.RUN:
+						playAnimation("run", 20);
+						
+						if (hitbox.velocity.y < 0)
+						{
+							currentState = Hero.JUMP;
+						}
+						else if (hitbox.velocity.y > 0)
+						{
+							currentState = Hero.FALL;
+						}
+						else if (hitbox.velocity.x == 0)
+						{
+							currentState = Hero.IDLE;
+						}
+					case Hero.JUMP:
+						if (hitbox.velocity.y > 0)
+						{
+							currentState = Hero.FALL;
+						}
+					case Hero.FALL:
+						playAnimation("fall");
+						
+						if (hitbox.velocity.y == 0)
+						{
+							currentState = Hero.LAND;
+							playAnimation("land", 30);
+						}
+					case Hero.LAND:
+						if (hitbox.velocity.x != 0)
+						{
+							currentState = Hero.RUN;
+						}
+						if (head.animation.finished)
+						{
+							currentState = Hero.IDLE;
+						}
+				}
 			}
-			else if (FlxG.keys.anyPressed(rightKeys))
+			
+			// check attack
+			if (FlxG.mouse.justPressed && currentState != Hero.LAND)
 			{
-				hitbox.acceleration.x = hitbox.drag.x;
-			}
-			
-			if (FlxG.keys.pressed.DOWN) {
-				canJumpThrough = true;
-			}else {
-				canJumpThrough = false;
-			}
-			
-			if (hitbox.acceleration.x < 0)
-				flipHero(true)
-			else if(hitbox.acceleration.x>0)
-				flipHero(false);
-			
-			jump();
-			
-			// limit to the map
-			if (hitbox.x <= 0)
-			{
-				hitbox.x = 0;
-			}
-			
-			switch (currentState)
-			{
-				case Hero.IDLE:
-					playAnimation("idle");
-					
-					if (hitbox.velocity.y < 0)
-					{
-						currentState = Hero.JUMP;
-					}
-					else if (hitbox.velocity.y > 0)
-					{
-						currentState = Hero.FALL;
-					}
-					else if (hitbox.velocity.x != 0)
-					{
-						currentState = Hero.RUN;
-					}
-				case Hero.RUN:
-					playAnimation("run", 20);
-					
-					if (hitbox.velocity.y < 0)
-					{
-						currentState = Hero.JUMP;
-					}
-					else if (hitbox.velocity.y > 0)
-					{
-						currentState = Hero.FALL;
-					}
-					else if (hitbox.velocity.x == 0)
-					{
-						currentState = Hero.IDLE;
-					}
-				case Hero.JUMP:
-					if (hitbox.velocity.y > 0)
-					{
-						currentState = Hero.FALL;
-					}
-				case Hero.FALL:
-					playAnimation("fall");
-					
-					if (hitbox.velocity.y == 0)
-					{
-						currentState = Hero.LAND;
-						playAnimation("land", 30);
-					}
-				case Hero.LAND:
-					if (hitbox.velocity.x != 0)
-					{
-						currentState = Hero.RUN;
-					}
-					if (head.animation.finished)
-					{
-						currentState = Hero.IDLE;
-					}
+				currentWeapon.fire();
 			}
 		}
-		
-		// check attack
-		if (FlxG.mouse.justPressed && currentState != Hero.LAND)
+		else
 		{
-			currentWeapon.fire();
+			hitbox.acceleration.y = Reg.GRAVITY;
+			hitbox.acceleration.x = 0;
 		}
 		
 		placeMembers();
@@ -244,11 +254,10 @@ class Hero extends FlxGroup
 	
 	public function hurt(_damage:Float):Void
 	{
-		
+		hitbox.health -= _damage;
 		var damageReduction = (5 * Reg.heroStats.baseDefensePoint) * 0.01;
 		_damage = Math.round(_damage - _damage * damageReduction);
 		
-		hitbox.hurt(_damage);
 		
 		var prtHealth = Reg.heroStats.health / Reg.heroStats.maxHealth;
 		
@@ -263,11 +272,10 @@ class Hero extends FlxGroup
 		Reg.heroStats.health = cast hitbox.health;
 		
 		Reg.playState.showDamage(cast _damage, this.hitbox);
-		
-		if (!hitbox.alive)
+		if (hitbox.health <= 0)
 		{
 			FlxG.sound.play("assets/sounds/hero_death.mp3");
-			kill();
+			playDeath();
 		}
 		else
 		{
@@ -284,12 +292,13 @@ class Hero extends FlxGroup
 		
 		FlxG.camera.fade(0xff000000, 1, false, gotoGameOver);
 		MusicManager.stopBeat();
-		
-		super.kill();
 	}
 	
 	function gotoGameOver() 
 	{
+		hitbox.kill();
+		
+		super.kill();
 		FlxG.switchState(new DieState());
 	}
 	
@@ -304,6 +313,26 @@ class Hero extends FlxGroup
 				hitbox.velocity.y = -hitbox.maxVelocity.y;
 			}
 		}
+	}
+	
+	private function playDeath()
+	{
+		/*if (head.animation.curAnim != null)
+		{
+			head.animation.curAnim.stop();
+		}
+		if (body.animation.curAnim != null)
+		{
+			body.animation.curAnim.stop();
+		}
+		if (currentWeapon.skin.animation.curAnim != null)
+		{
+			currentWeapon.skin.animation.curAnim.stop();
+		}*/
+		isDead = true;
+		head.animation.play("death");
+		body.animation.play("death");
+		currentWeapon.skin.animation.play("death");
 	}
 	
 	private function playAnimation(_anim:String, _speed:Int = 12):Void
@@ -343,7 +372,7 @@ class Hero extends FlxGroup
 		currentWeapon.flipWeapon(_facingLeft);
 	}
 	
-	private function soundifyAnimation(_name:String, _frameNumber:Int, _frameIndex:Int):Void
+	private function callbackAnimation(_name:String, _frameNumber:Int, _frameIndex:Int):Void
 	{
 		switch (_name)
 		{
@@ -365,6 +394,11 @@ class Hero extends FlxGroup
 				if (_frameNumber == 0)
 				{
 					FlxG.sound.play("assets/sounds/hero_land.mp3", 1, false);
+				}
+			case "death":
+				if (_frameNumber == 16)
+				{
+					kill();
 				}
 		}
 	}
