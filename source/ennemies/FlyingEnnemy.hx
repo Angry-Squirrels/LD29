@@ -53,7 +53,7 @@ class FlyingEnnemy extends BaseEnnemy
 	
 	public override function update()
 	{
-		if (!isHurt())
+		if (!isHurt() && !hero.isDead)
 		{
 			switch(currentState)
 			{
