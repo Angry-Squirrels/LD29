@@ -86,6 +86,16 @@ class Reg
 		"...be able to bear life again!"
 	];
 	
+	public static var storyTexts : Array<String> = [
+		"A long time ago... In a galaxy far far away...",
+		"A gigantic meteor hit the surface of a poor planet named SHITYLAND",
+		"And blablablaba, you don't neeed a story, fuck off"
+	];
+	
+	public static var storyTime : Array<Int> = [
+		1000, 1000, 1000
+	];
+	
 	public static function resetGame() {
 		hero = null;
 		currentTileMap = null;
