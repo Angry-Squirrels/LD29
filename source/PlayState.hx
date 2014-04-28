@@ -85,8 +85,8 @@ class PlayState extends FlxState
 		
 		add(level.crystals);
 
-		spawnHero();
 		initGame();
+		spawnHero();
 		enemySpawner.generateEnemies(level.definition.difficulty);
 		
 		FlxG.camera.follow(this.hero.hitbox);
@@ -175,8 +175,10 @@ class PlayState extends FlxState
 				
 				// init hero
 				
-				hero.hitbox.x = 140;
-				hero.hitbox.y = 17 * 64 + 10;
+				spawnX = 140;
+				spawnY = 17 * 64 + 10;
+				//hero.hitbox.x = 140;
+				//hero.hitbox.y = 17 * 64 + 10;
 				
 				Reg.heroStats.initHealth();
 			}
@@ -256,11 +258,10 @@ class PlayState extends FlxState
 			Reg.vitY = hero.hitbox.velocity.y;
 			Reg.heroFlip = hero.getFlip();
 			door.enter(this.hero);
-			if(!lastRoom)
-				FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
+			if(level.definition.isLast && door.direction == 'up')
+				FlxG.camera.fade(0xffffffff, 1, false, gotoOutro);
 			else {
-				hero.destroy();
-				FlxG.camera.fade(0xffffffff, 2, false, gotoOutro);
+				FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
 			}
 		}
 	}
@@ -276,9 +277,6 @@ class PlayState extends FlxState
 	function spawnHero():Void 
 	{
 		var door : Door = null;
-		
-		var spawnX : Int = 0;
-		var spawnY : Int = 0;
 		
 		this.hero = new Hero(0, 0);
 		hero.hitbox.velocity.x = Reg.vitX;
@@ -341,6 +339,8 @@ class PlayState extends FlxState
 	var enemyNameTxt : FlxText;
 	var enemyBarBg : FlxSprite;
 	var enemyBar : FlxSprite;
+	var spawnY:Int;
+	var spawnX:Int;
 	public function showEnnemyBar(enemy : BaseEnnemy) {
 		if (enemyNameTxt == null) {
 			
