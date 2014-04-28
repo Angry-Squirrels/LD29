@@ -244,6 +244,7 @@ class PlayState extends FlxState
 			level.explore();
 			Reg.vitX = hero.hitbox.velocity.x;
 			Reg.vitY = hero.hitbox.velocity.y;
+			Reg.heroFlip = hero.getFlip();
 			door.enter(this.hero);
 			FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
 		}
@@ -262,6 +263,8 @@ class PlayState extends FlxState
 		this.hero = new Hero(0, 0);
 		hero.hitbox.velocity.x = Reg.vitX;
 		hero.hitbox.velocity.y = Reg.vitY;
+		hero.flipHero(Reg.heroFlip);
+		if (Reg.vitY < 0) hero.setState(Hero.FALL);
 		add(this.hero);
 		
 		switch(Reg.exitDirection) {

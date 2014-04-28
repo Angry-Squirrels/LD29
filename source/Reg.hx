@@ -53,6 +53,9 @@ class Reg
 	static public var vitX : Float = 0;
 	static public var vitY : Float = 0;
 	
+	/** Hero flip to keep his rotation on spawn **/
+	static public var heroFlip:Bool = false;
+	
 	/** door offset **/
 	static public var spawnOffsetX : Int = 0;
 	static public var spawnOffsetY : Int = 0;
