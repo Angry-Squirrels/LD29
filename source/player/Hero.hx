@@ -21,6 +21,8 @@ import utils.MusicManager;
  */
 class Hero extends FlxGroup
 {
+	public static var verbose:Bool;
+	
 	public static inline var RUN_SPEED:Int = 500;
 	public static inline var JUMP_SPEED:Int = 620;
 	
@@ -235,7 +237,7 @@ class Hero extends FlxGroup
 	
 	public function hurt(_damage:Float):Void
 	{
-		hitbox.hurt(_damage);
+		//hitbox.hurt(_damage);
 		
 		var prtHealth = Reg.heroStats.health / Reg.heroStats.maxHealth;
 		

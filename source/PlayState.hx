@@ -60,9 +60,13 @@ class PlayState extends FlxState
 		add(level.backgroundTiles);
 		add(level.foregroundTiles);
 		
+		//	si le niveau n'a pas encore de spawner ni de difficulté, on les définit
+		if (level.definition.difficulty == 0)
+		{
+			level.definition.difficulty = Reg.heroStats.roomExplored;			
+		}
 		if (enemySpawner == null)
 		{
-			level.definition.difficulty = Reg.heroStats.roomExplored;
 			enemySpawner = new EnemySpawner(this);
 		}
 		
@@ -105,6 +109,8 @@ class PlayState extends FlxState
 		add(healthBar);
 		healthBar.origin.x = 0;
 		healthBar.origin.y = 0;
+		
+		add(new MiniMap());
 	}
 	
 	function updateUI() {
@@ -113,6 +119,7 @@ class PlayState extends FlxState
 	}
 	
 	var introTextIndex:Int = 0;
+	var canSkip : Bool;
 	function initGame() 
 	{
 		var curDef : LevelDef = Reg.levelTree.currentLevel.definition;
@@ -123,7 +130,7 @@ class PlayState extends FlxState
 		if (alt == 0 && long == 0) {
 			if (!curDef.explored) {
 				runningIntro = true;
-				FlxG.camera.fade(0xff000000, 1, true);
+				FlxG.camera.fade(0xff000000, 1, true, onEndIntroFadeIn);
 				introText = new FlxText(10, 10, 0, Reg.introTexts[introTextIndex], 16);
 				add(introText);
 				introTimer = Timer.delay(changeIntroText, 3000);
@@ -132,6 +139,11 @@ class PlayState extends FlxState
 				Reg.heroStats.initHealth();
 			}
 		}
+	}
+	
+	function onEndIntroFadeIn() 
+	{
+		canSkip = true;
 	}
 	
 	var introTimer : Timer;
@@ -173,7 +185,7 @@ class PlayState extends FlxState
 			introText.x = hero.hitbox.x + 50;
 			introText.y = hero.hitbox.y  - 25;
 			
-			if (FlxG.keys.pressed.X)
+			if (canSkip && FlxG.keys.pressed.X)
 				touchDoor(cast level.doors.getFirstExisting(), hero.hitbox);
 			
 		}
@@ -188,7 +200,7 @@ class PlayState extends FlxState
 	
 	function touchDoor(door: Door, player:FlxSprite) 
 	{
-		if (!door.entered){
+		if (!door.entered) {
 			if(verbose) trace("touchDoor");
 			level.explore();
 			Reg.vitX = hero.hitbox.velocity.x;
