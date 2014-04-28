@@ -32,23 +32,34 @@ class FlyingEnnemy extends BaseEnnemy
 		
 		super(_hero, _difficulty);
 		
-		damage = 1 + Math.floor(_difficulty / 2);
-		fireRate = 1 + _difficulty / 10;
-		body.health = 2 + _difficulty / 2;
-		distanceToDetect = 500 + (_difficulty - 1) * 10;
-		minDistance = Std.int(body.width);
-		move_speed = 200 + _difficulty * 5;
-		patrol_speed = 200 + _difficulty * 5;
-		award = _difficulty;
+		name = "Wasp";
 		
-		award = 5;
+		var factor = 10;
+		
+		damage = 1 + Math.floor(_difficulty / 2);
+		damage *= factor;
+		
+		fireRate = 1 + _difficulty / 10;
+		
+		body.health = 2 + _difficulty / 2;
+		body.health *= factor;
+		
+		maxHealth = cast body.health;
+		
+		distanceToDetect = 500 + (_difficulty - 1) * 10;
+		
+		minDistance = Std.int(body.width);
+		
+		move_speed = 200 + _difficulty * 5;
+		
+		patrol_speed = 200 + _difficulty * 5;
+		
+		award = _difficulty;
 		
 		weapon = new BaseEnnemyWeapon(body, Std.int(minDistance / 2), damage);
 		add(weapon);
 		
-		mainSound = new FlxSound();
-		mainSound.loadEmbedded(FlxAssets.getSound("assets/sounds/ennemy_buzz"), true);
-		mainSound.volume = 0.3;
+		mainSound = FlxG.sound.load(FlxAssets.getSound("assets/sounds/ennemy_buzz"), 0.3, true);
 	}
 	
 	public override function update()
@@ -122,6 +133,11 @@ class FlyingEnnemy extends BaseEnnemy
 		else
 		{
 			path.cancel();
+		}
+		
+		if (hero.isDead)
+		{
+			mainSound.stop();
 		}
 		
 		super.update();

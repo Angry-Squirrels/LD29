@@ -2,6 +2,7 @@ package ;
 import flixel.FlxSprite;
 import flixel.util.loaders.SparrowData;
 import haxe.xml.Fast;
+import flixel.FlxG;
 
 /**
  * ...
@@ -9,7 +10,7 @@ import haxe.xml.Fast;
  */
 class BigCrystal extends FlxSprite
 {
-	public function new(data:Fast, _x:Int, _y:Int) 
+	public function new(xml:Fast, _x:Int, _y:Int) 
 	{
 		super(_x, _y);
 		var data = new SparrowData("assets/images/Items/crystal_ore.xml", "assets/images/Items/crystal_ore.png");
@@ -30,6 +31,9 @@ class BigCrystal extends FlxSprite
 		}
 		
 		Reg.bigCrystalsGroup.remove(this);
+		
+		FlxG.sound.play("assets/sounds/bigcrystal_break.mp3", 1, false);
+		FlxG.sound.play("assets/sounds/crystal_pop.mp3", 1, false);
 		
 		for (i in 0 ... 10) new Crystal(cast (x + width / 2), cast (y + height / 2));
 		

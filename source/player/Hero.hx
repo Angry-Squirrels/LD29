@@ -254,6 +254,8 @@ class Hero extends FlxGroup
 	
 	public function hurt(_damage:Float):Void
 	{
+		var damageReduction = (0.25 * Reg.heroStats.baseDefensePoint) * 0.01;
+		_damage = Math.round(_damage - _damage * damageReduction);
 		hitbox.health -= _damage;
 		
 		var prtHealth = Reg.heroStats.health / Reg.heroStats.maxHealth;
@@ -268,6 +270,7 @@ class Hero extends FlxGroup
 		
 		Reg.heroStats.health = cast hitbox.health;
 		
+		Reg.playState.showDamage(cast _damage, this.hitbox);
 		if (hitbox.health <= 0)
 		{
 			FlxG.sound.play("assets/sounds/hero_death.mp3");
@@ -300,7 +303,7 @@ class Hero extends FlxGroup
 	
 	private function jump():Void
 	{
-		if (FlxG.keys.anyJustPressed(jumpKeys) && hitbox.isTouching(FlxObject.FLOOR))
+		if (FlxG.keys.anyPressed(jumpKeys) && hitbox.isTouching(FlxObject.FLOOR))
 		{
 			if (hitbox.velocity.y == 0)
 			{
@@ -313,18 +316,6 @@ class Hero extends FlxGroup
 	
 	private function playDeath()
 	{
-		/*if (head.animation.curAnim != null)
-		{
-			head.animation.curAnim.stop();
-		}
-		if (body.animation.curAnim != null)
-		{
-			body.animation.curAnim.stop();
-		}
-		if (currentWeapon.skin.animation.curAnim != null)
-		{
-			currentWeapon.skin.animation.curAnim.stop();
-		}*/
 		isDead = true;
 		head.animation.play("death");
 		body.animation.play("death");
@@ -361,11 +352,21 @@ class Hero extends FlxGroup
 		currentWeapon.moveWeapon(head.x, head.y);
 	}
 	
-	private function flipHero(_facingLeft:Bool):Void
+	public function flipHero(_facingLeft:Bool):Void
 	{
 		head.flipX = _facingLeft;
 		body.flipX = _facingLeft;
 		currentWeapon.flipWeapon(_facingLeft);
+	}
+	
+	public function getFlip():Bool
+	{
+		return head.flipX;
+	}
+	
+	public function setState(_state:Int):Void
+	{
+		currentState = _state;
 	}
 	
 	private function callbackAnimation(_name:String, _frameNumber:Int, _frameIndex:Int):Void

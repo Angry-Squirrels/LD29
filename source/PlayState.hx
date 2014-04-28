@@ -5,9 +5,11 @@ import ennemies.FlyingEnnemy;
 import flash.errors.Error;
 import flash.Lib;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
 import flixel.util.loaders.SparrowData;
 import haxe.Timer;
 import player.Halo;
@@ -83,8 +85,7 @@ class PlayState extends FlxState
 		add(level.crystals);
 
 		spawnHero();
-		
-		enemySpawner.generateEnemies();
+		enemySpawner.generateEnemies(level.definition.difficulty);
 		
 		FlxG.camera.follow(this.hero.hitbox);
 		FlxG.camera.setBounds(FlxG.worldBounds.x, FlxG.worldBounds.y, FlxG.worldBounds.width, FlxG.worldBounds.height);
@@ -192,7 +193,6 @@ class PlayState extends FlxState
 	override public function destroy():Void
 	{
 		if (verbose) trace("destroy(");
-		trace(introTimer);
 		if (introTimer != null)
 			introTimer.stop();
 		remove(level.backgroundTiles);
@@ -244,6 +244,7 @@ class PlayState extends FlxState
 			level.explore();
 			Reg.vitX = hero.hitbox.velocity.x;
 			Reg.vitY = hero.hitbox.velocity.y;
+			Reg.heroFlip = hero.getFlip();
 			door.enter(this.hero);
 			FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
 		}
@@ -266,6 +267,8 @@ class PlayState extends FlxState
 		this.hero = new Hero(0, 0);
 		hero.hitbox.velocity.x = Reg.vitX;
 		hero.hitbox.velocity.y = Reg.vitY;
+		hero.flipHero(Reg.heroFlip);
+		if (Reg.vitY < 0) hero.setState(Hero.FALL);
 		add(this.hero);
 		
 		switch(Reg.exitDirection) {
@@ -297,5 +300,74 @@ class PlayState extends FlxState
 		
 		hero.hitbox.x = spawnX;
 		hero.hitbox.y = spawnY;
+	}
+	
+	var damagestxts : Array<FlxText> = new Array<FlxText>();
+	public function showDamage(amount: Int, target:FlxSprite)  {
+		var damageTxt = new FlxText(target.getMidpoint().x, target.y - 30, 0, "-" + amount, 20);
+		if(target == hero.hitbox)
+			damageTxt.color = 0xffff6600;
+		else
+			damageTxt.color = 0xff66cc00;
+		add(damageTxt);
+		damageTxt.solid = true;
+		damageTxt.acceleration.y = 1000;
+		damageTxt.velocity.y = -1000;
+		FlxTween.tween(damageTxt, { alpha:0 }, 0.4, { complete:damageShown } );
+		damagestxts.push(damageTxt);
+	}
+	
+	function damageShown(target : FlxTween ) {
+		damagestxts.shift().destroy();
+	}
+	
+	var hittedEnemy : BaseEnnemy;
+	var enemyNameTxt : FlxText;
+	var enemyBarBg : FlxSprite;
+	var enemyBar : FlxSprite;
+	public function showEnnemyBar(enemy : BaseEnnemy) {
+		if (enemyNameTxt == null) {
+			
+			var barrX = 430;
+			var barrY = 427;
+			
+			enemyNameTxt = new FlxText(barrX, barrY, 0, "", 12);
+			add(enemyNameTxt);
+			enemyNameTxt.scrollFactor.x = 0;
+			enemyNameTxt.scrollFactor.y = 0;
+			
+			enemyBarBg = new FlxSprite(barrX, barrY + 20);
+			enemyBarBg.scrollFactor.x = 0;
+			enemyBarBg.scrollFactor.y = 0;
+			enemyBarBg.makeGraphic(250, 12, 0xff222222);
+			add(enemyBarBg);
+			
+			enemyBar = new FlxSprite(barrX + 2, enemyBarBg.y + 2);
+			enemyBar.makeGraphic(246, 8, 0xff66cc00);
+			enemyBar.origin.x = 0;
+			enemyBar.origin.y = 0;
+			enemyBar.scrollFactor.x = 0;
+			enemyBar.scrollFactor.y = 0;
+			add(enemyBar);
+		}
+		
+		if (hittedEnemy != null)
+			hideEnnemyBar();
+			
+		enemyNameTxt.visible = true;
+		enemyBarBg.visible = true;
+		enemyBar.visible = true;
+		hittedEnemy = enemy;
+		enemyBar.scale.x = enemy.body.health / enemy.maxHealth;
+		if (enemyBar.scale.x < 0)
+			enemyBar.scale.x = 0;
+		enemyNameTxt.text = enemy.name + " lvl " + enemy.difficulty;
+	}
+	
+	public function hideEnnemyBar() {
+		enemyNameTxt.visible = false;
+		enemyBarBg.visible = false;
+		enemyBar.visible = false;
+		hittedEnemy = null;
 	}
 }

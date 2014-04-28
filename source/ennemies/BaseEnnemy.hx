@@ -21,7 +21,7 @@ import flixel.FlxG;
  */
 class BaseEnnemy extends FlxGroup
 {
-	public static var verbose:Bool=true;
+	public static var verbose:Bool=false;
 	
 	private inline static var ACTION_PATROL:Int = 0;
 	private inline static var ACTION_RUSH:Int = 1;
@@ -31,7 +31,7 @@ class BaseEnnemy extends FlxGroup
 	private var hero:Hero;
 	private var currentState:Int;
 	
-	private var body:Collider;
+	public var body:Collider;
 	
 	private var move_speed:Int;
 	private var patrol_speed:Int;
@@ -47,12 +47,16 @@ class BaseEnnemy extends FlxGroup
 	private var fireTime:Float;
 	private var touchedTime:Float;
 	
+	public var name : String = "Enemy";
+	
 	private var award : UInt;
 	var splat:ennemies.Splat;
 	var isDying:Bool;
 	
 	public var difficulty:UInt;
 	static public inline var MAX_DIFFICULTY:UInt = 16;
+	
+	public var maxHealth : Int;
 	
 	public function new(_hero:Hero, _difficulty:UInt=1)
 	{
@@ -69,8 +73,7 @@ class BaseEnnemy extends FlxGroup
 		if (difficulty > MAX_DIFFICULTY)	difficulty = MAX_DIFFICULTY;
 		
 		touchedTime = 0;
-		award = 5;
-		award = 3;
+		award = _difficulty;
 		
 		path = new FlxPath();
 		
@@ -143,6 +146,9 @@ class BaseEnnemy extends FlxGroup
 		body.velocity.x = 500 * (deltaX > 0 ? 1 : -1);
 		body.velocity.y = 500 * (deltaY > 0 ? 1 : -1);
 		super.update();
+		
+		Reg.playState.showDamage(cast _damage, body);
+		Reg.playState.showEnnemyBar(this);
 	}
 	
 	function onSplatted(name:String, frameNumber:Int, frameIndex:Int)
@@ -152,7 +158,7 @@ class BaseEnnemy extends FlxGroup
 		{
 			splat.kill();
 			remove(splat);
-			FlxTween.tween(body, { y: body.y - 100, alpha: 0.0}, 0.25, { ease: FlxEase.cubeOut, complete:onDisappeared} );
+			FlxTween.tween(body, { alpha: 0.0}, 0.25, { ease: FlxEase.cubeOut, complete:onDisappeared} );
 		}
 	}
 	
@@ -278,6 +284,7 @@ class BaseEnnemy extends FlxGroup
 		for (i in 0 ... award) new Crystal(cast body.x, cast body.y - 10);
 		
 		Reg.heroStats.enemyKilled ++;
+		Reg.playState.hideEnnemyBar();
 		
 		super.kill();
 	}

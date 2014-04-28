@@ -17,6 +17,8 @@ class WalkingEnemy extends BaseEnnemy
 {
 	public function new(_hero:Hero, _difficulty:UInt=1) 
 	{
+		
+		
 		body = new Collider(0, 0, this);
 		var tilesetIndex = Math.ceil(_difficulty / 2);
 		var animation = new SparrowData("assets/Monsters/beetle.xml", "assets/Monsters/beetle"+tilesetIndex+".png");
@@ -28,19 +30,26 @@ class WalkingEnemy extends BaseEnnemy
 		
 		
 		super(_hero, _difficulty);
+		name = "Beatle";
 		/*
 		var tfDiff = new FlxTextField(20, 20, 20, _difficulty + "");
 		tfDiff.color = 0xffffffff;
 		add(tfDiff);
 		*/
 		
+		var factor = 10;
+		
 		damage = 1 + Math.floor(_difficulty / 2);
+		damage *= 10;
+		
 		fireRate = 1 + _difficulty / 10;
 		body.health = 2 + _difficulty / 2;
-		distanceToDetect = 500 + (_difficulty - 1) * 10;
+		body.health *= 10;
+		maxHealth = cast body.health;
+		distanceToDetect = 250 + (_difficulty - 1) * 10;
 		minDistance = Std.int(body.width);
-		move_speed = 200 + _difficulty * 5;
-		patrol_speed = 200 + _difficulty * 5;
+		move_speed = 100 + _difficulty * 5;
+		patrol_speed = 150 + _difficulty * 5;
 		award = _difficulty;
 		
 		body.drag.set(move_speed * 8, move_speed * 8);

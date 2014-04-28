@@ -11,7 +11,6 @@ class Splat extends FlxSprite
 	public function new(Callback) 
 	{
 		super();
-		trace(this.getScreenXY());
 		
 		var animData = new SparrowData("assets/images/Effects/splat.xml", "assets/images/Effects/splat.png");
 		loadGraphicFromTexture(animData);

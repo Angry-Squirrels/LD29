@@ -53,6 +53,9 @@ class Reg
 	static public var vitX : Float = 0;
 	static public var vitY : Float = 0;
 	
+	/** Hero flip to keep his rotation on spawn **/
+	static public var heroFlip:Bool = false;
+	
 	/** door offset **/
 	static public var spawnOffsetX : Int = 0;
 	static public var spawnOffsetY : Int = 0;
@@ -77,10 +80,10 @@ class Reg
 	
 	// intro
 	public static var introTexts : Array<String> = [
-		"I've been choosen by the council!",
+		"I've been choosen by the Council!",
 		"I must find out what's up there...",
-		"And see if our world will ever",
-		"be able to bear life again!"
+		"And see if our world will ever...",
+		"...be able to bear life again!"
 	];
 	
 	public static function resetGame() {
