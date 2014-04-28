@@ -34,6 +34,15 @@
    eJzFkssKgFAIRKX3O7f1/x+am0BkMiHjCrMbz3X0LkTUJGkV1ZRXbZB3iM4EHos2oz1hvmj9zbP5UDbPUyovk38HzRtUTyeqlHrQgzz3WyPg60KzRzye1/6/KI8/zPe024y8ercT8L7lnQ3jAn/5Ays=
   </data>
  </layer>
+ <layer name="front" width="20" height="15">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYEAFYkAszkAcIEatHBDLE2keKWpHwfAEikCsREXzNIFYi4rmjQLCgJZxCADdzAIB
+  </data>
+ </layer>
  <objectgroup name="doors" width="20" height="15">
   <object name="door" type="door" gid="19" x="0" y="704">
    <properties>
