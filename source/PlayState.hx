@@ -8,6 +8,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
+import flixel.util.loaders.SparrowData;
 import haxe.Timer;
 import player.Hero;
 import universe.LevelTree;
@@ -96,6 +97,7 @@ class PlayState extends FlxState
 	}
 	
 	var healthBar : FlxSprite;
+	var crystalTxt : FlxText;
 	function addUi() 
 	{
 		var healthBarBg = new FlxSprite(10, 10);
@@ -112,11 +114,26 @@ class PlayState extends FlxState
 		healthBar.origin.x = 0;
 		healthBar.origin.y = 0;
 		
+		var crystal = new FlxSprite(-15, 10);
+		var dat = new SparrowData("assets/images/Items/crystal.xml", "assets/images/Items/crystal.png");
+		crystal.loadGraphicFromTexture(dat, false, "LD29_crystal0003");
+		crystal.scrollFactor.x = 0;
+		crystal.scrollFactor.y = 0;
+		crystal.scale.x = 0.7;
+		crystal.scale.y = 0.7;
+		add(crystal);
+		
+		crystalTxt = new FlxText(30, 30, 0, "x " + Reg.heroStats.coinCollected, 24);
+		crystalTxt.scrollFactor.x = 0;
+		crystalTxt.scrollFactor.y = 0;
+		add(crystalTxt);
+		
 		add(new MiniMap());
 	}
 	
 	function updateUI() {
 		var ratio = Reg.heroStats.health / Reg.heroStats.maxHealth;
+		crystalTxt.text = "x " + Reg.heroStats.coinCollected;
 		healthBar.scale.x = ratio;
 	}
 	

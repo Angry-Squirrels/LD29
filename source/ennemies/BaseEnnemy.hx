@@ -68,6 +68,7 @@ class BaseEnnemy extends FlxGroup
 		
 		touchedTime = 0;
 		award = 5;
+		award = 3;
 		
 		path = new FlxPath();
 		
