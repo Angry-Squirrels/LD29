@@ -6,6 +6,7 @@ import utils.Collider;
 import utils.EnnemyPath;
 import flixel.util.FlxPoint;
 import weapons.ennemy_weapons.BaseEnnemyWeapon;
+import flixel.text.FlxTextField;
 
 /**
  * ...
@@ -13,12 +14,18 @@ import weapons.ennemy_weapons.BaseEnnemyWeapon;
  */
 class WalkingEnemy extends BaseEnnemy
 {
-	public function new(_hero:Hero) 
+	public function new(_hero:Hero, _difficulty:UInt=1) 
 	{
 		body = new Collider(0, 0, this);
 		body.makeGraphic(70, 50, FlxColor.FOREST_GREEN);
 		
-		super(_hero);
+		
+		super(_hero, _difficulty);
+		/*
+		var tfDiff = new FlxTextField(20, 20, 20, _difficulty + "");
+		tfDiff.color = 0xffffffff;
+		add(tfDiff);
+		*/
 		
 		damage = 1;
 		body.health = 2;

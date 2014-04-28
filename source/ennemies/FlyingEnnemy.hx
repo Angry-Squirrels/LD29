@@ -19,7 +19,7 @@ class FlyingEnnemy extends BaseEnnemy
 {
 	private var mainSound:FlxSound;
 	
-	public function new(_hero:Hero) 
+	public function new(_hero:Hero, _difficulty:UInt=1) 
 	{
 		body = new Collider(0, 0, this);
 		var animation = new SparrowData("assets/Monsters/wasp.xml", "assets/Monsters/wasp1.png");
@@ -28,7 +28,7 @@ class FlyingEnnemy extends BaseEnnemy
 		body.animation.addByPrefix("attack", "LD29_wasp_attack", 17, false);
 		body.animation.callback = callbackAnimation;
 		
-		super(_hero);
+		super(_hero, _difficulty);
 		
 		damage = 1;
 		fireRate = 1;

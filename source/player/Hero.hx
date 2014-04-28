@@ -235,7 +235,7 @@ class Hero extends FlxGroup
 	
 	public function hurt(_damage:Float):Void
 	{
-		hitbox.hurt(_damage);
+		//hitbox.hurt(_damage);
 		
 		var prtHealth = Reg.heroStats.health / Reg.heroStats.maxHealth;
 		

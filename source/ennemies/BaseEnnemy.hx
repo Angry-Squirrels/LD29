@@ -2,6 +2,7 @@ package ennemies;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
+import flixel.text.FlxTextField;
 import flixel.util.FlxPath;
 import flixel.util.FlxPoint;
 import flixel.util.FlxMath;
@@ -18,6 +19,8 @@ import flixel.FlxG;
  */
 class BaseEnnemy extends FlxGroup
 {
+	public static var verbose:Bool=true;
+	
 	private inline static var ACTION_PATROL:Int = 0;
 	private inline static var ACTION_RUSH:Int = 1;
 	private inline static var ACTION_ATTACK:Int = 2;
@@ -43,15 +46,22 @@ class BaseEnnemy extends FlxGroup
 	
 	private var award : UInt;
 	
-	public function new(_hero:Hero)
+	public var difficulty:UInt;
+	
+	public function new(_hero:Hero, _difficulty:UInt=1)
 	{
 		super();
+		if (verbose)	trace("difficulty:" + _difficulty);
 		
 		add(body);
 		
 		hero = _hero;
 		Reg.ennemyGroup.add(this);
 		currentState = BaseEnnemy.ACTION_PATROL;
+		
+		difficulty = _difficulty;
+		
+		
 		
 		path = new FlxPath();
 		
