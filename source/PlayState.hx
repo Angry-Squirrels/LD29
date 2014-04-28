@@ -117,6 +117,7 @@ class PlayState extends FlxState
 	}
 	
 	var introTextIndex:Int = 0;
+	var canSkip : Bool;
 	function initGame() 
 	{
 		var curDef : LevelDef = Reg.levelTree.currentLevel.definition;
@@ -127,7 +128,7 @@ class PlayState extends FlxState
 		if (alt == 0 && long == 0) {
 			if (!curDef.explored) {
 				runningIntro = true;
-				FlxG.camera.fade(0xff000000, 1, true);
+				FlxG.camera.fade(0xff000000, 1, true, onEndIntroFadeIn);
 				introText = new FlxText(10, 10, 0, Reg.introTexts[introTextIndex], 16);
 				add(introText);
 				introTimer = Timer.delay(changeIntroText, 3000);
@@ -136,6 +137,11 @@ class PlayState extends FlxState
 				Reg.heroStats.initHealth();
 			}
 		}
+	}
+	
+	function onEndIntroFadeIn() 
+	{
+		canSkip = true;
 	}
 	
 	var introTimer : Timer;
@@ -177,7 +183,7 @@ class PlayState extends FlxState
 			introText.x = hero.hitbox.x + 50;
 			introText.y = hero.hitbox.y  - 25;
 			
-			if (FlxG.keys.pressed.X)
+			if (canSkip && FlxG.keys.pressed.X)
 				touchDoor(cast level.doors.getFirstExisting(), hero.hitbox);
 			
 		}
