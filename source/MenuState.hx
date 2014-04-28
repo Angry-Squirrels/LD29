@@ -36,11 +36,12 @@ class MenuState extends FlxState
 	{
 		super.create();
 		
+		FlxG.camera.fade(0xff000000, 1, true);
+		
 		bg = new FlxSprite(0, 0, FlxAssets.getBitmapData("assets/images/Illu_worlds_end.jpg"));
 		add(bg);
 		
-		startText = new FlxText(100, 380, 0, 'Press < X > to start your journey', 18);
-		startText.x = (800 - startText.width) / 2;
+		startText = new FlxText(550, 440, 0, 'Press < X > to start', 18);
 		add(startText);
 		
 		vit = 0;
