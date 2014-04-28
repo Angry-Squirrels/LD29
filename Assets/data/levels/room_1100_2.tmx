@@ -23,7 +23,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgYIIRHHJccDIhS0b7BAsjxE7GAWL/T0g30BoT8IsRAXFoj1w5RItww2AG+PEotgCuc6BV2AJj5AYc=
+   eJxjYBgYIIRHHJccDIhS0b7BAsjxE7GAWL/T0g30BoT8IsRAXFojxw5RIuwfCgBfHqUWwBVW9Ao/AJmhAYc=
   </data>
  </layer>
  <layer name="Level" width="20" height="16">
@@ -31,7 +31,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy1k90KwCAIRmXtr9b2/o87hQRx7kIx4YMoOoSeCnyrYlZn7nG3GLxI1cG8MAvmSGBuYs1cT/QbmNfB3y/KafC6sR+pHdMgZx7MAoNHZ94+NnFf8yLuSf9orhmusH+ZzBn+Rd378y/r/87071HxOij9ewEkTQLt
+   eJy1k4sKwCAIRWXtVWv7/8+dQUKUjlkmXAikE+jJQVsesypz57uO4fWUz8wLs2AOA+ZWnIn7N9z7xIugn9cp8KLQ09aOCWCzD2KBwEt9zSxDcZfjjfiX9mrhCvlnyZzhX497X/5Z/d+Z/j1VRvx7AfiyAts=
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="16">
