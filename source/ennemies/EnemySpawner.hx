@@ -65,6 +65,7 @@ class EnemySpawner
 				{
 					enemy.place(spawningPoint.x, spawningPoint.y);
 					_playState.add(enemy);
+					_playState.enemies.add(enemy);
 				}
 				
 			}

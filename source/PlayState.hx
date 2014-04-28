@@ -1,4 +1,5 @@
 package;
+import ennemies.BaseEnnemy;
 import ennemies.EnemySpawner;
 import ennemies.FlyingEnnemy;
 import flash.errors.Error;
@@ -13,7 +14,7 @@ import universe.LevelTree;
 import states.DieState;
 import universe.LevelDef;
 import utils.MusicManager;
-
+import flixel.group.FlxGroup;
 /**
  * A FlxState which can be used for the actual gameplay.
  */
@@ -25,7 +26,9 @@ class PlayState extends FlxState
 	var map:FlxSprite;
 	var runningIntro : Bool;
 	var introText : FlxText;
+
 	public var enemySpawner:EnemySpawner;
+	public var enemies:FlxGroup;
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -36,8 +39,6 @@ class PlayState extends FlxState
 		super.create();
 		
 		Reg.playState = this;
-		
-		
 		
 		if(Reg.levelTree == null)	Reg.levelTree = new LevelTree(10, this);
 		
@@ -69,6 +70,7 @@ class PlayState extends FlxState
 		{
 			enemySpawner = new EnemySpawner(this);
 		}
+		enemies = new FlxGroup();
 		
 		level.loadObjects(this);
 		
@@ -194,9 +196,12 @@ class PlayState extends FlxState
 			FlxG.switchState(new DieState());
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
+		FlxG.collide(enemies, enemies);
 		
 		updateUI();
 	}	
+	
+	
 	
 	function touchDoor(door: Door, player:FlxSprite) 
 	{

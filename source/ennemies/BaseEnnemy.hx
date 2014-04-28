@@ -87,7 +87,7 @@ class BaseEnnemy extends FlxGroup
 			flipEnnemy(delta < 0);
 		}
 		
-		FlxG.overlap(body, Reg.hero, touchedHero);
+		FlxG.collide(body, Reg.hero, touchedHero);
 		
 		super.update();
 	}
