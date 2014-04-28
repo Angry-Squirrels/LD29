@@ -22,7 +22,9 @@ class FlyingEnnemy extends BaseEnnemy
 	public function new(_hero:Hero, _difficulty:UInt=1) 
 	{
 		body = new Collider(0, 0, this);
-		var animation = new SparrowData("assets/Monsters/wasp.xml", "assets/Monsters/wasp1.png");
+		
+		var tilesetIndex = Math.ceil(_difficulty / 2);
+		var animation = new SparrowData("assets/Monsters/wasp.xml", "assets/Monsters/wasp"+tilesetIndex+".png");
 		body.loadGraphicFromTexture(animation);
 		body.animation.addByPrefix("move", "LD29_wasp_move", 9);
 		body.animation.addByPrefix("attack", "LD29_wasp_attack", 17, false);
@@ -38,6 +40,8 @@ class FlyingEnnemy extends BaseEnnemy
 		move_speed = 200 + _difficulty * 5;
 		patrol_speed = 200 + _difficulty * 5;
 		award = _difficulty;
+		
+		award = 5;
 		
 		weapon = new BaseEnnemyWeapon(body, Std.int(minDistance / 2), damage);
 		add(weapon);

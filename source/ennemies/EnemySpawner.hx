@@ -12,7 +12,6 @@ class EnemySpawner
 {
 	public static var verbose:Bool = false;
 	var _playState:PlayState;
-	//public var availablePoints:FlxGroup;
 
 	public function new(playState:PlayState) 
 	{
@@ -26,7 +25,9 @@ class EnemySpawner
 		
 		var levelDifficulty = _playState.level.definition.difficulty;
 		
-		var nbEnemies:UInt = FlxRandom.intRanged(1, levelDifficulty);
+		var minNbEnemies = Math.ceil(levelDifficulty / BaseEnnemy.MAX_DIFFICULTY);
+		
+		var nbEnemies:UInt = FlxRandom.intRanged(minNbEnemies, levelDifficulty);
 		//	only 1 mob per spawning point, so no more mob than spawning point in the level
 		nbEnemies = Std.int(Math.min(nbEnemies, _playState.level.spawningPoints.length));
 		
@@ -52,7 +53,7 @@ class EnemySpawner
 				var enemy:BaseEnnemy = null;
 				var maxEnemyDiffShift:UInt = Math.round(averageDiff / 10);
 				var enemyDiffShift = FlxRandom.intRanged(-maxEnemyDiffShift, maxEnemyDiffShift);
-				var enemyDiff:UInt = averageDiff + enemyDiffShift;
+				var enemyDiff:UInt = Std.int(Math.min(averageDiff + enemyDiffShift, BaseEnnemy.MAX_DIFFICULTY));
 				switch(spawningPoint.type)
 				{
 					case EnemyType.FLYING:

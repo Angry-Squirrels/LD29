@@ -108,7 +108,7 @@ class Hero extends FlxGroup
 		
 		Reg.hero = this;
 		
-		hitbox.health = 5;
+		hitbox.health = Reg.heroStats.health;
 	}
 	
 	public override function update():Void
@@ -242,7 +242,7 @@ class Hero extends FlxGroup
 	
 	public function hurt(_damage:Float):Void
 	{
-		//hitbox.hurt(_damage);
+		hitbox.hurt(_damage);
 		
 		var prtHealth = Reg.heroStats.health / Reg.heroStats.maxHealth;
 		

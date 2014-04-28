@@ -32,8 +32,8 @@ class HeroStats
 	}
 	
 	public function initHealth() {
-		health = 5 * baseLifePoint;
 		maxHealth = 5 * baseLifePoint;
+		health = maxHealth;
 	}
 	
 }

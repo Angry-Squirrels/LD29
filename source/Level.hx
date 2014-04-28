@@ -27,6 +27,7 @@ class Level extends TiledMap
 	public var foregroundTiles: FlxGroup;
 	public var backgroundTiles: FlxGroup;
 	public var doors: FlxGroup;
+	public var crystals : FlxGroup;
 	
 	public var collisionableTileLayers:FlxTilemap;
 	var state : PlayState;
@@ -55,6 +56,7 @@ class Level extends TiledMap
 		backgroundTiles = new FlxGroup();
 		backgroundTiles.ID = 2345;
 		doors = new FlxGroup();
+		crystals = new FlxGroup();
 		spawningPoints = new FlxGroup();
 		
 		//FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
@@ -97,6 +99,11 @@ class Level extends TiledMap
 					for (tile in terrains["crossable"])
 						tilemap.setTileProperties(tile+1, FlxObject.UP, throughCallBack, Collider);
 				}
+				if (terrains["hurt"] != null)
+				{
+					for (tile in terrains["hurt"])
+						tilemap.setTileProperties(tile+1, FlxObject.ANY, hurtCallBack, Collider);
+				}
 			}
 			
 			if (tileLayer.properties.contains("nocollide"))
@@ -130,6 +137,17 @@ class Level extends TiledMap
 				tile.allowCollisions = 0;
 			else
 				tile.allowCollisions = FlxObject.UP;
+		}
+	}
+	
+	function hurtCallBack(tile:FlxObject, hero:FlxObject)
+	{
+		var collider : Collider = cast hero;
+		if (Type.getClassName(Type.getClass(collider.parent)) == "player.Hero")
+		{
+			var player : Hero = cast collider.parent;
+			
+			player.touchedByEnnemy(10,tile.getMidpoint());
 		}
 	}
 	

@@ -52,6 +52,7 @@ class BaseEnnemy extends FlxGroup
 	var isDying:Bool;
 	
 	public var difficulty:UInt;
+	static public inline var MAX_DIFFICULTY:UInt = 16;
 	
 	public function new(_hero:Hero, _difficulty:UInt=1)
 	{
@@ -65,8 +66,11 @@ class BaseEnnemy extends FlxGroup
 		currentState = BaseEnnemy.ACTION_PATROL;
 		
 		difficulty = _difficulty;
+		if (difficulty > MAX_DIFFICULTY)	difficulty = MAX_DIFFICULTY;
 		
 		touchedTime = 0;
+		award = 5;
+		award = 3;
 		
 		path = new FlxPath();
 		
@@ -89,7 +93,7 @@ class BaseEnnemy extends FlxGroup
 			flipEnnemy(delta < 0);
 		}
 		
-		FlxG.collide(body, Reg.hero, touchedHero);
+		FlxG.overlap(body, Reg.hero, touchedHero);
 		
 		super.update();
 	}
@@ -268,6 +272,8 @@ class BaseEnnemy extends FlxGroup
 		if(verbose) trace("really kill");
 		
 		body.kill();
+		
+		for (i in 0 ... award) new Crystal(cast body.x, cast body.y - 10);
 		
 		Reg.heroStats.enemyKilled ++;
 		
