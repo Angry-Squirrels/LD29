@@ -185,7 +185,6 @@ class PlayState extends FlxState
 	override public function destroy():Void
 	{
 		if (verbose) trace("destroy(");
-		trace(introTimer);
 		if (introTimer != null)
 			introTimer.stop();
 		remove(level.backgroundTiles);
