@@ -38,6 +38,9 @@ class BaseEnnemy extends FlxGroup
 	private var weapon:BaseEnnemyWeapon;
 	
 	private var damage:Float;
+	private var fireRate:Float;
+	private var fireTime:Float;
+	
 	private var xpAward : UInt;
 	
 	public function new(_hero:Hero)
@@ -51,10 +54,14 @@ class BaseEnnemy extends FlxGroup
 		currentState = BaseEnnemy.ACTION_PATROL;
 		
 		path = new FlxPath();
+		
+		fireTime = 0;
 	}
 	
 	public override function update()
 	{
+		fireTime += FlxG.elapsed;
+		
 		if (weapon != null)
 		{
 			weapon.moveWeapon(body.x, body.y);
@@ -123,6 +130,29 @@ class BaseEnnemy extends FlxGroup
 		}
 	}
 	
+	private function playAnimation(_anim:String, _speed:Int = 30):Void
+	{
+		// don't play same animation
+		if (body.animation.curAnim == null || body.animation.curAnim.name != _anim)
+		{
+			// for all anim but "attack"
+			if (_anim != "attack")
+			{
+				// play anim if not playing "attack"
+				if (body.animation.curAnim == null || body.animation.curAnim.name != "attack")
+				{
+					body.animation.play(_anim);
+					body.animation.curAnim.frameRate = _speed;
+				}
+			}
+			else
+			{
+				body.animation.play(_anim);
+				body.animation.curAnim.frameRate = _speed;
+			}
+		}
+	}
+	
 	private function detectHero():Bool
 	{
 		return FlxMath.getDistance(body.getMidpoint(), hero.hitbox.getMidpoint()) <= distanceToDetect;
@@ -136,12 +166,25 @@ class BaseEnnemy extends FlxGroup
 	
 	private function canAttack():Bool
 	{
+		if (fireTime > fireRate)
+		{
+			fireTime = 0;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	private function goodDistanceToAttack():Bool
+	{
 		return FlxMath.getDistance(body.getMidpoint(), hero.hitbox.getMidpoint()) <= minDistance;
 	}
 	
 	private function flipEnnemy(_facingLeft:Bool):Void
 	{
-		body.flipX = _facingLeft;
+		body.flipX = !_facingLeft;
 		
 		if (weapon != null)
 		{

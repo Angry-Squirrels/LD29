@@ -30,17 +30,12 @@ class BaseEnnemyWeapon extends BaseWeapon
 		this.bulletFactory.bulletDamage = _bulletDamage;
 		this.bulletFactory.setBulletLifeSpan(0.1);
 		this.bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, 0);
-		this.bulletFactory.makePixelBullet(2, bulletWidth, Std.int(_parent.height), FlxColor.SALMON);
+		this.bulletFactory.makePixelBullet(2, bulletWidth, Std.int(_parent.height), FlxColor.TRANSPARENT);
 		add(this.bulletFactory.group);
 	}
 	
 	public override function fire():Void
 	{
-		if (elapsedTime > fireRate)
-		{
-			FlxG.sound.play("assets/sounds/ennemy_swoosh.mp3");
-		}
-		
 		super.fire();
 	}
 	

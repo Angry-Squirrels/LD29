@@ -1,6 +1,7 @@
 package ennemies;
 import flixel.FlxSprite;
 import flixel.system.FlxSound;
+import flixel.util.loaders.SparrowData;
 import player.Hero;
 import flixel.util.FlxColor;
 import utils.Collider;
@@ -21,20 +22,25 @@ class FlyingEnnemy extends BaseEnnemy
 	public function new(_hero:Hero) 
 	{
 		body = new Collider(0, 0, this);
-		body.makeGraphic(70, 50, FlxColor.MAUVE);
+		var animation = new SparrowData("assets/Monsters/wasp.xml", "assets/Monsters/wasp1.png");
+		body.loadGraphicFromTexture(animation);
+		body.animation.addByPrefix("move", "LD29_wasp_move", 9);
+		body.animation.addByPrefix("attack", "LD29_wasp_attack", 17, false);
+		body.animation.callback = callbackAnimation;
 		
 		super(_hero);
 		
 		damage = 1;
+		fireRate = 1;
 		body.health = 3;
 		distanceToDetect = 500;
-		minDistance = Std.int(body.width * 2);
+		minDistance = Std.int(body.width);
 		move_speed = 200;
 		patrol_speed = 200;
 		
 		xpAward = 10;
 		
-		weapon = new BaseEnnemyWeapon(body, minDistance, damage);
+		weapon = new BaseEnnemyWeapon(body, Std.int(minDistance / 2), damage);
 		add(weapon);
 		
 		mainSound = new FlxSound();
@@ -48,6 +54,7 @@ class FlyingEnnemy extends BaseEnnemy
 		{
 			case BaseEnnemy.ACTION_PATROL:
 				mainSound.stop();
+				playAnimation("move");
 				if (detectHero())
 				{
 					mainSound.play();
@@ -60,6 +67,7 @@ class FlyingEnnemy extends BaseEnnemy
 				}
 			
 			case BaseEnnemy.ACTION_RUSH:
+				playAnimation("move");
 				if (followHero())
 				{
 					if (path.finished)
@@ -71,7 +79,7 @@ class FlyingEnnemy extends BaseEnnemy
 						}
 					}
 				}
-				else if (canAttack())
+				else if (goodDistanceToAttack())
 				{
 					path.cancel();
 					weapon.blockWeaponFor(0.2);
@@ -83,12 +91,20 @@ class FlyingEnnemy extends BaseEnnemy
 				}
 				
 			case BaseEnnemy.ACTION_ATTACK:
-				if (canAttack())
+				if (goodDistanceToAttack())
 				{
-					weapon.fire();
+					if (canAttack())
+					{
+						playAnimation("attack", 30);
+					}
+					else
+					{
+						playAnimation("move");
+					}
 				}
 				else
 				{
+					playAnimation("move");
 					currentState = BaseEnnemy.ACTION_RUSH;
 					pathToHero = findAPath();
 					if (pathToHero != null)
@@ -99,6 +115,21 @@ class FlyingEnnemy extends BaseEnnemy
 		}
 		
 		super.update();
+	}
+	
+	private function callbackAnimation(_anim:String, _frameNumber:Int, _frameIndex:Int):Void
+	{
+		if (_anim == "attack")
+		{
+			if (_frameNumber == 6)
+			{
+				FlxG.sound.play("assets/sounds/ennemy_swoosh.mp3");
+			}
+			if (_frameNumber == 9)
+			{
+				weapon.fire();
+			}
+		}
 	}
 	
 	public override function kill():Void
