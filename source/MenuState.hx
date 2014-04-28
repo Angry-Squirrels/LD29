@@ -69,6 +69,7 @@ class MenuState extends FlxState
 		
 		if (FlxG.keys.justPressed.X && goDown == false ) {
 			FlxG.camera.flash(0xffffff, 1);
+			remove(startText);
 			goDown = true;
 		}
 		

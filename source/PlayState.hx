@@ -80,11 +80,11 @@ class PlayState extends FlxState
 		
 		level.loadObjects(this);
 		
-		initGame();
 		
 		add(level.crystals);
 
 		spawnHero();
+		initGame();
 		enemySpawner.generateEnemies(level.definition.difficulty);
 		
 		FlxG.camera.follow(this.hero.hitbox);
@@ -166,6 +166,10 @@ class PlayState extends FlxState
 				introTimer = Timer.delay(changeIntroText, 3000);
 				
 				// init hero
+				
+				hero.hitbox.x = 0;
+				hero.hitbox.y = 17 * 64 + 10;
+				
 				Reg.heroStats.initHealth();
 			}
 		}
@@ -259,11 +263,8 @@ class PlayState extends FlxState
 		var door : Door = null;
 		
 		var spawnX : Int = 0;
-		var spawnY : Int = 17 * 64 + 10;
-		/*
-		var spawnX:Int = 7 * 64;
-		var spawnY:Int = 11 * 64;
-		*/
+		var spawnY : Int = 0;
+		
 		this.hero = new Hero(0, 0);
 		hero.hitbox.velocity.x = Reg.vitX;
 		hero.hitbox.velocity.y = Reg.vitY;
