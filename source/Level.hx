@@ -20,7 +20,7 @@ import utils.Collider;
  */
 class Level extends TiledMap
 {
-	public static var verbose:Bool = true;
+	public static var verbose:Bool = false;
 	private inline static var PATH_LEVEL_TILESHEETS = "assets/images/tilesets/";
 	
 	public var foregroundTiles: FlxGroup;

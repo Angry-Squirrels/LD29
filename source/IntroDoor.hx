@@ -24,7 +24,8 @@ class IntroDoor extends FlxSprite
 		"No, the exit is not this way.",
 		"You'll never finish the game if you stay here, you know ?",
 		"Press the right arrow to go right, not the left one.",
-		"Are you afraid ? Press X or use left click to defend yourself !"
+		"Are you afraid ? Press X or use your left click to defend yourself !",
+		"The people behind this game are awesome."
 	];
 
 	public function new(x: Int, y: Int) 

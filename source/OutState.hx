@@ -11,6 +11,8 @@ class OutState extends FlxState
 	public function new() 
 	{
 		super();
+		
+		bgColor = 0xffffffff;
 	}
 	
 }

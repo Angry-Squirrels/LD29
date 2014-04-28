@@ -31,6 +31,7 @@ class PlayState extends FlxState
 	var map:FlxSprite;
 	var runningIntro : Bool;
 	var introText : FlxText;
+	var lastRoom : Bool = true;
 
 	public var enemySpawner:EnemySpawner;
 	public var enemies:FlxGroup;
@@ -255,12 +256,21 @@ class PlayState extends FlxState
 			Reg.vitY = hero.hitbox.velocity.y;
 			Reg.heroFlip = hero.getFlip();
 			door.enter(this.hero);
-			FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
+			if(!lastRoom)
+				FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
+			else {
+				hero.destroy();
+				FlxG.camera.fade(0xffffffff, 2, false, gotoOutro);
+			}
 		}
 	}
 
 	function fadeComplete() {
 		FlxG.resetState();
+	}
+	
+	function gotoOutro() {
+		FlxG.switchState(new OutState());
 	}
 	
 	function spawnHero():Void 
