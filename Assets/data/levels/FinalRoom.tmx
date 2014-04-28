@@ -14,7 +14,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYEAARipgBhqZRw2zRs2jbvxSw1xam0epmUPJPGrH72A0DwBZ3gD9
+   eJxjYEAARjIxLkBN88g1C5e5g9E8xiFkHrXMpbV5lJo5lMyjdvwOBn+iAwA4UgDv
   </data>
  </layer>
  <layer name="bg2" width="20" height="15">
@@ -23,7 +23,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAfEKKjXaNgFIyC4QcAUXgAEw==
+   eJxjYKAfEKKjXbQC9PaDKJ3tG4pAGohlBtoRdATEpAlqpVMpKplDLQAAbJcAsg==
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -31,7 +31,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJyt0tcKwjAYhuFgFFvXvbj33nuc6Zme6f1fgG8gxRCMSNofHhpI+vERIsRnCkijjAqqqKGOBppo4YyLPlsU7pH620YHXfTQxwBDjHDFTZ/NOLJUt0Cvx5hgihnmWGCJFe546LOho6c01mtssMUOexxwxAlPvKz/7Z5SxJsw4Tw1Zsc8UsgmlBdNnJ7f8lRP346ut+Pb0ZXne5e/3rZ6o4Fj/9883xxXXtw3aOdF92YqWex9Uw5v9kIMbg==
+   eJylk1kOgDAIRIn7Wr2W97+QJUokdWikTjI/YCYPikSPluiGvou/XTP92pElao06sw2gvkeH2xvoj4Q5NdvhZGSlnCWzajGnZkR5MiuaE0kzztFVdF9E984T/Zkb5TFnjpF3YM1v3Y6HUd+Tlad3+fUtKJMn/x26b09eaU5H1zxTUve+rZUjkr1ph8S6h3JOFyYCnA==
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
@@ -52,7 +52,7 @@
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="1129" y="849">
+  <object name="spawner" type="spawner" gid="35" x="1088" y="576">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
@@ -62,5 +62,29 @@
     <property name="enemy" value="f"/>
    </properties>
   </object>
+  <object name="spawner" type="spawner" gid="35" x="448" y="640">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="704" y="448">
+   <properties>
+    <property name="enemy" value="f"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="896" y="640">
+   <properties>
+    <property name="enemy" value="f"/>
+   </properties>
+  </object>
  </objectgroup>
+ <layer name="Front" width="20" height="15">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzDkWgkAAREGupKjgBrjhvmCmmWZ6/wNYuRpMQDb/vQq7k+S7Dl1SevQZkJHTcP2x+9eQEWMmTCkoqbhxD/ibMWfBkhU1azY8eAb8bdmx58CRE2cuvHgH/MVisXb6AC7UCv0=
+  </data>
+ </layer>
 </map>

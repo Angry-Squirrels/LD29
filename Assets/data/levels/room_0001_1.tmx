@@ -87,6 +87,10 @@
   <object name="crystal" type="crystal" gid="43" x="128" y="256"/>
  </objectgroup>
  <layer name="Front" width="20" height="15">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYMAEYkAsjkWcXCAHxPJUNG8UjIJRQFugCMRKVDRPE4i1qGAOABduAQE=
   </data>
