@@ -115,91 +115,94 @@ class Hero extends FlxGroup
 	{
 		touchedTime += FlxG.elapsed;
 		
-		hitbox.acceleration.x = 0;
 		hitbox.acceleration.y = Reg.GRAVITY;
-		
-		if (FlxG.keys.anyPressed(leftKeys))
+		if (!isHurt())
 		{
-			hitbox.acceleration.x = -hitbox.drag.x;
-		}
-		else if (FlxG.keys.anyPressed(rightKeys))
-		{
-			hitbox.acceleration.x = hitbox.drag.x;
-		}
-		
-		if (FlxG.keys.pressed.DOWN) {
-			canJumpThrough = true;
-		}else {
-			canJumpThrough = false;
-		}
-		
-		if (hitbox.acceleration.x < 0)
-			flipHero(true)
-		else if(hitbox.acceleration.x>0)
-			flipHero(false);
-		
-		jump();
-		
-		// limit to the map
-		if (hitbox.x <= 0)
-		{
-			hitbox.x = 0;
-		}
-		
-		switch (currentState)
-		{
-			case Hero.IDLE:
-				playAnimation("idle");
-				
-				if (hitbox.velocity.y < 0)
-				{
-					currentState = Hero.JUMP;
-				}
-				else if (hitbox.velocity.y > 0)
-				{
-					currentState = Hero.FALL;
-				}
-				else if (hitbox.velocity.x != 0)
-				{
-					currentState = Hero.RUN;
-				}
-			case Hero.RUN:
-				playAnimation("run", 20);
-				
-				if (hitbox.velocity.y < 0)
-				{
-					currentState = Hero.JUMP;
-				}
-				else if (hitbox.velocity.y > 0)
-				{
-					currentState = Hero.FALL;
-				}
-				else if (hitbox.velocity.x == 0)
-				{
-					currentState = Hero.IDLE;
-				}
-			case Hero.JUMP:
-				if (hitbox.velocity.y > 0)
-				{
-					currentState = Hero.FALL;
-				}
-			case Hero.FALL:
-				playAnimation("fall");
-				
-				if (hitbox.velocity.y == 0)
-				{
-					currentState = Hero.LAND;
-					playAnimation("land", 30);
-				}
-			case Hero.LAND:
-				if (hitbox.velocity.x != 0)
-				{
-					currentState = Hero.RUN;
-				}
-				if (head.animation.finished)
-				{
-					currentState = Hero.IDLE;
-				}
+			hitbox.acceleration.x = 0;
+			
+			if (FlxG.keys.anyPressed(leftKeys))
+			{
+				hitbox.acceleration.x = -hitbox.drag.x;
+			}
+			else if (FlxG.keys.anyPressed(rightKeys))
+			{
+				hitbox.acceleration.x = hitbox.drag.x;
+			}
+			
+			if (FlxG.keys.pressed.DOWN) {
+				canJumpThrough = true;
+			}else {
+				canJumpThrough = false;
+			}
+			
+			if (hitbox.acceleration.x < 0)
+				flipHero(true)
+			else if(hitbox.acceleration.x>0)
+				flipHero(false);
+			
+			jump();
+			
+			// limit to the map
+			if (hitbox.x <= 0)
+			{
+				hitbox.x = 0;
+			}
+			
+			switch (currentState)
+			{
+				case Hero.IDLE:
+					playAnimation("idle");
+					
+					if (hitbox.velocity.y < 0)
+					{
+						currentState = Hero.JUMP;
+					}
+					else if (hitbox.velocity.y > 0)
+					{
+						currentState = Hero.FALL;
+					}
+					else if (hitbox.velocity.x != 0)
+					{
+						currentState = Hero.RUN;
+					}
+				case Hero.RUN:
+					playAnimation("run", 20);
+					
+					if (hitbox.velocity.y < 0)
+					{
+						currentState = Hero.JUMP;
+					}
+					else if (hitbox.velocity.y > 0)
+					{
+						currentState = Hero.FALL;
+					}
+					else if (hitbox.velocity.x == 0)
+					{
+						currentState = Hero.IDLE;
+					}
+				case Hero.JUMP:
+					if (hitbox.velocity.y > 0)
+					{
+						currentState = Hero.FALL;
+					}
+				case Hero.FALL:
+					playAnimation("fall");
+					
+					if (hitbox.velocity.y == 0)
+					{
+						currentState = Hero.LAND;
+						playAnimation("land", 30);
+					}
+				case Hero.LAND:
+					if (hitbox.velocity.x != 0)
+					{
+						currentState = Hero.RUN;
+					}
+					if (head.animation.finished)
+					{
+						currentState = Hero.IDLE;
+					}
+			}
 		}
 		
 		// check attack
@@ -215,15 +218,16 @@ class Hero extends FlxGroup
 	
 	public function touchedByEnnemy(_damage:Float, _ennemyPosition:FlxPoint):Bool
 	{
-		if (touchedTime > 1)
+		if (!isHurt())
 		{
 			touchedTime = 0;
 			
-			var deltaX = hitbox.x - _ennemyPosition.x;
-			var deltaY = hitbox.y - _ennemyPosition.y;
+			var deltaX = hitbox.getMidpoint().x - _ennemyPosition.x;
+			var deltaY = hitbox.getMidpoint().y - _ennemyPosition.y;
 			
-			hitbox.velocity.x = deltaX * 3;
-			hitbox.velocity.y = deltaY * 3;
+			hitbox.velocity.x = 0;
+			hitbox.acceleration.x = hitbox.drag.x * (deltaX > 0 ? 1 : -1);
+			hitbox.velocity.y = 200 * (deltaY > 0 ? 1 : -1);
 			super.update();
 			
 			placeMembers();
@@ -355,5 +359,10 @@ class Hero extends FlxGroup
 					FlxG.sound.play("assets/sounds/hero_land.mp3", 1, false);
 				}
 		}
+	}
+	
+	private function isHurt():Bool
+	{
+		return touchedTime < 0.2;
 	}
 }

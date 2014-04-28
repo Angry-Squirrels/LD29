@@ -45,6 +45,7 @@ class BaseEnnemy extends FlxGroup
 	private var damage:Float;
 	private var fireRate:Float;
 	private var fireTime:Float;
+	private var touchedTime:Float;
 	
 	private var award : UInt;
 	var splat:ennemies.Splat;
@@ -65,7 +66,7 @@ class BaseEnnemy extends FlxGroup
 		
 		difficulty = _difficulty;
 		
-		
+		touchedTime = 0;
 		
 		path = new FlxPath();
 		
@@ -75,6 +76,7 @@ class BaseEnnemy extends FlxGroup
 	public override function update()
 	{
 		fireTime += FlxG.elapsed;
+		touchedTime += FlxG.elapsed;
 		
 		if (weapon != null)
 		{
@@ -110,7 +112,6 @@ class BaseEnnemy extends FlxGroup
 	public function hurt(_damage:Float):Void
 	{
 		if(verbose) trace("hurt");
-		//body.hurt(_damage);
 		
 		body.health = body.health - _damage;
 		if (body.health < 0)
@@ -129,9 +130,14 @@ class BaseEnnemy extends FlxGroup
 			splat.y = body.y - body.height *2/3;
 			add(splat);
 			splat.play();
-			
-			//kill();
 		}
+		
+		var deltaX = body.getMidpoint().x - hero.hitbox.getGraphicMidpoint().x;
+		var deltaY = body.getMidpoint().y - hero.hitbox.getGraphicMidpoint().y;
+		
+		body.velocity.x = 500 * (deltaX > 0 ? 1 : -1);
+		body.velocity.y = 500 * (deltaY > 0 ? 1 : -1);
+		super.update();
 	}
 	
 	function onSplatted(name:String, frameNumber:Int, frameIndex:Int)
@@ -234,6 +240,11 @@ class BaseEnnemy extends FlxGroup
 	private function goodDistanceToAttack():Bool
 	{
 		return FlxMath.getDistance(body.getMidpoint(), hero.hitbox.getMidpoint()) <= minDistance;
+	}
+	
+	private function isHurt():Bool
+	{
+		return touchedTime < 0.2;
 	}
 	
 	private function flipEnnemy(_facingLeft:Bool):Void

@@ -49,68 +49,75 @@ class FlyingEnnemy extends BaseEnnemy
 	
 	public override function update()
 	{
-		switch(currentState)
+		if (!isHurt())
 		{
-			case BaseEnnemy.ACTION_PATROL:
-				mainSound.stop();
-				playAnimation("move");
-				if (detectHero())
-				{
-					mainSound.play();
-					currentState = BaseEnnemy.ACTION_RUSH;
-					pathToHero = findAPath();
-					if (pathToHero != null)
+			switch(currentState)
+			{
+				case BaseEnnemy.ACTION_PATROL:
+					mainSound.stop();
+					playAnimation("move");
+					if (detectHero())
 					{
-						path.start(body, pathToHero, move_speed);
-					}
-				}
-			
-			case BaseEnnemy.ACTION_RUSH:
-				playAnimation("move");
-				if (followHero())
-				{
-					if (path.finished)
-					{
+						mainSound.play();
+						currentState = BaseEnnemy.ACTION_RUSH;
 						pathToHero = findAPath();
 						if (pathToHero != null)
 						{
 							path.start(body, pathToHero, move_speed);
 						}
 					}
-				}
-				else if (goodDistanceToAttack())
-				{
-					path.cancel();
-					weapon.blockWeaponFor(0.2);
-					currentState = BaseEnnemy.ACTION_ATTACK;
-				}
-				else
-				{
-					currentState = BaseEnnemy.ACTION_PATROL;
-				}
 				
-			case BaseEnnemy.ACTION_ATTACK:
-				if (goodDistanceToAttack())
-				{
-					if (canAttack())
+				case BaseEnnemy.ACTION_RUSH:
+					playAnimation("move");
+					if (followHero())
 					{
-						playAnimation("attack", 30);
+						if (path.finished)
+						{
+							pathToHero = findAPath();
+							if (pathToHero != null)
+							{
+								path.start(body, pathToHero, move_speed);
+							}
+						}
+					}
+					else if (goodDistanceToAttack())
+					{
+						path.cancel();
+						weapon.blockWeaponFor(0);
+						currentState = BaseEnnemy.ACTION_ATTACK;
+					}
+					else
+					{
+						currentState = BaseEnnemy.ACTION_PATROL;
+					}
+					
+				case BaseEnnemy.ACTION_ATTACK:
+					if (goodDistanceToAttack())
+					{
+						if (canAttack())
+						{
+							playAnimation("attack", 30);
+						}
+						else
+						{
+							playAnimation("move");
+						}
 					}
 					else
 					{
 						playAnimation("move");
+						currentState = BaseEnnemy.ACTION_RUSH;
+						pathToHero = findAPath();
+						if (pathToHero != null)
+						{
+							path.start(body, pathToHero, move_speed);
+						}
 					}
-				}
-				else
-				{
-					playAnimation("move");
-					currentState = BaseEnnemy.ACTION_RUSH;
-					pathToHero = findAPath();
-					if (pathToHero != null)
-					{
-						path.start(body, pathToHero, move_speed);
-					}
-				}
+			}
+		}
+		else
+		{
+			path.cancel();
 		}
 		
 		super.update();
