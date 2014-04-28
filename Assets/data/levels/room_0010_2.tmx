@@ -23,7 +23,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKANEIJiBiz0YAXIbh7MgFw3itLIXFqYScitlABsZg8mv8MALcMAGQyVdA8CADt5AT8=
+   eJxjYKANEIJiBiz0YAXIbh7MgFw3itLIXFqYScitlABsZg8mv8MALcMAGVA73UsCsRQVzUMGAE1lAXI=
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -31,7 +31,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYWBgYMGCeRmoCzhpZCYt3MpKZfNI8TsTFLMTYSYpfmcmUh2x5nIzEOdOGCA2TLmJNJOUMCXWraSmUZi5+MwmNy3hii9Y/JCa7okJV1LdisuN0kAsQ4Z5yOGJDXMBMQDQBQHT
+   eJxjYWBgYMGCeRmoCzhpZCYt3MpKZfNI8TsTFLMTYSYpfmcmUh2x5nIzEOdOGCA2TLmJNJOUMCXWraSmUZi5+MwmNy3hii9Y/JCa7okJV1LdSihNkWoecnhiw1xADAC8sQGc
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
@@ -52,7 +52,7 @@
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="1152" y="896">
+  <object name="spawner" type="spawner" gid="35" x="1024" y="896">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
@@ -67,7 +67,7 @@
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="960" y="896">
+  <object name="spawner" type="spawner" gid="35" x="896" y="896">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
