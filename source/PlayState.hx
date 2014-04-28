@@ -48,7 +48,7 @@ class PlayState extends FlxState
 		
 		Reg.playState = this;
 		
-		if (Reg.levelTree == null)	Reg.levelTree = new LevelTree(2, this);
+		if (Reg.levelTree == null)	Reg.levelTree = new LevelTree(4, this);
 		
 		level = Reg.levelTree.currentLevel;
 		level.setCurrentState(this);
@@ -177,8 +177,6 @@ class PlayState extends FlxState
 				
 				spawnX = 140;
 				spawnY = 17 * 64 + 10;
-				//hero.hitbox.x = 140;
-				//hero.hitbox.y = 17 * 64 + 10;
 				
 				Reg.heroStats.initHealth();
 			}
@@ -258,7 +256,7 @@ class PlayState extends FlxState
 			Reg.vitY = hero.hitbox.velocity.y;
 			Reg.heroFlip = hero.getFlip();
 			door.enter(this.hero);
-			if(level.definition.isLast && door.direction == 'up')
+			if(level.definition.isLast && door.direction == 'down')
 				FlxG.camera.fade(0xffffffff, 1, false, gotoOutro);
 			else {
 				FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
