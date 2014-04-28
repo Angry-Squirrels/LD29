@@ -13,6 +13,7 @@ import utils.Collider;
 import weapons.BaseWeapon;
 import weapons.hero_weapons.BaseHeroWeapon;
 import weapons.hero_weapons.Staff;
+import utils.MusicManager;
 
 /**
  * ...
@@ -75,6 +76,7 @@ class Hero extends FlxGroup
 		body.animation.addByPrefix("jump", "LD29_hero_body_jumpR", 6, false);
 		body.animation.addByPrefix("fall", "LD29_hero_body_airR", 1);
 		body.animation.addByPrefix("land", "LD29_hero_body_fallR", 10, false);
+		body.animation.callback = soundifyAnimation;
 		
 		add(body);
 		add(head);
@@ -204,12 +206,28 @@ class Hero extends FlxGroup
 	{
 		hitbox.hurt(_damage);
 		
+		var prtHealth = hitbox.health / (Reg.heroStats.baseLifePoint * 10);
+		trace (prtHealth);
+		if (prtHealth < 0.25)
+		{
+			MusicManager.playQuickBeat();
+		}
+		else if (prtHealth < 0.5)
+		{
+			MusicManager.playSlowBeat();
+		}
+		
 		FlxG.camera.flash(0xffbb0000, 0.1);
 		FlxG.camera.shake(0.05,0.1);
 		
 		if (!hitbox.alive)
 		{
+			FlxG.sound.play("assets/sounds/hero_death.mp3");
 			kill();
+		}
+		else
+		{
+			FlxG.sound.play("assets/sounds/hero_hurt.mp3");
 		}
 	}
 	
@@ -221,6 +239,7 @@ class Hero extends FlxGroup
 		}
 		
 		FlxG.camera.fade(0xff000000, 1, false, gotoGameOver);
+		MusicManager.stopBeat();
 		
 		super.kill();
 	}
@@ -278,5 +297,31 @@ class Hero extends FlxGroup
 		head.flipX = _facingLeft;
 		body.flipX = _facingLeft;
 		currentWeapon.flipWeapon(_facingLeft);
+	}
+	
+	private function soundifyAnimation(_name:String, _frameNumber:Int, _frameIndex:Int):Void
+	{
+		switch (_name)
+		{
+			case "run":
+				if (_frameNumber == 5)
+				{
+					FlxG.sound.play("assets/sounds/step1.mp3", 1, false);
+				}
+				else if (_frameNumber == 11)
+				{
+					FlxG.sound.play("assets/sounds/step2.mp3", 1, false);
+				}
+			case "jump":
+				if (_frameNumber == 0)
+				{
+					FlxG.sound.play("assets/sounds/hero_jump.mp3", 1, false);
+				}
+			case "land":
+				if (_frameNumber == 0)
+				{
+					FlxG.sound.play("assets/sounds/hero_land.mp3", 1, false);
+				}
+		}
 	}
 }

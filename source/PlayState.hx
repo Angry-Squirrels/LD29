@@ -10,6 +10,7 @@ import player.Hero;
 import universe.LevelTree;
 import states.DieState;
 import universe.LevelDef;
+import utils.MusicManager;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -81,6 +82,8 @@ class PlayState extends FlxState
 		//FlxG.camera.bounds = FlxG.worldBounds;
 		FlxG.camera.setBounds(FlxG.worldBounds.x, FlxG.worldBounds.y, FlxG.worldBounds.width, FlxG.worldBounds.height);
 		FlxG.camera.fade(0xff000000, 0.1, true);
+		
+		MusicManager.playMusic();
 	}
 	
 	var introTextIndex:Int = 0;

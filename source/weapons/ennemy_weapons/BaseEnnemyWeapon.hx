@@ -36,6 +36,11 @@ class BaseEnnemyWeapon extends BaseWeapon
 	
 	public override function fire():Void
 	{
+		if (elapsedTime > fireRate)
+		{
+			FlxG.sound.play("assets/sounds/ennemy_swoosh.mp3");
+		}
+		
 		super.fire();
 	}
 	
@@ -56,6 +61,7 @@ class BaseEnnemyWeapon extends BaseWeapon
 			var collider = cast(_obj2, Collider);
 			var hero = cast(collider.parent, Hero);
 			hero.hurt(this.bulletFactory.bulletDamage);
+			FlxG.sound.play("assets/sounds/ennemy_hit.mp3");
 		}
 	}
 	

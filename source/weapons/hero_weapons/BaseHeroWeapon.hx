@@ -53,6 +53,7 @@ class BaseHeroWeapon extends BaseWeapon
 			var collider = cast(_obj2, Collider);
 			var ennemy = cast(collider.parent, BaseEnnemy);
 			ennemy.hurt(this.bulletFactory.bulletDamage);
+			FlxG.sound.play("assets/sounds/hero_hit.mp3", 0.6);
 		}
 	}
 	
@@ -63,6 +64,11 @@ class BaseHeroWeapon extends BaseWeapon
 		skin.animation.curAnim.frameRate = 30;
 		skin.animation.callback = checkEndOfFire;
 		
+		if (elapsedTime > fireRate)
+		{
+			FlxG.sound.play("assets/sounds/hero_swoosh.mp3", 0.6);
+		}
+		
 		super.fire();
 	}
 	
@@ -72,7 +78,6 @@ class BaseHeroWeapon extends BaseWeapon
 		{
 			firing = false;
 			
-			trace (currentAnim);
 			if (skin.animation.curAnim == null || skin.animation.curAnim.name != currentAnim)
 			{
 				skin.animation.play(currentAnim);
