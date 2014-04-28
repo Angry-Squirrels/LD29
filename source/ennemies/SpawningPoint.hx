@@ -8,6 +8,8 @@ import haxe.xml.Fast;
  */
 class SpawningPoint extends FlxBasic
 {
+	public static var verbose:Bool=false;
+	
 	public var x:Int;
 	public var y:Int;
 	
@@ -23,7 +25,7 @@ class SpawningPoint extends FlxBasic
 		var elem = data.node.properties.elements;
 		var node = elem.next();
 		type = node.att.value;		
-		trace(this);
+		if(verbose) trace(this);
 	}
 	
 	override public function toString():String

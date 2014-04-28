@@ -15,7 +15,7 @@ class EnemySpawner
 
 	public function new(playState:PlayState) 
 	{
-		trace(playState);
+		if(verbose)	trace(playState);
 		_playState = playState;
 	}
 	
@@ -44,7 +44,7 @@ class EnemySpawner
 		for (i in 0...nbEnemies)
 		{
 			var spawningPoint = cast(_playState.level.spawningPoints.getRandom(), SpawningPoint);
-			trace(spawningPoint);
+			if(verbose)	trace(spawningPoint);
 			if (spawningPoint != null)
 			{
 				//	we remove the swpawning point so that only 1 mob can be generated from there
