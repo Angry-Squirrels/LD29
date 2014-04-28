@@ -1,8 +1,10 @@
 package ennemies;
+import flixel.tweens.FlxEase;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.text.FlxTextField;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxPath;
 import flixel.util.FlxPoint;
 import flixel.util.FlxMath;
@@ -45,6 +47,7 @@ class BaseEnnemy extends FlxGroup
 	private var fireTime:Float;
 	
 	private var award : UInt;
+	var splat:ennemies.Splat;
 	
 	public var difficulty:UInt;
 	
@@ -104,10 +107,42 @@ class BaseEnnemy extends FlxGroup
 	
 	public function hurt(_damage:Float):Void
 	{
-		body.hurt(_damage);
-		if (!body.alive)
+		trace("hurt");
+		//body.hurt(_damage);
+		
+		body.health = body.health - _damage;
+		if (body.health < 0)
 		{
 			FlxG.sound.play("assets/sounds/ennemy_death.mp3", 3);
+			
+			
+			body.animation.curAnim.stop();
+			
+			splat = new Splat(onSplatted);
+			splat.x = body.x;
+			splat.y = body.y;
+			add(splat);
+			splat.play();
+			
+			//kill();
+		}
+	}
+	
+	function onSplatted(name:String, frameNumber:Int, frameIndex:Int)
+	{
+		trace("onSplatted(");
+		if (frameNumber == 11)
+		{
+			remove(splat);
+			FlxTween.tween(body, { y: body.y - 100, alpha: 0.0}, 0.25, { ease: FlxEase.cubeOut, complete:onDisappeared} );
+		}
+	}
+	
+	function onDisappeared(tween:FlxTween)
+	{
+		trace("onDisappeared(");
+		//if (frameNumber == 11)
+		{
 			kill();
 		}
 	}
@@ -204,11 +239,13 @@ class BaseEnnemy extends FlxGroup
 	
 	public override function kill()
 	{
+		trace("kill");
 		if (!alive)
 		{
+			trace("but already killed");
 			return;
 		}
-		
+		trace("really kill");
 		weapon.kill();
 		body.kill();
 		
