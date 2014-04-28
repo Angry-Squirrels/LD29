@@ -47,18 +47,17 @@ class UpgradeState extends FlxState
 		def = new FlxText(marginX, marginY + 180, 0, "Defense points : " + heroStats.baseDefensePoint, 12);
 		add(def);
 		
-		addLifeBTN = new FlxButton(marginX + 350, life.y, "Buy", buyLife);
+		addLifeBTN = new FlxButton(marginX + 350, life.y, "Buy : ", buyLife);
 		add(addLifeBTN);
 		
-		addAtkBTN = new FlxButton(marginX  + 350, atk.y, "Buy", buyAtk);
+		addAtkBTN = new FlxButton(marginX  + 350, atk.y, "Buy : ", buyAtk);
 		add(addAtkBTN);
 
-		addDefBTN = new FlxButton(marginX  + 350, def.y, "Buy", buyDef);
+		addDefBTN = new FlxButton(marginX  + 350, def.y, "Buy : ", buyDef);
 		add(addDefBTN);
 		
 		start = new FlxButton(addDefBTN.x , addDefBTN.y + 30, "Start", begin);
 		add(start);
-		start.active = false;
 		
 		updateText();
 	}
@@ -83,19 +82,30 @@ class UpgradeState extends FlxState
 		atk.text = "Damage level : " + heroStats.baseDamegePoint;
 		def.text = "Defense level : " + heroStats.baseDefensePoint;
 		
-		if (heroStats.statPoinrLeft == 0)
-			start.active = true;
-		else
-			start.active = false;
+		addLifeBTN.text = "Buy : " + getLifeCost();
+		addAtkBTN.text = "Buy : " + getAtk();
+		addDefBTN.text = "Buy : " + geteDef();
 	}
 	
 	function canAfford(ammount: Int) : Bool {
 		return Reg.heroStats.coinCollected - ammount >= 0;
 	}
 	
+	function getLifeCost() : Int {
+		return cast (Reg.heroStats.baseLifePoint * (Reg.heroStats.baseLifePoint / 2) + 2);
+	}
+	
+	function getAtk() : Int {
+		return cast (Reg.heroStats.baseDamegePoint * (Reg.heroStats.baseDamegePoint / 2) + 2);
+	}
+	
+	function geteDef() : Int {
+		return cast (Reg.heroStats.baseDefensePoint * (Reg.heroStats.baseDefensePoint / 2) + 2);
+	}
+	
 	function buyLife() 
 	{
-		var cost = Reg.heroStats.baseLifePoint * 10; 
+		var cost : Int = getLifeCost(); 
 		if (canAfford(cost))
 		{
 			heroStats.baseLifePoint++;
@@ -107,7 +117,7 @@ class UpgradeState extends FlxState
 	
 	function buyAtk() 
 	{
-		var cost = Reg.heroStats.baseDamegePoint * 10; 
+		var cost = getAtk(); 
 		if (canAfford(cost))
 		{
 			heroStats.baseDamegePoint++;
@@ -119,7 +129,7 @@ class UpgradeState extends FlxState
 	
 	function buyDef() 
 	{
-		var cost = Reg.heroStats.baseDefensePoint * 10; 
+		var cost = geteDef(); 
 		if (canAfford(cost))
 		{
 			heroStats.baseDefensePoint++;

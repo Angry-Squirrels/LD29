@@ -35,6 +35,7 @@
 	<!--------------------------------LIBRARIES------------------------------------->
 	
 	<haxelib name="openfl" />
+	<haxelib name="openfl-bitfive" if="html5" />
 	<haxelib name="flixel"/>
 	<haxelib name="flixel-addons" />
 	

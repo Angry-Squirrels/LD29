@@ -54,9 +54,9 @@ class DieState extends FlxState
 	{
 		var final : Int = Reg.heroStats.coinCollected; 
 		
-		Reg.heroStats.statPoinrLeft = final;
+		Reg.heroStats.coinCollected = final+100;
 							
-		var total = new FlxText(150, 220, 0, "Coins collected : " + Reg.heroStats.statPoinrLeft, 18);
+		var total = new FlxText(150, 220, 0, "Coins collected : " + Reg.heroStats.coinCollected, 18);
 		total.x = (800 - total.width) / 2;
 		add(total);
 		Timer.delay(showBtn, 1000);

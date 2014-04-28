@@ -22,7 +22,7 @@ class HeroStats
 	public var roomExplored : UInt = 0;
 	public var enemyKilled : UInt = 0;
 	
-	public var coinCollected : UInt = 0;
+	public var coinCollected : Int = 0;
 	
 	public var health : Int = 0;
 	
