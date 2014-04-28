@@ -255,10 +255,10 @@ class PlayState extends FlxState
 			Reg.vitX = hero.hitbox.velocity.x;
 			Reg.vitY = hero.hitbox.velocity.y;
 			Reg.heroFlip = hero.getFlip();
-			door.enter(this.hero);
-			if(level.definition.isLast && door.direction == 'down')
+			if(level.definition.isLast && door.direction == 'up')
 				FlxG.camera.fade(0xffffffff, 1, false, gotoOutro);
 			else {
+				door.enter(this.hero);
 				FlxG.camera.fade(0xff000000, 0.1, false, fadeComplete);
 			}
 		}
