@@ -143,6 +143,8 @@ class BaseEnnemy extends FlxGroup
 		body.velocity.x = 500 * (deltaX > 0 ? 1 : -1);
 		body.velocity.y = 500 * (deltaY > 0 ? 1 : -1);
 		super.update();
+		
+		Reg.playState.showDamage(cast _damage, body);
 	}
 	
 	function onSplatted(name:String, frameNumber:Int, frameIndex:Int)

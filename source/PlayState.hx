@@ -5,9 +5,11 @@ import ennemies.FlyingEnnemy;
 import flash.errors.Error;
 import flash.Lib;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
 import flixel.util.loaders.SparrowData;
 import haxe.Timer;
 import player.Hero;
@@ -282,5 +284,24 @@ class PlayState extends FlxState
 		
 		hero.hitbox.x = spawnX;
 		hero.hitbox.y = spawnY;
+	}
+	
+	var damagestxts : Array<FlxText> = new Array<FlxText>();
+	public function showDamage(amount: Int, target:FlxSprite)  {
+		var damageTxt = new FlxText(target.getMidpoint().x, target.y - 30, 0, "-" + amount, 20);
+		if(target == hero.hitbox)
+			damageTxt.color = 0xffff6600;
+		else
+			damageTxt.color = 0xff66cc00;
+		add(damageTxt);
+		damageTxt.solid = true;
+		damageTxt.acceleration.y = 1000;
+		damageTxt.velocity.y = -1000;
+		FlxTween.tween(damageTxt, { alpha:0 }, 0.4, { complete:damageShown } );
+		damagestxts.push(damageTxt);
+	}
+	
+	function damageShown(target : FlxTween ) {
+		damagestxts.shift().destroy();
 	}
 }

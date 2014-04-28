@@ -258,6 +258,8 @@ class Hero extends FlxGroup
 		
 		Reg.heroStats.health = cast hitbox.health;
 		
+		Reg.playState.showDamage(cast _damage, this.hitbox);
+		
 		if (!hitbox.alive)
 		{
 			FlxG.sound.play("assets/sounds/hero_death.mp3");
