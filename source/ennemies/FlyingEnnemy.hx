@@ -30,15 +30,14 @@ class FlyingEnnemy extends BaseEnnemy
 		
 		super(_hero, _difficulty);
 		
-		damage = 1;
-		fireRate = 1;
-		body.health = 3;
-		distanceToDetect = 500;
+		damage = 1 + Math.floor(_difficulty / 2);
+		fireRate = 1 + _difficulty / 10;
+		body.health = 2 + _difficulty / 2;
+		distanceToDetect = 500 + (_difficulty - 1) * 10;
 		minDistance = Std.int(body.width);
-		move_speed = 200;
-		patrol_speed = 200;
-		
-		award = 10;
+		move_speed = 200 + _difficulty * 5;
+		patrol_speed = 200 + _difficulty * 5;
+		award = _difficulty;
 		
 		weapon = new BaseEnnemyWeapon(body, Std.int(minDistance / 2), damage);
 		add(weapon);
