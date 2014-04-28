@@ -115,8 +115,10 @@ class BaseEnnemy extends FlxGroup
 		{
 			FlxG.sound.play("assets/sounds/ennemy_death.mp3", 3);
 			
-			
-			body.animation.curAnim.stop();
+			if (body.animation.curAnim != null)
+			{
+				body.animation.curAnim.stop();
+			}	
 			
 			splat = new Splat(onSplatted);
 			splat.x = body.x;
