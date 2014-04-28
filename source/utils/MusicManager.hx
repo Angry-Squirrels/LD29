@@ -23,6 +23,7 @@ class MusicManager
 	private static var dropLoudSound:FlxSound;
 	
 	private static var initialized:Bool = false;
+	private static var musicPlaying:Bool = false;
 	
 	private static var timer:FlxTimer;
 	
@@ -62,7 +63,16 @@ class MusicManager
 	private static function launchTimer():Void
 	{
 		var time = FlxRandom.floatRanged(0, 10);
-		timer.start(time, timerCallback);
+		if (musicPlaying)
+		{
+			timer.cancel();
+			timer.reset(time);
+		}
+		else
+		{
+			musicPlaying = true;
+			timer.start(time, timerCallback, 1);
+		}
 	}
 	private static function timerCallback(_timer:FlxTimer):Void
 	{
