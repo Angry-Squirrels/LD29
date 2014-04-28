@@ -20,7 +20,7 @@ import flash.display.JointStyle;
  */
 class LevelDef
 {
-	public static var verbose:Bool;
+	public static var verbose:Bool=true;
 	public var alt:Int;
 	public var long:Int;
 	var _order:UInt;
@@ -43,8 +43,12 @@ class LevelDef
 	
 	public var neighbors:Array<LevelDef>;
 	
-	public function new(?Alt:UInt, ?Long:Int, BranchLevel:UInt=0) 
+	public var isLast:Bool;
+	
+	public function new(?Alt:UInt, ?Long:Int, BranchLevel:UInt=0, IsLast:Bool=false) 
 	{
+		if(verbose)	trace("new(" + IsLast);
+		
 		_order = COUNT;
 		COUNT++;
 		
@@ -52,6 +56,9 @@ class LevelDef
 		//if(verbose) trace(this, Alt, Long, Mask);
 		alt = Alt;
 		long = Long;
+		
+		isLast = IsLast;
+		
 		neighbors = new Array<LevelDef>();
 	}
 
