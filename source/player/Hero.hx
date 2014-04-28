@@ -21,6 +21,8 @@ import utils.MusicManager;
  */
 class Hero extends FlxGroup
 {
+	public static var verbose:Bool;
+	
 	public static inline var RUN_SPEED:Int = 500;
 	public static inline var JUMP_SPEED:Int = 620;
 	

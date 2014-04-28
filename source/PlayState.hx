@@ -60,9 +60,13 @@ class PlayState extends FlxState
 		add(level.backgroundTiles);
 		add(level.foregroundTiles);
 		
+		//	si le niveau n'a pas encore de spawner ni de difficulté, on les définit
+		if (level.definition.difficulty == 0)
+		{
+			level.definition.difficulty = Reg.heroStats.roomExplored;			
+		}
 		if (enemySpawner == null)
 		{
-			level.definition.difficulty = Reg.heroStats.roomExplored;
 			enemySpawner = new EnemySpawner(this);
 		}
 		
