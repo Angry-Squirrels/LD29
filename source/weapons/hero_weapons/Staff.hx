@@ -49,7 +49,7 @@ class Staff extends BaseHeroWeapon
 		fireRate = 0.25;
 		
 		this.bulletFactory = new FlxWeapon("staff", skin);
-		this.bulletFactory.bulletDamage = 10 + Reg.heroStats.baseDamegePoint*5;
+		this.bulletFactory.bulletDamage = 5 + Reg.heroStats.baseDamegePoint*5;
 		this.bulletFactory.setBulletLifeSpan(0.1);
 		this.bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, bulletSpeed);
 		this.bulletFactory.makeImageBullet(5, FlxAssets.getBitmapData("assets/images/Effects/LD29_onde.png"));
