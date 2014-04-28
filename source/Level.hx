@@ -14,7 +14,6 @@ import player.Hero;
 import universe.Direction;
 import universe.LevelDef;
 import utils.Collider;
-
 /**
  * ...
  * @author TBaudon

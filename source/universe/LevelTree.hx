@@ -14,6 +14,7 @@ class LevelTree extends FlxGroup
 {
 	public static var verbose:Bool=false;
 	public var currentLevel:Level;
+	public var lastDef:LevelDef;
 	
 	public var defs:Array<LevelDef>;
 	public var levels:Array<Level>;
@@ -163,6 +164,13 @@ class LevelTree extends FlxGroup
 				break;
 			}
 			
+			//	nothing above last room
+			if (lastDef != null && currentAlt >= lastDef.alt)
+			{
+				if (verbose)	trace("too high");
+				break;
+			}
+			
 			//	if the space isn't available, we contine to the next iteration
 			if (branchLevel > 0 && !isSpaceAvailable(currentAlt, currentLong))
 			{
@@ -176,7 +184,10 @@ class LevelTree extends FlxGroup
 			
 			if(verbose)	trace("creation");
 			//	WE CREATE THE DEF
-			var def = new LevelDef(currentAlt, currentLong, branchLevel+1, isLastRoom);
+			var def = new LevelDef(currentAlt, currentLong, branchLevel + 1, isLastRoom);
+			
+			if (isLastRoom)	lastDef = def;
+			
 			if (verbose)	trace("created " + def);
 			def.debugColor = debugColor;
 			
