@@ -45,7 +45,7 @@ class BaseWeapon extends FlxGroup
 	
 	public function fire():Void
 	{
-		if (elapsedTime > fireRate)
+		if (elapsedTime >= fireRate)
 		{
 			elapsedTime = 0;
 			this.bulletFactory.fire();

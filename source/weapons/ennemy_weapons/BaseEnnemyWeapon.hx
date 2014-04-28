@@ -19,7 +19,7 @@ class BaseEnnemyWeapon extends BaseWeapon
 		super(_parent);
 		
 		bulletWidth = _bulletWidth;
-		fireRate = 1;
+		fireRate = 0;
 		
 		skin = new FlxSprite();
 		skin.makeGraphic(10, 10, FlxColor.BLACK);

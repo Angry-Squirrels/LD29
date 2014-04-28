@@ -220,7 +220,7 @@ class BaseEnnemy extends FlxGroup
 	{
 		if (isDying)	return false;
 		
-		if (fireTime > fireRate)
+		if (fireTime > 1/fireRate)
 		{
 			fireTime = 0;
 			return true;

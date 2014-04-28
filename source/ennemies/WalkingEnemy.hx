@@ -31,7 +31,7 @@ class WalkingEnemy extends BaseEnnemy
 		fireRate = 1 + _difficulty / 10;
 		body.health = 2 + _difficulty / 2;
 		distanceToDetect = 500 + (_difficulty - 1) * 10;
-		minDistance = Std.int(body.width);
+		minDistance = Std.int(body.width) + 20;
 		move_speed = 200 + _difficulty * 5;
 		patrol_speed = 200 + _difficulty * 5;
 		award = _difficulty;
@@ -104,5 +104,14 @@ class WalkingEnemy extends BaseEnnemy
 			body.acceleration.x = -body.drag.x;
 		}
 	}
-	
+	override private function goodDistanceToAttack():Bool
+	{
+		var distance = Math.abs(hero.hitbox.getMidpoint().x - body.getMidpoint().x);
+		return distance <= minDistance && Math.abs(hero.hitbox.getMidpoint().y - body.y) <= minDistance/4;
+	}
+	override private function followHero():Bool
+	{
+		var distance = Math.abs(hero.hitbox.getMidpoint().x - body.getMidpoint().x);
+		return ((distance <= distanceToDetect) && (distance >= minDistance));
+	}
 }
