@@ -101,7 +101,8 @@ class MenuState extends FlxState
 	}
 	
 	function fedeInComplete(tween: FlxTween) {
-		var delay = Reg.storyTime[indexText];
+		var delay = Reg.storyTime[indexText-1];
+		trace (delay);
 		Timer.delay(fadeOutText, delay);
 	}
 	

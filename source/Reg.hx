@@ -87,13 +87,14 @@ class Reg
 	];
 	
 	public static var storyTexts : Array<String> = [
-		"A long time ago... In a galaxy far far away...",
-		"A gigantic meteor hit the surface of a poor planet named SHITYLAND",
-		"And blablablaba, you don't neeed a story, fuck off"
+		"Once upon a time, in a distant world",
+		"A gigantic meteor hit a planet very similar to ours, spreading myriads of strange crystals on its surface",
+		"The population was forced to live underground, in caves",
+		"Each year, a young boy is sent to the surface to bring back some of those crystals, vital for the survivors..."
 	];
 	
 	public static var storyTime : Array<Int> = [
-		1000, 1000, 1000
+		1000, 2500, 1500, 2500
 	];
 	
 	public static function resetGame() {
