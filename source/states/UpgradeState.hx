@@ -35,7 +35,7 @@ class UpgradeState extends FlxState
 		var instructions : FlxText = new FlxText(marginX + 5, marginY, 0, "Upgrade your hero!", 32);
 		add(instructions);
 		
-		pointleft = new FlxText(marginX, marginY + 90, 0, "Coins left : " + heroStats.statPoinrLeft, 12);
+		pointleft = new FlxText(marginX, marginY + 90, 0, "Coins left : " , 12);
 		add(pointleft);
 		
 		life = new FlxText(marginX, marginY + 120, 0, "Life points : " + heroStats.baseLifePoint, 12);

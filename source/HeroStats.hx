@@ -17,18 +17,23 @@ class HeroStats
 	public var baseDefensePoint : UInt = 1;
 	
 	// points to distribute
-	public var statPoinrLeft : UInt = 10;
 	
 	public var roomExplored : UInt = 0;
 	public var enemyKilled : UInt = 0;
-	
 	public var coinCollected : Int = 0;
 	
+	// hero in game
 	public var health : Int = 0;
+	public var maxHealth : Int = 0;
 	
 	public function new() 
 	{
 		
+	}
+	
+	public function initHealth() {
+		health = 5 * baseLifePoint;
+		maxHealth = 5 * baseLifePoint;
 	}
 	
 }
