@@ -32,7 +32,7 @@ class Staff extends BaseHeroWeapon
 		this.bulletFactory.bulletDamage = 1;
 		this.bulletFactory.setBulletLifeSpan(0.1);
 		this.bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, 0);
-		this.bulletFactory.makePixelBullet(2, bulletWidth, 150, FlxColor.YELLOW);
+		this.bulletFactory.makePixelBullet(2, bulletWidth, 150, FlxColor.TRANSPARENT);
 		add(this.bulletFactory.group);
 	}
 	
