@@ -31,13 +31,27 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJylk1kOgDAIRIn7Wr2W97+QJUokdWikTjI/YCYPikSPluiGvou/XTP92pElao06sw2gvkeH2xvoj4Q5NdvhZGSlnCWzajGnZkR5MiuaE0kzztFVdF9E984T/Zkb5TFnjpF3YM1v3Y6HUd+Tlad3+fUtKJMn/x26b09eaU5H1zxTUve+rZUjkr1ph8S6h3JOFyYCnA==
+   eJylk1kKwCAMREP3xdre/7RV2tAQJ1J1YH6MDC8xEn1ywYPwQqlWdecAd1h9pmZpNM6dwXMF+9cnqDOv5qxhk9KcrXmRUzKiPO4V9YkkGffgLniuokvzWC19o7zImWOMM7D6t3anhFHuk5UnZ/n3LSiTx/8O7XdJXm3ORE8/mzovfVsrh8Vzk/bKsoZybqDLAnQ=
+  </data>
+ </layer>
+ <layer name="Front" width="20" height="15">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzCkSwlAURcFsCVJAwpSEKcxDHDhwsP8F0AIHiC/i/qlq8cS7SfJdhy7p5+7RZ0DGhebH379yhowYM2FKQcmVW8BexYw5C5asqFlz5xGwt2HLjj0Hjpw48+QVsBeLxdrpDUGFCsk=
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
   <object name="door" type="door" gid="19" x="512" y="960">
    <properties>
     <property name="direction" value="down"/>
+   </properties>
+  </object>
+  <object name="door" type="door" gid="19" x="512" y="64">
+   <properties>
+    <property name="direction" value="up"/>
    </properties>
   </object>
  </objectgroup>
@@ -78,13 +92,4 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="Front" width="20" height="15">
-  <properties>
-   <property name="nocollide" value="true"/>
-   <property name="tileset" value="tiles"/>
-  </properties>
-  <data encoding="base64" compression="zlib">
-   eJztzDkWgkAAREGupKjgBrjhvmCmmWZ6/wNYuRpMQDb/vQq7k+S7Dl1SevQZkJHTcP2x+9eQEWMmTCkoqbhxD/ibMWfBkhU1azY8eAb8bdmx58CRE2cuvHgH/MVisXb6AC7UCv0=
-  </data>
- </layer>
 </map>
