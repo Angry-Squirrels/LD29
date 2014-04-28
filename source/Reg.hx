@@ -89,7 +89,7 @@ class Reg
 	public static var storyTexts : Array<String> = [
 		"Once upon a time, in a distant world",
 		"A gigantic meteor hit a planet very similar to ours, spreading myriads of strange crystals on its surface",
-		"The population was forced to live underground, in caves",
+		"Because of the radiations, the population was forced to live underground, in caves",
 		"Each year, a young boy is sent to the surface to bring back some of those crystals, vital for the survivors..."
 	];
 	
