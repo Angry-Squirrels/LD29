@@ -83,6 +83,7 @@ class PlayState extends FlxState
 		add(level.crystals);
 
 		spawnHero();
+		
 		enemySpawner.generateEnemies();
 		
 		FlxG.camera.follow(this.hero.hitbox);

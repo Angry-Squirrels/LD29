@@ -7,6 +7,7 @@ import ennemies.BaseEnnemy;
 import flixel.tile.FlxTilemap;
 import player.Hero;
 import universe.LevelTree;
+import BigCrystal;
 
 /**
  * Handy, pre-built Registry class that can be used to store 
@@ -61,6 +62,9 @@ class Reg
 	
 	/** Ennemy group **/
 	static public var ennemyGroup:FlxTypedGroup<BaseEnnemy> = new FlxTypedGroup<BaseEnnemy>();
+	
+	/** big crystals group **/
+	static public var bigCrystalsGroup:FlxTypedGroup<BigCrystal> = new FlxTypedGroup<BigCrystal>();
 	
 	/** Hero for collision **/
 	static public var hero:Hero;
