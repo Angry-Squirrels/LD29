@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="6" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64">
+  <image source="../../images/tilesets/cave1.png" width="512" height="1024"/>
+  <terraintypes>
+   <terrain name="crossable" tile="13"/>
+   <terrain name="crossable" tile="14"/>
+   <terrain name="crossable" tile="15"/>
+  </terraintypes>
+ </tileset>
+ <layer name="Background" width="20" height="6">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYKEiZhzFdMVsBOQB1egAtw==
+  </data>
+ </layer>
+ <layer name="bg2" width="20" height="6">
+  <properties>
+   <property name="nocollide" value="true"/>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8QGigHTAMAAAYqAAT
+  </data>
+ </layer>
+ <layer name="Level" width="20" height="6">
+  <properties>
+   <property name="tileset" value="tiles"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzjYaAeYAFiZiqaxzBCzeNDw2xAzEQmBgBAwAB6
+  </data>
+ </layer>
+ <objectgroup name="doors" width="20" height="6">
+  <object name="door" type="door" gid="19" x="64" y="384">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+  </object>
+  <object name="door" type="door" gid="19" x="1216" y="128">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="832" y="320">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="704" y="320">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="spawners" width="20" height="6">
+  <object name="spawner" type="spawner" gid="35" x="576" y="320">
+   <properties>
+    <property name="enemy" value="w"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -10,7 +10,7 @@ import flixel.util.FlxMath;
  */
 class EnemySpawner
 {
-	public static var verbose:Bool = false;
+	public static var verbose:Bool = true;
 	var _playState:PlayState;
 
 	public function new(playState:PlayState) 
@@ -24,6 +24,7 @@ class EnemySpawner
 		if (verbose) trace("generateEnemies");
 		
 		var levelDifficulty = _playState.level.definition.difficulty;
+		if (levelDifficulty == 0)	return;
 		
 		var minNbEnemies = Math.ceil(levelDifficulty / BaseEnnemy.MAX_DIFFICULTY);
 		

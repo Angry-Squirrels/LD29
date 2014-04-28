@@ -44,7 +44,7 @@ class PlayState extends FlxState
 		
 		Reg.playState = this;
 		
-		if(Reg.levelTree == null)	Reg.levelTree = new LevelTree(10, this);
+		if (Reg.levelTree == null)	Reg.levelTree = new LevelTree(10, this);
 		
 		level = Reg.levelTree.currentLevel;
 		level.setCurrentState(this);
@@ -256,9 +256,13 @@ class PlayState extends FlxState
 	function spawnHero():Void 
 	{
 		var door : Door = null;
+		
 		var spawnX : Int = 0;
 		var spawnY : Int = 17 * 64 + 10;
-		
+		/*
+		var spawnX:Int = 7 * 64;
+		var spawnY:Int = 11 * 64;
+		*/
 		this.hero = new Hero(0, 0);
 		hero.hitbox.velocity.x = Reg.vitX;
 		hero.hitbox.velocity.y = Reg.vitY;

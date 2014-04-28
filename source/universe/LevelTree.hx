@@ -359,12 +359,18 @@ class LevelTree extends FlxGroup
 	}
 	*/
 	
+	static var NB_ROOMS_PER_MASK:Array<Int> = [0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 	
 	public function createLevel(def:LevelDef):Level
 	{
-		if(verbose) trace("createLevel(" + def);
+		if (verbose) trace("createLevel(" + def);
+		
+		var mask:UInt = def.topMask * 8 + def.bottomMask * 4 + def.leftMask * 2 + def.rightMask * 1;
+		var suffix = FlxRandom.intRanged(1, NB_ROOMS_PER_MASK[mask]);
+		var suffix = NB_ROOMS_PER_MASK[mask];
+		
 		//var tmx = FlxRandom.chanceRoll()?"assets/data/levels/templateDoors.tmx":"assets/data/levels/FirstRoom.tmx";
-		var tmx= "assets/data/levels/room_" + def.mask + ".tmx";
+		var tmx= "assets/data/levels/room_" + def.mask + "_"+suffix+".tmx";
 		if (def.alt == 0 && def.long == 0)
 		{
 			tmx = "assets/data/levels/FirstRoom.tmx";

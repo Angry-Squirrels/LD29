@@ -244,7 +244,7 @@ class Hero extends FlxGroup
 			
 			placeMembers();
 			
-			hurt(_damage);
+			//hurt(_damage);
 			
 			return true;
 		}
