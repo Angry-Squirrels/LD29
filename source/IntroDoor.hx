@@ -32,9 +32,9 @@ class IntroDoor extends FlxSprite
 		super(x, y);
 		var dat = new SparrowData("assets/images/story_door.xml", "assets/images/story_door.png");
 		loadGraphicFromTexture(dat, false);
-		animation.addByPrefix("closeMain", "LD29_story_close", 25, false);
+		animation.addByPrefix("closeMain", "LD29_story_close", 40, false);
 		animation.addByPrefix("open", "LD29_story_open", 12, false);
-		animation.addByPrefix("close", "LD29_story_miniClose", 12, false);
+		animation.addByPrefix("close", "LD29_story_miniClose", 40, false);
 		
 		animation.callback = checkFrame;
 	}
