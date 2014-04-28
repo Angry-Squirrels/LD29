@@ -11,7 +11,7 @@ import weapons.ennemy_weapons.BaseEnnemyWeapon;
  * ...
  * @author Ynk33
  */
-class WalkingEnnemy extends BaseEnnemy
+class WalkingEnemy extends BaseEnnemy
 {
 	public function new(_hero:Hero) 
 	{

@@ -1,6 +1,7 @@
 package ennemies;
 import flixel.group.FlxGroup;
 import haxe.xml.Fast;
+import ennemies.WalkingEnemy;
 /**
  * ...
  * @author damrem
@@ -34,7 +35,7 @@ class EnemySpawner
 					case EnemyType.FLYING:
 						enemy = new FlyingEnnemy(Reg.hero);
 					case EnemyType.WALKING:
-						enemy = new FlyingEnnemy(Reg.hero);	
+						enemy = new WalkingEnemy(Reg.hero);	
 				}
 				if (enemy != null)
 				{
