@@ -3,6 +3,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.loaders.SparrowData;
 import haxe.Timer;
+import flixel.util.FlxRandom;
 
 /**
  * ...
@@ -14,6 +15,17 @@ class IntroDoor extends FlxSprite
 	var opening : Bool;
 	var closing : Bool;
 	var closed : Bool;
+	
+	private var sentences:Array<String> = [
+		"Are you deaf or what ?",
+		"Run ! You fool !",
+		"Why are you still here ?",
+		"Don't you have a game to play ?",
+		"No, the exit is not this way.",
+		"You'll never finish the game if you stay here, you know ?",
+		"Press the right arrow to go right, not the left one.",
+		"Are you afraid ? Press X or use your left click to defend yourself !"
+	];
 
 	public function new(x: Int, y: Int) 
 	{
@@ -36,7 +48,19 @@ class IntroDoor extends FlxSprite
 				}
 				closed = true;
 			}
-		}	
+			else if (frameNumber == 1)
+			{
+				FlxG.sound.play("assets/sounds/door_slap.mp3");
+			}
+		}
+		else if (name == "open")
+		{
+			FlxG.sound.play("assets/sounds/door_slide_on.mp3");
+		}
+		else if (name == "close")
+		{
+			FlxG.sound.play("assets/sounds/door_slide_off.mp3");
+		}
 	}
 	
 	public function close() {
@@ -50,19 +74,25 @@ class IntroDoor extends FlxSprite
 	}
 	
 	public function open() {
-		if(!opening)
+		if (!opening)
+		{
 			animation.play("open");
-		Reg.playState.speakDoor("Are you deaf or what?");
-		opening = true;
-		closing = false;
+			
+			var sentence = sentences[FlxRandom.intRanged(0, sentences.length - 1)];
+			Reg.playState.speakDoor(sentence);
+			opening = true;
+			closing = false;
+		}
 	}
 	
 	public function reclose() {
 		if (!closing)
+		{
 			animation.play("close");
 			Reg.playState.speakDoor("");
-		closing = true;
-		opening = false;
+			closing = true;
+			opening = false;
+		}
 	}
 	
 	override public function update() {
