@@ -1,4 +1,5 @@
 package ennemies;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.util.FlxPath;
@@ -36,6 +37,7 @@ class BaseEnnemy extends FlxGroup
 	
 	private var weapon:BaseEnnemyWeapon;
 	
+	private var damage:Float;
 	private var xpAward : UInt;
 	
 	public function new(_hero:Hero)
@@ -64,7 +66,23 @@ class BaseEnnemy extends FlxGroup
 			flipEnnemy(delta < 0);
 		}
 		
+		FlxG.overlap(body, Reg.hero, touchedHero);
+		
 		super.update();
+	}
+	
+	private function touchedHero(_obj1:FlxObject, _obj2:FlxObject):Void
+	{
+		// apply damage to the hero
+		if (Type.getClassName(Type.getClass(_obj2)) == "utils.Collider")
+		{
+			var collider = cast(_obj2, Collider);
+			var hero = cast(collider.parent, Hero);
+			if (hero.touchedByEnnemy(damage, body.getMidpoint()))
+			{
+				FlxG.sound.play("assets/sounds/ennemy_hit.mp3");
+			}
+		}
 	}
 	
 	public function hurt(_damage:Float):Void

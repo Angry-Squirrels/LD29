@@ -45,6 +45,8 @@ class Hero extends FlxGroup
 	private var currentWeapon:BaseHeroWeapon;
 	public var canJumpThrough : Bool;
 	
+	private var touchedTime:Float;
+	
 	public function new(_x:Int, _y:Int) 
 	{
 		super();
@@ -100,14 +102,19 @@ class Hero extends FlxGroup
 		
 		placeMembers();
 		
+		touchedTime = 0;
+		
 		Reg.hero = this;
 		
-		hitbox.health = Reg.heroStats.health;
+		hitbox.health = 5;
 	}
 	
 	public override function update():Void
 	{
+		touchedTime += FlxG.elapsed;
+		
 		hitbox.acceleration.x = 0;
+		hitbox.acceleration.y = Reg.GRAVITY;
 		
 		if (FlxG.keys.anyPressed(leftKeys))
 		{
@@ -204,12 +211,33 @@ class Hero extends FlxGroup
 		super.update();
 	}
 	
+	public function touchedByEnnemy(_damage:Float, _ennemyPosition:FlxPoint):Bool
+	{
+		if (touchedTime > 1)
+		{
+			touchedTime = 0;
+			
+			var deltaX = hitbox.x - _ennemyPosition.x;
+			var deltaY = hitbox.y - _ennemyPosition.y;
+			
+			hitbox.x += deltaX;
+			hitbox.y += deltaY;
+			
+			placeMembers();
+			
+			hurt(_damage);
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public function hurt(_damage:Float):Void
 	{
 		hitbox.hurt(_damage);
 		
 		var prtHealth = hitbox.health / (Reg.heroStats.baseLifePoint * 10);
-		trace (prtHealth);
 		if (prtHealth < 0.25)
 		{
 			MusicManager.playQuickBeat();

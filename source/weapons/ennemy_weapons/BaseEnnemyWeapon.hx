@@ -14,7 +14,7 @@ import flixel.FlxG;
  */
 class BaseEnnemyWeapon extends BaseWeapon
 {
-	public function new(_parent:FlxSprite, _bulletWidth:Int) 
+	public function new(_parent:FlxSprite, _bulletWidth:Int, _bulletDamage:Float) 
 	{
 		super(_parent);
 		
@@ -27,7 +27,7 @@ class BaseEnnemyWeapon extends BaseWeapon
 		
 		
 		this.bulletFactory = new FlxWeapon("ennemy_weapon", skin);
-		this.bulletFactory.bulletDamage = 1;
+		this.bulletFactory.bulletDamage = _bulletDamage;
 		this.bulletFactory.setBulletLifeSpan(0.1);
 		this.bulletFactory.setBulletDirection(FlxWeapon.BULLET_RIGHT, 0);
 		this.bulletFactory.makePixelBullet(2, bulletWidth, Std.int(_parent.height), FlxColor.SALMON);

@@ -20,13 +20,14 @@ class WalkingEnemy extends BaseEnnemy
 		
 		super(_hero);
 		
+		damage = 1;
 		body.health = 2;
 		distanceToDetect = 500;
 		minDistance = Std.int(body.width * 2);
 		move_speed = 200;
 		patrol_speed = 200;
 		
-		weapon = new BaseEnnemyWeapon(body, minDistance);
+		weapon = new BaseEnnemyWeapon(body, minDistance, damage);
 		add(weapon);
 	}
 	

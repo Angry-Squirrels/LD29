@@ -25,7 +25,8 @@ class FlyingEnnemy extends BaseEnnemy
 		
 		super(_hero);
 		
-		body.health = 2;
+		damage = 1;
+		body.health = 3;
 		distanceToDetect = 500;
 		minDistance = Std.int(body.width * 2);
 		move_speed = 200;
@@ -33,7 +34,7 @@ class FlyingEnnemy extends BaseEnnemy
 		
 		xpAward = 10;
 		
-		weapon = new BaseEnnemyWeapon(body, minDistance);
+		weapon = new BaseEnnemyWeapon(body, minDistance, damage);
 		add(weapon);
 		
 		mainSound = new FlxSound();
@@ -73,7 +74,7 @@ class FlyingEnnemy extends BaseEnnemy
 				else if (canAttack())
 				{
 					path.cancel();
-					weapon.blockWeaponFor(1);
+					weapon.blockWeaponFor(0.2);
 					currentState = BaseEnnemy.ACTION_ATTACK;
 				}
 				else
