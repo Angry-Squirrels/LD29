@@ -73,10 +73,10 @@ class Reg
 	
 	// intro
 	public static var introTexts : Array<String> = [
-		"I've been choosen by the council!",
+		"I've been choosen by the Council!",
 		"I must find out what's up there...",
-		"And see if our world will ever",
-		"be able to bear life again!"
+		"And see if our world will ever...",
+		"...be able to bear life again!"
 	];
 	
 	public static function resetGame() {

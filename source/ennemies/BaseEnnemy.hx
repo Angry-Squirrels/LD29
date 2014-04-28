@@ -154,7 +154,8 @@ class BaseEnnemy extends FlxGroup
 		{
 			splat.kill();
 			remove(splat);
-			FlxTween.tween(body, { y: body.y - 100, alpha: 0.0}, 0.25, { ease: FlxEase.cubeOut, complete:onDisappeared} );
+			//FlxTween.tween(body, { y: body.y - 100, alpha: 0.0}, 0.25, { ease: FlxEase.cubeOut, complete:onDisappeared} );
+			kill();
 		}
 	}
 	
