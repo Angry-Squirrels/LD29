@@ -99,6 +99,11 @@ class Level extends TiledMap
 					for (tile in terrains["crossable"])
 						tilemap.setTileProperties(tile+1, FlxObject.UP, throughCallBack, Collider);
 				}
+				if (terrains["hurt"] != null)
+				{
+					for (tile in terrains["hurt"])
+						tilemap.setTileProperties(tile+1, FlxObject.ANY, hurtCallBack, Collider);
+				}
 			}
 			
 			if (tileLayer.properties.contains("nocollide"))
@@ -132,6 +137,17 @@ class Level extends TiledMap
 				tile.allowCollisions = 0;
 			else
 				tile.allowCollisions = FlxObject.UP;
+		}
+	}
+	
+	function hurtCallBack(tile:FlxObject, hero:FlxObject)
+	{
+		var collider : Collider = cast hero;
+		if (Type.getClassName(Type.getClass(collider.parent)) == "player.Hero")
+		{
+			var player : Hero = cast collider.parent;
+			
+			player.touchedByEnnemy(10,tile.getMidpoint());
 		}
 	}
 	

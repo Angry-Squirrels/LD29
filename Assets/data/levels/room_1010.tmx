@@ -6,6 +6,8 @@
    <terrain name="crossable" tile="13"/>
    <terrain name="crossable" tile="14"/>
    <terrain name="crossable" tile="15"/>
+   <terrain name="hurt" tile="16"/>
+   <terrain name="hurt" tile="19"/>
   </terraintypes>
  </tileset>
  <layer name="Background" width="20" height="15">

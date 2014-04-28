@@ -134,6 +134,7 @@ class PlayState extends FlxState
 		var ratio = Reg.heroStats.health / Reg.heroStats.maxHealth;
 		crystalTxt.text = "x " + Reg.heroStats.coinCollected;
 		healthBar.scale.x = ratio;
+		if (hero.hitbox.health < 0) hero.hitbox.health = 0;
 		healthTxt.text = hero.hitbox.health + " / " + Reg.heroStats.maxHealth;
 	}
 	
