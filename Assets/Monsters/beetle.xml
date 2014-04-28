@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:fbf588b2d81b75cda8183e974ddd5791$ -->
+<!-- $TexturePacker:SmartUpdate:1d9efb499bee5a8be5d06440be642eac$ -->
 <TextureAtlas imagePath="beetle.png">
-    <SubTexture name="LD29_beetle_attack0001" x="0" y="0" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0002" x="110" y="0" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0003" x="220" y="0" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0004" x="330" y="0" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0005" x="440" y="0" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0006" x="0" y="100" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0007" x="110" y="100" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0008" x="220" y="100" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0009" x="330" y="100" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0010" x="440" y="100" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0011" x="0" y="200" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0012" x="110" y="200" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0013" x="220" y="200" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0014" x="330" y="200" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0015" x="440" y="200" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0016" x="0" y="300" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_attack0017" x="0" y="0" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_move0001" x="110" y="300" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_move0002" x="220" y="300" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_move0003" x="330" y="300" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_move0004" x="440" y="300" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_move0005" x="0" y="400" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_move0006" x="110" y="400" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_move0007" x="220" y="400" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_move0008" x="330" y="400" width="110" height="100"/>
-    <SubTexture name="LD29_beetle_move0009" x="440" y="400" width="110" height="100"/>
+    <SubTexture name="LD29_beetle_attack0001" x="0" y="0" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_attack0002" x="90" y="0" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_attack0003" x="180" y="0" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_attack0004" x="270" y="0" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_attack0005" x="0" y="70" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_attack0006" x="90" y="70" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_attack0007" x="180" y="70" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_attack0008" x="270" y="70" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_attack0009" x="0" y="140" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_attack0010" x="0" y="0" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_move0001" x="90" y="140" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_move0002" x="180" y="140" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_move0003" x="270" y="140" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_move0004" x="0" y="210" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_move0005" x="90" y="210" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_move0006" x="180" y="210" width="90" height="70"/>
+    <SubTexture name="LD29_beetle_move0007" x="270" y="210" width="90" height="70"/>
 </TextureAtlas>
