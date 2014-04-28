@@ -21,11 +21,16 @@ class WalkingEnemy extends BaseEnnemy
 		super(_hero);
 		
 		damage = 1;
+		fireRate = 1;
 		body.health = 2;
 		distanceToDetect = 500;
 		minDistance = Std.int(body.width * 2);
 		move_speed = 200;
 		patrol_speed = 200;
+		
+		body.drag.set(move_speed * 8, move_speed * 8);
+		body.maxVelocity.set(move_speed, move_speed);
+		body.acceleration.set(0, Reg.GRAVITY);
 		
 		weapon = new BaseEnnemyWeapon(body, minDistance, damage);
 		add(weapon);
@@ -33,35 +38,27 @@ class WalkingEnemy extends BaseEnnemy
 	
 	public override function update()
 	{
+		Reg.levelTree.currentLevel.collideWithLevel(body);
+		
+		body.acceleration.x = 0;
+		body.acceleration.y = Reg.GRAVITY;
+		
 		switch(currentState)
 		{
 			case BaseEnnemy.ACTION_PATROL:
 				if (detectHero())
 				{
 					currentState = BaseEnnemy.ACTION_RUSH;
-					pathToHero = findAPath();
-					if (pathToHero != null)
-					{
-						path.start(body, pathToHero, move_speed);
-					}
 				}
 			
 			case BaseEnnemy.ACTION_RUSH:
 				if (followHero())
 				{
-					if (path.finished)
-					{
-						pathToHero = findAPath();
-						if (pathToHero != null)
-						{
-							path.start(body, pathToHero, move_speed);
-						}
-					}
+					followPath();
 				}
-				else if (canAttack())
+				else if (goodDistanceToAttack())
 				{
-					path.cancel();
-					weapon.blockWeaponFor(1);
+					weapon.blockWeaponFor(0.3);
 					currentState = BaseEnnemy.ACTION_ATTACK;
 				}
 				else
@@ -70,22 +67,34 @@ class WalkingEnemy extends BaseEnnemy
 				}
 				
 			case BaseEnnemy.ACTION_ATTACK:
-				if (canAttack())
+				if (goodDistanceToAttack())
 				{
-					weapon.fire();
+					if (canAttack())
+					{
+						weapon.fire();
+					}
 				}
 				else
 				{
 					currentState = BaseEnnemy.ACTION_RUSH;
-					pathToHero = findAPath();
-					if (pathToHero != null)
-					{
-						path.start(body, pathToHero, move_speed);
-					}
 				}
 		}
 		
 		super.update();
+	}
+	
+	private function followPath():Void
+	{
+		if (hero.hitbox.x > body.x)
+		{
+			flipEnnemy(false);
+			body.acceleration.x = body.drag.x;
+		}
+		else
+		{
+			flipEnnemy(true);
+			body.acceleration.x = -body.drag.x;
+		}
 	}
 	
 }

@@ -122,12 +122,15 @@ class Level extends TiledMap
 	function throughCallBack(tile:FlxObject, hero:FlxObject) 
 	{
 		var collider : Collider = cast hero;
-		var player : Hero = cast collider.parent;
-		
-		if (player.canJumpThrough)
-			tile.allowCollisions = 0;
-		else
-			tile.allowCollisions = FlxObject.UP;
+		if (Type.getClassName(Type.getClass(collider.parent)) == "player.Hero")
+		{
+			var player : Hero = cast collider.parent;
+			
+			if (player.canJumpThrough)
+				tile.allowCollisions = 0;
+			else
+				tile.allowCollisions = FlxObject.UP;
+		}
 	}
 	
 	public function getDoor(direction: String) : Door {

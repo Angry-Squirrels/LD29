@@ -220,8 +220,8 @@ class Hero extends FlxGroup
 			var deltaX = hitbox.x - _ennemyPosition.x;
 			var deltaY = hitbox.y - _ennemyPosition.y;
 			
-			hitbox.x += deltaX;
-			hitbox.y += deltaY;
+			hitbox.acceleration.x = deltaX;
+			hitbox.acceleration.y = deltaY;
 			
 			placeMembers();
 			
