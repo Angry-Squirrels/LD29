@@ -79,4 +79,10 @@ class Reg
 		"be able to bear life again!"
 	];
 	
+	public static function resetGame() {
+		hero = null;
+		currentTileMap = null;
+		levelTree = null;
+	}
+	
 }

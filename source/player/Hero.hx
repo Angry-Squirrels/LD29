@@ -53,7 +53,7 @@ class Hero extends FlxGroup
 		
 		// create hitbox
 		hitbox = new Collider(_x, _y, this);
-		hitbox.makeGraphic(50, 118, FlxColor.GREEN);
+		hitbox.makeGraphic(80, 118, FlxColor.TRANSPARENT);
 		add(hitbox);
 		
 		this.canJumpThrough = false;
@@ -237,15 +237,12 @@ class Hero extends FlxGroup
 	{
 		hitbox.hurt(_damage);
 		
-		var prtHealth = hitbox.health / (Reg.heroStats.baseLifePoint * 10);
+		var prtHealth = Reg.heroStats.health / Reg.heroStats.maxHealth;
+		
 		if (prtHealth < 0.25)
-		{
 			MusicManager.playQuickBeat();
-		}
 		else if (prtHealth < 0.5)
-		{
 			MusicManager.playSlowBeat();
-		}
 		
 		FlxG.camera.flash(0xffbb0000, 0.1);
 		FlxG.camera.shake(0.05, 0.1);

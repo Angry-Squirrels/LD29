@@ -57,7 +57,7 @@ class MusicManager
 		{
 			musicSound.play();
 		}
-		launchTimer();
+		//launchTimer();
 	}
 	
 	private static function launchTimer():Void

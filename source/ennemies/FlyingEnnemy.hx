@@ -38,7 +38,7 @@ class FlyingEnnemy extends BaseEnnemy
 		move_speed = 200;
 		patrol_speed = 200;
 		
-		xpAward = 10;
+		award = 10;
 		
 		weapon = new BaseEnnemyWeapon(body, Std.int(minDistance / 2), damage);
 		add(weapon);

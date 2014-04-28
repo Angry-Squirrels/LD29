@@ -2,6 +2,7 @@ package;
 import ennemies.EnemySpawner;
 import ennemies.FlyingEnnemy;
 import flash.errors.Error;
+import flash.Lib;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -70,8 +71,7 @@ class PlayState extends FlxState
 		spawnHero();
 		
 		enemySpawner.generateEnemies();
-		
-		launchSpecialEvent();
+		initGame();
 		
 		
 		/*
@@ -85,10 +85,35 @@ class PlayState extends FlxState
 		FlxG.camera.fade(0xff000000, 0.1, true);
 		
 		MusicManager.playMusic();
+		
+		addUi();
+	}
+	
+	var healthBar : FlxSprite;
+	function addUi() 
+	{
+		var healthBarBg = new FlxSprite(10, 10);
+		healthBarBg.makeGraphic(250, 12, 0xff000000);
+		healthBarBg.scrollFactor.x = 0;
+		healthBarBg.scrollFactor.y = 0;
+		add(healthBarBg);
+		
+		healthBar = new FlxSprite(12, 12);
+		healthBar.makeGraphic(246, 8, 0xffcc0000);
+		healthBar.scrollFactor.x = 0;
+		healthBar.scrollFactor.y = 0;
+		add(healthBar);
+		healthBar.origin.x = 0;
+		healthBar.origin.y = 0;
+	}
+	
+	function updateUI() {
+		var ratio = Reg.heroStats.health / Reg.heroStats.maxHealth;
+		healthBar.scale.x = ratio;
 	}
 	
 	var introTextIndex:Int = 0;
-	function launchSpecialEvent() 
+	function initGame() 
 	{
 		var curDef : LevelDef = Reg.levelTree.currentLevel.definition;
 		
@@ -102,6 +127,9 @@ class PlayState extends FlxState
 				introText = new FlxText(10, 10, 0, Reg.introTexts[introTextIndex], 16);
 				add(introText);
 				introTimer = Timer.delay(changeIntroText, 3000);
+				
+				// init hero
+				Reg.heroStats.initHealth();
 			}
 		}
 	}
@@ -154,6 +182,8 @@ class PlayState extends FlxState
 			FlxG.switchState(new DieState());
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
+		
+		updateUI();
 	}	
 	
 	function touchDoor(door: Door, player:FlxSprite) 
