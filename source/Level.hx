@@ -27,6 +27,7 @@ class Level extends TiledMap
 	public var foregroundTiles: FlxGroup;
 	public var backgroundTiles: FlxGroup;
 	public var doors: FlxGroup;
+	public var crystals : FlxGroup;
 	
 	public var collisionableTileLayers:FlxTilemap;
 	var state : PlayState;
@@ -55,6 +56,7 @@ class Level extends TiledMap
 		backgroundTiles = new FlxGroup();
 		backgroundTiles.ID = 2345;
 		doors = new FlxGroup();
+		crystals = new FlxGroup();
 		spawningPoints = new FlxGroup();
 		
 		//FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);

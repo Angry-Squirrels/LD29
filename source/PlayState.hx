@@ -76,6 +76,8 @@ class PlayState extends FlxState
 		
 		spawnHero();
 		
+		add(new Crystal(cast hero.hitbox.x, cast hero.hitbox.y));
+		
 		enemySpawner.generateEnemies();
 		initGame();
 		
@@ -197,11 +199,16 @@ class PlayState extends FlxState
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 		FlxG.collide(enemies, enemies);
+		FlxG.overlap(level.crystals, this.hero.hitbox, collectCrystal);
 		
 		updateUI();
 	}	
 	
-	
+	function collectCrystal(crystal: Crystal, player:FlxSprite) 
+	{
+		crystal.kill();
+		Reg.heroStats.coinCollected++;
+	}
 	
 	function touchDoor(door: Door, player:FlxSprite) 
 	{
