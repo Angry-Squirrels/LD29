@@ -3,6 +3,7 @@ import flixel.util.FlxRandom;
 import flixel.group.FlxGroup;
 import haxe.xml.Fast;
 import ennemies.WalkingEnemy;
+import flixel.util.FlxMath;
 /**
  * ...
  * @author damrem
@@ -26,6 +27,9 @@ class EnemySpawner
 		var levelDifficulty = _playState.level.definition.difficulty;
 		
 		var nbEnemies:UInt = FlxRandom.intRanged(1, levelDifficulty);
+		//	only 1 mob per spawning point, so no more mob than spawning point in the level
+		nbEnemies = Std.int(Math.min(nbEnemies, _playState.level.spawningPoints.length));
+		
 		var maxNbEnemiesShift:UInt = Math.round(levelDifficulty / 5);
 		var nbEnemiesShift = FlxRandom.intRanged(0, maxNbEnemiesShift);
 		nbEnemies += nbEnemiesShift;
@@ -42,6 +46,9 @@ class EnemySpawner
 			trace(spawningPoint);
 			if (spawningPoint != null)
 			{
+				//	we remove the swpawning point so that only 1 mob can be generated from there
+				_playState.level.spawningPoints.remove(spawningPoint);
+				
 				var enemy:BaseEnnemy = null;
 				var maxEnemyDiffShift:UInt = Math.round(averageDiff / 10);
 				var enemyDiffShift = FlxRandom.intRanged(-maxEnemyDiffShift, maxEnemyDiffShift);
@@ -59,6 +66,7 @@ class EnemySpawner
 					enemy.place(spawningPoint.x, spawningPoint.y);
 					_playState.add(enemy);
 				}
+				
 			}
 		}
 	}
