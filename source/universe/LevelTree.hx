@@ -90,12 +90,25 @@ class LevelTree extends FlxGroup
 		if(verbose)	trace("DIRECTIONS AND CREATIONS");
 		for (i in 1...Length)
 		{
-			if(verbose)	trace("direction");
+			if (verbose)	trace("direction");
+			
+			var isLastRoom:Bool = false;
+			trace("branchLevel=" + branchLevel);
+			trace("Length=" + Length);
+			if (branchLevel == 0 && i == Std.int(Length - 1))
+			{
+				isLastRoom = true;
+			}
+			
 			var direction:Int;
 			//for the 1st room, we go to the right
 			if (i == 1 && from.alt == 0 && from.long==0 )
 			{
 				direction = 1;
+			}
+			else if (isLastRoom)
+			{
+				direction = 0;
 			}
 			else
 			{
@@ -158,13 +171,7 @@ class LevelTree extends FlxGroup
 			}
 			
 			
-			var isLastRoom:Bool = false;
-			trace("branchLevel=" + branchLevel);
-			trace("Length=" + Length);
-			if (branchLevel == 0 && i == Std.int(Length - 1))
-			{
-				isLastRoom = true;
-			}
+			
 			
 			
 			if(verbose)	trace("creation");
