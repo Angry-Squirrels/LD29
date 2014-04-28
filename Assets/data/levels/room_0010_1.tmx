@@ -14,7 +14,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYBzFQwYzjJo3ikcwBgC8JgEp
+   eJxjYIAARjIxNkCuWbQwD5u51DBvIDC13T+YzUMHo/E/cjC+eAIAaSoBDw==
   </data>
  </layer>
  <layer name="bg2" width="20" height="15">
@@ -23,7 +23,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAfECJTbhTQD4zGAyogJTxGw472AAAAvwBb
+   eJxjYKAfECJTbhTQD4zGAyogJTxGQthJArHUANoPABnXAI4=
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -31,10 +31,10 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzjYWBgYKES5gViZgbqAdYhbB4bEDNhwexkmsfJAAlfEOBhQIQ5B5nmweQZCKjBZZ4AEPNT0Txc8iDAzUBcOILU4wsPUBjiSrvY9LFiEaMEUMM85HAfjO5DNw9bHiAXcwExAKqMAdI=
+   eJydko0KgDAIhKVatX73/k/bjhLEnKsdHIzJPp1KdGvLHn56J1tgzYWYp1C47xtYUCS7zlaexfX+OmZ3ypPDDU5tYC3PWc4Kuc8Gnuz1134wL2UfIq+sDVrJ/2etPmsPwKz1Ee/0LJLBs3bd6mNpHzF/nj2//SLJSypf/MHh96X6WuXxMGOr53LHdTzQe//Z2Bc9U75n6ThiF4E+At0=
   </data>
  </layer>
- <objectgroup name="doors" width="20" height="15" visible="0">
+ <objectgroup name="doors" width="20" height="15">
   <object name="door" type="door" gid="19" x="0" y="704">
    <properties>
     <property name="direction" value="left"/>
@@ -42,7 +42,7 @@
   </object>
  </objectgroup>
  <objectgroup name="spawners" width="20" height="15">
-  <object name="spawner" type="spawner" gid="35" x="1059" y="221">
+  <object name="spawner" type="spawner" gid="35" x="960" y="320">
    <properties>
     <property name="enemy" value="f"/>
    </properties>
@@ -77,5 +77,8 @@
     <property name="enemy" value="w"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup name="crystals" width="20" height="15">
+  <object name="crystal" type="crystal" gid="43" x="512" y="832"/>
  </objectgroup>
 </map>

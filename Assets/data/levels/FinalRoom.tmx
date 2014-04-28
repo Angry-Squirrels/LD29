@@ -6,8 +6,6 @@
    <terrain name="crossable" tile="13"/>
    <terrain name="crossable" tile="14"/>
    <terrain name="crossable" tile="15"/>
-   <terrain name="hurt" tile="16"/>
-   <terrain name="hurt" tile="19"/>
   </terraintypes>
  </tileset>
  <layer name="Background" width="20" height="15">
@@ -16,7 +14,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYCQRM5ChZySZRwwYSPPoHX70wJSEA6n6iAEDHR7DFQMAaM4BCg==
+   eJxjYEAARipgBhqZRw2zRs2jbvxSw1xam0epmUPJPGrH72A0DwBZ3gD9
   </data>
  </layer>
  <layer name="bg2" width="20" height="15">
@@ -25,7 +23,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKA+EMLBJqR2FAxeIDrQDoCCweKOoQLIzV+khDM94wQAb1MAnQ==
+   eJxjYKAfEKKjXaNgFIyC4QcAUXgAEw==
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -33,25 +31,10 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy1Ue0KgCAQOyr7MCt/9P7PmoEHck3rygZD2N0N2RwRdRmOdIWJrwP7S2ALbkpgv/Nuj0xnX/zQTOp9YFOgVfoZsIcg7zzwY+2NH/9F6hPl+37SvbYPBM7cRr/tg5fMSNsvc0hu0oxq9Yt0T7o+UE41+vjTb6Zy5qvgXV8HH+ICig==
-  </data>
- </layer>
- <layer name="front" width="20" height="15">
-  <data encoding="base64" compression="zlib">
-   eJxjYEAFYkAszkA8IKReDojlSTCPVPWjYHgDRSBWoqJ5mkCsRUXzRgEE0CueANnMAgE=
+   eJyt0tcKwjAYhuFgFFvXvbj33nuc6Zme6f1fgG8gxRCMSNofHhpI+vERIsRnCkijjAqqqKGOBppo4YyLPlsU7pH620YHXfTQxwBDjHDFTZ/NOLJUt0Cvx5hgihnmWGCJFe546LOho6c01mtssMUOexxwxAlPvKz/7Z5SxJsw4Tw1Zsc8UsgmlBdNnJ7f8lRP346ut+Pb0ZXne5e/3rZ6o4Fj/9883xxXXtw3aOdF92YqWex9Uw5v9kIMbg==
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="15">
-  <object name="door" type="door" gid="19" x="512" y="64">
-   <properties>
-    <property name="direction" value="up"/>
-   </properties>
-  </object>
-  <object name="door" type="door" gid="19" x="1216" y="704">
-   <properties>
-    <property name="direction" value="right"/>
-   </properties>
-  </object>
   <object name="door" type="door" gid="19" x="512" y="960">
    <properties>
     <property name="direction" value="down"/>
@@ -59,26 +42,25 @@
   </object>
  </objectgroup>
  <objectgroup name="spawners" width="20" height="15">
-  <object name="spawner" type="spawner" gid="35" x="640" y="576">
+  <object name="spawner" type="spawner" gid="35" x="312" y="255">
+   <properties>
+    <property name="enemy" value="f"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="35" x="832" y="896">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="128" y="896">
+  <object name="spawner" type="spawner" gid="35" x="1129" y="849">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="448" y="192">
+  <object name="spawner" type="spawner" gid="35" x="910" y="227">
    <properties>
-    <property name="enemy" value="w"/>
-   </properties>
-  </object>
-  <object name="spawner" type="spawner" gid="35" x="1088" y="896">
-   <properties>
-    <property name="enemy" value="w"/>
+    <property name="enemy" value="f"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="crystals" width="20" height="15"/>
 </map>
