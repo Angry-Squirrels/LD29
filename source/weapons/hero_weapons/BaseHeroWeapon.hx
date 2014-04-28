@@ -1,11 +1,14 @@
 package weapons.hero_weapons;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.util.FlxPoint;
 import flixel.util.loaders.SparrowData;
 import flixel.FlxG;
+import player.Splash;
 import weapons.BaseWeapon;
 import ennemies.BaseEnnemy;
 import utils.Collider;
+import flixel.util.FlxMath;
 
 /**
  * ...
@@ -45,16 +48,21 @@ class BaseHeroWeapon extends BaseWeapon
 	
 	private override function applyDamage(_obj1:FlxObject, _obj2:FlxObject)
 	{
-		super.applyDamage(_obj1, _obj2);
-		
 		// apply damage to the ennemy
 		if (Type.getClassName(Type.getClass(_obj2)) == "utils.Collider")
 		{
+			var point:FlxPoint = new FlxPoint(_obj1.x + (_obj2.x - _obj1.x) / 2, _obj1.y + (_obj2.y - _obj1.y) / 2);
+			var splash:Splash = new Splash(point);
+			add(splash);
+			splash.play();
+			
 			var collider = cast(_obj2, Collider);
 			var ennemy = cast(collider.parent, BaseEnnemy);
 			ennemy.hurt(this.bulletFactory.bulletDamage);
 			FlxG.sound.play("assets/sounds/hero_hit.mp3", 0.6);
 		}
+		
+		super.applyDamage(_obj1, _obj2);
 	}
 	
 	public override function fire():Void
