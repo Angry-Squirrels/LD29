@@ -81,6 +81,8 @@ class PlayState extends FlxState
 		level.loadObjects(this);
 		
 		initGame();
+		
+		add(level.crystals);
 
 		spawnHero();
 		enemySpawner.generateEnemies(level.definition.difficulty);

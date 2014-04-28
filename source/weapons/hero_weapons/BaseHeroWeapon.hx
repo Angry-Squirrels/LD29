@@ -30,6 +30,7 @@ class BaseHeroWeapon extends BaseWeapon
 	public override function update()
 	{
 		FlxG.overlap(this.bulletFactory.group, Reg.ennemyGroup, applyDamage);
+		FlxG.overlap(this.bulletFactory.group, Reg.bigCrystalsGroup, breakCrystal);
 		
 		super.update();
 	}
@@ -51,6 +52,17 @@ class BaseHeroWeapon extends BaseWeapon
 		}
 		
 		super.applyDamage(_obj1, _obj2);
+	}
+	
+	private function breakCrystal(_obj1:FlxObject, _obj2:FlxObject):Void
+	{
+		var point:FlxPoint = new FlxPoint(_obj1.x + (_obj2.x - _obj1.x) / 2, _obj1.y + (_obj2.y - _obj1.y) / 2);
+		var splash:Splash = new Splash(point);
+		add(splash);
+		splash.play();
+		
+		_obj1.kill();
+		_obj2.hurt(this.bulletFactory.bulletDamage);
 	}
 	
 	private function checkEndOfFire(_name:String, _frameNumber:Int, _frameIndex:Int):Void

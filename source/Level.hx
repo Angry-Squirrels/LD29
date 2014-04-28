@@ -189,6 +189,11 @@ class Level extends TiledMap
 				var spawningPoint = new SpawningPoint(o.xmlData, x, y);
 				spawningPoints.add(spawningPoint);
 				//state.enemySpawner.addSpawningPoint(o.xmlData, x, y);
+			
+			case "crystal":
+				var crystal = new BigCrystal(o.xmlData, x, y);
+				state.add(crystal);
+				if (verbose) trace ("generating crystal");
 				
 		}
 	}
