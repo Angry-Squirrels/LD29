@@ -75,17 +75,10 @@ class PlayState extends FlxState
 		
 		level.loadObjects(this);
 		
-		spawnHero();
-		
-		enemySpawner.generateEnemies();
 		initGame();
-		
-		
-		/*
-		var ennemy:FlyingEnnemy = new FlyingEnnemy(hero);
-		ennemy.place(100, 100);
-		add(ennemy);
-		*/
+
+		spawnHero();
+		enemySpawner.generateEnemies();
 		
 		FlxG.camera.follow(this.hero.hitbox);
 		FlxG.camera.setBounds(FlxG.worldBounds.x, FlxG.worldBounds.y, FlxG.worldBounds.width, FlxG.worldBounds.height);
@@ -98,21 +91,27 @@ class PlayState extends FlxState
 	
 	var healthBar : FlxSprite;
 	var crystalTxt : FlxText;
+	var healthTxt : FlxText;
 	function addUi() 
 	{
 		var healthBarBg = new FlxSprite(10, 10);
-		healthBarBg.makeGraphic(250, 12, 0xff000000);
+		healthBarBg.makeGraphic(250, 12, 0xff222222);
 		healthBarBg.scrollFactor.x = 0;
 		healthBarBg.scrollFactor.y = 0;
 		add(healthBarBg);
 		
 		healthBar = new FlxSprite(12, 12);
-		healthBar.makeGraphic(246, 8, 0xffcc0000);
+		healthBar.makeGraphic(246, 8, 0xffcc3300);
 		healthBar.scrollFactor.x = 0;
 		healthBar.scrollFactor.y = 0;
 		add(healthBar);
 		healthBar.origin.x = 0;
 		healthBar.origin.y = 0;
+		
+		healthTxt = new FlxText(20, 10, 0, hero.hitbox.health + " / " + Reg.heroStats.maxHealth);
+		healthTxt.scrollFactor.x = 0;
+		healthTxt.scrollFactor.y = 0;
+		add(healthTxt);
 		
 		var crystal = new FlxSprite(-15, 10);
 		var dat = new SparrowData("assets/images/Items/crystal.xml", "assets/images/Items/crystal.png");
@@ -135,6 +134,7 @@ class PlayState extends FlxState
 		var ratio = Reg.heroStats.health / Reg.heroStats.maxHealth;
 		crystalTxt.text = "x " + Reg.heroStats.coinCollected;
 		healthBar.scale.x = ratio;
+		healthTxt.text = hero.hitbox.health + " / " + Reg.heroStats.maxHealth;
 	}
 	
 	var introTextIndex:Int = 0;
