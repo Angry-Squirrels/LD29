@@ -14,7 +14,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKEiZhzFdMVsBOQB1egAtw==
+   eJxjYGBgYKEiZhzFdMVsBOQB1AgAtg==
   </data>
  </layer>
  <layer name="bg2" width="20" height="6">
@@ -23,7 +23,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBi8QGigHTAMAAAYqAAT
+   eJxjYKAu4MEiJgTF2MTxiWGTH6pAFA3TCwAAtqAAuw==
   </data>
  </layer>
  <layer name="Level" width="20" height="6">
@@ -31,7 +31,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzjYaAeYAFiZiqaxzBCzeNDw2xAzEQmBgBAwAB6
+   eJxjYGBg4GGgDmCBmsVBJfNAgJmKZg0V8/jQMBsQM5GJAVsAAIs=
   </data>
  </layer>
  <objectgroup name="doors" width="20" height="6">
@@ -62,5 +62,7 @@
     <property name="enemy" value="w"/>
    </properties>
   </object>
+  <object gid="35" x="640" y="128"/>
+  <object gid="35" x="768" y="128"/>
  </objectgroup>
 </map>

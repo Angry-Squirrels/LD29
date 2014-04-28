@@ -23,7 +23,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFwxkAAAHgAAE=
+   eJxjYKAdEMKChysQxSOOjInVRy0AAMPYANk=
   </data>
  </layer>
  <layer name="Level" width="20" height="6">
@@ -78,4 +78,12 @@
    </properties>
   </object>
  </objectgroup>
+ <layer name="Calque 4" width="20" height="6">
+  <properties>
+   <property name="nocollide" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAeiAGxOAnqCQE5IJanonkDDRSBWImKejWBWItM82B6AfaIAZc=
+  </data>
+ </layer>
 </map>
