@@ -38,4 +38,11 @@ class Crystal extends FlxSprite
 		level.collideWithLevel(this);
 	}
 	
+	public override function kill()
+	{
+		FlxG.sound.play("assets/sounds/crystal_get.mp3", 1, false);
+		
+		super.kill();
+	}
+	
 }

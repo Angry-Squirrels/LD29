@@ -2,6 +2,7 @@ package ;
 import flixel.FlxSprite;
 import flixel.util.loaders.SparrowData;
 import haxe.xml.Fast;
+import flixel.FlxG;
 
 /**
  * ...
@@ -30,6 +31,9 @@ class BigCrystal extends FlxSprite
 		}
 		
 		Reg.bigCrystalsGroup.remove(this);
+		
+		FlxG.sound.play("assets/sounds/bigcrystal_break.mp3", 1, false);
+		FlxG.sound.play("assets/sounds/crystal_pop.mp3", 1, false);
 		
 		for (i in 0 ... 10) new Crystal(cast (x + width / 2), cast (y + height / 2));
 		
