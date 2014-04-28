@@ -10,6 +10,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.util.loaders.SparrowData;
 import haxe.Timer;
+import player.Halo;
 import player.Hero;
 import universe.LevelTree;
 import states.DieState;
@@ -30,6 +31,8 @@ class PlayState extends FlxState
 
 	public var enemySpawner:EnemySpawner;
 	public var enemies:FlxGroup;
+	
+	private var halo:Halo;
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -85,6 +88,9 @@ class PlayState extends FlxState
 		FlxG.camera.fade(0xff000000, 0.1, true);
 		
 		MusicManager.playMusic();
+		
+		halo = new Halo(hero.hitbox);
+		add(halo);
 		
 		addUi();
 	}
@@ -216,6 +222,8 @@ class PlayState extends FlxState
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 		FlxG.collide(enemies, enemies);
 		FlxG.overlap(level.crystals, this.hero.hitbox, collectCrystal);
+		
+		halo.place();
 		
 		updateUI();
 	}	
