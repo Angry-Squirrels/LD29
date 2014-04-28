@@ -3,6 +3,7 @@ import flixel.system.FlxSound;
 import flixel.system.FlxAssets;
 import flixel.util.FlxTimer;
 import flixel.util.FlxRandom;
+import flixel.FlxG;
 
 /**
  * ...
@@ -16,7 +17,6 @@ class MusicManager
 	private static var dropLightPath:String = "assets/music/drop_light";
 	private static var dropLoudPath:String = "assets/music/drop_loud";
 	
-	private static var musicSound:FlxSound;
 	private static var heartBeatSlowSound:FlxSound;
 	private static var heartBeatQuickSound:FlxSound;
 	private static var dropLightSound:FlxSound;
@@ -29,17 +29,10 @@ class MusicManager
 	
 	public static function init():Void
 	{
-		musicSound = new FlxSound();
-		musicSound.loadEmbedded(FlxAssets.getSound(musicPath), true);
-		musicSound.volume = 2;
-		heartBeatSlowSound = new FlxSound();
-		heartBeatSlowSound.loadEmbedded(FlxAssets.getSound(heartBeatSlowPath), true);
-		heartBeatQuickSound = new FlxSound();
-		heartBeatQuickSound.loadEmbedded(FlxAssets.getSound(heartBeatQuickPath), true);
-		dropLightSound = new FlxSound();
-		dropLightSound.loadEmbedded(FlxAssets.getSound(dropLightPath), false);
-		dropLoudSound = new FlxSound();
-		dropLoudSound.loadEmbedded(FlxAssets.getSound(dropLoudPath), false);
+		heartBeatSlowSound = FlxG.sound.load(FlxAssets.getSound(heartBeatSlowPath), 1, true);
+		heartBeatQuickSound = FlxG.sound.load(FlxAssets.getSound(heartBeatQuickPath), 1, true);
+		dropLightSound = FlxG.sound.load(FlxAssets.getSound(dropLightPath), 1, true);
+		dropLoudSound = FlxG.sound.load(FlxAssets.getSound(dropLoudPath), 1, true);
 		
 		timer = new FlxTimer();
 		
@@ -53,11 +46,12 @@ class MusicManager
 			init();
 		}
 		
-		if (!musicSound.playing)
+		if (!musicPlaying)
 		{
-			musicSound.play();
+			FlxG.sound.playMusic(FlxAssets.getSound(musicPath));
 		}
-		//launchTimer();
+		
+		launchTimer();
 	}
 	
 	private static function launchTimer():Void
@@ -125,7 +119,7 @@ class MusicManager
 	
 	public static function stopMusic():Void
 	{
-		musicSound.stop();
+		FlxG.sound.music.stop();
 		dropLightSound.stop();
 		dropLoudSound.stop();
 		timer.destroy();

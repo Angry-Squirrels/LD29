@@ -59,9 +59,7 @@ class FlyingEnnemy extends BaseEnnemy
 		weapon = new BaseEnnemyWeapon(body, Std.int(minDistance / 2), damage);
 		add(weapon);
 		
-		mainSound = new FlxSound();
-		mainSound.loadEmbedded(FlxAssets.getSound("assets/sounds/ennemy_buzz"), true);
-		mainSound.volume = 0.3;
+		mainSound = FlxG.sound.load(FlxAssets.getSound("assets/sounds/ennemy_buzz"), 0.3, true);
 	}
 	
 	public override function update()
@@ -135,6 +133,11 @@ class FlyingEnnemy extends BaseEnnemy
 		else
 		{
 			path.cancel();
+		}
+		
+		if (hero.isDead)
+		{
+			mainSound.stop();
 		}
 		
 		super.update();
