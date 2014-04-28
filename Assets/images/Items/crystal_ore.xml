@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:622f5fcbb6dd26d5106a4e454e347c19$ -->
+<TextureAtlas imagePath="crystal_ore.png">
+    <SubTexture name="LD29_crystal_ore0001" x="0" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0002" x="128" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0003" x="256" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0004" x="384" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0005" x="512" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0006" x="640" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0007" x="768" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0008" x="896" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0009" x="1024" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0010" x="1152" y="0" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0011" x="0" y="128" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0012" x="128" y="128" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0013" x="256" y="128" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0014" x="384" y="128" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0015" x="512" y="128" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0016" x="640" y="128" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0017" x="768" y="128" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0018" x="896" y="128" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0019" x="1024" y="128" width="128" height="128"/>
+    <SubTexture name="LD29_crystal_ore0020" x="0" y="0" width="128" height="128"/>
+</TextureAtlas>
