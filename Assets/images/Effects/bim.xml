@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:8eb6e89c6fae06f2b69a6646e2dacee7$ -->
+<TextureAtlas imagePath="bim.png">
+    <SubTexture name="LD29_bim0001" x="0" y="0" width="150" height="150"/>
+    <SubTexture name="LD29_bim0002" x="150" y="0" width="150" height="150"/>
+    <SubTexture name="LD29_bim0003" x="300" y="0" width="150" height="150"/>
+    <SubTexture name="LD29_bim0004" x="450" y="0" width="150" height="150"/>
+    <SubTexture name="LD29_bim0005" x="600" y="0" width="150" height="150"/>
+    <SubTexture name="LD29_bim0006" x="750" y="0" width="150" height="150"/>
+</TextureAtlas>
