@@ -34,10 +34,67 @@
    eJzjYWBgYKES5gViZgbqAdYhbB4bEDNhwexkmsfJAAlfEOBhQIQ5B5nmweQZCKjBZZ4AEPNT0Txc8iDAzUBcOILU4wsPUBjiSrvY9LFiEaMEUMM85HAfjO5DNw9bHiAXcwExAKqMAdI=
   </data>
  </layer>
- <objectgroup name="doors" width="20" height="15" visible="0">
+ <objectgroup name="doors" width="20" height="15">
   <object name="door" type="door" gid="19" x="0" y="704">
    <properties>
     <property name="direction" value="left"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="spawners" width="20" height="15">
+  <object name="spawner" type="spawner" gid="20" x="1047" y="235">
+   <properties>
+    <property name="enemyType" value="f"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="20" x="724" y="219">
+   <properties>
+    <property name="enemyType" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="20" x="477" y="189">
+   <properties>
+    <property name="enemyType" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="20" x="755" y="447">
+   <properties>
+    <property name="enemyType" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="20" x="1079" y="658">
+   <properties>
+    <property name="enemyType" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="20" x="186" y="400">
+   <properties>
+    <property name="enemyType" value="w"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="20" x="1034" y="398">
+   <properties>
+    <property name="enemyType" value="f"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="20" x="217" y="192">
+   <properties>
+    <property name="enemyType" value="f"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="20" x="336" y="587">
+   <properties>
+    <property name="enemyType" value="f"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="20" x="879" y="770">
+   <properties>
+    <property name="enemyType" value="f"/>
+   </properties>
+  </object>
+  <object name="spawner" type="spawner" gid="20" x="600" y="772">
+   <properties>
+    <property name="enemyType" value="f"/>
    </properties>
   </object>
  </objectgroup>

@@ -23,8 +23,8 @@ class PlayState extends FlxState
 	var hero:Hero;
 	var map:FlxSprite;
 	var runningIntro : Bool;
-	
 	var introText : FlxText;
+	public var enemySpawner:EnemySpawner;
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -59,17 +59,21 @@ class PlayState extends FlxState
 		add(level.backgroundTiles);
 		add(level.foregroundTiles);
 		
+		if (enemySpawner == null)
+		{
+			level.definition.difficulty = Reg.heroStats.roomExplored;
+			enemySpawner = new EnemySpawner(this);
+		}
+		
 		level.loadObjects(this);
 		
 		spawnHero();
 		
+		enemySpawner.generateEnemies();
+		
 		launchSpecialEvent();
 		
-		if (!level.definition.explored)
-		{
-			level.definition.difficulty = Reg.heroStats.roomExplored;
-			new EnemySpawner(this).generateEnemies();
-		}
+		
 		/*
 		var ennemy:FlyingEnnemy = new FlyingEnnemy(hero);
 		ennemy.place(100, 100);

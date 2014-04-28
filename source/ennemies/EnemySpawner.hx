@@ -1,5 +1,6 @@
 package ennemies;
-
+import flixel.group.FlxGroup;
+import haxe.xml.Fast;
 /**
  * ...
  * @author damrem
@@ -8,6 +9,7 @@ class EnemySpawner
 {
 	public static var verbose:Bool = true;
 	var _playState:PlayState;
+	//public var availablePoints:FlxGroup;
 
 	public function new(playState:PlayState) 
 	{
@@ -19,11 +21,27 @@ class EnemySpawner
 	{
 		if (verbose) trace("generateEnemies");
 		
-		for (i in 0..._playState.level.definition.difficulty)
+		for (i in 0..._playState.level.definition.difficulty * 5)
 		{
-			var ennemy:FlyingEnnemy = new FlyingEnnemy(Reg.hero);
-			ennemy.place(100, 100);
-			_playState.add(ennemy);
+			
+			var spawningPoint = cast(_playState.level.spawningPoints.getRandom(), SpawningPoint);
+			trace(spawningPoint);
+			if (spawningPoint != null)
+			{
+				var enemy:BaseEnnemy = null;
+				switch(spawningPoint.type)
+				{
+					case EnemyType.FLYING:
+						enemy = new FlyingEnnemy(Reg.hero);
+					case EnemyType.WALKING:
+						enemy = new FlyingEnnemy(Reg.hero);	
+				}
+				if (enemy != null)
+				{
+					enemy.place(spawningPoint.x, spawningPoint.y);
+					_playState.add(enemy);
+				}
+			}
 		}
 	}
 	

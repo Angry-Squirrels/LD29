@@ -1,4 +1,5 @@
 package ;
+import ennemies.SpawningPoint;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectGroup;
@@ -34,6 +35,7 @@ class Level extends TiledMap
 	
 	var _number:UInt = 0;
 	static private var NB_LEVEL:UInt = 0;
+	public var spawningPoints:FlxGroup;
 	
 	public function new(path:String, def:LevelDef) 
 	{
@@ -53,6 +55,7 @@ class Level extends TiledMap
 		backgroundTiles = new FlxGroup();
 		backgroundTiles.ID = 2345;
 		doors = new FlxGroup();
+		spawningPoints = new FlxGroup();
 		
 		//FlxG.camera.setBounds(0, 0, fullWidth, fullHeight);
 		//return;
@@ -160,8 +163,12 @@ class Level extends TiledMap
 				doors.add(door);
 				trace("generating door");
 			
-			case "flyingSpawner":
-				level.
+				
+			case "spawner":
+				var spawningPoint = new SpawningPoint(o.xmlData, x, y);
+				spawningPoints.add(spawningPoint);
+				//state.enemySpawner.addSpawningPoint(o.xmlData, x, y);
+				
 		}
 	}
 	

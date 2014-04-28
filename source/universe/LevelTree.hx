@@ -374,8 +374,12 @@ class LevelTree extends FlxGroup
 		{
 			tmx = "assets/data/levels/FirstRoom.tmx";
 		}
+		if (def.order == 1)
+		{
+			tmx = "assets/data/levels/SecondRoom.tmx";
+		}
 		 
-		//if(verbose) trace(tmx);
+		if(verbose) trace(tmx);
 		var level = new Level(tmx, def);
 		return level;
 	}

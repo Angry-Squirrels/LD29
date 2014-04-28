@@ -23,6 +23,8 @@ class LevelDef
 	public static var verbose:Bool;
 	public var alt:Int;
 	public var long:Int;
+	var _order:UInt;
+	static var COUNT:UInt = 0;
 	public var explored : Bool;
 	//public var mask:String;
 	public var topMask:UInt;
@@ -43,6 +45,9 @@ class LevelDef
 	
 	public function new(?Alt:UInt, ?Long:Int, BranchLevel:UInt=0) 
 	{
+		_order = COUNT;
+		COUNT++;
+		
 		branchLevel = BranchLevel;
 		//if(verbose) trace(this, Alt, Long, Mask);
 		alt = Alt;
@@ -82,7 +87,7 @@ class LevelDef
 	
 	public function toString():String
 	{
-		return "[Space("+alt+", "+long+"; "+branchLevel+")]";
+		return "[LevelDef("+alt+", "+long+"; "+order+")]";
 	}
 	
 	function get_mask():String 
@@ -91,6 +96,13 @@ class LevelDef
 	}
 	
 	public var mask(get_mask, null):String;
+	
+	function get_order():UInt 
+	{
+		return _order;
+	}
+	
+	public var order(get_order, null):UInt;
 	
 	var line:LineStyle = { thickness:1, color:0xff0000, pixelHinting:true, scaleMode:LineScaleMode.NORMAL, capsStyle:CapsStyle.NONE, jointStyle:JointStyle.MITER, miterLimit:1 };
 	var fill:FillStyle = { hasFill:true, color:0xff0000, alpha:1 };
