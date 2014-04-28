@@ -72,6 +72,7 @@ class Hero extends FlxGroup
 		head.animation.addByPrefix("jump", "LD29_hero_head_jumpR", 6, false);
 		head.animation.addByPrefix("fall", "LD29_hero_head_airR", 1);
 		head.animation.addByPrefix("land", "LD29_hero_head_fallR", 10, false);
+		head.animation.addByPrefix("death", "LD29_hero_head_deathR", 17, false);
 		
 		var bodyAnimation = new SparrowData("assets/Hero/hero_body.xml", "assets/Hero/hero_body.png");
 		body.loadGraphicFromTexture(bodyAnimation);
@@ -80,6 +81,7 @@ class Hero extends FlxGroup
 		body.animation.addByPrefix("jump", "LD29_hero_body_jumpR", 6, false);
 		body.animation.addByPrefix("fall", "LD29_hero_body_airR", 1);
 		body.animation.addByPrefix("land", "LD29_hero_body_fallR", 10, false);
+		body.animation.addByPrefix("death", "LD29_hero_body_deathR", 17, false);
 		body.animation.callback = soundifyAnimation;
 		
 		add(body);

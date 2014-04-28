@@ -25,18 +25,6 @@ class BaseHeroWeapon extends BaseWeapon
 	public function new(_parent:FlxSprite) 
 	{
 		super(_parent);
-		
-		// load animation
-		var animation = new SparrowData(spriteXML, spritePath);
-		skin = new FlxSprite();
-		skin.loadGraphicFromTexture(animation);
-		skin.animation.addByPrefix("idle", "LD29_hero_arm_1_waitR", 75);
-		skin.animation.addByPrefix("run", "LD29_hero_arm_1_runR", 12);
-		skin.animation.addByPrefix("jump", "LD29_hero_arm_1_jumpR", 6, false);
-		skin.animation.addByPrefix("fall", "LD29_hero_arm_1_airR", 1);
-		skin.animation.addByPrefix("land", "LD29_hero_arm_1_fallR", 10, false);
-		skin.animation.addByPrefix("fire", "LD29_hero_arm_fire", 6, false);
-		add(skin);
 	}
 	
 	public override function update()

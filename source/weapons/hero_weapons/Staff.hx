@@ -29,6 +29,19 @@ class Staff extends BaseHeroWeapon
 		
 		super(_parent.body);
 		
+		// load animation
+		var animation = new SparrowData(spriteXML, spritePath);
+		skin = new FlxSprite();
+		skin.loadGraphicFromTexture(animation);
+		skin.animation.addByPrefix("idle", "LD29_hero_arm_1_waitR", 75);
+		skin.animation.addByPrefix("run", "LD29_hero_arm_1_runR", 12);
+		skin.animation.addByPrefix("jump", "LD29_hero_arm_1_jumpR", 6, false);
+		skin.animation.addByPrefix("fall", "LD29_hero_arm_1_airR", 1);
+		skin.animation.addByPrefix("land", "LD29_hero_arm_1_fallR", 10, false);
+		skin.animation.addByPrefix("fire", "LD29_hero_arm_fire", 6, false);
+		skin.animation.addByPrefix("death", "LD29_hero_arm_1_deathR", 17, false);
+		add(skin);
+		
 		hero = _parent;
 		
 		bulletSpeed = 600;
@@ -69,21 +82,24 @@ class Staff extends BaseHeroWeapon
 	
 	private override function checkEndOfFire(_anim:String, _frameNumber:Int, _frameIndex:Int):Void
 	{
-		if (_anim == "fire")
+		if (this.bulletFactory.currentBullet != null)
 		{
-			if (_frameNumber == 4)
+			if (_anim == "fire")
 			{
-				super.fire();
-				this.bulletFactory.currentBullet.flipX = skin.flipX;
-				this.bulletFactory.currentBullet.alpha = 1;
-				if (firedBullets.indexOf(this.bulletFactory.currentBullet) == -1)
+				if (_frameNumber == 4)
 				{
-					firedBullets.push(this.bulletFactory.currentBullet);
+					super.fire();
+					this.bulletFactory.currentBullet.flipX = skin.flipX;
+					this.bulletFactory.currentBullet.alpha = 1;
+					if (firedBullets.indexOf(this.bulletFactory.currentBullet) == -1)
+					{
+						firedBullets.push(this.bulletFactory.currentBullet);
+					}
 				}
 			}
+			
+			super.checkEndOfFire(_anim, _frameNumber, _frameIndex);
 		}
-		
-		super.checkEndOfFire(_anim, _frameNumber, _frameIndex);
 	}
 	
 	public override function flipWeapon(_facingLeft:Bool):Void
