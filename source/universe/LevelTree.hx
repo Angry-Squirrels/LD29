@@ -12,7 +12,7 @@ import flixel.util.FlxRandom;
  */
 class LevelTree extends FlxGroup
 {
-	public static var verbose:Bool=true;
+	public static var verbose:Bool=false;
 	public var currentLevel:Level;
 	
 	public var defs:Array<LevelDef>;
@@ -62,8 +62,12 @@ class LevelTree extends FlxGroup
 		
 		var branchLevel = from.branchLevel;
 		
-		trace("branchLevel:" + branchLevel);
-		trace("branchLevelMax:" + branchLevelMax);
+		if (verbose)
+		{
+			
+			trace("branchLevel:" + branchLevel);
+			trace("branchLevelMax:" + branchLevelMax);
+		}
 	
 		
 		if (branchLevel > branchLevelMax)
@@ -83,10 +87,10 @@ class LevelTree extends FlxGroup
 		
 		
 		//if(verbose) trace("---");
-		trace("DIRECTIONS AND CREATIONS");
+		if(verbose)	trace("DIRECTIONS AND CREATIONS");
 		for (i in 1...Length)
 		{
-			trace("direction");
+			if(verbose)	trace("direction");
 			var direction:Int;
 			//for the 1st room, we go to the right
 			if (i == 1 && from.alt == 0 && from.long==0 )
@@ -157,7 +161,7 @@ class LevelTree extends FlxGroup
 			
 			
 			
-			trace("creation");
+			if(verbose)	trace("creation");
 			//	WE CREATE THE DEF
 			var def = new LevelDef(currentAlt, currentLong, branchLevel+1);
 			if (verbose)	trace("created " + def);
@@ -180,13 +184,13 @@ class LevelTree extends FlxGroup
 			branch.push(def);
 		}	//end of branch generation
 		
-		trace("END OF DIRECTION/CREATION");
+		if(verbose)	trace("END OF DIRECTION/CREATION");
 		
 		
 		
-		trace("branchLevel:" + branchLevel);
+		if(verbose)	trace("branchLevel:" + branchLevel);
 		branchLevel ++;
-		trace("branchLevel++ :" + branchLevel);
+		if(verbose)	trace("branchLevel++ :" + branchLevel);
 		
 		
 		
@@ -195,7 +199,7 @@ class LevelTree extends FlxGroup
 		
 		
 		//
-		trace("max level reached?");
+		if(verbose)	trace("max level reached?");
 		if (branchLevel > branchLevelMax)
 		{
 			if (verbose)
@@ -203,20 +207,20 @@ class LevelTree extends FlxGroup
 				trace(branchLevel+">"+branchLevelMax+": max branch level reached");
 			}
 			
-			trace("before return branch");
+			if(verbose)	trace("before return branch");
 			return branch;
-			trace("after return branch");
+			if(verbose)	trace("after return branch");
 		}
 		
 		
-		trace("SUBBRANCHES GENERATION");
+		if(verbose)	trace("SUBBRANCHES GENERATION");
 		
 		//	SUB-BRANCH
 		for (def in branch)
 		{
 			if (FlxRandom.chanceRoll(50))
 			{
-				trace("elected for creating a subbranch:"+def);
+				if(verbose)	trace("elected for creating a subbranch:"+def);
 				//var subtree:
 				//if (branchLevel < nbBranchLevels)
 				{
@@ -237,14 +241,14 @@ class LevelTree extends FlxGroup
 						while (def.getNeighborAt(subBranchDirection) != null);
 						
 						var subBranchLength:UInt = FlxRandom.intRanged(1, Std.int(16 / (branchLevel+1)));
-						trace("subBranchLength:"+subBranchLength);
+						if(verbose)	trace("subBranchLength:"+subBranchLength);
 						var subBranch:Array<LevelDef> = createBranch(def, subBranchLength, subBranchDirection, branchLevelMax);
 						branch = branch.concat(subBranch);
 					}
 				}
 			}
 		}
-		trace("SUBBRANCHES GENERATED");
+		if(verbose)	trace("SUBBRANCHES GENERATED");
 		
 		//if(verbose) trace(spaces);
 		return branch;

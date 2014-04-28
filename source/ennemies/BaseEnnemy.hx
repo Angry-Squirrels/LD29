@@ -21,7 +21,7 @@ import flixel.FlxG;
  */
 class BaseEnnemy extends FlxGroup
 {
-	public static var verbose:Bool;
+	public static var verbose:Bool=true;
 	
 	private inline static var ACTION_PATROL:Int = 0;
 	private inline static var ACTION_RUSH:Int = 1;
@@ -195,6 +195,7 @@ class BaseEnnemy extends FlxGroup
 	
 	private function playAnimation(_anim:String, _speed:Int = 30):Void
 	{
+		if (verbose)	trace("playAnimation(" + _anim);
 		// don't play same animation
 		if (body.animation.curAnim == null || body.animation.curAnim.name != _anim)
 		{

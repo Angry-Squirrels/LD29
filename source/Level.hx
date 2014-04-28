@@ -21,7 +21,7 @@ import utils.Collider;
  */
 class Level extends TiledMap
 {
-	public static var verbose:Bool = true;
+	public static var verbose:Bool = false;
 	private inline static var PATH_LEVEL_TILESHEETS = "assets/images/tilesets/";
 	
 	public var foregroundTiles: FlxGroup;
@@ -182,7 +182,7 @@ class Level extends TiledMap
 				var door = new Door(o.xmlData, x,y);
 				state.add(door);
 				doors.add(door);
-				trace("generating door");
+				if(verbose)	trace("generating door");
 			
 				
 			case "spawner":
