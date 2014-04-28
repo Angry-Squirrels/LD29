@@ -11,6 +11,7 @@ import flixel.FlxG;
  */
 class MusicManager
 {
+	private static var titleMusicPath:String = "assets/music/title_music";
 	private static var musicPath:String = "assets/music/music_back";
 	private static var heartBeatSlowPath:String = "assets/music/heart_beat_slow";
 	private static var heartBeatQuickPath:String = "assets/music/heart_beat_quick";
@@ -38,6 +39,21 @@ class MusicManager
 		
 		initialized = true;
 	}
+	
+	public static function playTitleMusic():Void
+	{
+		if (!initialized)
+		{
+			init();
+		}
+		
+		FlxG.sound.playMusic(FlxAssets.getSound(titleMusicPath), 1);
+	}
+	
+	public static function stopTitleMusic():Void
+	{
+		FlxG.sound.music.fadeOut(2);
+	}
 
 	public static function playMusic():Void
 	{
@@ -48,7 +64,8 @@ class MusicManager
 		
 		if (!musicPlaying)
 		{
-			FlxG.sound.playMusic(FlxAssets.getSound(musicPath));
+			FlxG.sound.playMusic(FlxAssets.getSound(musicPath), 0);
+			FlxG.sound.music.fadeIn();
 		}
 		
 		launchTimer();
@@ -119,7 +136,7 @@ class MusicManager
 	
 	public static function stopMusic():Void
 	{
-		FlxG.sound.music.stop();
+		FlxG.sound.music.fadeOut();
 		dropLightSound.stop();
 		dropLoudSound.stop();
 		timer.destroy();

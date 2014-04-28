@@ -9,6 +9,7 @@ import flixel.util.FlxMath;
 import flixel.system.FlxAssets;
 import flixel.tweens.FlxTween;
 import haxe.Timer;
+import utils.MusicManager;
 
 /**
  * A FlxState which can be used for the game's menu.
@@ -49,6 +50,8 @@ class MenuState extends FlxState
 		introText.x = (800 - 550) / 2;
 		introText.alpha = 0;
 		add(introText);
+		
+		MusicManager.playTitleMusic();
 	}
 	
 	/**
@@ -107,8 +110,10 @@ class MenuState extends FlxState
 		if(!endIntro){
 			FlxTween.tween(introText, { alpha:0 }, 2, { complete: fadeInText } );
 		}
-		else
+		else {
+			MusicManager.stopTitleMusic();
 			FlxTween.tween(introText, { alpha:0 }, 2, { complete: gotoGame } );
+		}
 	}
 	
 	function gotoGame(tween: FlxTween) {
