@@ -21,7 +21,7 @@ import flixel.FlxG;
  */
 class BaseEnnemy extends FlxGroup
 {
-	public static var verbose:Bool=true;
+	public static var verbose:Bool;
 	
 	private inline static var ACTION_PATROL:Int = 0;
 	private inline static var ACTION_RUSH:Int = 1;
@@ -55,7 +55,7 @@ class BaseEnnemy extends FlxGroup
 	public function new(_hero:Hero, _difficulty:UInt=1)
 	{
 		super();
-		if (verbose)	trace("difficulty:" + _difficulty);
+		if (verbose)	if(verbose) trace("difficulty:" + _difficulty);
 		
 		add(body);
 		
@@ -109,7 +109,7 @@ class BaseEnnemy extends FlxGroup
 	
 	public function hurt(_damage:Float):Void
 	{
-		trace("hurt");
+		if(verbose) trace("hurt");
 		//body.hurt(_damage);
 		
 		body.health = body.health - _damage;
@@ -136,7 +136,7 @@ class BaseEnnemy extends FlxGroup
 	
 	function onSplatted(name:String, frameNumber:Int, frameIndex:Int)
 	{
-		trace("onSplatted(");
+		if(verbose) trace("onSplatted(");
 		if (frameNumber == 11)
 		{
 			splat.kill();
@@ -147,7 +147,7 @@ class BaseEnnemy extends FlxGroup
 	
 	function onDisappeared(tween:FlxTween)
 	{
-		trace("onDisappeared(");
+		if(verbose) trace("onDisappeared(");
 		//if (frameNumber == 11)
 		{
 			kill();
@@ -248,13 +248,13 @@ class BaseEnnemy extends FlxGroup
 	
 	public override function kill()
 	{
-		trace("kill");
+		if(verbose) trace("kill");
 		if (!alive)
 		{
-			trace("but already killed");
+			if(verbose) trace("but already killed");
 			return;
 		}
-		trace("really kill");
+		if(verbose) trace("really kill");
 		
 		body.kill();
 		

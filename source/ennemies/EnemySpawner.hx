@@ -9,7 +9,7 @@ import ennemies.WalkingEnemy;
  */
 class EnemySpawner
 {
-	public static var verbose:Bool = true;
+	public static var verbose:Bool = false;
 	var _playState:PlayState;
 	//public var availablePoints:FlxGroup;
 

@@ -275,7 +275,7 @@ class LevelTree extends FlxGroup
 	function introduceNewNeighbors()
 	{
 		if(verbose) trace("introduceNewNeighbors(");
-		for (i in 0...defs.length)
+		for (i in 1...defs.length)
 		{
 			if (i < defs.length - 3)
 			{
@@ -297,15 +297,6 @@ class LevelTree extends FlxGroup
 				}
 			}
 		}
-		
-		/*
-		for (space in defs)
-		{
-			if(verbose) trace("neighbors for "+space+"->"+space.neighbors);
-		}
-		*/
-		
-		//if(verbose) trace(
 	}
 	
 	
