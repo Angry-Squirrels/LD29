@@ -78,4 +78,12 @@
    </properties>
   </object>
  </objectgroup>
+ <layer name="Calque 4" width="20" height="6">
+  <properties>
+   <property name="nocollide" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYKAciAGxOBXMgQE5IJanonkjGQAAmJAAaw==
+  </data>
+ </layer>
 </map>
