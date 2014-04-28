@@ -247,6 +247,11 @@ class PlayState extends FlxState
 		var spawnX : Int = 0;
 		var spawnY : Int = 17 * 64 + 10;
 		
+		this.hero = new Hero(0, 0);
+		hero.hitbox.velocity.x = Reg.vitX;
+		hero.hitbox.velocity.y = Reg.vitY;
+		add(this.hero);
+		
 		switch(Reg.exitDirection) {
 			case 'left' :
 				door = level.getDoor('right');
@@ -274,10 +279,7 @@ class PlayState extends FlxState
 				}
 		}
 		
-		
-		this.hero = new Hero(spawnX, spawnY);
-		hero.hitbox.velocity.x = Reg.vitX;
-		hero.hitbox.velocity.y = Reg.vitY;
-		add(this.hero);
+		hero.hitbox.x = spawnX;
+		hero.hitbox.y = spawnY;
 	}
 }
