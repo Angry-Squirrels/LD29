@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:ec80c5271d57c2e607de6bf7136636eb$ -->
+<TextureAtlas imagePath="splat.png">
+    <SubTexture name="splat0001" x="0" y="0" width="100" height="100"/>
+    <SubTexture name="splat0002" x="100" y="0" width="100" height="100"/>
+    <SubTexture name="splat0003" x="200" y="0" width="100" height="100"/>
+    <SubTexture name="splat0004" x="300" y="0" width="100" height="100"/>
+    <SubTexture name="splat0005" x="400" y="0" width="100" height="100"/>
+    <SubTexture name="splat0006" x="500" y="0" width="100" height="100"/>
+    <SubTexture name="splat0007" x="600" y="0" width="100" height="100"/>
+    <SubTexture name="splat0008" x="700" y="0" width="100" height="100"/>
+    <SubTexture name="splat0009" x="800" y="0" width="100" height="100"/>
+    <SubTexture name="splat0010" x="900" y="0" width="100" height="100"/>
+    <SubTexture name="splat0011" x="1000" y="0" width="100" height="100"/>
+    <SubTexture name="splat0012" x="1100" y="0" width="100" height="100"/>
+</TextureAtlas>

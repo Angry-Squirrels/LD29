@@ -2,6 +2,7 @@ package states;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.text.FlxText;
+import flixel.ui.FlxButton;
 import haxe.Timer;
 
 /**
@@ -10,12 +11,13 @@ import haxe.Timer;
  */
 class DieState extends FlxState
 {
+	var btn:flixel.ui.FlxButton;
 
 	override public function create() {
 	
 		FlxG.camera.fade(0xff000000, 2, true);
 		
-		var dead : FlxText = new FlxText(0, 150, 0, "You died...", 42);
+		var dead : FlxText = new FlxText(0, 100, 0, "You died...", 42);
 		dead.x = (800 - dead.width) / 2;
 		dead.color = 0xffff0000;
 		add(dead);
@@ -26,7 +28,7 @@ class DieState extends FlxState
 	function showRooms() 
 	{
 		//FlxG.switchState(new PlayState());
-		var roomText = new FlxText(150, 230, 0, "Room explored : " + Reg.heroStats.roomExplored, 18);
+		var roomText = new FlxText(150, 170, 0, "Room explored : " + Reg.heroStats.roomExplored, 18);
 		roomText.x = (800 - roomText.width) / 2;
 		add(roomText);
 		Timer.delay(showKills, 1000);
@@ -34,9 +36,50 @@ class DieState extends FlxState
 	
 	function showKills() 
 	{
-		var killText = new FlxText(150, 260, 0, "Enemy killed : " + Reg.heroStats.enemyKilled, 18);
+		var killText = new FlxText(150, 200, 0, "Enemy killed : " + Reg.heroStats.enemyKilled, 18);
 		killText.x = (800 - killText.width) / 2;
 		add(killText);
+		Timer.delay(showXp, 1000);
+	}
+	
+	function showXp() 
+	{
+		var xpText = new FlxText(150, 230, 0, "xp : " + Reg.heroStats.experience, 18);
+		xpText.x = (800 - xpText.width) / 2;
+		add(xpText);
+		Timer.delay(showScore, 1000);
+	}
+	
+	function showScore() 
+	{
+		var final : Int = Std.int(	(Reg.heroStats.enemyKilled * 50 + 
+							Reg.heroStats.roomExplored * 10 +
+							Reg.heroStats.experience) / 100); 
+		
+		Reg.heroStats.statPoinrLeft = final;
+							
+		var total = new FlxText(150, 260, 0, "Point earned : " + Reg.heroStats.statPoinrLeft, 18);
+		total.x = (800 - total.width) / 2;
+		add(total);
+		Timer.delay(showBtn, 1000);
+	}
+	
+	function showBtn() 
+	{
+		btn = new FlxButton(0, 330, "Continue", onClick);
+		btn.x = (800 - btn.width) / 2;
+		add(btn);
+	}
+	
+	function onClick() 
+	{
+		FlxG.camera.fade(0xff000000, 0.3, false, gotoUpgrade);
+		btn.active = false;
+	}
+	
+	function gotoUpgrade() 
+	{
+		FlxG.switchState(new UpgradeState());
 	}
 	
 	
