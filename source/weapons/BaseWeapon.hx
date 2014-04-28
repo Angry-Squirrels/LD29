@@ -92,8 +92,11 @@ class BaseWeapon extends FlxGroup
 		{
 			return;
 		}
-		
-		bulletFactory = null;
+		if (bulletFactory.currentBullet != null)
+		{
+			bulletFactory.currentBullet.kill();
+		}
+		//bulletFactory = null;
 		
 		super.kill();
 	}

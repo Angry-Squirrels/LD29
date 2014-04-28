@@ -48,6 +48,7 @@ class BaseEnnemy extends FlxGroup
 	
 	private var award : UInt;
 	var splat:ennemies.Splat;
+	var isDying:Bool;
 	
 	public var difficulty:UInt;
 	
@@ -93,6 +94,7 @@ class BaseEnnemy extends FlxGroup
 	
 	private function touchedHero(_obj1:FlxObject, _obj2:FlxObject):Void
 	{
+		if (isDying)	return;
 		// apply damage to the hero
 		if (Type.getClassName(Type.getClass(_obj2)) == "utils.Collider")
 		{
@@ -114,15 +116,17 @@ class BaseEnnemy extends FlxGroup
 		if (body.health < 0)
 		{
 			FlxG.sound.play("assets/sounds/ennemy_death.mp3", 3);
-			
+			isDying = true;
 			if (body.animation.curAnim != null)
 			{
 				body.animation.curAnim.stop();
-			}	
+			}
+			
+			weapon.kill();
 			
 			splat = new Splat(onSplatted);
 			splat.x = body.x;
-			splat.y = body.y;
+			splat.y = body.y - body.height *2/3;
 			add(splat);
 			splat.play();
 			
@@ -135,6 +139,7 @@ class BaseEnnemy extends FlxGroup
 		trace("onSplatted(");
 		if (frameNumber == 11)
 		{
+			splat.kill();
 			remove(splat);
 			FlxTween.tween(body, { y: body.y - 100, alpha: 0.0}, 0.25, { ease: FlxEase.cubeOut, complete:onDisappeared} );
 		}
@@ -213,6 +218,8 @@ class BaseEnnemy extends FlxGroup
 	
 	private function canAttack():Bool
 	{
+		if (isDying)	return false;
+		
 		if (fireTime > fireRate)
 		{
 			fireTime = 0;
@@ -248,7 +255,7 @@ class BaseEnnemy extends FlxGroup
 			return;
 		}
 		trace("really kill");
-		weapon.kill();
+		
 		body.kill();
 		
 		Reg.heroStats.enemyKilled ++;
