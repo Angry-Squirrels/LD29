@@ -158,12 +158,18 @@ class LevelTree extends FlxGroup
 			}
 			
 			
-			
+			var isLastRoom:Bool = false;
+			trace("branchLevel=" + branchLevel);
+			trace("Length=" + Length);
+			if (branchLevel == 0 && i == Std.int(Length - 1))
+			{
+				isLastRoom = true;
+			}
 			
 			
 			if(verbose)	trace("creation");
 			//	WE CREATE THE DEF
-			var def = new LevelDef(currentAlt, currentLong, branchLevel+1);
+			var def = new LevelDef(currentAlt, currentLong, branchLevel+1, isLastRoom);
 			if (verbose)	trace("created " + def);
 			def.debugColor = debugColor;
 			
