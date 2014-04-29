@@ -220,6 +220,8 @@ class PlayState extends FlxState
 		
 		if(introDoor != null)
 			FlxG.collide(introDoor, hero.hitbox, introDoorCollide);
+			
+		if (FlxG.keys.justPressed.R) FlxG.resetState();
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 		FlxG.collide(enemies, enemies);
