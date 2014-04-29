@@ -15,8 +15,7 @@ class IntroDoor extends FlxSprite
 	var opening : Bool;
 	var closing : Bool;
 	var closed : Bool;
-	
-	static var shown : Bool;
+	var shown : Bool;
 	
 	private var sentences:Array<String> = [
 		"Are you deaf or what ?",
@@ -27,13 +26,16 @@ class IntroDoor extends FlxSprite
 		"You'll never finish the game if you stay here, you know ?",
 		"Press the right arrow to go right, not the left one.",
 		"Are you afraid ? Press X or use your left click to defend yourself !",
-		"The people behind this game are awesome."
+		"The people behind this game are awesome.",
+		"... the game was finished 20 min before the dead line",
+		"... the door is blocked."
 	];
 	var closeTimer : Timer;
 
-	public function new(x: Int, y: Int) 
+	public function new(x: Int, y: Int, shown : Bool) 
 	{
 		super(x, y);
+		this.shown = shown;
 		var dat = new SparrowData("assets/images/story_door.xml", "assets/images/story_door.png");
 		loadGraphicFromTexture(dat, false);
 		animation.addByPrefix("closeMain", "LD29_story_close", 40, false);
@@ -44,10 +46,10 @@ class IntroDoor extends FlxSprite
 		
 		if (shown) {
 			closed = true;
-			close();
+			closing = true;
+			opening = false;
+			animation.play("closeMain");
 		}
-		
-		shown = true;
 	}
 	
 	function checkFrame(name:String, frameNumber : Int, frameidx:Int) {
@@ -77,7 +79,7 @@ class IntroDoor extends FlxSprite
 	public function close() {
 		closeTimer = Timer.delay(closeDoor, 3000);
 		if(!shown)
-		Reg.playState.speakDoor("Don't mind to come back until you find a way up there!");
+			Reg.playState.speakDoor("Don't mind to come back until you find a way up there!");
 	}
 	
 	function closeDoor() {

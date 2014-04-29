@@ -161,7 +161,7 @@ class PlayState extends FlxState
 		
 		if (alt == 0 && long == 0) {
 			
-			introDoor = new IntroDoor( -10, 64 * 15);
+			introDoor = new IntroDoor( -10, 64 * 15, curDef.explored);
 			introDoor.immovable = true;
 			add(introDoor);
 			introText = new FlxText(introDoor.x + 100, introDoor.y + 100, 250, "", 16);
