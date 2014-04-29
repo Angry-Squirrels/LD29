@@ -144,7 +144,7 @@ class BaseEnnemy extends FlxGroup
 		var deltaY = body.getMidpoint().y - hero.hitbox.getGraphicMidpoint().y;
 		
 		body.velocity.x = 500 * (deltaX > 0 ? 1 : -1);
-		body.velocity.y = 500 * (deltaY > 0 ? 1 : -1);
+		body.velocity.y = 500 * (deltaY > 0 ? 0 : -1);
 		super.update();
 		
 		Reg.playState.showDamage(cast _damage, body);
