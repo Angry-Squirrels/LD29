@@ -9,6 +9,7 @@ import flixel.util.FlxPoint;
 import weapons.ennemy_weapons.BaseEnnemyWeapon;
 import flixel.text.FlxTextField;
 import flixel.util.loaders.SparrowData;
+import flixel.util.FlxMath;
 /**
  * ...
  * @author Ynk33
@@ -27,10 +28,14 @@ class WalkingEnemy extends BaseEnnemy
 		body.animation.addByPrefix("move", "LD29_beetle_move", 10);
 		body.animation.addByPrefix("attack", "LD29_beetle_attack", 7, false);
 		body.animation.callback = callbackAnimation;
+		body.offset.x = 25;
+		body.offset.y = 30;
+		body.width = 60;
+		body.height = 40;
 		
 		
 		super(_hero, _difficulty);
-		name = "Beatle";
+		name = "Beetle";
 		/*
 		var tfDiff = new FlxTextField(20, 20, 20, _difficulty + "");
 		tfDiff.color = 0xffffffff;
@@ -47,7 +52,7 @@ class WalkingEnemy extends BaseEnnemy
 		body.health *= 10;
 		maxHealth = cast body.health;
 		distanceToDetect = 250 + (_difficulty - 1) * 10;
-		minDistance = Std.int(body.width);
+		minDistance = 120;// Std.int(body.width);
 		move_speed = 100 + _difficulty * 5;
 		patrol_speed = 150 + _difficulty * 5;
 		award = _difficulty;
@@ -161,12 +166,14 @@ class WalkingEnemy extends BaseEnnemy
 	}
 	override private function goodDistanceToAttack():Bool
 	{
-		var distance = Math.abs(hero.hitbox.getMidpoint().x - body.getMidpoint().x);
-		return distance <= minDistance && Math.abs(hero.hitbox.getMidpoint().y - body.y) <= minDistance/4;
+		//var distance = Math.abs(hero.hitbox.getMidpoint().x - body.getMidpoint().x);
+		var distance = FlxMath.getDistance(hero.hitbox.getMidpoint(), body.getMidpoint());
+		//trace(distance <= 100 );
+		return distance <= minDistance;// && Math.abs(hero.hitbox.getMidpoint().y - body.y) <= minDistance / 4;
 	}
 	override private function followHero():Bool
 	{
 		var distance = Math.abs(hero.hitbox.getMidpoint().x - body.getMidpoint().x);
-		return ((distance <= distanceToDetect) && (distance >= minDistance));
+		return ((distance <= distanceToDetect) && (distance >= minDistance- 40));
 	}
 }

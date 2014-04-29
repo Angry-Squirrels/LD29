@@ -56,7 +56,7 @@ class Hero extends FlxGroup
 		
 		// create hitbox
 		hitbox = new Collider(_x, _y, this);
-		hitbox.makeGraphic(80, 118, FlxColor.TRANSPARENT);
+		hitbox.makeGraphic(40, 118, FlxColor.TRANSPARENT);
 		add(hitbox);
 		
 		this.canJumpThrough = false;

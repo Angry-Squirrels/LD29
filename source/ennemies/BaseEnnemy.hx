@@ -263,6 +263,11 @@ class BaseEnnemy extends FlxGroup
 	{
 		body.flipX = !_facingLeft;
 		
+		if (!_facingLeft)
+			body.offset.x = 3;
+		else 
+			body.offset.x = 25;
+		
 		if (weapon != null)
 		{
 			weapon.flipWeapon(_facingLeft);
