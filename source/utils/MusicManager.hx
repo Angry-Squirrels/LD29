@@ -50,9 +50,9 @@ class MusicManager
 		FlxG.sound.playMusic(FlxAssets.getSound(titleMusicPath), 1);
 	}
 	
-	public static function stopTitleMusic():Void
+	public static function stopTitleMusic(_delay:Int = 2):Void
 	{
-		FlxG.sound.music.fadeOut(2);
+		FlxG.sound.music.fadeOut(_delay);
 	}
 
 	public static function playMusic():Void
