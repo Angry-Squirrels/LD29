@@ -381,7 +381,7 @@ class LevelTree extends FlxGroup
 	}
 	*/
 	
-	static var NB_ROOMS_PER_MASK:Array<Int> = [0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
+	static var NB_ROOMS_PER_MASK:Array<Int> = [0, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2];
 	
 	public function createLevel(def:LevelDef):Level
 	{
