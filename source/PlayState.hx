@@ -47,7 +47,7 @@ class PlayState extends FlxState
 		
 		Reg.playState = this;
 		
-		if (Reg.levelTree == null)	Reg.levelTree = new LevelTree(30, this);
+		if (Reg.levelTree == null)	Reg.levelTree = new LevelTree(15, this);
 		
 		level = Reg.levelTree.currentLevel;
 		level.setCurrentState(this);
