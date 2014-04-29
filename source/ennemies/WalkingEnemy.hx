@@ -52,8 +52,8 @@ class WalkingEnemy extends BaseEnnemy
 		patrol_speed = 150 + _difficulty * 5;
 		award = _difficulty;
 		
-		body.drag.set(move_speed * 8, move_speed * 8);
-		body.maxVelocity.set(move_speed, move_speed);
+		body.drag.set(move_speed * 8, move_speed * 4 * 8);
+		body.maxVelocity.set(move_speed, move_speed * 4);
 		body.acceleration.set(0, Reg.GRAVITY);
 		
 		weapon = new BaseEnnemyWeapon(body, minDistance, damage);

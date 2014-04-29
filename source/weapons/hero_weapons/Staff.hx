@@ -86,24 +86,34 @@ class Staff extends BaseHeroWeapon
 	
 	private override function checkEndOfFire(_anim:String, _frameNumber:Int, _frameIndex:Int):Void
 	{
-			if (_anim == "fire")
+		if (hero.isDead)
+		{
+			if (skin.animation.curAnim == null || skin.animation.curAnim.name != "death")
 			{
-				if (_frameNumber == 4)
+				skin.animation.play("death");
+				skin.animation.callback = null;
+			}
+			return;
+		}
+		if (_anim == "fire")
+		{
+			if (_frameNumber == 4)
+			{
+				super.fire();
+				if (this.bulletFactory.currentBullet != null)
 				{
-					super.fire();
-					if (this.bulletFactory.currentBullet != null)
+					this.bulletFactory.currentBullet.flipX = skin.flipX;
+					this.bulletFactory.currentBullet.alpha = 1;
+					if (firedBullets.indexOf(this.bulletFactory.currentBullet) == -1)
 					{
-						this.bulletFactory.currentBullet.flipX = skin.flipX;
-						this.bulletFactory.currentBullet.alpha = 1;
-						if (firedBullets.indexOf(this.bulletFactory.currentBullet) == -1)
-						{
-							firedBullets.push(this.bulletFactory.currentBullet);
-						}
+						firedBullets.push(this.bulletFactory.currentBullet);
 					}
 				}
 			}
 			
-			super.checkEndOfFire(_anim, _frameNumber, _frameIndex);
+		}
+		
+		super.checkEndOfFire(_anim, _frameNumber, _frameIndex);
 	}
 	
 	public override function flipWeapon(_facingLeft:Bool):Void

@@ -47,7 +47,7 @@ class PlayState extends FlxState
 		
 		Reg.playState = this;
 		
-		if (Reg.levelTree == null)	Reg.levelTree = new LevelTree(30, this);
+		if (Reg.levelTree == null)	Reg.levelTree = new LevelTree(15, this);
 		
 		level = Reg.levelTree.currentLevel;
 		level.setCurrentState(this);
@@ -164,7 +164,7 @@ class PlayState extends FlxState
 			introDoor = new IntroDoor( -10, 64 * 15, curDef.explored);
 			introDoor.immovable = true;
 			add(introDoor);
-			introText = new FlxText(introDoor.x + 100, introDoor.y + 100, 250, "", 16);
+			introText = new FlxText(introDoor.x + 100, introDoor.y + 50, 250, "", 16);
 			add(introText);
 			
 			if (!curDef.explored) {
@@ -183,6 +183,7 @@ class PlayState extends FlxState
 	
 	public function speakDoor(text : String) {
 		introText.text = text;
+		add(introText);
 	}
 	
 	function onEndIntroFadeIn() 
@@ -219,6 +220,8 @@ class PlayState extends FlxState
 		
 		if(introDoor != null)
 			FlxG.collide(introDoor, hero.hitbox, introDoorCollide);
+			
+		if (FlxG.keys.justPressed.R) FlxG.resetState();
 		
 		FlxG.overlap(level.doors, this.hero.hitbox, touchDoor);
 		FlxG.collide(enemies, enemies);
