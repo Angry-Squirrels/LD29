@@ -15,11 +15,11 @@ class GameClass extends FlxGame
 
 	var initialState:Class<FlxState> = PlayState; // The FlxState the game starts with.
 
-<<<<<<< .mine
+
 	//var initialState:Class<FlxState> = MenuState; // The FlxState the game starts with.
-=======
-	var initialState:Class<FlxState> = OutState; // The FlxState the game starts with.
->>>>>>> .theirs
+
+	//var initialState:Class<FlxState> = OutState; // The FlxState the game starts with.
+
 
 	//var initialState:Class<FlxState> = TreeState; // The FlxState the game starts with.
 	//var initialState:Class<FlxState> = OutState; // The FlxState the game starts with.
