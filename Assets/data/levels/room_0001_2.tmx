@@ -62,27 +62,27 @@
     <property name="enemy" value="f"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="64" y="128">
+  <object name="spawner" type="spawner" gid="35" x="128" y="192">
    <properties>
     <property name="enemy" value="f"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="1024" y="384">
+  <object name="spawner" type="spawner" gid="35" x="1088" y="384">
    <properties>
     <property name="enemy" value="f"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="704" y="896">
+  <object name="spawner" type="spawner" gid="35" x="768" y="896">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="384" y="320">
+  <object name="spawner" type="spawner" gid="35" x="320" y="320">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="320" y="896">
+  <object name="spawner" type="spawner" gid="35" x="384" y="896">
    <properties>
     <property name="enemy" value="w"/>
    </properties>

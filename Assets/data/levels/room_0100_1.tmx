@@ -56,7 +56,7 @@
     <property name="enemy" value="w"/>
    </properties>
   </object>
-  <object name="spawner" type="spawner" gid="35" x="320" y="896">
+  <object name="spawner" type="spawner" gid="35" x="384" y="896">
    <properties>
     <property name="enemy" value="w"/>
    </properties>
