@@ -24,7 +24,8 @@ class IntroDoor extends FlxSprite
 		"No, the exit is not this way.",
 		"You'll never finish the game if you stay here, you know ?",
 		"Press the right arrow to go right, not the left one.",
-		"Are you afraid ? Press X or use your left click to defend yourself !"
+		"Are you afraid ? Press X or use your left click to defend yourself !",
+		"The people behind this game are awesome."
 	];
 
 	public function new(x: Int, y: Int) 
@@ -32,9 +33,9 @@ class IntroDoor extends FlxSprite
 		super(x, y);
 		var dat = new SparrowData("assets/images/story_door.xml", "assets/images/story_door.png");
 		loadGraphicFromTexture(dat, false);
-		animation.addByPrefix("closeMain", "LD29_story_close", 25, false);
+		animation.addByPrefix("closeMain", "LD29_story_close", 40, false);
 		animation.addByPrefix("open", "LD29_story_open", 12, false);
-		animation.addByPrefix("close", "LD29_story_miniClose", 12, false);
+		animation.addByPrefix("close", "LD29_story_miniClose", 40, false);
 		
 		animation.callback = checkFrame;
 	}

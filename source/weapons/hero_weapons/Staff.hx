@@ -70,14 +70,17 @@ class Staff extends BaseHeroWeapon
 	
 	public override function fire():Void
 	{
-		firing = true;
-		skin.animation.play("fire");
-		skin.animation.curAnim.frameRate = 30;
-		skin.animation.callback = checkEndOfFire;
-		
-		if (elapsedTime > fireRate)
+		if (!hero.isDead)
 		{
-			FlxG.sound.play("assets/sounds/hero_swoosh.mp3", 0.6);
+			firing = true;
+			skin.animation.play("fire");
+			skin.animation.curAnim.frameRate = 30;
+			skin.animation.callback = checkEndOfFire;
+			
+			if (elapsedTime > fireRate)
+			{
+				FlxG.sound.play("assets/sounds/hero_swoosh.mp3", 0.6);
+			}
 		}
 	}
 	

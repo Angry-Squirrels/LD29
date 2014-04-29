@@ -10,7 +10,7 @@ import flixel.util.FlxMath;
  */
 class EnemySpawner
 {
-	public static var verbose:Bool = true;
+	public static var verbose:Bool = false;
 	var _playState:PlayState;
 
 	public function new(playState:PlayState) 

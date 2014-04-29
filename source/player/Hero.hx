@@ -212,7 +212,7 @@ class Hero extends FlxGroup
 			}
 			
 			// check attack
-			if (FlxG.mouse.justPressed && currentState != Hero.LAND)
+			if ((FlxG.mouse.justPressed || FlxG.keys.justPressed.X) && currentState != Hero.LAND)
 			{
 				currentWeapon.fire();
 			}
