@@ -8,7 +8,7 @@
    <terrain name="crossable" tile="15"/>
   </terraintypes>
  </tileset>
- <layer name="Background" width="20" height="6">
+ <layer name="Background" width="20" height="6" visible="0">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles"/>
@@ -17,7 +17,7 @@
    eJxjYGBgYKEiZhzFdMVsBOQB1AgAtg==
   </data>
  </layer>
- <layer name="bg2" width="20" height="6">
+ <layer name="bg2" width="20" height="6" visible="0">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles"/>
@@ -31,10 +31,10 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYGBg4GGgDmCBmsVBJfNAgJmKZg0V8/jQMBsQM5GJAVsAAIs=
+   eJxjYGBg4AFiFiphkFkcDNQDzFQ0a6iYx4eG2YCYiUwMAM/gAM8=
   </data>
  </layer>
- <objectgroup name="doors" width="20" height="6">
+ <objectgroup name="doors" width="20" height="6" visible="0">
   <object name="door" type="door" gid="19" x="64" y="384">
    <properties>
     <property name="direction" value="down"/>
@@ -56,7 +56,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="spawners" width="20" height="6">
+ <objectgroup name="spawners" width="20" height="6" visible="0">
   <object name="spawner" type="spawner" gid="35" x="576" y="320">
    <properties>
     <property name="enemy" value="w"/>

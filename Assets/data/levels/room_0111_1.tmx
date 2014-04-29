@@ -8,7 +8,7 @@
    <terrain name="crossable" tile="15"/>
   </terraintypes>
  </tileset>
- <layer name="Background" width="20" height="15">
+ <layer name="Background" width="20" height="15" visible="0">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles"/>
@@ -17,7 +17,7 @@
    eJxjZGBgYBzFQxKzATETmXphAJsYuvhwMQ+XGLXMI0Zu1DwEIMc8AKd+ARY=
   </data>
  </layer>
- <layer name="bg2" width="20" height="15">
+ <layer name="bg2" width="20" height="15" visible="0">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles"/>
@@ -31,10 +31,10 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzlkuEKgCAMhIdmZZn5/k/bIIVjTO3H/iV8ICc77oaJiBYjLsaT3Qk/9itMrqyMq2xCJ0W/J/kC3P0HXctn7Yd95dxMx777IF8S75HeP9vLFxUN/Ua7mP0LrS/uAju1N9m3dyzyWfk5hQNmsqD5nZ3ZB9hSAzo=
+   eJzlkuEKgCAMhIdmZZn1/k+bkMIxpvPH/iV8IBs77sYSES1GXAVPdi/8WO8p5MpacJVton4r/gL8/URd8meth3n5nFbHvPvAX2L9SN/N9vxFoYZ6o11odyHlxV1gptbjeXvPwp+VnhM4YCYzmt7ZmX0B3jIDPA==
   </data>
  </layer>
- <layer name="front" width="20" height="15">
+ <layer name="front" width="20" height="15" visible="0">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles"/>
@@ -43,7 +43,7 @@
    eJxjYEAFYkAszkAYEKtODojlqahuFIyCUUB7oAjESlTUpwnEWmSYh64PAPwNAgE=
   </data>
  </layer>
- <objectgroup name="doors" width="20" height="15">
+ <objectgroup name="doors" width="20" height="15" visible="0">
   <object name="door" type="door" gid="19" x="0" y="704">
    <properties>
     <property name="direction" value="left"/>
@@ -60,7 +60,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="spawners" width="20" height="15">
+ <objectgroup name="spawners" width="20" height="15" visible="0">
   <object name="spawner" type="spawner" gid="35" x="832" y="320">
    <properties>
     <property name="enemy" value="w"/>
