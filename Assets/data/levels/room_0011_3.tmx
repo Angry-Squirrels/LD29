@@ -25,7 +25,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFgwEIDbQDcIDB6q5RMAqGKhjNU6NgFIyCUUA9AACtDwA3
+   eJxjYBgF1AZCVNBDjhm0AIPFHaNgaILR9IMAQmg0MWppDSSBWIpOdo0C3ABXfA+2/CMNxDID7YghCAZTPhMdaAfQAAAAeh4BZw==
   </data>
  </layer>
  <layer name="Level" width="30" height="23">
@@ -33,7 +33,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzNVV0PgjAMXFQQURFNfPDj//9Ou4QmzaVbW8SPS+4BWHtd1x0p/ScOxI3gcWYc0orr4P2uUofU4rhLsEbUK0HW4Y1Bzc5Z35JYf1nPq9sStwtptQ7dcVrXE/fElUKspzW+9aA7EE+Kdm2Gk1IP5+WZkWjgOXK+XId1l3NOnFPUzTVHz8/qA+5lnGJK/Yroy/3IvWg91ta9q5+heciNeHfqon5pNmvIPR2SPqvYF8t35/ighqaS0+u7vC/t/pXWN5Wcn/Rp63xreBCfP9CVXhiZO/TJqJ4Wa90/TVO7Z544DZr3YazVq2tQk5E98iwY9Qr8x3hR+kcxXjLyBg4=
+   eJzNlesOwiAMhYkO1E3nfP+XFZKRNCelF5hxTc4P5w5fKaUL4ZzxzJqIXp0+lOa7w/OHkAdloc+ao9VH8/CwKLPHNxrXPzAt3JR1O4iVDNxtf2/OWrIujDCfpPw3A3fNejNsqYcDk09dl+uZCL8951vz0O4ytyZyS87e89PqgNxt97Tq1ds/dC/SvcQ9j/KtM6TFRX6rN6UoNV0D36tYF23uHjXPorCmtWZ1X9z9a70flTV/Fdr5npFLZ6Gn73BOenmcV7t/I0yLj5t96LXWyptrmZEfIu+swG+MNVrfqBpfByYFAg==
   </data>
  </layer>
  <objectgroup name="doors" width="30" height="23">
