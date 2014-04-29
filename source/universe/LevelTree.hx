@@ -94,8 +94,6 @@ class LevelTree extends FlxGroup
 			if (verbose)	trace("direction");
 			
 			var isLastRoom:Bool = false;
-			trace("branchLevel=" + branchLevel);
-			trace("Length=" + Length);
 			if (branchLevel == 0 && i == Std.int(Length - 1))
 			{
 				isLastRoom = true;

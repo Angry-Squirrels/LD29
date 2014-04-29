@@ -36,6 +36,8 @@ class MenuState extends FlxState
 	{
 		super.create();
 		
+		bgColor = 0xff000000;
+		
 		FlxG.camera.fade(0xff000000, 1, true);
 		
 		bg = new FlxSprite(0, 0, FlxAssets.getBitmapData("assets/images/Illu_worlds_end.jpg"));

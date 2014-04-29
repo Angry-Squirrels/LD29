@@ -20,7 +20,7 @@ import flash.display.JointStyle;
  */
 class LevelDef
 {
-	public static var verbose:Bool=true;
+	public static var verbose:Bool=false;
 	public var alt:Int;
 	public var long:Int;
 	var _order:UInt;
