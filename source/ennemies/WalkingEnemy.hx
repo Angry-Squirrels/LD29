@@ -71,6 +71,11 @@ class WalkingEnemy extends BaseEnnemy
 		
 		body.acceleration.y = Reg.GRAVITY;
 		
+		if (body.flipX)
+			body.offset.x = 3;
+		else 
+			body.offset.x = 25;
+		
 		if (!isHurt() && !hero.isDead)
 		{
 			body.acceleration.x = 0;

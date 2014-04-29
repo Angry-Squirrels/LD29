@@ -30,6 +30,10 @@ class FlyingEnnemy extends BaseEnnemy
 		body.animation.addByPrefix("attack", "LD29_wasp_attack", 17, false);
 		body.animation.callback = callbackAnimation;
 		
+		body.offset.y = 30;
+		body.width = 50;
+		body.height = 60;
+		
 		super(_hero, _difficulty);
 		
 		name = "Wasp";
@@ -64,6 +68,10 @@ class FlyingEnnemy extends BaseEnnemy
 	
 	public override function update()
 	{
+		if (body.flipX)
+			body.offset.x = 20;
+		else 
+			body.offset.x = 30;
 		if (!isHurt() && !hero.isDead)
 		{
 			switch(currentState)
