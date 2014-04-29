@@ -33,7 +33,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYEAAHiBmQcIcDJiAFU09NjW49OBTLwDEfFDMD9VDrPnI9jCToB6bHnR30MoeSvXgcidIDylhBtNDKiBGD7Ib2YCYiwTzKVXPRARGNx8AE90B1A==
+   eJxjYEAAHiBmQcIcDJiAFU09NjW49OBTLwDEfEiYlQTzke1hJkE9Nj3I7uCnoT2U6sHlTpAeUsIMpodUQIweZDeyATEXCeZTqp6JCIxuPgARZQHT
   </data>
  </layer>
  <objectgroup name="doors" width="13" height="15">
@@ -70,13 +70,4 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="fg" width="13" height="15">
-  <properties>
-   <property name="nocollide" value="true"/>
-   <property name="tileset" value="tiles"/>
-  </properties>
-  <data encoding="base64" compression="zlib">
-   eJxjYGBgEANicQbSgBwQy5OoZxSMAloARSBWIlGPJhBroYkBAE9TAQE=
-  </data>
- </layer>
 </map>
