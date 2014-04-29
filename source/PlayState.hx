@@ -164,7 +164,7 @@ class PlayState extends FlxState
 			introDoor = new IntroDoor( -10, 64 * 15, curDef.explored);
 			introDoor.immovable = true;
 			add(introDoor);
-			introText = new FlxText(introDoor.x + 100, introDoor.y + 100, 250, "", 16);
+			introText = new FlxText(introDoor.x + 100, introDoor.y + 50, 250, "", 16);
 			add(introText);
 			
 			if (!curDef.explored) {
@@ -183,6 +183,7 @@ class PlayState extends FlxState
 	
 	public function speakDoor(text : String) {
 		introText.text = text;
+		add(introText);
 	}
 	
 	function onEndIntroFadeIn() 

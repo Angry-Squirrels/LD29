@@ -389,7 +389,7 @@ class LevelTree extends FlxGroup
 		
 		var mask:UInt = def.topMask * 8 + def.bottomMask * 4 + def.leftMask * 2 + def.rightMask * 1;
 		var suffix = FlxRandom.intRanged(1, NB_ROOMS_PER_MASK[mask]);
-		var suffix = NB_ROOMS_PER_MASK[mask];
+		//var suffix = NB_ROOMS_PER_MASK[mask];
 		
 		//var tmx = FlxRandom.chanceRoll()?"assets/data/levels/templateDoors.tmx":"assets/data/levels/FirstRoom.tmx";
 		var tmx= "assets/data/levels/room_" + def.mask + "_"+suffix+".tmx";
