@@ -12,7 +12,6 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxStringUtil;
 import flixel.util.loaders.SparrowData;
-import haxe.Timer;
 import player.Halo;
 import player.Hero;
 import universe.LevelTree;
@@ -48,7 +47,7 @@ class PlayState extends FlxState
 		
 		Reg.playState = this;
 		
-		if (Reg.levelTree == null)	Reg.levelTree = new LevelTree(4, this);
+		if (Reg.levelTree == null)	Reg.levelTree = new LevelTree(30, this);
 		
 		level = Reg.levelTree.currentLevel;
 		level.setCurrentState(this);
@@ -171,7 +170,6 @@ class PlayState extends FlxState
 			if (!curDef.explored) {
 				runningIntro = true;
 				FlxG.camera.fade(0xff000000, 1, true, onEndIntroFadeIn);
-				//introTimer = Timer.delay(changeIntroText, 3000);
 				
 				// init hero
 				
@@ -192,15 +190,7 @@ class PlayState extends FlxState
 		introDoor.close();
 	}
 	
-	var introTimer : Timer;
-	function changeIntroText() 
-	{
-		if (introTextIndex < Reg.introTexts.length-1 && introText != null) {
-			introTextIndex++;
-			introTimer = Timer.delay(changeIntroText, 2000);
-			introText.text = Reg.introTexts[introTextIndex];
-		}
-	}
+	
 	
 	/**
 	 * Function that is called when this state is destroyed - you might want to 
@@ -209,8 +199,6 @@ class PlayState extends FlxState
 	override public function destroy():Void
 	{
 		if (verbose) trace("destroy(");
-		if (introTimer != null)
-			introTimer.stop();
 		remove(level.backgroundTiles);
 		remove(level.foregroundTiles);
 		super.destroy();

@@ -16,6 +16,8 @@ class IntroDoor extends FlxSprite
 	var closing : Bool;
 	var closed : Bool;
 	
+	static var shown : Bool;
+	
 	private var sentences:Array<String> = [
 		"Are you deaf or what ?",
 		"Run ! You fool !",
@@ -27,6 +29,7 @@ class IntroDoor extends FlxSprite
 		"Are you afraid ? Press X or use your left click to defend yourself !",
 		"The people behind this game are awesome."
 	];
+	var closeTimer : Timer;
 
 	public function new(x: Int, y: Int) 
 	{
@@ -38,6 +41,13 @@ class IntroDoor extends FlxSprite
 		animation.addByPrefix("close", "LD29_story_miniClose", 40, false);
 		
 		animation.callback = checkFrame;
+		
+		if (shown) {
+			closed = true;
+			close();
+		}
+		
+		shown = true;
 	}
 	
 	function checkFrame(name:String, frameNumber : Int, frameidx:Int) {
@@ -65,7 +75,8 @@ class IntroDoor extends FlxSprite
 	}
 	
 	public function close() {
-		Timer.delay(closeDoor, 3000);
+		closeTimer = Timer.delay(closeDoor, 3000);
+		if(!shown)
 		Reg.playState.speakDoor("Don't mind to come back until you find a way up there!");
 	}
 	
@@ -106,6 +117,12 @@ class IntroDoor extends FlxSprite
 			else
 				reclose();
 		}
+	}
+	
+	override public function destroy() { 
+		super.destroy();
+		if(closeTimer != null)
+			closeTimer.stop();
 	}
 	
 }

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="90" height="20" tilewidth="64" tileheight="64">
+<map version="1.0" orientation="orthogonal" width="21" height="20" tilewidth="64" tileheight="64">
  <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64">
   <image source="../../images/tilesets/cave1.png" width="512" height="1024"/>
  </tileset>
- <layer name="Background" width="90" height="20">
+ <layer name="Background" width="21" height="20" visible="0">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7DWv+mqGOxIIAkAAAAA8EVVVY8PBv8CHQ==
+   eJxjYBgFo2AUjILBBRhH8YjEAIOUAH8=
   </data>
  </layer>
- <layer name="bg2" width="90" height="20">
+ <layer name="bg2" width="21" height="20">
   <properties>
    <property name="nocollide" value="true"/>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt0LENAEAIAkBncP9hbX6Bjx3eJXQ0UAUAAAAAcFu//PSTbPek/QGQbgBjRgBb
+   eJxjYBgFo2AUjIKRB4SgGBmIAbE4HvXkADkglidTLz2BKJXVkQMA9KQAyw==
   </data>
  </layer>
- <layer name="Level" width="90" height="20">
+ <layer name="Level" width="21" height="20">
   <properties>
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztw7EJAAAIA7Ai/n+zXxSHBJIAAAAAAF+slQD8NFYef+0CHQ==
+   eJxjYBgFo2AUjILBBVhogEcBdQETDTAApggAfw==
   </data>
  </layer>
- <objectgroup name="doors" width="90" height="20">
-  <object name="door" type="door" gid="19" x="5696" y="1024">
+ <objectgroup name="doors" width="21" height="20" visible="0">
+  <object name="door" type="door" gid="19" x="1280" y="1024">
    <properties>
     <property name="direction" value="right"/>
    </properties>
