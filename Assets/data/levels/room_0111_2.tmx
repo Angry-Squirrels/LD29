@@ -23,7 +23,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAtEKKx+lEwCoYKGE3blAMAs1gANw==
+   eJxjYKAtEKKxehCQBGIpMvSNglFAT0BO2h4FqAAAewMAag==
   </data>
  </layer>
  <layer name="Level" width="20" height="15">
@@ -31,7 +31,7 @@
    <property name="tileset" value="tiles"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzFkssKgFAIRKX3O7f1/x+am0BkMiHjCrMbz3X0LkTUJGkV1ZRXbZB3iM4EHos2oz1hvmj9zbP5UDbPUyovk38HzRtUTyeqlHrQgzz3WyPg60KzRzye1/6/KI8/zPe024y8ercT8L7lnQ3jAn/5Ays=
+   eJzjYWBgYKES5gViZgbqAVY6mycAxHxomJ8C80gFtDYP3X/Y/IZPzUD5V4ABfzwgm8eBpIcNiJmQMDsWPdjUwOzixGI+MsDmdmLU4FOLnv6INU+AAvfhCltq+Bc5bLmwqCXkX240MwC4TgL4
   </data>
  </layer>
  <layer name="front" width="20" height="15">
