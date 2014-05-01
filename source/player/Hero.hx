@@ -43,6 +43,7 @@ class Hero extends FlxGroup
 	private var jumpKeys:Array<String>;
 	private var leftKeys:Array<String>;
 	private var rightKeys:Array<String>;
+	private var downKeys:Array<String>;
 	
 	private var currentWeapon:BaseHeroWeapon;
 	public var canJumpThrough : Bool;
@@ -99,6 +100,7 @@ class Hero extends FlxGroup
 		jumpKeys = ["SPACE", "Z", "UP"];
 		leftKeys = ["LEFT", "Q"];
 		rightKeys = ["RIGHT", "D"];
+		downKeys = ["DOWN", "S"];
 		
 		// create weapon
 		this.currentWeapon = new Staff(this);
@@ -135,7 +137,7 @@ class Hero extends FlxGroup
 					hitbox.acceleration.x = hitbox.drag.x;
 				}
 				
-				if (FlxG.keys.pressed.DOWN) {
+				if (FlxG.keys.anyPressed(downKeys)) {
 					canJumpThrough = true;
 				}else {
 					canJumpThrough = false;
@@ -254,7 +256,7 @@ class Hero extends FlxGroup
 	
 	public function hurt(_damage:Float):Void
 	{
-		var damageReduction = (0.25 * Reg.heroStats.baseDefensePoint) * 0.01;
+		var damageReduction =  Reg.heroStats.baseDefensePoint * 2.5 * 0.01;
 		_damage = Math.round(_damage - _damage * damageReduction);
 		hitbox.health -= _damage;
 		
